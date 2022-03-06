@@ -33,8 +33,7 @@ class User {
       this.profilePhotoNameSuffix,
       this.profilePhotoUpdateCnt,
       this.messageTokenId,
-      this.onlineStatus,
-      this.lastLoginTime,
+      this.informationModifiedTime,
       this.interestingCategories,
       this.interestingCourse,
       this.insertUserDocId,
@@ -74,8 +73,7 @@ class User {
   String? profilePhotoNameSuffix;
   int? profilePhotoUpdateCnt;
   String? messageTokenId;
-  bool? onlineStatus;
-  DateTime? lastLoginTime;
+  DateTime? informationModifiedTime;
   String? interestingCategories;
   String? interestingCourse;
   String? insertUserDocId;

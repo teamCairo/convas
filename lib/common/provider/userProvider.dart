@@ -29,7 +29,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
   StreamSubscription<QuerySnapshot>? streamSub;
 
 
-  Future<void> updatelastLoginTime() async {
+  Future<void> updateLastLoginTime() async {
     Setting? tmpSetting=await selectIsarSettingByCode("localUserInfo");
     updateFirebaseUser(userDocId: tmpSetting!.stringValue2!,data:{'lastLoginTime': FieldValue.serverTimestamp()});
   }
@@ -113,8 +113,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
       _userData['profilePhotoNameSuffix'] =tmpUser.profilePhotoNameSuffix;
       _userData['profilePhotoUpdateCnt'] =tmpUser.profilePhotoUpdateCnt;
       _userData['messageTokenId'] =tmpUser.messageTokenId;
-      _userData['onlineStatus'] =tmpUser.onlineStatus;
-      _userData['lastLoginTime'] =tmpUser.lastLoginTime;
+      _userData['informationModifiedTime'] =tmpUser.informationModifiedTime;
       _userData['interestingCategories'] =tmpUser.interestingCategories;
       _userData['interestingCourse'] =tmpUser.interestingCourse;
       _userData['insertUserDocId'] =tmpUser.insertUserDocId;
@@ -159,7 +158,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
     _callStream = FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: email)
-        .where('updateTime', isGreaterThan: Timestamp.fromDate(userUpdatedTime))
+        .where('informationModifiedTime', isGreaterThan: Timestamp.fromDate(userUpdatedTime))
         .where('readableFlg', isEqualTo: true)
         .snapshots();
 
@@ -199,8 +198,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
         _userData['profilePhotoNameSuffix'] = snapshot.docs[0].get('profilePhotoNameSuffix');
         _userData['profilePhotoUpdateCnt'] = snapshot.docs[0].get('profilePhotoUpdateCnt');
         _userData['messageTokenId'] = snapshot.docs[0].get('messageTokenId');
-        _userData['onlineStatus'] = snapshot.docs[0].get('onlineStatus');
-        _userData['lastLoginTime'] = snapshot.docs[0].get('lastLoginTime');
+        _userData['informationModifiedTime'] = snapshot.docs[0].get('informationModifiedTime');
         _userData['interestingCategories'] = snapshot.docs[0].get('interestingCategories');
         _userData['interestingCourse'] = snapshot.docs[0].get('interestingCourse');
         _userData['insertUserDocId'] = snapshot.docs[0].get('insertUserDocId');
@@ -237,8 +235,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
             profilePhotoNameSuffix: snapshot.docs[0].get('profilePhotoNameSuffix'),
             profilePhotoUpdateCnt: snapshot.docs[0].get('profilePhotoUpdateCnt'),
             messageTokenId: snapshot.docs[0].get('messageTokenId'),
-            onlineStatus: snapshot.docs[0].get('onlineStatus'),
-            lastLoginTime: snapshot.docs[0].get('lastLoginTime').toDate(),
+          informationModifiedTime: snapshot.docs[0].get('informationModifiedTime').toDate(),
             interestingCategories: snapshot.docs[0].get('interestingCategories'),
             interestingCourse: snapshot.docs[0].get('interestingCourse'),
             insertUserDocId: snapshot.docs[0].get('insertUserDocId'),
@@ -253,10 +250,10 @@ class UserDataProviderNotifier extends ChangeNotifier {
 
         log("XXXXXXXXXXXXXXXXXXXXXXXX日付セット前　ID" + snapshot.docs[0].id);
         log("XXXXXXXXXXXXXXXXXXXXXXXX日付セット　SnapshotDocsDate" +
-            snapshot.docs[0].get("updateTime").toDate().toString());
+            snapshot.docs[0].get("informationModifiedTime").toDate().toString());
         await insertOrUpdateIsarSettingBySettingCode(
             settingCode: "userUpdateCheck",
-            dateTimeValue1: snapshot.docs[0].get("updateTime").toDate()
+            dateTimeValue1: snapshot.docs[0].get("informationModifiedTime").toDate()
         );
 
         log("XXXXXXXXXXXXXADDするUSER用");

@@ -120,7 +120,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   //     ref, boxSetting.get("userDocId"));
 
   // ref.read(countryDataProvider.notifier).controlStreamOfReadCountryNewDataFromFirebaseToIsarAndMemory();
-  ref.read(userDataProvider.notifier).updatelastLoginTime();
+  ref.read(userDataProvider.notifier).updateLastLoginTime();
   //TODO Master、Topic、Category、Countryは常にWatchする必要ないよね
 }
 

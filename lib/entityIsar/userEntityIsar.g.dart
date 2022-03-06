@@ -17,7 +17,7 @@ extension GetUserCollection on Isar {
 final UserSchema = CollectionSchema(
   name: 'User',
   schema:
-      '{"name":"User","idName":"id","properties":[{"name":"age","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourse","type":"String"},{"name":"lastLoginTime","type":"Long"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"onlineStatus","type":"Bool"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionNativeLang","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"User","idName":"id","properties":[{"name":"age","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourse","type":"String"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionNativeLang","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
   nativeAdapter: const _UserNativeAdapter(),
   webAdapter: const _UserWebAdapter(),
   idName: 'id',
@@ -31,33 +31,32 @@ final UserSchema = CollectionSchema(
     'greeting': 6,
     'homeCountry': 7,
     'homeTown': 8,
-    'insertProgramId': 9,
-    'insertTime': 10,
-    'insertUserDocId': 11,
-    'interestingCategories': 12,
-    'interestingCourse': 13,
-    'lastLoginTime': 14,
+    'informationModifiedTime': 9,
+    'insertProgramId': 10,
+    'insertTime': 11,
+    'insertUserDocId': 12,
+    'interestingCategories': 13,
+    'interestingCourse': 14,
     'level': 15,
     'messageTokenId': 16,
     'motherTongue': 17,
     'name': 18,
     'occupation': 19,
-    'onlineStatus': 20,
-    'placeWannaGo': 21,
-    'profilePhotoNameSuffix': 22,
-    'profilePhotoUpdateCnt': 23,
-    'readableFlg': 24,
-    'searchConditionAge': 25,
-    'searchConditionCountry': 26,
-    'searchConditionGender': 27,
-    'searchConditionLevel': 28,
-    'searchConditionNativeLang': 29,
-    'town': 30,
-    'updateProgramId': 31,
-    'updateTime': 32,
-    'updateUserDocId': 33,
-    'userDocId': 34,
-    'userType': 35
+    'placeWannaGo': 20,
+    'profilePhotoNameSuffix': 21,
+    'profilePhotoUpdateCnt': 22,
+    'readableFlg': 23,
+    'searchConditionAge': 24,
+    'searchConditionCountry': 25,
+    'searchConditionGender': 26,
+    'searchConditionLevel': 27,
+    'searchConditionNativeLang': 28,
+    'town': 29,
+    'updateProgramId': 30,
+    'updateTime': 31,
+    'updateUserDocId': 32,
+    'userDocId': 33,
+    'userType': 34
   },
   listProperties: {},
   indexIds: {},
@@ -93,6 +92,8 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
     IsarNative.jsObjectSet(jsObj, 'homeCountry', object.homeCountry);
     IsarNative.jsObjectSet(jsObj, 'homeTown', object.homeTown);
     IsarNative.jsObjectSet(jsObj, 'id', object.id);
+    IsarNative.jsObjectSet(jsObj, 'informationModifiedTime',
+        object.informationModifiedTime?.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'insertProgramId', object.insertProgramId);
     IsarNative.jsObjectSet(
         jsObj, 'insertTime', object.insertTime?.toUtc().millisecondsSinceEpoch);
@@ -101,14 +102,11 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         jsObj, 'interestingCategories', object.interestingCategories);
     IsarNative.jsObjectSet(
         jsObj, 'interestingCourse', object.interestingCourse);
-    IsarNative.jsObjectSet(jsObj, 'lastLoginTime',
-        object.lastLoginTime?.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'level', object.level);
     IsarNative.jsObjectSet(jsObj, 'messageTokenId', object.messageTokenId);
     IsarNative.jsObjectSet(jsObj, 'motherTongue', object.motherTongue);
     IsarNative.jsObjectSet(jsObj, 'name', object.name);
     IsarNative.jsObjectSet(jsObj, 'occupation', object.occupation);
-    IsarNative.jsObjectSet(jsObj, 'onlineStatus', object.onlineStatus);
     IsarNative.jsObjectSet(jsObj, 'placeWannaGo', object.placeWannaGo);
     IsarNative.jsObjectSet(
         jsObj, 'profilePhotoNameSuffix', object.profilePhotoNameSuffix);
@@ -162,10 +160,9 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
       IsarNative.jsObjectGet(jsObj, 'profilePhotoNameSuffix'),
       IsarNative.jsObjectGet(jsObj, 'profilePhotoUpdateCnt'),
       IsarNative.jsObjectGet(jsObj, 'messageTokenId'),
-      IsarNative.jsObjectGet(jsObj, 'onlineStatus'),
-      IsarNative.jsObjectGet(jsObj, 'lastLoginTime') != null
+      IsarNative.jsObjectGet(jsObj, 'informationModifiedTime') != null
           ? DateTime.fromMillisecondsSinceEpoch(
-                  IsarNative.jsObjectGet(jsObj, 'lastLoginTime'),
+                  IsarNative.jsObjectGet(jsObj, 'informationModifiedTime'),
                   isUtc: true)
               .toLocal()
           : null,
@@ -218,6 +215,13 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
       case 'id':
         return (IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity)
             as P;
+      case 'informationModifiedTime':
+        return (IsarNative.jsObjectGet(jsObj, 'informationModifiedTime') != null
+            ? DateTime.fromMillisecondsSinceEpoch(
+                    IsarNative.jsObjectGet(jsObj, 'informationModifiedTime'),
+                    isUtc: true)
+                .toLocal()
+            : null) as P;
       case 'insertProgramId':
         return (IsarNative.jsObjectGet(jsObj, 'insertProgramId')) as P;
       case 'insertTime':
@@ -233,13 +237,6 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         return (IsarNative.jsObjectGet(jsObj, 'interestingCategories')) as P;
       case 'interestingCourse':
         return (IsarNative.jsObjectGet(jsObj, 'interestingCourse')) as P;
-      case 'lastLoginTime':
-        return (IsarNative.jsObjectGet(jsObj, 'lastLoginTime') != null
-            ? DateTime.fromMillisecondsSinceEpoch(
-                    IsarNative.jsObjectGet(jsObj, 'lastLoginTime'),
-                    isUtc: true)
-                .toLocal()
-            : null) as P;
       case 'level':
         return (IsarNative.jsObjectGet(jsObj, 'level')) as P;
       case 'messageTokenId':
@@ -250,8 +247,6 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         return (IsarNative.jsObjectGet(jsObj, 'name')) as P;
       case 'occupation':
         return (IsarNative.jsObjectGet(jsObj, 'occupation')) as P;
-      case 'onlineStatus':
-        return (IsarNative.jsObjectGet(jsObj, 'onlineStatus')) as P;
       case 'placeWannaGo':
         return (IsarNative.jsObjectGet(jsObj, 'placeWannaGo')) as P;
       case 'profilePhotoNameSuffix':
@@ -350,34 +345,34 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       _homeTown = IsarBinaryWriter.utf8Encoder.convert(value8);
     }
     dynamicSize += (_homeTown?.length ?? 0) as int;
-    final value9 = object.insertProgramId;
+    final value9 = object.informationModifiedTime;
+    final _informationModifiedTime = value9;
+    final value10 = object.insertProgramId;
     IsarUint8List? _insertProgramId;
-    if (value9 != null) {
-      _insertProgramId = IsarBinaryWriter.utf8Encoder.convert(value9);
+    if (value10 != null) {
+      _insertProgramId = IsarBinaryWriter.utf8Encoder.convert(value10);
     }
     dynamicSize += (_insertProgramId?.length ?? 0) as int;
-    final value10 = object.insertTime;
-    final _insertTime = value10;
-    final value11 = object.insertUserDocId;
+    final value11 = object.insertTime;
+    final _insertTime = value11;
+    final value12 = object.insertUserDocId;
     IsarUint8List? _insertUserDocId;
-    if (value11 != null) {
-      _insertUserDocId = IsarBinaryWriter.utf8Encoder.convert(value11);
+    if (value12 != null) {
+      _insertUserDocId = IsarBinaryWriter.utf8Encoder.convert(value12);
     }
     dynamicSize += (_insertUserDocId?.length ?? 0) as int;
-    final value12 = object.interestingCategories;
+    final value13 = object.interestingCategories;
     IsarUint8List? _interestingCategories;
-    if (value12 != null) {
-      _interestingCategories = IsarBinaryWriter.utf8Encoder.convert(value12);
+    if (value13 != null) {
+      _interestingCategories = IsarBinaryWriter.utf8Encoder.convert(value13);
     }
     dynamicSize += (_interestingCategories?.length ?? 0) as int;
-    final value13 = object.interestingCourse;
+    final value14 = object.interestingCourse;
     IsarUint8List? _interestingCourse;
-    if (value13 != null) {
-      _interestingCourse = IsarBinaryWriter.utf8Encoder.convert(value13);
+    if (value14 != null) {
+      _interestingCourse = IsarBinaryWriter.utf8Encoder.convert(value14);
     }
     dynamicSize += (_interestingCourse?.length ?? 0) as int;
-    final value14 = object.lastLoginTime;
-    final _lastLoginTime = value14;
     final value15 = object.level;
     IsarUint8List? _level;
     if (value15 != null) {
@@ -408,82 +403,80 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       _occupation = IsarBinaryWriter.utf8Encoder.convert(value19);
     }
     dynamicSize += (_occupation?.length ?? 0) as int;
-    final value20 = object.onlineStatus;
-    final _onlineStatus = value20;
-    final value21 = object.placeWannaGo;
+    final value20 = object.placeWannaGo;
     IsarUint8List? _placeWannaGo;
-    if (value21 != null) {
-      _placeWannaGo = IsarBinaryWriter.utf8Encoder.convert(value21);
+    if (value20 != null) {
+      _placeWannaGo = IsarBinaryWriter.utf8Encoder.convert(value20);
     }
     dynamicSize += (_placeWannaGo?.length ?? 0) as int;
-    final value22 = object.profilePhotoNameSuffix;
+    final value21 = object.profilePhotoNameSuffix;
     IsarUint8List? _profilePhotoNameSuffix;
-    if (value22 != null) {
-      _profilePhotoNameSuffix = IsarBinaryWriter.utf8Encoder.convert(value22);
+    if (value21 != null) {
+      _profilePhotoNameSuffix = IsarBinaryWriter.utf8Encoder.convert(value21);
     }
     dynamicSize += (_profilePhotoNameSuffix?.length ?? 0) as int;
-    final value23 = object.profilePhotoUpdateCnt;
-    final _profilePhotoUpdateCnt = value23;
-    final value24 = object.readableFlg;
-    final _readableFlg = value24;
-    final value25 = object.searchConditionAge;
+    final value22 = object.profilePhotoUpdateCnt;
+    final _profilePhotoUpdateCnt = value22;
+    final value23 = object.readableFlg;
+    final _readableFlg = value23;
+    final value24 = object.searchConditionAge;
     IsarUint8List? _searchConditionAge;
-    if (value25 != null) {
-      _searchConditionAge = IsarBinaryWriter.utf8Encoder.convert(value25);
+    if (value24 != null) {
+      _searchConditionAge = IsarBinaryWriter.utf8Encoder.convert(value24);
     }
     dynamicSize += (_searchConditionAge?.length ?? 0) as int;
-    final value26 = object.searchConditionCountry;
+    final value25 = object.searchConditionCountry;
     IsarUint8List? _searchConditionCountry;
-    if (value26 != null) {
-      _searchConditionCountry = IsarBinaryWriter.utf8Encoder.convert(value26);
+    if (value25 != null) {
+      _searchConditionCountry = IsarBinaryWriter.utf8Encoder.convert(value25);
     }
     dynamicSize += (_searchConditionCountry?.length ?? 0) as int;
-    final value27 = object.searchConditionGender;
+    final value26 = object.searchConditionGender;
     IsarUint8List? _searchConditionGender;
-    if (value27 != null) {
-      _searchConditionGender = IsarBinaryWriter.utf8Encoder.convert(value27);
+    if (value26 != null) {
+      _searchConditionGender = IsarBinaryWriter.utf8Encoder.convert(value26);
     }
     dynamicSize += (_searchConditionGender?.length ?? 0) as int;
-    final value28 = object.searchConditionLevel;
+    final value27 = object.searchConditionLevel;
     IsarUint8List? _searchConditionLevel;
-    if (value28 != null) {
-      _searchConditionLevel = IsarBinaryWriter.utf8Encoder.convert(value28);
+    if (value27 != null) {
+      _searchConditionLevel = IsarBinaryWriter.utf8Encoder.convert(value27);
     }
     dynamicSize += (_searchConditionLevel?.length ?? 0) as int;
-    final value29 = object.searchConditionNativeLang;
+    final value28 = object.searchConditionNativeLang;
     IsarUint8List? _searchConditionNativeLang;
-    if (value29 != null) {
+    if (value28 != null) {
       _searchConditionNativeLang =
-          IsarBinaryWriter.utf8Encoder.convert(value29);
+          IsarBinaryWriter.utf8Encoder.convert(value28);
     }
     dynamicSize += (_searchConditionNativeLang?.length ?? 0) as int;
-    final value30 = object.town;
+    final value29 = object.town;
     IsarUint8List? _town;
-    if (value30 != null) {
-      _town = IsarBinaryWriter.utf8Encoder.convert(value30);
+    if (value29 != null) {
+      _town = IsarBinaryWriter.utf8Encoder.convert(value29);
     }
     dynamicSize += (_town?.length ?? 0) as int;
-    final value31 = object.updateProgramId;
+    final value30 = object.updateProgramId;
     IsarUint8List? _updateProgramId;
-    if (value31 != null) {
-      _updateProgramId = IsarBinaryWriter.utf8Encoder.convert(value31);
+    if (value30 != null) {
+      _updateProgramId = IsarBinaryWriter.utf8Encoder.convert(value30);
     }
     dynamicSize += (_updateProgramId?.length ?? 0) as int;
-    final value32 = object.updateTime;
-    final _updateTime = value32;
-    final value33 = object.updateUserDocId;
+    final value31 = object.updateTime;
+    final _updateTime = value31;
+    final value32 = object.updateUserDocId;
     IsarUint8List? _updateUserDocId;
-    if (value33 != null) {
-      _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value33);
+    if (value32 != null) {
+      _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value32);
     }
     dynamicSize += (_updateUserDocId?.length ?? 0) as int;
-    final value34 = object.userDocId;
-    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value34);
+    final value33 = object.userDocId;
+    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value33);
     dynamicSize += (_userDocId.length) as int;
-    final value35 = object.userType;
+    final value34 = object.userType;
     IsarUint8List? _userType;
-    if (value35 != null) {
-      _userType = IsarBinaryWriter.utf8Encoder.convert(value35);
+    if (value34 != null) {
+      _userType = IsarBinaryWriter.utf8Encoder.convert(value34);
     }
     dynamicSize += (_userType?.length ?? 0) as int;
     final size = staticSize + dynamicSize;
@@ -501,40 +494,39 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
     writer.writeBytes(offsets[6], _greeting);
     writer.writeBytes(offsets[7], _homeCountry);
     writer.writeBytes(offsets[8], _homeTown);
-    writer.writeBytes(offsets[9], _insertProgramId);
-    writer.writeDateTime(offsets[10], _insertTime);
-    writer.writeBytes(offsets[11], _insertUserDocId);
-    writer.writeBytes(offsets[12], _interestingCategories);
-    writer.writeBytes(offsets[13], _interestingCourse);
-    writer.writeDateTime(offsets[14], _lastLoginTime);
+    writer.writeDateTime(offsets[9], _informationModifiedTime);
+    writer.writeBytes(offsets[10], _insertProgramId);
+    writer.writeDateTime(offsets[11], _insertTime);
+    writer.writeBytes(offsets[12], _insertUserDocId);
+    writer.writeBytes(offsets[13], _interestingCategories);
+    writer.writeBytes(offsets[14], _interestingCourse);
     writer.writeBytes(offsets[15], _level);
     writer.writeBytes(offsets[16], _messageTokenId);
     writer.writeBytes(offsets[17], _motherTongue);
     writer.writeBytes(offsets[18], _name);
     writer.writeBytes(offsets[19], _occupation);
-    writer.writeBool(offsets[20], _onlineStatus);
-    writer.writeBytes(offsets[21], _placeWannaGo);
-    writer.writeBytes(offsets[22], _profilePhotoNameSuffix);
-    writer.writeLong(offsets[23], _profilePhotoUpdateCnt);
-    writer.writeBool(offsets[24], _readableFlg);
-    writer.writeBytes(offsets[25], _searchConditionAge);
-    writer.writeBytes(offsets[26], _searchConditionCountry);
-    writer.writeBytes(offsets[27], _searchConditionGender);
-    writer.writeBytes(offsets[28], _searchConditionLevel);
-    writer.writeBytes(offsets[29], _searchConditionNativeLang);
-    writer.writeBytes(offsets[30], _town);
-    writer.writeBytes(offsets[31], _updateProgramId);
-    writer.writeDateTime(offsets[32], _updateTime);
-    writer.writeBytes(offsets[33], _updateUserDocId);
-    writer.writeBytes(offsets[34], _userDocId);
-    writer.writeBytes(offsets[35], _userType);
+    writer.writeBytes(offsets[20], _placeWannaGo);
+    writer.writeBytes(offsets[21], _profilePhotoNameSuffix);
+    writer.writeLong(offsets[22], _profilePhotoUpdateCnt);
+    writer.writeBool(offsets[23], _readableFlg);
+    writer.writeBytes(offsets[24], _searchConditionAge);
+    writer.writeBytes(offsets[25], _searchConditionCountry);
+    writer.writeBytes(offsets[26], _searchConditionGender);
+    writer.writeBytes(offsets[27], _searchConditionLevel);
+    writer.writeBytes(offsets[28], _searchConditionNativeLang);
+    writer.writeBytes(offsets[29], _town);
+    writer.writeBytes(offsets[30], _updateProgramId);
+    writer.writeDateTime(offsets[31], _updateTime);
+    writer.writeBytes(offsets[32], _updateUserDocId);
+    writer.writeBytes(offsets[33], _userDocId);
+    writer.writeBytes(offsets[34], _userType);
   }
 
   @override
   User deserialize(IsarCollection<User> collection, int id,
       IsarBinaryReader reader, List<int> offsets) {
     final object = User(
-      reader.readString(offsets[34]),
+      reader.readString(offsets[33]),
       reader.readStringOrNull(offsets[18]),
       reader.readStringOrNull(offsets[4]),
       reader.readLongOrNull(offsets[0]),
@@ -542,33 +534,32 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       reader.readStringOrNull(offsets[19]),
       reader.readStringOrNull(offsets[17]),
       reader.readStringOrNull(offsets[1]),
-      reader.readStringOrNull(offsets[30]),
+      reader.readStringOrNull(offsets[29]),
       reader.readStringOrNull(offsets[7]),
       reader.readStringOrNull(offsets[8]),
       reader.readStringOrNull(offsets[5]),
-      reader.readStringOrNull(offsets[21]),
+      reader.readStringOrNull(offsets[20]),
       reader.readStringOrNull(offsets[6]),
       reader.readStringOrNull(offsets[3]),
-      reader.readStringOrNull(offsets[35]),
-      reader.readStringOrNull(offsets[25]),
-      reader.readStringOrNull(offsets[28]),
-      reader.readStringOrNull(offsets[29]),
-      reader.readStringOrNull(offsets[26]),
+      reader.readStringOrNull(offsets[34]),
+      reader.readStringOrNull(offsets[24]),
       reader.readStringOrNull(offsets[27]),
-      reader.readStringOrNull(offsets[22]),
-      reader.readLongOrNull(offsets[23]),
+      reader.readStringOrNull(offsets[28]),
+      reader.readStringOrNull(offsets[25]),
+      reader.readStringOrNull(offsets[26]),
+      reader.readStringOrNull(offsets[21]),
+      reader.readLongOrNull(offsets[22]),
       reader.readStringOrNull(offsets[16]),
-      reader.readBoolOrNull(offsets[20]),
-      reader.readDateTimeOrNull(offsets[14]),
-      reader.readStringOrNull(offsets[12]),
+      reader.readDateTimeOrNull(offsets[9]),
       reader.readStringOrNull(offsets[13]),
-      reader.readStringOrNull(offsets[11]),
-      reader.readStringOrNull(offsets[9]),
-      reader.readDateTimeOrNull(offsets[10]),
-      reader.readStringOrNull(offsets[33]),
-      reader.readStringOrNull(offsets[31]),
-      reader.readDateTimeOrNull(offsets[32]),
-      reader.readBoolOrNull(offsets[24]),
+      reader.readStringOrNull(offsets[14]),
+      reader.readStringOrNull(offsets[12]),
+      reader.readStringOrNull(offsets[10]),
+      reader.readDateTimeOrNull(offsets[11]),
+      reader.readStringOrNull(offsets[32]),
+      reader.readStringOrNull(offsets[30]),
+      reader.readDateTimeOrNull(offsets[31]),
+      reader.readBoolOrNull(offsets[23]),
       reader.readBoolOrNull(offsets[2]),
     );
     object.id = id;
@@ -600,17 +591,17 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       case 8:
         return (reader.readStringOrNull(offset)) as P;
       case 9:
-        return (reader.readStringOrNull(offset)) as P;
-      case 10:
         return (reader.readDateTimeOrNull(offset)) as P;
-      case 11:
+      case 10:
         return (reader.readStringOrNull(offset)) as P;
+      case 11:
+        return (reader.readDateTimeOrNull(offset)) as P;
       case 12:
         return (reader.readStringOrNull(offset)) as P;
       case 13:
         return (reader.readStringOrNull(offset)) as P;
       case 14:
-        return (reader.readDateTimeOrNull(offset)) as P;
+        return (reader.readStringOrNull(offset)) as P;
       case 15:
         return (reader.readStringOrNull(offset)) as P;
       case 16:
@@ -622,15 +613,15 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       case 19:
         return (reader.readStringOrNull(offset)) as P;
       case 20:
-        return (reader.readBoolOrNull(offset)) as P;
+        return (reader.readStringOrNull(offset)) as P;
       case 21:
         return (reader.readStringOrNull(offset)) as P;
       case 22:
-        return (reader.readStringOrNull(offset)) as P;
-      case 23:
         return (reader.readLongOrNull(offset)) as P;
-      case 24:
+      case 23:
         return (reader.readBoolOrNull(offset)) as P;
+      case 24:
+        return (reader.readStringOrNull(offset)) as P;
       case 25:
         return (reader.readStringOrNull(offset)) as P;
       case 26:
@@ -644,14 +635,12 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       case 30:
         return (reader.readStringOrNull(offset)) as P;
       case 31:
-        return (reader.readStringOrNull(offset)) as P;
-      case 32:
         return (reader.readDateTimeOrNull(offset)) as P;
-      case 33:
+      case 32:
         return (reader.readStringOrNull(offset)) as P;
-      case 34:
+      case 33:
         return (reader.readString(offset)) as P;
-      case 35:
+      case 34:
         return (reader.readStringOrNull(offset)) as P;
       default:
         throw 'Illegal propertyIndex';
@@ -1630,6 +1619,66 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
+  QueryBuilder<User, User, QAfterFilterCondition>
+      informationModifiedTimeIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'informationModifiedTime',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      informationModifiedTimeEqualTo(DateTime? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'informationModifiedTime',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      informationModifiedTimeGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'informationModifiedTime',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      informationModifiedTimeLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'informationModifiedTime',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      informationModifiedTimeBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'informationModifiedTime',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+    ));
+  }
+
   QueryBuilder<User, User, QAfterFilterCondition> insertProgramIdIsNull() {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.isNull,
@@ -2130,62 +2179,6 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
       property: 'interestingCourse',
       value: pattern,
       caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> lastLoginTimeIsNull() {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.isNull,
-      property: 'lastLoginTime',
-      value: null,
-    ));
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> lastLoginTimeEqualTo(
-      DateTime? value) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.eq,
-      property: 'lastLoginTime',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> lastLoginTimeGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.gt,
-      include: include,
-      property: 'lastLoginTime',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> lastLoginTimeLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.lt,
-      include: include,
-      property: 'lastLoginTime',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> lastLoginTimeBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return addFilterConditionInternal(FilterCondition.between(
-      property: 'lastLoginTime',
-      lower: lower,
-      includeLower: includeLower,
-      upper: upper,
-      includeUpper: includeUpper,
     ));
   }
 
@@ -2737,23 +2730,6 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
       property: 'occupation',
       value: pattern,
       caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> onlineStatusIsNull() {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.isNull,
-      property: 'onlineStatus',
-      value: null,
-    ));
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> onlineStatusEqualTo(
-      bool? value) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.eq,
-      property: 'onlineStatus',
-      value: value,
     ));
   }
 
@@ -4315,6 +4291,14 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
     return addSortByInternal('id', Sort.desc);
   }
 
+  QueryBuilder<User, User, QAfterSortBy> sortByInformationModifiedTime() {
+    return addSortByInternal('informationModifiedTime', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByInformationModifiedTimeDesc() {
+    return addSortByInternal('informationModifiedTime', Sort.desc);
+  }
+
   QueryBuilder<User, User, QAfterSortBy> sortByInsertProgramId() {
     return addSortByInternal('insertProgramId', Sort.asc);
   }
@@ -4355,14 +4339,6 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
     return addSortByInternal('interestingCourse', Sort.desc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortByLastLoginTime() {
-    return addSortByInternal('lastLoginTime', Sort.asc);
-  }
-
-  QueryBuilder<User, User, QAfterSortBy> sortByLastLoginTimeDesc() {
-    return addSortByInternal('lastLoginTime', Sort.desc);
-  }
-
   QueryBuilder<User, User, QAfterSortBy> sortByLevel() {
     return addSortByInternal('level', Sort.asc);
   }
@@ -4401,14 +4377,6 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
 
   QueryBuilder<User, User, QAfterSortBy> sortByOccupationDesc() {
     return addSortByInternal('occupation', Sort.desc);
-  }
-
-  QueryBuilder<User, User, QAfterSortBy> sortByOnlineStatus() {
-    return addSortByInternal('onlineStatus', Sort.asc);
-  }
-
-  QueryBuilder<User, User, QAfterSortBy> sortByOnlineStatusDesc() {
-    return addSortByInternal('onlineStatus', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> sortByPlaceWannaGo() {
@@ -4613,6 +4581,14 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
     return addSortByInternal('id', Sort.desc);
   }
 
+  QueryBuilder<User, User, QAfterSortBy> thenByInformationModifiedTime() {
+    return addSortByInternal('informationModifiedTime', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByInformationModifiedTimeDesc() {
+    return addSortByInternal('informationModifiedTime', Sort.desc);
+  }
+
   QueryBuilder<User, User, QAfterSortBy> thenByInsertProgramId() {
     return addSortByInternal('insertProgramId', Sort.asc);
   }
@@ -4653,14 +4629,6 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
     return addSortByInternal('interestingCourse', Sort.desc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenByLastLoginTime() {
-    return addSortByInternal('lastLoginTime', Sort.asc);
-  }
-
-  QueryBuilder<User, User, QAfterSortBy> thenByLastLoginTimeDesc() {
-    return addSortByInternal('lastLoginTime', Sort.desc);
-  }
-
   QueryBuilder<User, User, QAfterSortBy> thenByLevel() {
     return addSortByInternal('level', Sort.asc);
   }
@@ -4699,14 +4667,6 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
 
   QueryBuilder<User, User, QAfterSortBy> thenByOccupationDesc() {
     return addSortByInternal('occupation', Sort.desc);
-  }
-
-  QueryBuilder<User, User, QAfterSortBy> thenByOnlineStatus() {
-    return addSortByInternal('onlineStatus', Sort.asc);
-  }
-
-  QueryBuilder<User, User, QAfterSortBy> thenByOnlineStatusDesc() {
-    return addSortByInternal('onlineStatus', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> thenByPlaceWannaGo() {
@@ -4878,6 +4838,10 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
     return addDistinctByInternal('id');
   }
 
+  QueryBuilder<User, User, QDistinct> distinctByInformationModifiedTime() {
+    return addDistinctByInternal('informationModifiedTime');
+  }
+
   QueryBuilder<User, User, QDistinct> distinctByInsertProgramId(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('insertProgramId',
@@ -4906,10 +4870,6 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
         caseSensitive: caseSensitive);
   }
 
-  QueryBuilder<User, User, QDistinct> distinctByLastLoginTime() {
-    return addDistinctByInternal('lastLoginTime');
-  }
-
   QueryBuilder<User, User, QDistinct> distinctByLevel(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('level', caseSensitive: caseSensitive);
@@ -4934,10 +4894,6 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
   QueryBuilder<User, User, QDistinct> distinctByOccupation(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('occupation', caseSensitive: caseSensitive);
-  }
-
-  QueryBuilder<User, User, QDistinct> distinctByOnlineStatus() {
-    return addDistinctByInternal('onlineStatus');
   }
 
   QueryBuilder<User, User, QDistinct> distinctByPlaceWannaGo(
@@ -5062,6 +5018,11 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
     return addPropertyNameInternal('id');
   }
 
+  QueryBuilder<User, DateTime?, QQueryOperations>
+      informationModifiedTimeProperty() {
+    return addPropertyNameInternal('informationModifiedTime');
+  }
+
   QueryBuilder<User, String?, QQueryOperations> insertProgramIdProperty() {
     return addPropertyNameInternal('insertProgramId');
   }
@@ -5083,10 +5044,6 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
     return addPropertyNameInternal('interestingCourse');
   }
 
-  QueryBuilder<User, DateTime?, QQueryOperations> lastLoginTimeProperty() {
-    return addPropertyNameInternal('lastLoginTime');
-  }
-
   QueryBuilder<User, String?, QQueryOperations> levelProperty() {
     return addPropertyNameInternal('level');
   }
@@ -5105,10 +5062,6 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
 
   QueryBuilder<User, String?, QQueryOperations> occupationProperty() {
     return addPropertyNameInternal('occupation');
-  }
-
-  QueryBuilder<User, bool?, QQueryOperations> onlineStatusProperty() {
-    return addPropertyNameInternal('onlineStatus');
   }
 
   QueryBuilder<User, String?, QQueryOperations> placeWannaGoProperty() {

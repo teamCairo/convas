@@ -60,8 +60,7 @@ Future<String> insertFirebaseUser({
           'profilePhotoNameSuffix':"",
           'profilePhotoUpdateCnt': 0,
           'messageTokenId':"",
-          'onlineStatus':true,
-          'lastLoginTime': FieldValue.serverTimestamp(),
+          'informationModifiedTime': FieldValue.serverTimestamp(),
           'interestingCategories':"",
           'interestingCourse':"",
           'insertUserDocId':"myself",
@@ -90,6 +89,7 @@ Future<void> updateUserSelectedItem(WidgetRef ref,String databaseItem,dynamic va
       .doc(userDocId)
       .update({
     databaseItem: value,
+    'informationModifiedTime': FieldValue.serverTimestamp(),
     'updateUserDocId': userDocId,
     'updateProgramId': programId,
     'updateTime': FieldValue.serverTimestamp(),
