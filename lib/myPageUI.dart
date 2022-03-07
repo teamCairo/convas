@@ -112,13 +112,18 @@ class MyPage extends ConsumerWidget {
 
   Widget bigIconButton(
       {required String text, required IconData icon, Function()? onPressed}) {
-    return GestureDetector(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [Icon(icon, size: 50), black16TextCenter(text)],
+    return SizedBox(
+      width:120,
+      child: GestureDetector(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment:MainAxisAlignment.center,
+              children: [Icon(icon, size: 50),
+                black16TextCenter(text)],
+            ),
           ),
-        ),
-        onTap: onPressed);
+          onTap: onPressed),
+    );
   }
 }
