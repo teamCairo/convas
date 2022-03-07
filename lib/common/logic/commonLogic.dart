@@ -5,10 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../provider/userProvider.dart';
+
 Future<void> closeStreams(WidgetRef ref) async {
   // ref.read(categoryDataProvider.notifier).closeStream();
   // ref.read(topicDataProvider.notifier).closeStream();
-  // ref.read(userDataProvider.notifier).closeStream();
+  ref.read(userDataProvider.notifier).closeStream();
   // ref.read(friendDataProvider.notifier).closeStream();
   // ref.read(chatMessagesDataProvider.notifier).closeStream();
   //TODO 編集必要

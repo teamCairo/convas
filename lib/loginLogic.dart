@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'common/UI/commonUI.dart';
+import 'common/provider/categoryProvider.dart';
+import 'common/provider/topicProvider.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
 import 'daoIsar/settingDaoIsar.dart';
@@ -22,23 +25,8 @@ Future<void> insertUserToFirebase(BuildContext context,WidgetRef ref, String ema
 
   }else {
     if(tmpSetting.stringValue1!=email) {
-      //違うユーザでログイン
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) {
-          return AlertDialog(
-            title: const Text("Warning"),
-            content: const Text("Delete Local Data"),
-            actions: [
-              TextButton(
-                child: const Text("OK"),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          );
-        },
-      );
+
+      await showOkWarningDialog(context,"Different e-mail,Delete Local Data");
 
     }else{
       await insertUser(ref,email);
@@ -108,12 +96,12 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   //     .read(friendDataProvider.notifier)
   //     .controlStreamOfReadFriendNewDataFromFirebaseToHiveAndMemory(
   //     ref, boxSetting.get("userDocId"));
-  // ref
-  //     .read(topicDataProvider.notifier)
-  //     .controlStreamOfReadTopicNewDataFromFirebaseToIsar();
-  // ref
-  //     .read(categoryDataProvider.notifier)
-  //     .controlStreamOfReadCategoryNewDataFromFirebaseToIsar();
+  ref
+      .read(topicDataProvider.notifier)
+      .controlStreamOfReadTopicNewDataFromFirebaseToIsar();
+  ref
+      .read(categoryDataProvider.notifier)
+      .controlStreamOfReadCategoryNewDataFromFirebaseToIsar();
   // ref
   //     .read(chatMessagesDataProvider.notifier)
   //     .controlStreamOfReadChatMessageNewDataFromFirebaseToIsar(

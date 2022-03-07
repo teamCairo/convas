@@ -1,8 +1,13 @@
 import 'package:convas/settingPageUI.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common/UI/commonUI.dart';
+import 'common/logic/commonLogic.dart';
 import 'common/provider/userProvider.dart';
+import 'developerPageUI.dart';
+import 'editInterestUI.dart';
+import 'loginPageUI.dart';
 
 class MyPage extends ConsumerWidget {
   MyPage({
@@ -14,37 +19,95 @@ class MyPage extends ConsumerWidget {
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
-              child: Column(children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.black38, width: 0.5))),
-                  child:
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          child: Column(children: [
+            Container(
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(color: Colors.black38, width: 0.5))),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                      child: Column(children: [
-                        blackBigBoldTextLeft(ref.watch(userDataProvider).userData["name"]??""),
-                        whiteRoundSquareSmallButton(text:"Edit Profile",
-                        onPressed:() async {
-                          await Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) {
-                              return SettingPage();
-                            }),
-                          );
-                        },)
-                      ])
-                    ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10),
+                        child: Column(children: [
+                          black20BoldTextLeft(
+                              ref.watch(userDataProvider).userData["name"] ??
+                                  ""),
+                          whiteRoundSquareSmallButton(
+                            text: "Edit Profile",
+                            onPressed: () async {
+                              await Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) {
+                                  return SettingPage();
+                                }),
+                              );
+                            },
+                          )
+                        ])),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: imageAvatar(
-                        radius: 40,
-                        image:ref.watch(userDataProvider).mainPhotoData
-                      ),
+                          radius: 40,
+                          image: ref.watch(userDataProvider).mainPhotoData),
                     ),
                   ]),
-                ),
-              ]),
-            )));
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    bigIconButton(
+                      text: "Logout",
+                      icon: Icons.logout,
+                      onPressed: () async {
+                        await closeStreams(ref);
+                        await FirebaseAuth.instance.signOut();
+                        // ログイン画面に遷移＋チャット画面を破棄
+                        await Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) {
+                            return LoginPage();
+                          }),
+                        );
+                      },
+                    ),
+                    bigIconButton(
+                      text: "Edit \nInterest",
+                      icon: Icons.logout,
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return EditInterest();
+                          }),
+                        );
+                      },
+                    ),
+                    bigIconButton(text: "Logout", icon: Icons.logout)
+                  ]),
+            )
+          ]),
+        )),
+        floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () async {
+              await Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) {
+                  return const DeveloperPage();
+                }),
+              );
+            }));
+  }
+
+  Widget bigIconButton(
+      {required String text, required IconData icon, Function()? onPressed}) {
+    return GestureDetector(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [Icon(icon, size: 50), black16TextCenter(text)],
+          ),
+        ),
+        onTap: onPressed);
   }
 }

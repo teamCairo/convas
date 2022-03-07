@@ -180,6 +180,21 @@ Padding gray16TextLeft(String text) {
         )),
   );
 }
+Padding black16TextCenter(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: Align(
+        alignment: Alignment.topCenter,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+            color: Colors.black87,
+          ),
+        )),
+  );
+}
 
 Padding black16TextLeft(String text) {
   return Padding(
@@ -212,7 +227,7 @@ Padding black18TextLeft(String text) {
   );
 }
 
-Padding blackBigBoldTextLeft(String text) {
+Padding black20BoldTextLeft(String text) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: Align(
@@ -334,5 +349,43 @@ CircleAvatar imageAvatar({Image? image, required double radius}) {
     radius: radius,
     backgroundColor: Colors.white,
     backgroundImage: image?.image,
+  );
+}
+
+Future<dynamic> showOkWarningDialog(BuildContext context,  String message)async{
+  return await showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) {
+      return AlertDialog(
+        title:  const Text("Warning"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            child: const Text("OK"),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<dynamic> showOkInfoDialog(BuildContext context,  String message)async{
+  return await showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) {
+      return AlertDialog(
+        title:  const Text("Information"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            child: const Text("OK"),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      );
+    },
   );
 }

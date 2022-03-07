@@ -119,16 +119,6 @@ class LoginPage extends ConsumerWidget {
           ),
         ),
       ),
-        floatingActionButton:FloatingActionButton(
-          child:const Icon(Icons.add),
-          onPressed:() async {
-            await Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) {
-                return const DeveloperPage();
-              }),
-            );
-          }
-        )
     );
   }
 

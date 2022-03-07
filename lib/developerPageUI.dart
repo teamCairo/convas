@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'categoryRegisterUI.dart';
+// import 'topicRegisterUI.dart';
+
 class DeveloperPage extends ConsumerWidget {
   const DeveloperPage({
     Key? key,
@@ -50,24 +53,24 @@ class DeveloperPage extends ConsumerWidget {
                       //     ),
                       //   ),
                       // ),
-                      // ElevatedButton(
-                      //   style: ButtonStyle(),
-                      //   onPressed: () async {
-                      //     await Navigator.of(context).push(
-                      //       MaterialPageRoute(builder: (context) {
-                      //         return CategoryRegister();
-                      //       }),
-                      //     );
-                      //   },
-                      //   child: Text(
-                      //     "カテゴリマスタ登録画面",
-                      //     style: TextStyle(
-                      //       fontWeight: FontWeight.normal,
-                      //       fontSize: 16,
-                      //       color: Colors.white,
-                      //     ),
-                      //   ),
-                      // ),
+                      ElevatedButton(
+                        style: ButtonStyle(),
+                        onPressed: () async {
+                          await Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) {
+                              return CategoryRegister();
+                            }),
+                          );
+                        },
+                        child: Text(
+                          "カテゴリマスタ登録画面",
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                       // const SizedBox(height: 8),
                       // Container(
                       //   width: double.infinity,

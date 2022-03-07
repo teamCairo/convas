@@ -1,4 +1,4 @@
-import 'package:convas/settingEditDescriptionPage.dart';
+import 'package:convas/settingEditDescriptionPageUI.dart';
 import 'package:convas/settingEditNumberPageUI.dart';
 import 'package:convas/settingEditTextPageUI.dart';
 import 'package:convas/settingEditRadioPageUI.dart';
@@ -39,7 +39,7 @@ class SettingPage extends ConsumerWidget {
                     child: const Text('upload photo') //,
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 14.0),
+                    padding: const EdgeInsets.only(left: 14.0,bottom: 8),
                     child: black16TextLeft("Greeting")),
                 Padding(
                   padding: const EdgeInsets.only(left: 14.0),
@@ -54,7 +54,7 @@ class SettingPage extends ConsumerWidget {
 
                       )),),
                 Padding(
-                    padding: const EdgeInsets.all( 14.0,),
+                    padding: const EdgeInsets.all( 14.0),
                     child: Container(
                       decoration: const BoxDecoration(
                         border: Border(
@@ -81,7 +81,7 @@ class SettingPage extends ConsumerWidget {
                       ),
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(left: 14.0),
+                    padding: const EdgeInsets.only(left: 14.0,bottom: 8),
                     child: black18TextLeft("Self-Introduction")),
                 Padding(
                       padding: const EdgeInsets.only(left: 14.0),
