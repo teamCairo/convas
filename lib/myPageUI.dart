@@ -1,4 +1,5 @@
 import 'package:convas/settingPageUI.dart';
+import 'package:convas/topicRegisterUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,7 +74,7 @@ class MyPage extends ConsumerWidget {
                       },
                     ),
                     bigIconButton(
-                      text: "Edit \nInterest",
+                      text: "Edit Interest",
                       icon: Icons.logout,
                       onPressed: () async {
                         await Navigator.of(context).push(
@@ -83,7 +84,17 @@ class MyPage extends ConsumerWidget {
                         );
                       },
                     ),
-                    bigIconButton(text: "Logout", icon: Icons.logout)
+                    bigIconButton(
+                      text: "register topic",
+                      icon: Icons.add_photo_alternate_outlined,
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return TopicRegister();
+                          }),
+                        );
+                      },
+                    ),
                   ]),
             )
           ]),

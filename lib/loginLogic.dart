@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/entityIsar/categoryEntityIsar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
@@ -12,6 +13,7 @@ import 'common/provider/userProvider.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
 import 'daoIsar/settingDaoIsar.dart';
 import 'entityIsar/settingEntityIsar.dart';
+import 'entityIsar/topicEntityIsar.dart';
 import 'entityIsar/userEntityIsar.dart';
 
 Future<void> insertUserToFirebase(BuildContext context,WidgetRef ref, String email) async {
@@ -137,7 +139,7 @@ Future<void> openIsarInstances() async {
   final dir = await getApplicationSupportDirectory();
   if (isarInstance == null) {
     await Isar.open(
-      schemas: [SettingSchema,UserSchema],
+      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema],
       directory: dir.path,
       inspector: true,
     );

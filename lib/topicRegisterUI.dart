@@ -1,11 +1,9 @@
-import 'dart:io';
 import 'package:convas/topicRegisterLogic.dart';
 import 'package:convas/topicRegisterProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'categoryRegisterLogic.dart';
 import 'common/UI/commonUI.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/topicsDaoFirebase.dart';
@@ -23,6 +21,7 @@ class TopicRegister extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final topicName = ref.watch(topicNameProvider);
 
     return Scaffold(
         body: SafeArea(
@@ -67,7 +66,7 @@ class TopicRegister extends ConsumerWidget {
                 onPressed:() async {
                   if (await checkTopicData(context,ref,ref.watch(topicNameProvider))) {
                     await insertTopic(ref,
-                      ref.watch(topicNameProvider),
+                      topicName,
                       ref.watch(categoryItemsProvider).selectedCategoryItem,
                       ref.watch(topicImagePhotoFileProvider).topicImagePhotoFile,
                         ref.watch(userDataProvider).userData["userDocId"],
