@@ -12,12 +12,12 @@ class EditInterestingCourseNotifier extends ChangeNotifier {
   Map<String,String> _courseDocIdNameMap={};
   get courseDocIdNameMap=>_courseDocIdNameMap;
 
-  Map<String,bool> _courseDocIdboolMap={};
-  get courseDocIdboolMap=>_courseDocIdboolMap;
+  Map<String,bool> _courseDocIdBoolMap={};
+  get courseDocIdBoolMap=>_courseDocIdBoolMap;
 
   Future<void> initialize(WidgetRef ref)async{
     _courseDocIdNameMap={};
-    _courseDocIdboolMap={};
+    _courseDocIdBoolMap={};
     List<Course>? courseList=await selectIsarCourseAll();
 
     if(courseList!.isEmpty){
@@ -26,9 +26,9 @@ class EditInterestingCourseNotifier extends ChangeNotifier {
       for(int i=0;i<courseList.length;i++){
         _courseDocIdNameMap[courseList[i].courseDocId]=courseList[i].courseName;
         if(ref.watch(userDataProvider).userData["interestingCourses"].contains(courseList[i].courseDocId)){
-          _courseDocIdboolMap[courseList[i].courseDocId]=true;
+          _courseDocIdBoolMap[courseList[i].courseDocId]=true;
         }else{
-          _courseDocIdboolMap[courseList[i].courseDocId]=false;
+          _courseDocIdBoolMap[courseList[i].courseDocId]=false;
         }
       }
     }
@@ -37,7 +37,7 @@ class EditInterestingCourseNotifier extends ChangeNotifier {
   }
 
   void setBool(String key,bool value){
-    _courseDocIdboolMap[key]=!value;
+    _courseDocIdBoolMap[key]=!value;
     notifyListeners();
   }
 }

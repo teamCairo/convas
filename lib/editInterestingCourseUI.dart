@@ -25,7 +25,7 @@ class EditInterestingCourse extends ConsumerWidget {
       checkList.add(
           CheckboxListTile(
             title: gray20TextLeft(value),
-            value: ref.watch(editInterestingCourseProvider).courseDocIdboolMap[key.toString()],
+            value: ref.watch(editInterestingCourseProvider).courseDocIdBoolMap[key.toString()],
             onChanged: (bool? value) {
               ref.read(editInterestingCourseProvider.notifier).setBool(key.toString(),!(value!));
             },
@@ -50,7 +50,7 @@ class EditInterestingCourse extends ConsumerWidget {
 
                 orangeRoundButton(onPressed: () {
                   String interestingCourses="";
-                  ref.watch(editInterestingCourseProvider).courseDocIdboolMap.forEach((key, value) {
+                  ref.watch(editInterestingCourseProvider).courseDocIdBoolMap.forEach((key, value) {
                     if(value){
                       interestingCourses=interestingCourses+key.toString()+",";
                     }
