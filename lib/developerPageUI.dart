@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'categoryRegisterUI.dart';
+import 'courseRegisterUI.dart';
 // import 'topicRegisterUI.dart';
 
 class DeveloperPage extends ConsumerWidget {
@@ -53,7 +54,7 @@ class DeveloperPage extends ConsumerWidget {
                   //   ),
                   // ),
                   ElevatedButton(
-                    style: ButtonStyle(),
+                    style: const ButtonStyle(),
                     onPressed: () async {
                       await Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) {
@@ -62,7 +63,7 @@ class DeveloperPage extends ConsumerWidget {
                       );
                     },
                     child: Text(
-                      "カテゴリマスタ登録画面",
+                      "Register category",
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
@@ -70,6 +71,24 @@ class DeveloperPage extends ConsumerWidget {
                       ),
                     ),
                   ),
+                ElevatedButton(
+                  style: ButtonStyle(),
+                  onPressed: () async {
+                    await Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return CourseRegister();
+                      }),
+                    );
+                  },
+                  child: Text(
+                    "Register course",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
                   // const SizedBox(height: 8),
                   // Container(
                   //   width: double.infinity,

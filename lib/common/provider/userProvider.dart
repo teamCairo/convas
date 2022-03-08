@@ -115,7 +115,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
       _userData['messageTokenId'] =tmpUser.messageTokenId;
       _userData['informationModifiedTime'] =tmpUser.informationModifiedTime;
       _userData['interestingCategories'] =tmpUser.interestingCategories;
-      _userData['interestingCourse'] =tmpUser.interestingCourse;
+      _userData['interestingCourses'] =tmpUser.interestingCourses;
       _userData['insertUserDocId'] =tmpUser.insertUserDocId;
       _userData['insertProgramId'] =tmpUser.insertProgramId;
       _userData['insertTime'] =tmpUser.insertTime;
@@ -200,7 +200,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
         _userData['messageTokenId'] = snapshot.docs[0].get('messageTokenId');
         _userData['informationModifiedTime'] = snapshot.docs[0].get('informationModifiedTime');
         _userData['interestingCategories'] = snapshot.docs[0].get('interestingCategories');
-        _userData['interestingCourse'] = snapshot.docs[0].get('interestingCourse');
+        _userData['interestingCourses'] = snapshot.docs[0].get('interestingCourses');
         _userData['insertUserDocId'] = snapshot.docs[0].get('insertUserDocId');
         _userData['insertProgramId'] = snapshot.docs[0].get('insertProgramId');
         _userData['insertTime'] = snapshot.docs[0].get('insertTime');
@@ -237,7 +237,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
             messageTokenId: snapshot.docs[0].get('messageTokenId'),
           informationModifiedTime: snapshot.docs[0].get('informationModifiedTime').toDate(),
             interestingCategories: snapshot.docs[0].get('interestingCategories'),
-            interestingCourse: snapshot.docs[0].get('interestingCourse'),
+            interestingCourses: snapshot.docs[0].get('interestingCourses'),
             insertUserDocId: snapshot.docs[0].get('insertUserDocId'),
             insertProgramId: snapshot.docs[0].get('insertProgramId'),
             insertTime: snapshot.docs[0].get('insertTime').toDate(),

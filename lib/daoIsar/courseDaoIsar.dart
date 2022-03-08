@@ -3,42 +3,42 @@ import 'dart:typed_data';
 
 import 'package:isar/isar.dart';
 
-import '../entityIsar/categoryEntityIsar.dart';
+import '../entityIsar/courseEntityIsar.dart';
 
-Future<Category?> selectIsarCategoryById(String categoryDocId) async {
+Future<Course?> selectIsarCourseById(String courseDocId) async {
 
   var isarInstance = Isar.getInstance();
-  Category? resultCategory;
+  Course? resultCourse;
   await isarInstance?.writeTxn((isar) async {
-    List<Category> resultList =
-    await isar.categorys.filter().deleteFlgEqualTo(false).categoryDocIdEqualTo(categoryDocId).findAll();
+    List<Course> resultList =
+    await isar.courses.filter().deleteFlgEqualTo(false).courseDocIdEqualTo(courseDocId).findAll();
 
     if(resultList.length == 0){
-      resultCategory = null;
+      resultCourse = null;
     }else{
-      resultCategory = resultList[0];
+      resultCourse = resultList[0];
     }
   });
-  return resultCategory;
+  return resultCourse;
 }
 
-Future<List<Category>?> selectIsarCategoryAll() async {
+Future<List<Course>?> selectIsarCourseAll() async {
 
-  List<Category>? resultCategoryList;
+  List<Course>? resultCourseList;
   var isarInstance = Isar.getInstance();
   await isarInstance?.writeTxn((isar) async {
-    resultCategoryList =
-    await isar.categorys.filter().deleteFlgEqualTo(false).findAll();
+    resultCourseList =
+    await isar.courses.filter().deleteFlgEqualTo(false).findAll();
 
-    log("XXXXXXXXXXカテゴリ件数"+resultCategoryList!.length.toString());
+    log("XXXXXXXXXXカテゴリ件数"+resultCourseList!.length.toString());
   });
-  return resultCategoryList;
+  return resultCourseList;
 }
 
 
-Future<int> insertOrUpdateIsarCategory({
-  required String categoryDocId,
-  required String categoryName,
+Future<int> insertOrUpdateIsarCourse({
+  required String courseDocId,
+  required String courseName,
   required Uint8List photoFile,
   required String photoNameSuffix,
   required int photoUpdateCnt,
@@ -52,13 +52,13 @@ Future<int> insertOrUpdateIsarCategory({
   required bool deleteFlg,
 }) async {
 
-  Category? targetCategory =await selectIsarCategoryById(categoryDocId);
+  Course? targetCourse =await selectIsarCourseById(courseDocId);
 
   int returnValue=0;
-  if(targetCategory==null){
-    returnValue= await insertIsarCategory(
-      categoryDocId: categoryDocId,
-      categoryName: categoryName,
+  if(targetCourse==null){
+    returnValue= await insertIsarCourse(
+      courseDocId: courseDocId,
+      courseName: courseName,
       photoFile: photoFile,
       photoNameSuffix: photoNameSuffix,
       photoUpdateCnt: photoUpdateCnt,
@@ -74,9 +74,9 @@ Future<int> insertOrUpdateIsarCategory({
 
   }else{
 
-    returnValue= await updateIsarCategory(
-      categoryDocId: categoryDocId,
-      categoryName: categoryName,
+    returnValue= await updateIsarCourse(
+      courseDocId: courseDocId,
+      courseName: courseName,
       photoFile: photoFile,
       photoNameSuffix: photoNameSuffix,
       photoUpdateCnt: photoUpdateCnt,
@@ -99,9 +99,9 @@ Future<int> insertOrUpdateIsarCategory({
 }
 
 
-Future<int> insertIsarCategory({
-  required String categoryDocId,
-  required String categoryName,
+Future<int> insertIsarCourse({
+  required String courseDocId,
+  required String courseName,
   required Uint8List photoFile,
   required String photoNameSuffix,
   required int photoUpdateCnt,
@@ -117,9 +117,9 @@ Future<int> insertIsarCategory({
 
 }) async {
 
-  Category insertCategory = Category(
-    categoryDocId,
-    categoryName,
+  Course insertCourse = Course(
+    courseDocId,
+    courseName,
     photoFile,
     photoNameSuffix,
     photoUpdateCnt,
@@ -138,7 +138,7 @@ Future<int> insertIsarCategory({
   int returnResult=0;
 
   await isarInstance?.writeTxn((isar) async {
-    returnResult=  await isar.categorys.put(insertCategory);
+    returnResult=  await isar.courses.put(insertCourse);
   });
 
   return returnResult;
@@ -147,9 +147,9 @@ Future<int> insertIsarCategory({
 
 
 
-Future<int> updateIsarCategory({
-  required String categoryDocId,
-  required String categoryName,
+Future<int> updateIsarCourse({
+  required String courseDocId,
+  required String courseName,
   required Uint8List photoFile,
   required String photoNameSuffix,
   required int photoUpdateCnt,
@@ -165,12 +165,12 @@ Future<int> updateIsarCategory({
 
 }) async {
 
-  Category? targetCategory =await selectIsarCategoryById(categoryDocId);
+  Course? targetCourse =await selectIsarCourseById(courseDocId);
 
-  Category updateCategory = setIsarCategoryParameters(
-    inputCategory: targetCategory!,
-    categoryDocId: categoryDocId,
-    categoryName: categoryName,
+  Course updateCourse = setIsarCourseParameters(
+    inputCourse: targetCourse!,
+    courseDocId: courseDocId,
+    courseName: courseName,
     photoFile: photoFile,
     photoNameSuffix: photoNameSuffix,
     photoUpdateCnt: photoUpdateCnt,
@@ -190,7 +190,7 @@ Future<int> updateIsarCategory({
   int returnResult=0;
 
   await isarInstance?.writeTxn((isar) async {
-    returnResult=  await isar.categorys.put(updateCategory);
+    returnResult=  await isar.courses.put(updateCourse);
   });
 
   return returnResult;
@@ -198,12 +198,12 @@ Future<int> updateIsarCategory({
 }
 
 
-Future<int> deleteIsarCategorysById(categoryDocId) async {
+Future<int> deleteIsarCoursesById(courseDocId) async {
 
   int returnInt=0;
   var isarInstance = Isar.getInstance();
   await isarInstance?.writeTxn((isar) async {
-    returnInt = await isar.categorys.filter().deleteFlgEqualTo(false).categoryDocIdEqualTo(categoryDocId).deleteAll();
+    returnInt = await isar.courses.filter().deleteFlgEqualTo(false).courseDocIdEqualTo(courseDocId).deleteAll();
   });
 
   return returnInt;
@@ -212,10 +212,10 @@ Future<int> deleteIsarCategorysById(categoryDocId) async {
 
 
 
-Category setIsarCategoryParameters({
-  required Category inputCategory,
-  required String categoryDocId,
-  required String categoryName,
+Course setIsarCourseParameters({
+  required Course inputCourse,
+  required String courseDocId,
+  required String courseName,
   required Uint8List photoFile,
   required String photoNameSuffix,
   required int photoUpdateCnt,
@@ -231,21 +231,21 @@ Category setIsarCategoryParameters({
 
 }){
 
-  Category tmpCategory =inputCategory;
-  tmpCategory.categoryDocId=categoryDocId;
-  tmpCategory.categoryName=categoryName;
-  tmpCategory.photoFile=photoFile;
-  tmpCategory.photoNameSuffix=photoNameSuffix;
-  tmpCategory.photoUpdateCnt=photoUpdateCnt;
-  tmpCategory.insertUserDocId=insertUserDocId;
-  tmpCategory.insertProgramId=insertProgramId;
-  tmpCategory.insertTime=insertTime;
-  tmpCategory.updateUserDocId=updateUserDocId;
-  tmpCategory.updateProgramId=updateProgramId;
-  tmpCategory.updateTime=updateTime;
-  tmpCategory.readableFlg=readableFlg;
-  tmpCategory.deleteFlg=deleteFlg;
+  Course tmpCourse =inputCourse;
+  tmpCourse.courseDocId=courseDocId;
+  tmpCourse.courseName=courseName;
+  tmpCourse.photoFile=photoFile;
+  tmpCourse.photoNameSuffix=photoNameSuffix;
+  tmpCourse.photoUpdateCnt=photoUpdateCnt;
+  tmpCourse.insertUserDocId=insertUserDocId;
+  tmpCourse.insertProgramId=insertProgramId;
+  tmpCourse.insertTime=insertTime;
+  tmpCourse.updateUserDocId=updateUserDocId;
+  tmpCourse.updateProgramId=updateProgramId;
+  tmpCourse.updateTime=updateTime;
+  tmpCourse.readableFlg=readableFlg;
+  tmpCourse.deleteFlg=deleteFlg;
 
 
-  return tmpCategory;
+  return tmpCourse;
 }

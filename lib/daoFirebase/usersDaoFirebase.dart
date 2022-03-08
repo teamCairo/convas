@@ -62,7 +62,7 @@ Future<String> insertFirebaseUser({
           'messageTokenId':"",
           'informationModifiedTime': FieldValue.serverTimestamp(),
           'interestingCategories':"",
-          'interestingCourse':"",
+          'interestingCourses':"",
           'insertUserDocId':"myself",
           'insertProgramId': programId,
           'insertTime': FieldValue.serverTimestamp(),

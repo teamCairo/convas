@@ -17,7 +17,7 @@ extension GetUserCollection on Isar {
 final UserSchema = CollectionSchema(
   name: 'User',
   schema:
-      '{"name":"User","idName":"id","properties":[{"name":"age","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourse","type":"String"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionNativeLang","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"User","idName":"id","properties":[{"name":"age","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourses","type":"String"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionNativeLang","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
   nativeAdapter: const _UserNativeAdapter(),
   webAdapter: const _UserWebAdapter(),
   idName: 'id',
@@ -36,7 +36,7 @@ final UserSchema = CollectionSchema(
     'insertTime': 11,
     'insertUserDocId': 12,
     'interestingCategories': 13,
-    'interestingCourse': 14,
+    'interestingCourses': 14,
     'level': 15,
     'messageTokenId': 16,
     'motherTongue': 17,
@@ -101,7 +101,7 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
     IsarNative.jsObjectSet(
         jsObj, 'interestingCategories', object.interestingCategories);
     IsarNative.jsObjectSet(
-        jsObj, 'interestingCourse', object.interestingCourse);
+        jsObj, 'interestingCourses', object.interestingCourses);
     IsarNative.jsObjectSet(jsObj, 'level', object.level);
     IsarNative.jsObjectSet(jsObj, 'messageTokenId', object.messageTokenId);
     IsarNative.jsObjectSet(jsObj, 'motherTongue', object.motherTongue);
@@ -167,7 +167,7 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
               .toLocal()
           : null,
       IsarNative.jsObjectGet(jsObj, 'interestingCategories'),
-      IsarNative.jsObjectGet(jsObj, 'interestingCourse'),
+      IsarNative.jsObjectGet(jsObj, 'interestingCourses'),
       IsarNative.jsObjectGet(jsObj, 'insertUserDocId'),
       IsarNative.jsObjectGet(jsObj, 'insertProgramId'),
       IsarNative.jsObjectGet(jsObj, 'insertTime') != null
@@ -235,8 +235,8 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         return (IsarNative.jsObjectGet(jsObj, 'insertUserDocId')) as P;
       case 'interestingCategories':
         return (IsarNative.jsObjectGet(jsObj, 'interestingCategories')) as P;
-      case 'interestingCourse':
-        return (IsarNative.jsObjectGet(jsObj, 'interestingCourse')) as P;
+      case 'interestingCourses':
+        return (IsarNative.jsObjectGet(jsObj, 'interestingCourses')) as P;
       case 'level':
         return (IsarNative.jsObjectGet(jsObj, 'level')) as P;
       case 'messageTokenId':
@@ -367,12 +367,12 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       _interestingCategories = IsarBinaryWriter.utf8Encoder.convert(value13);
     }
     dynamicSize += (_interestingCategories?.length ?? 0) as int;
-    final value14 = object.interestingCourse;
-    IsarUint8List? _interestingCourse;
+    final value14 = object.interestingCourses;
+    IsarUint8List? _interestingCourses;
     if (value14 != null) {
-      _interestingCourse = IsarBinaryWriter.utf8Encoder.convert(value14);
+      _interestingCourses = IsarBinaryWriter.utf8Encoder.convert(value14);
     }
-    dynamicSize += (_interestingCourse?.length ?? 0) as int;
+    dynamicSize += (_interestingCourses?.length ?? 0) as int;
     final value15 = object.level;
     IsarUint8List? _level;
     if (value15 != null) {
@@ -499,7 +499,7 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
     writer.writeDateTime(offsets[11], _insertTime);
     writer.writeBytes(offsets[12], _insertUserDocId);
     writer.writeBytes(offsets[13], _interestingCategories);
-    writer.writeBytes(offsets[14], _interestingCourse);
+    writer.writeBytes(offsets[14], _interestingCourses);
     writer.writeBytes(offsets[15], _level);
     writer.writeBytes(offsets[16], _messageTokenId);
     writer.writeBytes(offsets[17], _motherTongue);
@@ -2071,27 +2071,27 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseIsNull() {
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesIsNull() {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.isNull,
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       value: null,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseEqualTo(
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseGreaterThan(
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesGreaterThan(
     String? value, {
     bool caseSensitive = true,
     bool include = false,
@@ -2099,13 +2099,13 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: include,
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseLessThan(
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesLessThan(
     String? value, {
     bool caseSensitive = true,
     bool include = false,
@@ -2113,13 +2113,13 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: include,
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseBetween(
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -2127,7 +2127,7 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     bool includeUpper = true,
   }) {
     return addFilterConditionInternal(FilterCondition.between(
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
@@ -2136,47 +2136,47 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseStartsWith(
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.startsWith,
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseEndsWith(
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.endsWith,
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseContains(
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesContains(
       String value,
       {bool caseSensitive = true}) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.contains,
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> interestingCourseMatches(
+  QueryBuilder<User, User, QAfterFilterCondition> interestingCoursesMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.matches,
-      property: 'interestingCourse',
+      property: 'interestingCourses',
       value: pattern,
       caseSensitive: caseSensitive,
     ));
@@ -4331,12 +4331,12 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
     return addSortByInternal('interestingCategories', Sort.desc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortByInterestingCourse() {
-    return addSortByInternal('interestingCourse', Sort.asc);
+  QueryBuilder<User, User, QAfterSortBy> sortByInterestingCourses() {
+    return addSortByInternal('interestingCourses', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortByInterestingCourseDesc() {
-    return addSortByInternal('interestingCourse', Sort.desc);
+  QueryBuilder<User, User, QAfterSortBy> sortByInterestingCoursesDesc() {
+    return addSortByInternal('interestingCourses', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> sortByLevel() {
@@ -4621,12 +4621,12 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
     return addSortByInternal('interestingCategories', Sort.desc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenByInterestingCourse() {
-    return addSortByInternal('interestingCourse', Sort.asc);
+  QueryBuilder<User, User, QAfterSortBy> thenByInterestingCourses() {
+    return addSortByInternal('interestingCourses', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenByInterestingCourseDesc() {
-    return addSortByInternal('interestingCourse', Sort.desc);
+  QueryBuilder<User, User, QAfterSortBy> thenByInterestingCoursesDesc() {
+    return addSortByInternal('interestingCourses', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> thenByLevel() {
@@ -4864,9 +4864,9 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
         caseSensitive: caseSensitive);
   }
 
-  QueryBuilder<User, User, QDistinct> distinctByInterestingCourse(
+  QueryBuilder<User, User, QDistinct> distinctByInterestingCourses(
       {bool caseSensitive = true}) {
-    return addDistinctByInternal('interestingCourse',
+    return addDistinctByInternal('interestingCourses',
         caseSensitive: caseSensitive);
   }
 
@@ -5040,8 +5040,8 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
     return addPropertyNameInternal('interestingCategories');
   }
 
-  QueryBuilder<User, String?, QQueryOperations> interestingCourseProperty() {
-    return addPropertyNameInternal('interestingCourse');
+  QueryBuilder<User, String?, QQueryOperations> interestingCoursesProperty() {
+    return addPropertyNameInternal('interestingCourses');
   }
 
   QueryBuilder<User, String?, QQueryOperations> levelProperty() {

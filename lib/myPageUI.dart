@@ -8,6 +8,7 @@ import 'common/logic/commonLogic.dart';
 import 'common/provider/userProvider.dart';
 import 'developerPageUI.dart';
 import 'editInterestUI.dart';
+import 'editInterestingCourseUI.dart';
 import 'loginPageUI.dart';
 
 class MyPage extends ConsumerWidget {
@@ -75,7 +76,7 @@ class MyPage extends ConsumerWidget {
                     ),
                     bigIconButton(
                       text: "Edit Interest",
-                      icon: Icons.logout,
+                      icon: Icons.star,
                       onPressed: () async {
                         await Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) {
@@ -85,7 +86,47 @@ class MyPage extends ConsumerWidget {
                       },
                     ),
                     bigIconButton(
-                      text: "register topic",
+                      text: "Register topic",
+                      icon: Icons.add_photo_alternate_outlined,
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return TopicRegister();
+                          }),
+                        );
+                      },
+                    ),
+                  ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    bigIconButton(
+                      text: "Edit course",
+                      icon: Icons.widgets_outlined,
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return EditInterestingCourse();
+                          }),
+                        );
+                      },
+                    ),
+                    bigIconButton(
+                      text: "Edit Calendar",
+                      icon: Icons.star,
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return EditInterest();
+                          }),
+                        );
+                      },
+                    ),
+                    bigIconButton(
+                      text: "XXXXX",
                       icon: Icons.add_photo_alternate_outlined,
                       onPressed: () async {
                         await Navigator.of(context).push(

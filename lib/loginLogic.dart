@@ -2,12 +2,14 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/entityIsar/categoryEntityIsar.dart';
+import 'package:convas/entityIsar/courseEntityIsar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'common/UI/commonUI.dart';
 import 'common/provider/categoryProvider.dart';
+import 'common/provider/courseProvider.dart';
 import 'common/provider/topicProvider.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
@@ -73,6 +75,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
   await openIsarInstances();
 
+  await updateTimeCheck("courses");
   await updateTimeCheck("topics");
   await updateTimeCheck("friends");
   await updateTimeCheck("user");
@@ -104,6 +107,9 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   ref
       .read(categoryDataProvider.notifier)
       .controlStreamOfReadCategoryNewDataFromFirebaseToIsar();
+  ref
+      .read(courseDataProvider.notifier)
+      .controlStreamOfReadCourseNewDataFromFirebaseToIsar();
   // ref
   //     .read(chatMessagesDataProvider.notifier)
   //     .controlStreamOfReadChatMessageNewDataFromFirebaseToIsar(
@@ -139,14 +145,14 @@ Future<void> openIsarInstances() async {
   final dir = await getApplicationSupportDirectory();
   if (isarInstance == null) {
     await Isar.open(
-      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema],
+      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema],
       directory: dir.path,
       inspector: true,
     );
   } else {
     if (!isarInstance.isOpen) {
       await Isar.open(
-        schemas: [SettingSchema,UserSchema],
+        schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema],
         directory: dir.path,
         inspector: true,
       );

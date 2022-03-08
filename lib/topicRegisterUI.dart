@@ -17,11 +17,16 @@ class TopicRegister extends ConsumerWidget {
 
   TextEditingController? topicEditingController;
 
+  bool initialProcessFlg = true;
 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final topicName = ref.watch(topicNameProvider);
+
+    if(initialProcessFlg){
+      initialProcessFlg=false;
+      ref.read(topicRegisterProvider.notifier).initialize();
+    }
 
     return Scaffold(
         body: SafeArea(
@@ -36,10 +41,10 @@ class TopicRegister extends ConsumerWidget {
                       child: imageAvatar(
                         radius: 80,
                         image:
-                        ref.watch(topicImagePhotoFileProvider).topicImagePhotoFile == null
+                        ref.watch(topicRegisterProvider).topicImagePhotoFile == null
                             ? null
                             : Image.file(ref
-                            .watch(topicImagePhotoFileProvider)
+                            .watch(topicRegisterProvider)
                             .topicImagePhotoFile!),
                       ),
                     ),
@@ -48,7 +53,7 @@ class TopicRegister extends ConsumerWidget {
                       onPressed: () async {
                         await setTopicImage(ref);
                       },
-                      child: const Text('写真アップロード') //,
+                      child: const Text('Upload photo') //,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -57,20 +62,53 @@ class TopicRegister extends ConsumerWidget {
                       decoration: const InputDecoration(labelText: "Topic Name"),
                       controller: topicEditingController,
                       onChanged: (String value) {
-                        ref.read(topicNameProvider.state).update((state) => value);
+                        ref.read(topicRegisterProvider.notifier).setTopicName(value);
                       },
                     ),
                   ),
                   const SizedBox(height: 8),
-                  DropdownButton(
-                    items: ref.watch(categoryItemsProvider).categoryItems,
-                    value: ref.watch(categoryItemsProvider).selectedCategoryItem,
-                    onChanged: (value) => {
-                      ref
-                          .watch(categoryItemsProvider.notifier)
-                          .setCategoryItemId(value.toString())
-                    },
-                  ),
+      Padding(
+          padding: const EdgeInsets.only(left:14,right:14,bottom:6),
+          child: Container(
+            height: 70,
+            child:Column(children:[
+              SizedBox(
+                  width: double.infinity,
+                  child: gray16TextLeft("Category Name")
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    gray16TextLeft(
+                      ref.watch(topicRegisterProvider).categoryItemName),
+                    Padding(padding:const EdgeInsets.only(left:5),
+                      child:GestureDetector(
+                          onTap: () async{
+                            showDialog<void>(
+                              context: context,
+                              builder: (_) {
+                                return SelectCategoryDialog();
+                              },
+                            );
+
+                          },
+                          child: const Icon(
+                              Icons.edit,
+                              color: Colors.black87,
+                              size:18
+                          )
+                      ),)])
+            ]),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.black26,
+                  width: 0.5,
+                ),
+              ),
+            ),
+          ))
+                  
                 ],
               ),
               Padding(
@@ -78,21 +116,17 @@ class TopicRegister extends ConsumerWidget {
                 child: orangeRoundButton(
                   text:"Register",
                   onPressed:() async {
-                    if (await checkTopicData(context,ref,ref.watch(topicNameProvider))) {
+                    if (await checkTopicData(context,ref,ref.watch(topicRegisterProvider).topicName)) {
                       await insertTopic(ref,
-                        topicName,
-                        ref.watch(categoryItemsProvider).selectedCategoryItem,
-                        ref.watch(topicImagePhotoFileProvider).topicImagePhotoFile,
+                          ref.watch(topicRegisterProvider).topicName,
+                          ref.watch(topicRegisterProvider).categoryItemDocId,
+                        ref.watch(topicRegisterProvider).topicImagePhotoFile,
                           ref.watch(userDataProvider).userData["userDocId"],
                         "topicResister");
-                      ref.watch(categoryItemsProvider.notifier)
-                          .clearCategoryItemsNotifier();
+                      ref.watch(topicRegisterProvider.notifier)
+                          .initialize();
 
-                      ref.read(topicNameProvider.state).update((state) => "");
                       topicEditingController =  TextEditingController(text: '');
-
-                      ref.watch(topicImagePhotoFileProvider.notifier)
-                          .clearTopicImagePhotoFile();
 
                       await showOkInfoDialog(context,"data has been inserted");
                     }
@@ -102,3 +136,63 @@ class TopicRegister extends ConsumerWidget {
   }
 
 }
+
+class SelectCategoryDialog extends ConsumerWidget {
+  SelectCategoryDialog({Key? key}) : super(key: key);
+
+
+  List<Widget> radioTileList = [];
+  
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    radioTileList=[];
+    ref.watch(topicRegisterProvider).categoryMap.forEach((key, value) {
+      radioTileList.add(RadioListTile(
+          title: Text(value),
+          value: key.toString(),
+          groupValue: ref.watch(topicRegisterProvider).categoryItemDocId,
+          onChanged: (key) => ref.read(topicRegisterProvider.notifier).setCategoryItemDocId(key.toString(),value),
+          controlAffinity:ListTileControlAffinity.trailing
+      ),);
+
+    });
+    final _dialogWidth = MediaQuery.of(context).size.width * 3 / 4; // 画面サイズから相対的に大きさを決めている。
+    return Dialog(
+      insetPadding: const EdgeInsets.all(0),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      // SizedBoxでダイアログそのものの大きさをまずは決めています。
+      child: SizedBox(
+        width: _dialogWidth,
+        height: _dialogWidth*1.5,
+          child: SingleChildScrollView(
+              child: Container(
+                decoration: BoxDecoration(
+                  color:Colors.white,
+                  border:Border.all(style:BorderStyle.none),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children:[
+                      Column(
+                        children:radioTileList
+                      ),
+                      orangeRoundButton(text: "OK",
+                          onPressed: (){
+                      Navigator.pop(context);
+                      })
+                    ]
+
+                  ),
+                ),
+              ),
+            )
+      ),
+    );
+  }
+}
+

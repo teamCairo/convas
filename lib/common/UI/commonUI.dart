@@ -10,7 +10,7 @@ Widget borderedTextBox(
         TextFormField(
             decoration: InputDecoration(
               labelText: text,
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
             obscureText: passwordSecure,
             onChanged: onChanged)
@@ -159,6 +159,21 @@ Padding gray16TextRight(String text) {
           style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 16,
+            color: Colors.black54,
+          ),
+        )),
+  );
+}
+Padding gray20TextLeft(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 20,
             color: Colors.black54,
           ),
         )),

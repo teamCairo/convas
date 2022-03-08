@@ -1,3 +1,4 @@
+import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,7 +52,7 @@ class CategoryRegister extends ConsumerWidget {
                     text:"Register",
                   onPressed:() async {
                     if (await checkCategoryData(context, ref, categoryName)) {
-                      await insertCategoryData(ref, categoryName,ref.watch(categoryImagePhotoFileProvider).categoryImagePhotoFile);
+                      await insertCategoryData(ref, categoryName,ref.watch(categoryImagePhotoFileProvider).categoryImagePhotoFile,"categoryResister",ref.watch(userDataProvider).userData["userDocId"]);
 
                       ref.read(categoryNameProvider.state).update((state) => "");
                       categoryNameEditingController = TextEditingController(text: '');

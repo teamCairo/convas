@@ -35,7 +35,7 @@ class User {
       this.messageTokenId,
       this.informationModifiedTime,
       this.interestingCategories,
-      this.interestingCourse,
+      this.interestingCourses,
       this.insertUserDocId,
       this.insertProgramId,
       this.insertTime,
@@ -75,7 +75,7 @@ class User {
   String? messageTokenId;
   DateTime? informationModifiedTime;
   String? interestingCategories;
-  String? interestingCourse;
+  String? interestingCourses;
   String? insertUserDocId;
   String? insertProgramId;
   DateTime? insertTime;

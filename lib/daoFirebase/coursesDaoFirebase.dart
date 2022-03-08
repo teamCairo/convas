@@ -5,18 +5,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
-import '../common/provider/userProvider.dart';
 
-Future<void> insertCategoryData(WidgetRef ref, String categoryName,File imageFile,String programId,String userDocId) async {
+Future<void> insertCourseData(WidgetRef ref, String courseName,File imageFile,String programId,String userDocId) async {
 
   try {
     String insertedDocId = "";
     String pathStr= imageFile.path;
 
     FirebaseStorage storage = FirebaseStorage.instance;
-    await FirebaseFirestore.instance.collection('categories').add(
+    await FirebaseFirestore.instance.collection('courses').add(
       {
-        'categoryName': categoryName,
+        'courseName': courseName,
         'photoNameSuffix':pathStr.substring(pathStr.lastIndexOf('.')),
         'photoUpdateCnt':0,
         'insertUserDocId':userDocId,
@@ -33,7 +32,7 @@ Future<void> insertCategoryData(WidgetRef ref, String categoryName,File imageFil
     });
 
     await storage
-        .ref("categories/" +
+        .ref("courses/" +
         insertedDocId +
         pathStr.substring(
           pathStr.lastIndexOf('.'),
@@ -41,7 +40,7 @@ Future<void> insertCategoryData(WidgetRef ref, String categoryName,File imageFil
         .putFile(imageFile);
 
     await FirebaseFirestore.instance
-        .collection('categories')
+        .collection('courses')
         .doc(insertedDocId)
         .update({
       'readableFlg': true,
