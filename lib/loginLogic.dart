@@ -72,11 +72,13 @@ Future<void> insertUser(WidgetRef ref,String email)async {
 
 
 Future<void> initialProcessLogic(WidgetRef ref, String email) async {
+  log("initialProcessLogic1行目");
   await makeDir("chatMessages");
   await makeDir("media");
 
   await openIsarInstances();
 
+  log("initialProcessLogic6行目くらい");
   await updateTimeCheck("events");
   await updateTimeCheck("courses");
   await updateTimeCheck("topics");
@@ -90,6 +92,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   // await ref.read(friendDataProvider.notifier).readFriendDataFromHiveToMemory();
   // await ref.read(countryDataProvider.notifier).readCountryDataFromIsarToMemory();
 
+  log("initialProcessLogic　readUserDataFromIsarToMemoryのあと");
   QuerySnapshot tmpUserData=await selectFirebaseUserByEmail(email);
 
   await insertOrUpdateIsarSettingBySettingCode(settingCode:"localUserInfo",
@@ -100,6 +103,11 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   ref
       .read(userDataProvider.notifier)
       .controlStreamOfReadUserDataFirebaseToIsarAndMemory(email);
+
+  await ref
+      .read(eventDataProvider.notifier)
+      .readEventDataFromIsarToMemory();
+  log("initialProcessLogic　readEventDataFromIsarToMemory();のあと");
   // ref
   //     .read(friendDataProvider.notifier)
   //     .controlStreamOfReadFriendNewDataFromFirebaseToHiveAndMemory(
@@ -107,6 +115,8 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   ref
       .read(eventDataProvider.notifier)
       .controlStreamOfReadEventNewDataFromFirebaseToIsar(tmpUserData.docs[0].id);
+
+  log("initialProcessLogic　controlStreamOfReadEventNewDataFromFirebaseToIsar();のあと");
   ref
       .read(topicDataProvider.notifier)
       .controlStreamOfReadTopicNewDataFromFirebaseToIsar();

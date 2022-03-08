@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import 'calendarEditDeleteDialogUI.dart';
 import 'calendarEditLogic.dart';
 import 'calendarEditProvider.dart';
+import 'calendarEditSelectModeDialogUI.dart';
 import 'common/UI/commonUI.dart';
 import 'common/logic/commonLogic.dart';
 import 'common/provider/eventProvider.dart';
@@ -39,9 +41,44 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
                 monthViewSettings: const MonthViewSettings(showAgenda: true),
                 dataSource: EventDataSource(
                     ref.watch(eventDataProvider).eventList),
-                onTap: (calendarDetails) {
-                  ref.read(calendarEditProvider.notifier).initializeEditedEvent(calendarDetails.date!);
-                  _fabPressed(context, calendarDetails,ref);
+                onTap: (calendarDetails) async{
+                  if(calendarDetails.appointments==null){
+
+                    ref.read(calendarEditProvider.notifier).setEditMode("insert");
+                    ref.read(calendarEditProvider.notifier).initializeEditedEvent(calendarDetails.date!);
+                    _fabPressed(context, calendarDetails,ref);
+
+                  }else{
+
+                    ref.read(calendarEditProvider.notifier).setEditMode("cancel");
+
+                    await showDialog<void>(
+                      context: context,
+                      builder: (_) {
+                        return CalendarEditSelectModeDialog(details: calendarDetails);
+                      },
+                    );
+
+                    if(ref.watch(calendarEditProvider).editMode=="delete"){
+
+                      await showDialog<void>(
+                        context: context,
+                        builder: (_) {
+                          return CalendarEditDeleteDialog(details: calendarDetails);
+                        },
+                      );
+
+                    }else if(ref.watch(calendarEditProvider).editMode=="update"){
+
+                      ref.read(calendarEditProvider.notifier).setEditedEventInfo(calendarDetails.appointments![0]);
+                      _fabPressed(context, calendarDetails,ref);
+
+                    }else if(ref.watch(calendarEditProvider).editMode=="insert"){
+                      ref.read(calendarEditProvider.notifier).initializeEditedEvent(calendarDetails.date!);
+                      _fabPressed(context, calendarDetails,ref);
+                    }
+
+                  }
                 })));
   }
 
@@ -60,13 +97,7 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    graySmallerIconButton(
-                        icon: Icons.clear,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        }),
-                  ]),
+                  closeButtonForModal(context),
                   borderedTextBox(
                     text: "title",
                     initialValue: ref.watch(calendarEditProvider).editedEventName ,
@@ -79,9 +110,16 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
                   dateTimeRow(ref,context,"to",setState),
                   Padding(
                     padding: const EdgeInsets.only(bottom:14.0),
-                    child: orangeRoundButton(text: "OK",
+                    child: orangeRoundButton(text: ref.watch(calendarEditProvider).editMode=="insert"?"Create Event":"Update Event",
                         onPressed: ()async {
-                          await ref.read(calendarEditProvider.notifier).insertEditedEvent(ref);
+
+                      if(ref.watch(calendarEditProvider).editMode=="insert"){
+                        await ref.read(calendarEditProvider.notifier).insertEditedEvent(ref);
+
+                      }else{
+                        await ref.read(calendarEditProvider.notifier).updateEditedEvent(ref);
+
+                      }
                           Navigator.of(context).pop();
                         }),
                   )

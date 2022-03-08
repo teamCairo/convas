@@ -55,3 +55,63 @@ Future<String> insertEventData(
     return "";
   }
 }
+
+
+
+Future<void> updateEventData(
+    {required WidgetRef ref,
+      required String eventDocId,
+      required String eventName,
+      required String eventType,
+      required String friendUserDocId,
+      required String callChannelId,
+      required DateTime fromTime,
+      required DateTime toTime,
+      required bool isAllDay,
+      required String programId}) async {
+  try {
+
+    String friendName = "";
+
+    if (friendUserDocId != "") {
+      DocumentSnapshot friendUserData =
+      await selectFirebaseUserByUserDocId(friendUserDocId);
+      friendName = friendUserData.get("userName");
+    }
+
+    await FirebaseFirestore.instance
+        .collection('events')
+        .doc(eventDocId)
+        .update({
+      'eventName': eventName,
+      'eventType': eventType,
+      'friendUserDocId': friendUserDocId,
+      'friendUserName': friendName,
+      'callChannelId': callChannelId,
+      'fromTime': Timestamp.fromDate(fromTime),
+      'toTime': Timestamp.fromDate(toTime),
+      'isAllDay':isAllDay,
+      'updateUserDocId': ref.watch(userDataProvider).userData["userDocId"],
+      'updateProgramId': programId,
+      'updateTime': FieldValue.serverTimestamp(),
+    });
+  } catch (e) {
+    log(e.toString());
+  }
+}
+
+
+
+Future<void> logicalDeleteEventData(String eventDocId,String userDocId,String programId) async {
+
+  await FirebaseFirestore.instance
+      .collection('events')
+      .doc(eventDocId)
+      .update({
+    "deleteFlg": true,
+    'updateUserDocId': userDocId,
+    'updateProgramId': programId,
+    'updateTime': FieldValue.serverTimestamp(),
+  });
+
+}

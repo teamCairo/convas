@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 
+Widget closeButtonForModal(BuildContext context){
+  return
+    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      graySmallerIconButton(
+          icon: Icons.clear,
+          onPressed: () {
+            Navigator.of(context).pop();
+          }),
+    ]);
+}
 Widget borderedTextBox(
     {required String text,
     Function(String)? onChanged,

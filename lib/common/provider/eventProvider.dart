@@ -33,6 +33,7 @@ class EventDataNotifier extends ChangeNotifier {
 
     _eventList=(await selectIsarEventAll())!;
     log("XXXXXXXXイベント件数"+_eventList.length.toString());
+    notifyListeners();
   }
 
   void clearIsar()async {
@@ -54,7 +55,9 @@ class EventDataNotifier extends ChangeNotifier {
     }else{
       controller.stream.listen((value)  async{
         streamSub!.cancel();
+        log("cancel後");
         streamSub=await readEventNewDataFromFirebaseToIsar(userDocId);
+        log("Stram設定後");
       });
     }
 
@@ -117,7 +120,6 @@ class EventDataNotifier extends ChangeNotifier {
         }
         await readEventDataFromIsarToMemory();
         controller.sink.add(true);
-        notifyListeners();
       }
 
     });

@@ -230,7 +230,7 @@ Future<int> deleteIsarEventsById(eventDocId) async {
   int returnInt=0;
   var isarInstance = Isar.getInstance();
   await isarInstance?.writeTxn((isar) async {
-    returnInt = await isar.events.filter().deleteFlgEqualTo(false).eventDocIdEqualTo(eventDocId).deleteAll();
+    returnInt = await isar.events.filter().deleteFlgEqualTo(false).and().eventDocIdEqualTo(eventDocId).deleteAll();
   });
 
   return returnInt;

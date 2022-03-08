@@ -203,7 +203,7 @@ Future<int> deleteIsarCategorysById(categoryDocId) async {
   int returnInt=0;
   var isarInstance = Isar.getInstance();
   await isarInstance?.writeTxn((isar) async {
-    returnInt = await isar.categorys.filter().deleteFlgEqualTo(false).categoryDocIdEqualTo(categoryDocId).deleteAll();
+    returnInt = await isar.categorys.filter().deleteFlgEqualTo(false).and().categoryDocIdEqualTo(categoryDocId).deleteAll();
   });
 
   return returnInt;

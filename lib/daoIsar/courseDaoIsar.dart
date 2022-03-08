@@ -203,7 +203,7 @@ Future<int> deleteIsarCoursesById(courseDocId) async {
   int returnInt=0;
   var isarInstance = Isar.getInstance();
   await isarInstance?.writeTxn((isar) async {
-    returnInt = await isar.courses.filter().deleteFlgEqualTo(false).courseDocIdEqualTo(courseDocId).deleteAll();
+    returnInt = await isar.courses.filter().deleteFlgEqualTo(false).and().courseDocIdEqualTo(courseDocId).deleteAll();
   });
 
   return returnInt;

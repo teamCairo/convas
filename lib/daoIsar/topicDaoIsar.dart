@@ -201,7 +201,7 @@ Future<int> deleteIsarTopicsById(topicDocId) async {
   int returnInt=0;
   var isarInstance = Isar.getInstance();
   await isarInstance?.writeTxn((isar) async {
-    returnInt = await isar.topics.filter().deleteFlgEqualTo(false).topicDocIdEqualTo(topicDocId).deleteAll();
+    returnInt = await isar.topics.filter().deleteFlgEqualTo(false).and().topicDocIdEqualTo(topicDocId).deleteAll();
   });
 
   return returnInt;

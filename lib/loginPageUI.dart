@@ -104,7 +104,7 @@ class LoginPage extends ConsumerWidget {
 
                         // ログインしたユーザー情報
                         ref.read(userProvider.state).update((state) => result.user);
-                        loginCommonProcess(context, ref, email);
+                        await loginCommonProcess(context, ref, email);
                       } catch (e) {
                         // ログインに失敗した場合
                         ref
