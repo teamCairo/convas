@@ -11,7 +11,7 @@ Future<Course?> selectIsarCourseById(String courseDocId) async {
   Course? resultCourse;
   await isarInstance?.writeTxn((isar) async {
     List<Course> resultList =
-    await isar.courses.filter().deleteFlgEqualTo(false).courseDocIdEqualTo(courseDocId).findAll();
+    await isar.courses.filter().deleteFlgEqualTo(false).and().courseDocIdEqualTo(courseDocId).findAll();
 
     if(resultList.length == 0){
       resultCourse = null;

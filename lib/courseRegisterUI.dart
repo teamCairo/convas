@@ -52,7 +52,7 @@ class CourseRegister extends ConsumerWidget {
                 text:"Register",
                 onPressed:() async {
                   if (await checkCourseData(context, ref, courseName)) {
-                    await insertCourseData(ref, courseName,ref.watch(courseImagePhotoFileProvider).courseImagePhotoFile,"courseResister",ref.watch(userDataProvider).userData["userDocId"]);
+                    await insertFirebaseCourse(ref, courseName,ref.watch(courseImagePhotoFileProvider).courseImagePhotoFile,"courseResister",ref.watch(userDataProvider).userData["userDocId"]);
 
                     ref.read(courseNameProvider.state).update((state) => "");
                     courseNameEditingController = TextEditingController(text: '');

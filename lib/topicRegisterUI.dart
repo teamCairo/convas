@@ -117,7 +117,7 @@ class TopicRegister extends ConsumerWidget {
                   text:"Register",
                   onPressed:() async {
                     if (await checkTopicData(context,ref,ref.watch(topicRegisterProvider).topicName)) {
-                      await insertTopic(ref,
+                      await insertFirebaseTopic(ref,
                           ref.watch(topicRegisterProvider).topicName,
                           ref.watch(topicRegisterProvider).categoryItemDocId,
                         ref.watch(topicRegisterProvider).topicImagePhotoFile,

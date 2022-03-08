@@ -3,6 +3,7 @@ import 'package:convas/topicRegisterUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'calendarEditUI.dart';
 import 'common/UI/commonUI.dart';
 import 'common/logic/commonLogic.dart';
 import 'common/provider/userProvider.dart';
@@ -116,11 +117,11 @@ class MyPage extends ConsumerWidget {
                     ),
                     bigIconButton(
                       text: "Edit Calendar",
-                      icon: Icons.star,
+                      icon: Icons.calendar_today,
                       onPressed: () async {
                         await Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) {
-                            return EditInterest();
+                            return const CalendarEdit();
                           }),
                         );
                       },

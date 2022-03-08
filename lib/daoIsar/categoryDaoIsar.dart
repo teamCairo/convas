@@ -11,7 +11,7 @@ Future<Category?> selectIsarCategoryById(String categoryDocId) async {
   Category? resultCategory;
   await isarInstance?.writeTxn((isar) async {
     List<Category> resultList =
-    await isar.categorys.filter().deleteFlgEqualTo(false).categoryDocIdEqualTo(categoryDocId).findAll();
+    await isar.categorys.filter().deleteFlgEqualTo(false).and().categoryDocIdEqualTo(categoryDocId).findAll();
 
     if(resultList.length == 0){
       resultCategory = null;

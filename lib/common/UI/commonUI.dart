@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 Widget borderedTextBox(
     {required String text,
     Function(String)? onChanged,
+      String? initialValue,
     required bool passwordSecure}) {
   return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Column(children: [
         TextFormField(
+            initialValue:initialValue,
             decoration: InputDecoration(
               labelText: text,
               border: const OutlineInputBorder(),
@@ -180,6 +182,21 @@ Padding gray20TextLeft(String text) {
   );
 }
 
+Padding gray20TextRight(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: Align(
+        alignment: Alignment.topRight,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 20,
+            color: Colors.black54,
+          ),
+        )),
+  );
+}
 Padding gray16TextLeft(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),

@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
 
-Future<void> insertCourseData(WidgetRef ref, String courseName,File imageFile,String programId,String userDocId) async {
+Future<void> insertFirebaseCourse(WidgetRef ref, String courseName,File imageFile,String programId,String userDocId) async {
 
   try {
     String insertedDocId = "";

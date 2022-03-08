@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
 
-Future<void> insertTopic(WidgetRef ref,String topicName,String categoryDocId,File file,String userDocId,String programId) async {
+Future<void> insertFirebaseTopic(WidgetRef ref,String topicName,String categoryDocId,File file,String userDocId,String programId) async {
 
   String insertedDocId="";
   try {

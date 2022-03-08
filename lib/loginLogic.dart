@@ -10,10 +10,12 @@ import 'package:path_provider/path_provider.dart';
 import 'common/UI/commonUI.dart';
 import 'common/provider/categoryProvider.dart';
 import 'common/provider/courseProvider.dart';
+import 'common/provider/eventProvider.dart';
 import 'common/provider/topicProvider.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
 import 'daoIsar/settingDaoIsar.dart';
+import 'entityIsar/eventEntityIsar.dart';
 import 'entityIsar/settingEntityIsar.dart';
 import 'entityIsar/topicEntityIsar.dart';
 import 'entityIsar/userEntityIsar.dart';
@@ -75,6 +77,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
   await openIsarInstances();
 
+  await updateTimeCheck("events");
   await updateTimeCheck("courses");
   await updateTimeCheck("topics");
   await updateTimeCheck("friends");
@@ -89,7 +92,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
   QuerySnapshot tmpUserData=await selectFirebaseUserByEmail(email);
 
-  insertOrUpdateIsarSettingBySettingCode(settingCode:"localUserInfo",
+  await insertOrUpdateIsarSettingBySettingCode(settingCode:"localUserInfo",
       stringValue1:tmpUserData.docs[0].get("email"),
       stringValue2:tmpUserData.docs[0].id
   );
@@ -101,6 +104,9 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   //     .read(friendDataProvider.notifier)
   //     .controlStreamOfReadFriendNewDataFromFirebaseToHiveAndMemory(
   //     ref, boxSetting.get("userDocId"));
+  ref
+      .read(eventDataProvider.notifier)
+      .controlStreamOfReadEventNewDataFromFirebaseToIsar(tmpUserData.docs[0].id);
   ref
       .read(topicDataProvider.notifier)
       .controlStreamOfReadTopicNewDataFromFirebaseToIsar();
@@ -145,14 +151,14 @@ Future<void> openIsarInstances() async {
   final dir = await getApplicationSupportDirectory();
   if (isarInstance == null) {
     await Isar.open(
-      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema],
+      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema],
       directory: dir.path,
       inspector: true,
     );
   } else {
     if (!isarInstance.isOpen) {
       await Isar.open(
-        schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema],
+        schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema],
         directory: dir.path,
         inspector: true,
       );

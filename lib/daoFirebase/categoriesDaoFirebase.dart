@@ -5,9 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
-import '../common/provider/userProvider.dart';
 
-Future<void> insertCategoryData(WidgetRef ref, String categoryName,File imageFile,String programId,String userDocId) async {
+Future<void> insertFirebaseCategory(WidgetRef ref, String categoryName,File imageFile,String programId,String userDocId) async {
 
   try {
     String insertedDocId = "";

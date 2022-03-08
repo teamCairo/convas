@@ -15,6 +15,16 @@ Future<QuerySnapshot> selectFirebaseUserByEmail(String email)async{
   return snapshot;
 }
 
+
+Future<DocumentSnapshot> selectFirebaseUserByUserDocId(String userDocId)async{
+  DocumentSnapshot snapshot  = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(userDocId)
+      .get();
+
+  return snapshot;
+}
+
 Future<String> insertFirebaseUser({
   String? name,
   String? email,

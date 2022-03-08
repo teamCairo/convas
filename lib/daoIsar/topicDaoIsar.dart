@@ -10,7 +10,7 @@ Future<Topic?> selectIsarTopicById(String topicDocId) async {
   Topic? resultTopic;
   await isarInstance?.writeTxn((isar) async {
     List<Topic> resultList =
-    await isar.topics.filter().deleteFlgEqualTo(false).topicDocIdEqualTo(topicDocId).findAll();
+    await isar.topics.filter().deleteFlgEqualTo(false).and().topicDocIdEqualTo(topicDocId).findAll();
 
     if(resultList.length == 0){
       resultTopic = null;
