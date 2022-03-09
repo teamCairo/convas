@@ -67,6 +67,7 @@ class EventDataNotifier extends ChangeNotifier {
     Setting? tmpSetting = await selectIsarSettingByCode("eventsUpdateCheck");
     DateTime eventUpdatedTime = tmpSetting!.dateTimeValue1!;
 
+    log("XXXXXXXXXXXXXXeventUpdateTime"+eventUpdatedTime.toString());
     _callStream = FirebaseFirestore.instance
         .collection('events')
         .where('updateTime',
@@ -76,11 +77,12 @@ class EventDataNotifier extends ChangeNotifier {
         .orderBy('updateTime', descending: false)
         .snapshots();
 
+    //TODO 1データを複数件として取得してしまう問題有り
 
     StreamSubscription<QuerySnapshot> streamSub=_callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
         for(int i=0;i<snapshot.size;i++){
-
+          log("XXXXXXXXXXXXXXイベント件数"+snapshot.size.toString());
           if(snapshot.docs[i].get("deleteFlg")){
 
             await deleteIsarEventsById(snapshot.docs[i].id);

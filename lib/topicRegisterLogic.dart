@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'common/UI/commonUI.dart';
+import 'common/UI/commonOthersUI.dart';
 
 Future<void> setTopicImage(WidgetRef ref) async {
   XFile? pickerFile = await ImagePicker().pickImage(

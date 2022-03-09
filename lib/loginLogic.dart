@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'common/UI/commonUI.dart';
+import 'common/UI/commonOthersUI.dart';
 import 'common/provider/categoryProvider.dart';
 import 'common/provider/courseProvider.dart';
 import 'common/provider/eventProvider.dart';

@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'categoryRegisterProvider.dart';
-import 'common/UI/commonUI.dart';
+import 'common/UI/commonOthersUI.dart';
 
 Future<void> setCategoryImage(WidgetRef ref) async {
   XFile? pickerFile = await ImagePicker().pickImage(

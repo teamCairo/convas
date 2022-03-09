@@ -5,7 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'categoryRegisterLogic.dart';
 import 'categoryRegisterProvider.dart';
-import 'common/UI/commonUI.dart';
+import 'common/UI/commonButtonUI.dart';
+import 'common/UI/commonOthersUI.dart';
 import 'daoFirebase/categoriesDaoFirebase.dart';
 
 class CategoryRegister extends ConsumerWidget {

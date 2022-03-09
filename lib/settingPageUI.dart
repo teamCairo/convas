@@ -4,7 +4,9 @@ import 'package:convas/settingEditTextPageUI.dart';
 import 'package:convas/settingEditRadioPageUI.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'common/UI/commonUI.dart';
+import 'common/UI/commonButtonUI.dart';
+import 'common/UI/commonOthersUI.dart';
+import 'common/UI/commonTextUI.dart';
 import 'common/provider/masterProvider.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
@@ -169,7 +171,7 @@ class SettingPage extends ConsumerWidget {
           child:Column(children:[
             SizedBox(
               width: double.infinity,
-              child: orangeSmallestTextLeft(displayedItem)
+              child: orange12TextLeft(displayedItem)
             ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.start,

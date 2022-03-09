@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'courseRegisterProvider.dart';
-import 'common/UI/commonUI.dart';
+import 'common/UI/commonOthersUI.dart';
 
 Future<void> setCourseImage(WidgetRef ref) async {
   XFile? pickerFile = await ImagePicker().pickImage(

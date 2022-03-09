@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'common/UI/commonUI.dart';
+import 'common/UI/commonButtonUI.dart';
+import 'common/UI/commonOthersUI.dart';
+import 'common/UI/commonTextUI.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/topicsDaoFirebase.dart';
 

@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'common/UI/commonButtonUI.dart';
 import 'courseRegisterLogic.dart';
 import 'courseRegisterProvider.dart';
-import 'common/UI/commonUI.dart';
+import 'common/UI/commonOthersUI.dart';
 import 'daoFirebase/coursesDaoFirebase.dart';
 
 class CourseRegister extends ConsumerWidget {
