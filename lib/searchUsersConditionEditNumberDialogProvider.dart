@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'common/commonValues.dart';
+
 class SearchUsersConditionEditNumberDialogNotifier extends ChangeNotifier {
 
   int _start=0;
@@ -28,8 +30,8 @@ class SearchUsersConditionEditNumberDialogNotifier extends ChangeNotifier {
 
     switch(databaseItem){
       case "searchConditionAge":
-        _min = 18;
-        _max = 99;
+        _min = searchConditionAgeMin;
+        _max = searchConditionAgeMax;
         break;
 
     }

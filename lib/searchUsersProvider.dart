@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'common/commonValues.dart';
 import 'common/provider/userProvider.dart';
 import 'daoAlgolia/usersDaoAlgolia.dart';
 
@@ -56,7 +57,7 @@ class SearchUsersNotifier extends ChangeNotifier {
 
   void resetConditions(WidgetRef ref){
 
-    _tmpSearchConditionAge="";
+    _tmpSearchConditionAge=searchConditionAgeMin.toString()+", "+searchConditionAgeMax.toString();
 
     _tmpSearchConditionLevel="";
 
@@ -131,6 +132,7 @@ class SearchUsersNotifier extends ChangeNotifier {
         _tmpSearchConditionGender=value;
         break;
     }
+    notifyListeners();
   }
 
 
@@ -156,6 +158,7 @@ class SearchUsersNotifier extends ChangeNotifier {
         _tmpSearchConditionGender=value;
         break;
     }
+    notifyListeners();
   }
 
 

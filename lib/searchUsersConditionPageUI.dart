@@ -106,7 +106,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
         child: GestureDetector(
           onTap:(){
 
-            if(databaseItem=="age"){
+            if(databaseItem=="searchConditionAge"){
 
            showDialog<void>(
             context: context,

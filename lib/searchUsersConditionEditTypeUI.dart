@@ -41,7 +41,6 @@ class SearchConditionValueEditType extends ConsumerWidget {
             },
             controlAffinity: ListTileControlAffinity.trailing,
           ));
-
     });
 
     return Scaffold(
@@ -50,10 +49,13 @@ class SearchConditionValueEditType extends ConsumerWidget {
         child:Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-            children:checkList),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                children:checkList),
+              ),
+            ),
             orangeRoundButton(text: "OK", onPressed: (){
               ref.read(searchUsersProvider.notifier).setConditionByMap(ref,databaseItem,ref.watch(searchUsersConditionEditTypeProvider).masterBoolMap);
               Navigator.pop(context);

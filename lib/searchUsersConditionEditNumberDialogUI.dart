@@ -16,17 +16,25 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
     required this.databaseItem,
     required this.value,}) : super(key: key);
 
+  bool initialProcessFlg=true;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _dialogWidth = MediaQuery.of(context).size.width * 3 / 4; // 画面サイズから相対的に大きさを決めている。
-    return Dialog(
+
+    if(initialProcessFlg){
+
+      initialProcessFlg=false;
+      ref.read(searchUsersConditionEditNumberDialogProvider.notifier).initialize(ref, databaseItem, value);
+
+    }return Dialog(
       insetPadding: const EdgeInsets.all(0),
       elevation: 0,
       backgroundColor: Colors.transparent,
       // SizedBoxでダイアログそのものの大きさをまずは決めています。
       child: SizedBox(
         width: _dialogWidth,
-        height: _dialogWidth*1.5,
+        height: _dialogWidth,
         child: Container(
           decoration: BoxDecoration(
             color:Colors.white,
@@ -38,31 +46,32 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:[
-                  Column(
-                    children: [
-                      closeButtonForModal(context),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                        child: black20TextCenter("Age"),
-                      ),
-                      RangeSlider(
-                        labels: RangeLabels(ref.watch(searchUsersConditionEditNumberDialogProvider).start, ref.watch(searchUsersConditionEditNumberDialogProvider).end),
-                        values: ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues,
-                        min: ref.watch(searchUsersConditionEditNumberDialogProvider).min,
-                        max: ref.watch(searchUsersConditionEditNumberDialogProvider).max,
-                        divisions: 1,
-                        onChanged: (values) {
-                          ref.read(searchUsersConditionEditNumberDialogProvider.notifier).setRangeValues(values);
-                        },
-                      ),
+                          closeButtonForModal(context),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                            child: black20TextCenter("Age"),
+                          ),
+                          Expanded(
+                            child: RangeSlider(
+                              labels: RangeLabels(ref.watch(searchUsersConditionEditNumberDialogProvider).start.toString(), ref.watch(searchUsersConditionEditNumberDialogProvider).end.toString()),
+                              values: ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues,
+                              min: ref.watch(searchUsersConditionEditNumberDialogProvider).min.toDouble(),
+                              max: ref.watch(searchUsersConditionEditNumberDialogProvider).max.toDouble(),
+                              divisions: (ref.watch(searchUsersConditionEditNumberDialogProvider).max.toDouble()-ref.watch(searchUsersConditionEditNumberDialogProvider).min.toDouble()).toInt(),
+                              onChanged: (values) {
+                                ref.read(searchUsersConditionEditNumberDialogProvider.notifier).setRangeValues(values);
+                              },
+                            ),
+                          ),
 
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
 
                           roundButtonByWidthAndHeight(text: 'Cancel',
                               height: 50,
                               color: Colors.black26,
-                              width: 70,
+                              width: 90,
                               onPressed: () {
                                 Navigator.pop(context);
 
@@ -71,11 +80,11 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
                           roundButtonByWidthAndHeight(text: 'OK',
                               height: 50,
                               color: Colors.orange,
-                              width: 70,
+                              width: 90,
                               onPressed: () {
-                            ref.read(searchUsersProvider.notifier).setCondition(ref, databaseItem,ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues.start.toString()
+                            ref.read(searchUsersProvider.notifier).setCondition(ref, databaseItem,ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues.start.toInt().toString()
                             +", "
-                            +ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues.end.toString());
+                            +ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues.end.toInt().toString());
                             Navigator.pop(context);
 
                           }),
@@ -84,9 +93,6 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
                       )
 
                     ],
-
-                  ),
-                ]
 
             ),
           ),

@@ -10,7 +10,7 @@ class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
   get masterBoolMap => _masterBoolMap;
 
   void initialize(
-      WidgetRef ref, String databaseItem, String value) async {
+      WidgetRef ref, String databaseItem, String inputValue) async {
     _masterBoolMap = {};
 
     switch (databaseItem) {
@@ -31,7 +31,7 @@ class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
     if (_masterMap.isEmpty) {
     } else {
       _masterMap.forEach((key, value) {
-        if (value.contains(key)) {
+        if (inputValue.contains(key)) {
           _masterBoolMap[key] = true;
         } else {
           _masterBoolMap[key] = false;

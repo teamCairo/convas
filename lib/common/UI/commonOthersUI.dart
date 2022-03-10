@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 
-const Color themeColorDeep = Colors.orangeAccent;
 
 
 AppBar whiteAppbar(String text) {
