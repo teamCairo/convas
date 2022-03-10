@@ -1,4 +1,5 @@
 import 'package:algolia/algolia.dart';
+import 'package:convas/searchUsersConditionPageUI.dart';
 import 'package:convas/searchUsersProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,22 +8,28 @@ import 'common/UI/commonButtonUI.dart';
 import 'common/UI/commonOthersUI.dart';
 import 'common/UI/commonTextUI.dart';
 
-class Search extends ConsumerWidget {
-  Search({
+class SearchUsersMainPage extends ConsumerWidget {
+  SearchUsersMainPage({
     Key? key,
   }) : super(key: key);
 
-  bool searchProcessFlg=true;
+  bool initialProcessFlg=true;
 
 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
+    if(initialProcessFlg==true) {
+      initialProcessFlg=false;
+      ref.read(searchUsersProvider.notifier).readConditionsFromUserData(ref);
+      ref.read(searchUsersProvider.notifier).setSearchProcessingFlgTrue();
+      ref.read(searchUsersProvider.notifier).searchUsers(ref);
+    }
+
     return Scaffold(
-        appBar: whiteAppbar("Search"),
         body: SafeArea(
-            child:Padding(padding:const EdgeInsets.only(top:14,left:14,right:14,bottom:10),
+            child:Padding(padding:const EdgeInsets.only(top:20,left:14,right:14,bottom:10),
                 child:Column(
                     children:[
                       Padding(
@@ -34,27 +41,28 @@ class Search extends ConsumerWidget {
                                 children:[
                                   Expanded(
                                     child: grayWideIconTextButton(
-                                        onPressed: () {
+                                        onPressed: ()async {
+
+                                          await Navigator.of(context).push(
+                                            MaterialPageRoute(builder: (context) {
+                                              return const SearchUsersConditionPage();
+                                            }),
+                                          );
 
                                         },
                                         icon: Icons.search,
                                         text: 'Set search conditions'),
                                   ),
-                                  SizedBox(
-                                      width:40,
-                                      child:Align(
-                                          alignment:Alignment.center,
-                                          child:GestureDetector(
-                                              onTap: () async{
+                                  IconButton(onPressed:(){
 
-                                              },
-                                              child: const Icon(
-                                                  Icons.upgrade,
-                                                  color: Colors.black87,
-                                                  size:26
-                                              )
-                                          )
-                                      ))
+                                  },
+                                      icon: const Icon(Icons.refresh),
+                                  iconSize:26),
+                                  IconButton(onPressed:(){
+
+                                  },
+                                      icon: const Icon(Icons.upgrade),
+                                      iconSize:26),
                                 ]
                             )
                         ),
@@ -69,9 +77,7 @@ class Search extends ConsumerWidget {
 
   Widget resultBody(WidgetRef ref){
 
-    if(searchProcessFlg==true) {
-      searchProcessFlg=false;
-      ref.watch(searchUsersProvider.notifier).searchUsers(ref);
+    if(ref.watch(searchUsersProvider).searchProcessFlg==true) {
       return const Expanded(
           child:Center(
               child:

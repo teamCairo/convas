@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:convas/common/provider/masterProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
@@ -21,24 +22,48 @@ List<String> fromTextToList(String txt) {
   String workText = txt;
   List<String> outputList = [];
 
-  for (; workText.contains(',');) {
-    outputList.add(workText.substring(0, workText.indexOf(',')));
-    workText = workText.substring(workText.indexOf(',') + 1);
+  for (; workText.contains(', ');) {
+    outputList.add(workText.substring(0, workText.indexOf(', ')));
+    workText = workText.substring(workText.indexOf(', ') + 2);
   }
   outputList.add(workText);
 
   return outputList;
 }
 
+String fromListToTextDot(List<String> codeList){
+  String result ="";
+  for(int i=0;i<codeList.length;i++){
+    if(i!=0){
+      result=result+", ";
+    }
+    result=result+codeList[i];
+  }
+
+  return result;
+}
+
+String fromCodeListToTextDot(List<String> codeList,masterName,WidgetRef ref){
+  String result ="";
+  for(int i=0;i<codeList.length;i++){
+    if(i!=0){
+      result=result+", ";
+    }
+    result=result+getMasterName(masterName, codeList[i], ref);
+  }
+
+  return result;
+}
+
 Future<File> urlToFile(String imageUrl) async {
 // generate random number.
-  var rng = new Random();
+  var rng = Random();
 // get temporary directory of device.
   Directory tempDir = await getTemporaryDirectory();
 // get temporary path from temporary directory.
   String tempPath = tempDir.path;
 // create a new file in temporary path with random file name.
-  File file = new File('$tempPath'+ (rng.nextInt(100)).toString() +'.png');
+  File file = File('$tempPath'+ (rng.nextInt(100)).toString() +'.png');
 // call http.get method and pass imageUrl into it to get response.
   http.Response response = await http.get( Uri.parse(imageUrl));
 // write bodyBytes received in response to file.

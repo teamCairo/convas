@@ -2,6 +2,41 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+String getMasterName(String masterName, String code, WidgetRef ref){
+
+  switch(masterName){
+    case "level":
+    return ref.watch(masterDataProvider).levelMasterData[code];
+    case "country":
+    return ref.watch(masterDataProvider).countryMasterData[code];
+    case "language":
+    return ref.watch(masterDataProvider).languageMasterData[code];
+    case "gender":
+    return ref.watch(masterDataProvider).genderMasterData[code];
+    default:
+      return "";
+  }
+
+}
+
+
+Map<String,String> getMasterMap(String masterName, WidgetRef ref){
+
+  switch(masterName){
+    case "level":
+      return ref.watch(masterDataProvider).levelMasterData;
+    case "country":
+      return ref.watch(masterDataProvider).countryMasterData;
+    case "language":
+      return ref.watch(masterDataProvider).languageMasterData;
+    case "gender":
+      return ref.watch(masterDataProvider).genderMasterData;
+    default:
+      return {};
+  }
+
+}
+
 final masterDataProvider = ChangeNotifierProvider(
       (ref) => MasterDataProvider(),
 );

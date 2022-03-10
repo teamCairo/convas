@@ -17,7 +17,7 @@ extension GetUserCollection on Isar {
 final UserSchema = CollectionSchema(
   name: 'User',
   schema:
-      '{"name":"User","idName":"id","properties":[{"name":"age","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourses","type":"String"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionNativeLang","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"User","idName":"id","properties":[{"name":"age","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourses","type":"String"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionMotherTongue","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
   nativeAdapter: const _UserNativeAdapter(),
   webAdapter: const _UserWebAdapter(),
   idName: 'id',
@@ -50,7 +50,7 @@ final UserSchema = CollectionSchema(
     'searchConditionCountry': 25,
     'searchConditionGender': 26,
     'searchConditionLevel': 27,
-    'searchConditionNativeLang': 28,
+    'searchConditionMotherTongue': 28,
     'town': 29,
     'updateProgramId': 30,
     'updateTime': 31,
@@ -121,8 +121,8 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         jsObj, 'searchConditionGender', object.searchConditionGender);
     IsarNative.jsObjectSet(
         jsObj, 'searchConditionLevel', object.searchConditionLevel);
-    IsarNative.jsObjectSet(
-        jsObj, 'searchConditionNativeLang', object.searchConditionNativeLang);
+    IsarNative.jsObjectSet(jsObj, 'searchConditionMotherTongue',
+        object.searchConditionMotherTongue);
     IsarNative.jsObjectSet(jsObj, 'town', object.town);
     IsarNative.jsObjectSet(jsObj, 'updateProgramId', object.updateProgramId);
     IsarNative.jsObjectSet(
@@ -154,7 +154,7 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
       IsarNative.jsObjectGet(jsObj, 'userType'),
       IsarNative.jsObjectGet(jsObj, 'searchConditionAge'),
       IsarNative.jsObjectGet(jsObj, 'searchConditionLevel'),
-      IsarNative.jsObjectGet(jsObj, 'searchConditionNativeLang'),
+      IsarNative.jsObjectGet(jsObj, 'searchConditionMotherTongue'),
       IsarNative.jsObjectGet(jsObj, 'searchConditionCountry'),
       IsarNative.jsObjectGet(jsObj, 'searchConditionGender'),
       IsarNative.jsObjectGet(jsObj, 'profilePhotoNameSuffix'),
@@ -263,8 +263,8 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         return (IsarNative.jsObjectGet(jsObj, 'searchConditionGender')) as P;
       case 'searchConditionLevel':
         return (IsarNative.jsObjectGet(jsObj, 'searchConditionLevel')) as P;
-      case 'searchConditionNativeLang':
-        return (IsarNative.jsObjectGet(jsObj, 'searchConditionNativeLang'))
+      case 'searchConditionMotherTongue':
+        return (IsarNative.jsObjectGet(jsObj, 'searchConditionMotherTongue'))
             as P;
       case 'town':
         return (IsarNative.jsObjectGet(jsObj, 'town')) as P;
@@ -443,13 +443,13 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       _searchConditionLevel = IsarBinaryWriter.utf8Encoder.convert(value27);
     }
     dynamicSize += (_searchConditionLevel?.length ?? 0) as int;
-    final value28 = object.searchConditionNativeLang;
-    IsarUint8List? _searchConditionNativeLang;
+    final value28 = object.searchConditionMotherTongue;
+    IsarUint8List? _searchConditionMotherTongue;
     if (value28 != null) {
-      _searchConditionNativeLang =
+      _searchConditionMotherTongue =
           IsarBinaryWriter.utf8Encoder.convert(value28);
     }
-    dynamicSize += (_searchConditionNativeLang?.length ?? 0) as int;
+    dynamicSize += (_searchConditionMotherTongue?.length ?? 0) as int;
     final value29 = object.town;
     IsarUint8List? _town;
     if (value29 != null) {
@@ -513,7 +513,7 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
     writer.writeBytes(offsets[25], _searchConditionCountry);
     writer.writeBytes(offsets[26], _searchConditionGender);
     writer.writeBytes(offsets[27], _searchConditionLevel);
-    writer.writeBytes(offsets[28], _searchConditionNativeLang);
+    writer.writeBytes(offsets[28], _searchConditionMotherTongue);
     writer.writeBytes(offsets[29], _town);
     writer.writeBytes(offsets[30], _updateProgramId);
     writer.writeDateTime(offsets[31], _updateTime);
@@ -3490,29 +3490,29 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangIsNull() {
+      searchConditionMotherTongueIsNull() {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.isNull,
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       value: null,
     ));
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangEqualTo(
+      searchConditionMotherTongueEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangGreaterThan(
+      searchConditionMotherTongueGreaterThan(
     String? value, {
     bool caseSensitive = true,
     bool include = false,
@@ -3520,14 +3520,14 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: include,
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangLessThan(
+      searchConditionMotherTongueLessThan(
     String? value, {
     bool caseSensitive = true,
     bool include = false,
@@ -3535,14 +3535,14 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: include,
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangBetween(
+      searchConditionMotherTongueBetween(
     String? lower,
     String? upper, {
     bool caseSensitive = true,
@@ -3550,7 +3550,7 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     bool includeUpper = true,
   }) {
     return addFilterConditionInternal(FilterCondition.between(
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
@@ -3560,48 +3560,48 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangStartsWith(
+      searchConditionMotherTongueStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.startsWith,
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangEndsWith(
+      searchConditionMotherTongueEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.endsWith,
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangContains(String value,
+      searchConditionMotherTongueContains(String value,
           {bool caseSensitive = true}) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.contains,
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<User, User, QAfterFilterCondition>
-      searchConditionNativeLangMatches(String pattern,
+      searchConditionMotherTongueMatches(String pattern,
           {bool caseSensitive = true}) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.matches,
-      property: 'searchConditionNativeLang',
+      property: 'searchConditionMotherTongue',
       value: pattern,
       caseSensitive: caseSensitive,
     ));
@@ -4443,12 +4443,13 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
     return addSortByInternal('searchConditionLevel', Sort.desc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortBySearchConditionNativeLang() {
-    return addSortByInternal('searchConditionNativeLang', Sort.asc);
+  QueryBuilder<User, User, QAfterSortBy> sortBySearchConditionMotherTongue() {
+    return addSortByInternal('searchConditionMotherTongue', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortBySearchConditionNativeLangDesc() {
-    return addSortByInternal('searchConditionNativeLang', Sort.desc);
+  QueryBuilder<User, User, QAfterSortBy>
+      sortBySearchConditionMotherTongueDesc() {
+    return addSortByInternal('searchConditionMotherTongue', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> sortByTown() {
@@ -4733,12 +4734,13 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
     return addSortByInternal('searchConditionLevel', Sort.desc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenBySearchConditionNativeLang() {
-    return addSortByInternal('searchConditionNativeLang', Sort.asc);
+  QueryBuilder<User, User, QAfterSortBy> thenBySearchConditionMotherTongue() {
+    return addSortByInternal('searchConditionMotherTongue', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenBySearchConditionNativeLangDesc() {
-    return addSortByInternal('searchConditionNativeLang', Sort.desc);
+  QueryBuilder<User, User, QAfterSortBy>
+      thenBySearchConditionMotherTongueDesc() {
+    return addSortByInternal('searchConditionMotherTongue', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> thenByTown() {
@@ -4939,9 +4941,9 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
         caseSensitive: caseSensitive);
   }
 
-  QueryBuilder<User, User, QDistinct> distinctBySearchConditionNativeLang(
+  QueryBuilder<User, User, QDistinct> distinctBySearchConditionMotherTongue(
       {bool caseSensitive = true}) {
-    return addDistinctByInternal('searchConditionNativeLang',
+    return addDistinctByInternal('searchConditionMotherTongue',
         caseSensitive: caseSensitive);
   }
 
@@ -5100,8 +5102,8 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
   }
 
   QueryBuilder<User, String?, QQueryOperations>
-      searchConditionNativeLangProperty() {
-    return addPropertyNameInternal('searchConditionNativeLang');
+      searchConditionMotherTongueProperty() {
+    return addPropertyNameInternal('searchConditionMotherTongue');
   }
 
   QueryBuilder<User, String?, QQueryOperations> townProperty() {

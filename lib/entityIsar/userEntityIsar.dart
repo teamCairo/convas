@@ -27,7 +27,7 @@ class User {
       this.userType,
       this.searchConditionAge,
       this.searchConditionLevel,
-      this.searchConditionNativeLang,
+      this.searchConditionMotherTongue,
       this.searchConditionCountry,
       this.searchConditionGender,
       this.profilePhotoNameSuffix,
@@ -67,7 +67,7 @@ class User {
   String? userType;
   String? searchConditionAge;
   String? searchConditionLevel;
-  String? searchConditionNativeLang;
+  String? searchConditionMotherTongue;
   String? searchConditionCountry;
   String? searchConditionGender;
   String? profilePhotoNameSuffix;

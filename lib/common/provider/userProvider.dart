@@ -107,7 +107,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
       _userData['userType'] =tmpUser.userType;
       _userData['searchConditionAge'] =tmpUser.searchConditionAge;
       _userData['searchConditionLevel'] =tmpUser.searchConditionLevel;
-      _userData['searchConditionNativeLang'] =tmpUser.searchConditionNativeLang;
+      _userData['searchConditionMotherTongue'] =tmpUser.searchConditionMotherTongue;
       _userData['searchConditionCountry'] =tmpUser.searchConditionCountry;
       _userData['searchConditionGender'] =tmpUser.searchConditionGender;
       _userData['profilePhotoNameSuffix'] =tmpUser.profilePhotoNameSuffix;
@@ -192,7 +192,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
         _userData['userType'] = snapshot.docs[0].get('userType');
         _userData['searchConditionAge'] = snapshot.docs[0].get('searchConditionAge');
         _userData['searchConditionLevel'] = snapshot.docs[0].get('searchConditionLevel');
-        _userData['searchConditionNativeLang'] = snapshot.docs[0].get('searchConditionNativeLang');
+        _userData['searchConditionMotherTongue'] = snapshot.docs[0].get('searchConditionMotherTongue');
         _userData['searchConditionCountry'] = snapshot.docs[0].get('searchConditionCountry');
         _userData['searchConditionGender'] = snapshot.docs[0].get('searchConditionGender');
         _userData['profilePhotoNameSuffix'] = snapshot.docs[0].get('profilePhotoNameSuffix');
@@ -229,7 +229,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
             userType: snapshot.docs[0].get('userType'),
             searchConditionAge: snapshot.docs[0].get('searchConditionAge'),
             searchConditionLevel: snapshot.docs[0].get('searchConditionLevel'),
-            searchConditionNativeLang: snapshot.docs[0].get('searchConditionNativeLang'),
+            searchConditionMotherTongue: snapshot.docs[0].get('searchConditionMotherTongue'),
             searchConditionCountry: snapshot.docs[0].get('searchConditionCountry'),
             searchConditionGender: snapshot.docs[0].get('searchConditionGender'),
             profilePhotoNameSuffix: snapshot.docs[0].get('profilePhotoNameSuffix'),

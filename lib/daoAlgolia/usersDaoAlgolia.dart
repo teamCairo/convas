@@ -38,16 +38,16 @@ Future<List<AlgoliaObjectSnapshot>> selectUsersByConditions(WidgetRef ref) async
       ref.watch(userDataProvider).userData["searchConditionAge"]!);
 
   String filterConditions =
-      "ageNumber:" + ageConditionList[0] + " TO " + ageConditionList[1];
-  filterConditions = filterConditions +
-      " AND NOT objectID:" +
-      ref.watch(userDataProvider).userData["userDocId"]! +
-      " ";
+      "age:" + ageConditionList[0] + " TO " + ageConditionList[1];
+  // filterConditions = filterConditions +
+  //     " AND NOT objectID:" +
+  //     ref.watch(userDataProvider).userData["userDocId"]! +
+  //     " ";
 
   //filterConditions=addConditionList(filterConditions,"searchConditionLevel","level");
-  //filterConditions=addConditionList(filterConditions,"searchConditionNativeLang","nativeLang");TODO なぜか追加すると検索できない
-  filterConditions = addConditionList(
-      ref, filterConditions, "searchConditionCountry", "country");
+  //filterConditions=addConditionList(filterConditions,"searchConditionMotherTongue","motherTongue");TODO なぜか追加すると検索できない
+  // filterConditions = addConditionList(
+  //     ref, filterConditions, "searchConditionCountry", "country");
   //filterConditions=addConditionList(filterConditions,"searchConditionGender","gender");TODO なぜか追加すると検索できない
 
   //query=query.filters("country:USA");文字検索の成功例

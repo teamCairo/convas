@@ -12,7 +12,7 @@ AppBar whiteAppbar(String text) {
       text,
       style: const TextStyle(
         fontWeight: FontWeight.w500,
-        fontSize: 21,
+        fontSize: 20,
         color: Colors.black87,
       ),
     ),

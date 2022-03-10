@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Padding gray12TextRight(String text) {
@@ -49,6 +48,28 @@ Padding gray16TextRight(String text) {
         )),
   );
 }
+
+
+Padding gray16TextRightEllipsis(String text,double width) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: Align(
+        alignment: Alignment.topRight,
+        child: SizedBox(
+          width:width,
+          child: Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+              color: Colors.black54,
+            ),
+          ),
+        )),
+  );
+}
+
 Padding gray20TextLeft(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
@@ -60,6 +81,23 @@ Padding gray20TextLeft(String text) {
             fontWeight: FontWeight.w400,
             fontSize: 20,
             color: Colors.black54,
+          ),
+        )),
+  );
+}
+
+
+Padding black20TextCenter(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 20,
+            color: Colors.black87,
           ),
         )),
   );

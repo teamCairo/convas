@@ -1,5 +1,5 @@
 import 'package:convas/rootProvider.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:convas/searchUsersMainPageUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
@@ -47,8 +47,8 @@ class Root extends ConsumerWidget {
       //   return Now();
       // case 1:
       //   return Talk();
-      // case 2:
-      //   return Search();
+      case 2:
+        return SearchUsersMainPage();
       // case 3:
       //   return TopicPage(
       //   );
