@@ -44,7 +44,8 @@ class SearchUsersConditionPage extends ConsumerWidget {
                         roundHalfButton(text: "Search",
                             color:Colors.orange,
                             onPressed: (){
-                              ref.read(searchUsersProvider.notifier).searchUsers(ref);
+                              ref.read(searchUsersProvider.notifier).setSearchProcessingFlgTrue();
+                              ref.read(searchUsersProvider.notifier).setConditionsToFirebaseAndSearchUsers(ref);
                               Navigator.pop(context);
                             }),
                       ],

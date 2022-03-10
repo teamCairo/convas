@@ -65,6 +65,7 @@ class EventDataNotifier extends ChangeNotifier {
 
   Future<StreamSubscription<QuerySnapshot>> readEventNewDataFromFirebaseToIsar(String userDocId) async {
     Setting? tmpSetting = await selectIsarSettingByCode("eventsUpdateCheck");
+    log("XXXXXXXXXXXXXXXXXXXXXXXXeventProvider68行目");
     DateTime eventUpdatedTime = tmpSetting!.dateTimeValue1!;
 
     log("XXXXXXXXXXXXXXeventUpdateTime"+eventUpdatedTime.toString());

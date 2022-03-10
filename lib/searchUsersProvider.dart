@@ -49,9 +49,10 @@ class SearchUsersNotifier extends ChangeNotifier {
     _userImages = {};
   }
 
-  Future<void> searchUsers(WidgetRef ref)async {
-
-    updateFirebaseUser(userDocId: ref.watch(userDataProvider).userData["userDocId"],
+  Future<void> setConditionsToFirebaseAndSearchUsers(WidgetRef ref)async {
+    String userDocId =ref.watch(userDataProvider).userData["userDocId"];
+    await searchUsers(ref);
+    updateFirebaseUser(userDocId: userDocId,
       data: {
         'searchConditionAge':_tmpSearchConditionAge ,
         'searchConditionLevel':_tmpSearchConditionLevel,
@@ -60,7 +61,14 @@ class SearchUsersNotifier extends ChangeNotifier {
         'searchConditionGender':_tmpSearchConditionGender,
       }, programId: "searchUsers"
       , );
-    _searchResultList = await selectUsersByConditions(ref);
+
+  }
+
+  Future<void> searchUsers(WidgetRef ref)async {
+
+    _searchResultList = await selectUsersByConditions(ref,
+        searchConditionAge:_tmpSearchConditionAge);
+
     await setFriendPhoto();
     _searchProcessFlg=false;
     notifyListeners();

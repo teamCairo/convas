@@ -145,6 +145,7 @@ class SearchUsersMainPage extends ConsumerWidget {
                         children:[
                           Row(children:[
                             black16TextCenter(userData.data["name"]),
+                            black16TextCenter(userData.data["age"].toString()),
                             // CircleAvatar(radius:10,
                             //     backgroundImage:ref.watch(countryDataProvider).countryData[userData.data["country"]]["imageFile"].image)
                           ]),

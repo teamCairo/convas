@@ -140,6 +140,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
 Future<void> updateTimeCheck(String itemName) async {
 
+  log("XXXXXXXXXXloginLogic143行目");
   Setting? updateTime = await selectIsarSettingByCode(itemName + "UpdateCheck");
   if (updateTime == null) {
     await insertIsarSetting(settingCode:itemName + "UpdateCheck", dateTimeValue1:DateTime(2022, 1, 1, 0, 0));

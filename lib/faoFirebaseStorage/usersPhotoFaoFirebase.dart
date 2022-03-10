@@ -21,7 +21,7 @@ Future<Image?> getUsersSmallPhoto(String userDocId, String profilePhotoNameSuffi
       log("写真あるはずなのになぜかエラーだった");
     }
   } else {
-    log("写真登録されていない");
+    // log("写真登録されていない");
   }
   return null;
 }
