@@ -171,7 +171,7 @@ class SettingPage extends ConsumerWidget {
           child:Column(children:[
             SizedBox(
               width: double.infinity,
-              child: orange12TextLeft(displayedItem)
+              child: deepOrange12TextLeft(displayedItem)
             ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.start,

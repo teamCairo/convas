@@ -41,6 +41,7 @@ Future<String> insertFirebaseUser({
   String? greeting,
   String? description,
   String? userType,
+  bool? readableFlg,
   required String  programId
 }) async {
 
@@ -70,6 +71,8 @@ Future<String> insertFirebaseUser({
           'profilePhotoNameSuffix':"",
           'profilePhotoUpdateCnt': 0,
           'messageTokenId':"",
+          'onlineStatus':false,
+          'lastLoginTime':FieldValue.serverTimestamp(),
           'informationModifiedTime': FieldValue.serverTimestamp(),
           'interestingCategories':"",
           'interestingCourses':"",
@@ -79,7 +82,7 @@ Future<String> insertFirebaseUser({
           'updateUserDocId':"myself",
           'updateProgramId': programId,
           'updateTime': FieldValue.serverTimestamp(),
-          'readableFlg': true,
+          'readableFlg': readableFlg??true,
           'deleteFlg': false,
         }).then((value){
       insertedDocId=value.id;

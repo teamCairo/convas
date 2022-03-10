@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'categoryRegisterUI.dart';
 import 'courseRegisterUI.dart';
+import 'developerLogic/insertTestUsersData.dart';
 // import 'topicRegisterUI.dart';
 
 class DeveloperPage extends ConsumerWidget {
@@ -87,6 +88,16 @@ class DeveloperPage extends ConsumerWidget {
                       fontSize: 16,
                       color: Colors.white,
                     ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    child: const Text('InsertTestUserData'),
+                    onPressed: () {
+                      insertTestUserData(ref);
+                    },
                   ),
                 ),
                   // const SizedBox(height: 8),

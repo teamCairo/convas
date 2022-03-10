@@ -59,6 +59,7 @@ Padding gray16TextRightEllipsis(String text,double width) {
           width:width,
           child: Text(
             text,
+            textAlign:TextAlign.end,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontWeight: FontWeight.w400,
@@ -197,7 +198,7 @@ Padding black20BoldTextLeft(String text) {
 }
 
 
-Text orange12TextLeft(String text) {
+Text deepOrange12TextLeft(String text) {
   return Text(
     text,
     textAlign: TextAlign.left,
@@ -209,6 +210,29 @@ Text orange12TextLeft(String text) {
   );
 }
 
+Text deepOrange16TextLeft(String text) {
+  return Text(
+    text,
+    textAlign: TextAlign.left,
+    style: const TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 16,
+      color: Colors.deepOrange,
+    ),
+  );
+}
+
+Text deepOrange16TextRight(String text) {
+  return Text(
+    text,
+    textAlign: TextAlign.right,
+    style: const TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 16,
+      color: Colors.deepOrange,
+    ),
+  );
+}
 
 
 

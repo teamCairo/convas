@@ -22,6 +22,8 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _dialogWidth = MediaQuery.of(context).size.width * 3 / 4; // 画面サイズから相対的に大きさを決めている。
 
+
+
     if(initialProcessFlg){
 
       initialProcessFlg=false;
@@ -46,21 +48,39 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:[
-                          closeButtonForModal(context),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                            padding: const EdgeInsets.only(right: 14.0,left:14,bottom:35,top:10),
                             child: black20TextCenter("Age"),
                           ),
                           Expanded(
-                            child: RangeSlider(
-                              labels: RangeLabels(ref.watch(searchUsersConditionEditNumberDialogProvider).start.toString(), ref.watch(searchUsersConditionEditNumberDialogProvider).end.toString()),
-                              values: ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues,
-                              min: ref.watch(searchUsersConditionEditNumberDialogProvider).min.toDouble(),
-                              max: ref.watch(searchUsersConditionEditNumberDialogProvider).max.toDouble(),
-                              divisions: (ref.watch(searchUsersConditionEditNumberDialogProvider).max.toDouble()-ref.watch(searchUsersConditionEditNumberDialogProvider).min.toDouble()).toInt(),
-                              onChanged: (values) {
-                                ref.read(searchUsersConditionEditNumberDialogProvider.notifier).setRangeValues(values);
-                              },
+                            child: Column(
+                              children: [
+                                SliderTheme(
+                                  data: const SliderThemeData(
+                                      valueIndicatorColor:Colors.white10,
+                            ),
+                                  child: RangeSlider(
+                                    labels: RangeLabels(ref.watch(searchUsersConditionEditNumberDialogProvider).start.toString(), ref.watch(searchUsersConditionEditNumberDialogProvider).end.toString()),
+                                    values: ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues,
+                                    min: ref.watch(searchUsersConditionEditNumberDialogProvider).min.toDouble(),
+                                    max: ref.watch(searchUsersConditionEditNumberDialogProvider).max.toDouble(),
+                                    divisions: (ref.watch(searchUsersConditionEditNumberDialogProvider).max.toDouble()-ref.watch(searchUsersConditionEditNumberDialogProvider).min.toDouble()).toInt(),
+                                    onChanged: (values) {
+                                      ref.read(searchUsersConditionEditNumberDialogProvider.notifier).setRangeValues(values);
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      deepOrange16TextLeft(ref.watch(searchUsersConditionEditNumberDialogProvider).start.toString()),
+                                      deepOrange16TextRight(ref.watch(searchUsersConditionEditNumberDialogProvider).end.toString())
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
 
@@ -69,7 +89,7 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
                         children: [
 
                           roundButtonByWidthAndHeight(text: 'Cancel',
-                              height: 50,
+                              height: 40,
                               color: Colors.black26,
                               width: 90,
                               onPressed: () {
@@ -78,7 +98,7 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
                               }),
 
                           roundButtonByWidthAndHeight(text: 'OK',
-                              height: 50,
+                              height: 40,
                               color: Colors.orange,
                               width: 90,
                               onPressed: () {
