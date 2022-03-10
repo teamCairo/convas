@@ -31,7 +31,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
 
   Future<void> updateLastLoginTime() async {
     Setting? tmpSetting=await selectIsarSettingByCode("localUserInfo");
-    updateFirebaseUser(userDocId: tmpSetting!.stringValue2!,data:{'lastLoginTime': FieldValue.serverTimestamp()});
+    updateFirebaseUser(userDocId: tmpSetting!.stringValue2!,data:{'lastLoginTime': FieldValue.serverTimestamp()}, programId: "updateLastLoginTime");
   }
 
 
@@ -289,9 +289,9 @@ class UserDataProviderNotifier extends ChangeNotifier {
       _userData["profilePhotoNameSuffix"] = pathStrEx;
       await updateIsarUserPhotoInfo(pathStrEx);
 
-      updateFirebaseUserPhotoInfo(_userData["userDocId"]!,_userData["profilePhotoUpdateCnt"]! + 1,pathStrEx);
+      updateFirebaseUserPhotoInfo(_userData["userDocId"]!,_userData["profilePhotoUpdateCnt"]! + 1,pathStrEx,"uploadAndInsertPhoto");
 
-      var result = await FlutterImageCompress.compressAndGetFile(
+      await FlutterImageCompress.compressAndGetFile(
         "${appDocDir.path}/media/" + "mainPhoto" + pathStrEx,
         "${appDocDir.path}/media/" + "mainPhoto_small" + pathStrEx,
         quality: 20,

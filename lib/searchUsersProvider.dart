@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:algolia/algolia.dart';
 import 'package:convas/common/logic/commonLogic.dart';
+import 'package:convas/searchUsersConditionPageUI.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common/commonValues.dart';
 import 'common/provider/userProvider.dart';
 import 'daoAlgolia/usersDaoAlgolia.dart';
+import 'daoFirebase/usersDaoFirebase.dart';
+import 'faoFirebaseStorage/usersPhotoFaoFirebase.dart';
 
 
 final searchUsersProvider = ChangeNotifierProvider(
@@ -19,9 +22,9 @@ class SearchUsersNotifier extends ChangeNotifier {
 
   get searchResultList => _searchResultList;
 
-  Map<String, Image?> _friendImage = {};
+  Map<String, Image?> _userImages = {};
 
-  get friendImage => _friendImage;
+  get userImages => _userImages;
 
   bool _searchProcessFlg=true;
   get  searchProcessFlg => _searchProcessFlg;
@@ -43,13 +46,22 @@ class SearchUsersNotifier extends ChangeNotifier {
 
   void clear() {
     _searchResultList = [];
-    _friendImage = {};
+    _userImages = {};
   }
 
   Future<void> searchUsers(WidgetRef ref)async {
 
+    updateFirebaseUser(userDocId: ref.watch(userDataProvider).userData["userDocId"],
+      data: {
+        'searchConditionAge':_tmpSearchConditionAge ,
+        'searchConditionLevel':_tmpSearchConditionLevel,
+        'searchConditionMotherTongue':_tmpSearchConditionMotherTongue,
+        'searchConditionCountry':_tmpSearchConditionCountry,
+        'searchConditionGender':_tmpSearchConditionGender,
+      }, programId: "searchUsers"
+      , );
     _searchResultList = await selectUsersByConditions(ref);
-    setFriendPhoto();
+    await setFriendPhoto();
     _searchProcessFlg=false;
     notifyListeners();
 
@@ -89,6 +101,7 @@ class SearchUsersNotifier extends ChangeNotifier {
 
   void setSearchProcessingFlgTrue(){
     _searchProcessFlg=true;
+    notifyListeners();
   }
   
   void setConditionByMap(WidgetRef ref,String databaseItem,Map<String,bool> values){
@@ -164,36 +177,10 @@ class SearchUsersNotifier extends ChangeNotifier {
 
 
   Future<void> setFriendPhoto() async {
-    _friendImage.clear();
-    FirebaseStorage storage = FirebaseStorage.instance;
+    _userImages.clear();
 
     for (int i = 0; i < _searchResultList.length; i++) {
-      String profilePhotoNameSuffix =
-      _searchResultList[i].data["profilePhotoNameSuffix"];
-
-      if (profilePhotoNameSuffix != "") {
-        //写真が登録されている場合
-
-        try {
-          Reference imageRef = storage
-              .ref()
-              .child("profile")
-              .child(_searchResultList[i].data["objectID"]!)
-              .child("mainPhoto_small" + profilePhotoNameSuffix);
-          await imageRef.getDownloadURL().then((imageUrl) {
-            _friendImage[_searchResultList[i].data["objectID"]!] =
-                Image.network(imageUrl, width: 90);
-          });
-        } catch (e) {
-          //写真があるはずなのになぜかエラーだった
-          log("写真あるはずなのになぜかエラーだった");
-          _friendImage[_searchResultList[i].data["objectID"]!] = null;
-        }
-      } else {
-        //写真が登録されていない場合
-
-        _friendImage[_searchResultList[i].data["objectID"]!] = null;
-      }
+      getUsersSmallPhoto(_searchResultList[i].data["objectID"],_searchResultList[i].data["profilePhotoNameSuffix"]);
     }
   }
 }

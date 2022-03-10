@@ -54,12 +54,13 @@ class SearchUsersMainPage extends ConsumerWidget {
                                         text: 'Set search conditions'),
                                   ),
                                   IconButton(onPressed:(){
+                                    ref.read(searchUsersProvider.notifier).searchUsers(ref);
+                                    ref.read(searchUsersProvider.notifier).setSearchProcessingFlgTrue();
 
                                   },
                                       icon: const Icon(Icons.refresh),
                                   iconSize:26),
                                   IconButton(onPressed:(){
-
                                   },
                                       icon: const Icon(Icons.upgrade),
                                       iconSize:26),
@@ -130,12 +131,17 @@ class SearchUsersMainPage extends ConsumerWidget {
             color: Colors.white10,
             height:130,
             child:Row(
-                children:[imageAvatar(radius:32,
-                        image:ref.watch(searchUsersProvider).friendImage[userData.data["objectID"]] ==null
-                            ? null
-                            : ref.watch(searchUsersProvider).friendImage[userData.data["objectID"]]!.image,),
+              crossAxisAlignment: CrossAxisAlignment.start,
+                children:[Padding(
+                  padding: const EdgeInsets.only(right:8.0,top:8),
+                  child: imageAvatar(radius:32,
+                          image:ref.watch(searchUsersProvider).userImages[userData.data["objectID"]] ==null
+                              ? null
+                              : ref.watch(searchUsersProvider).userImages[userData.data["objectID"]]!.image,),
+                ),
                   Expanded(
                       child:Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children:[
                           Row(children:[
                             black16TextCenter(userData.data["name"]),

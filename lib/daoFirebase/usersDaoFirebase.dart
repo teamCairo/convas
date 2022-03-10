@@ -110,18 +110,29 @@ Future<void> updateUserSelectedItem(WidgetRef ref,String databaseItem,dynamic va
 }
 
 Future<void> updateFirebaseUser({required String userDocId,
-  required Map<String, Object?> data
+  required Map<String, Object?> data,
+  required programId
 }) async {
+  data.addAll({
+    'informationModifiedTime': FieldValue.serverTimestamp(),
+    'updateUserDocId': userDocId,
+    'updateProgramId': programId,
+    'updateTime': FieldValue.serverTimestamp(),
+  });
   FirebaseFirestore.instance.collection('users').doc(userDocId).update(data);
 
 }
 
-Future<void> updateFirebaseUserPhotoInfo(String userDocId,int profilePhotoUpdateCnt,String profilePhotoNameSuffix)async {
+Future<void> updateFirebaseUserPhotoInfo(String userDocId,int profilePhotoUpdateCnt,String profilePhotoNameSuffix,String programId)async {
   await FirebaseFirestore.instance
       .collection('users')
       .doc(userDocId)
       .update({
     "profilePhotoUpdateCnt": profilePhotoUpdateCnt,
-    "profilePhotoNameSuffix": profilePhotoNameSuffix
+    "profilePhotoNameSuffix": profilePhotoNameSuffix,
+    'informationModifiedTime': FieldValue.serverTimestamp(),
+    'updateUserDocId': userDocId,
+    'updateProgramId': programId,
+    'updateTime': FieldValue.serverTimestamp(),
   });
 }
