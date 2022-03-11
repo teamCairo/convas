@@ -8,7 +8,9 @@ if (localPropertiesFile.exists()) {
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+//    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")DELETE
+    throw new FileNotFoundException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")//ADD
+
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -74,4 +76,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation "com.algolia:algoliasearch-client-kotlin:$kotlin_client_version"
+    implementation "io.ktor:ktor-client-okhttp:$ktor_version"
 }
