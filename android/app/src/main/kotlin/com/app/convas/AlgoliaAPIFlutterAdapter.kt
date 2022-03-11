@@ -2,6 +2,8 @@ package com.app.convas
 
 import android.util.Log
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.dsl.filters
+import com.algolia.search.dsl.query
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
 import com.algolia.search.helper.toIndexName
@@ -29,8 +31,34 @@ class AlgoliaAPIFlutterAdapter(
             return@runBlocking
         }
 
+        //引数
+//        String? searchConditionAllKeyword,
+//        required String searchConditionAge,
+//        String? searchConditionLevel,
+//        String? searchConditionMotherTongue,
+//        String? searchConditionCountry,
+//        String? searchConditionGender,
+
+        var searchConditionAgeArrayList =  fromTextToList(args[1])
+        var searchConditionLevelArrayList =  fromTextToList(args[2])
+        var searchConditionMotherTongueArrayList =  fromTextToList(args[3])
+        var searchConditionCountryArrayList =  fromTextToList(args[4])
+        var searchConditionGenderArrayList =  fromTextToList(args[5])
+
+        val query = query {
+            filters {
+                and {
+//                    facet("color", "red")
+//                    facet("category", "shirt")
+                }
+                orNumeric {
+                    range("age", searchConditionAgeArrayList[0].toIntOrNull()!! until searchConditionAgeArrayList[1].toIntOrNull()!!)
+//                    comparison("price", Equals, 15)
+                }
+            }
+        }
         when (call.method) {
-            METHOD_SEARCH -> search(indexName = args[0].toIndexName(), Query(args[1]), result)
+            METHOD_SEARCH -> search(indexName = args[0].toIndexName(), query=query, result = result)
             else -> result.notImplemented()
         }
     }
@@ -46,6 +74,6 @@ class AlgoliaAPIFlutterAdapter(
     }
 
     companion object {
-        private const val METHOD_SEARCH = "search"
+        private const val METHOD_SEARCH = "selectUsersByConditionsOnKotlin"
     }
 }

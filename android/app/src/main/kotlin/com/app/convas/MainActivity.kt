@@ -7,7 +7,7 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
 
-    private val algoliaAPIAdapter = AlgoliaAPIFlutterAdapter("latency", "1f6fd3a6fb973cb08419fe7d288fa4db")
+    private val algoliaAPIAdapter = AlgoliaAPIFlutterAdapter("GJZB18X3PO", "abba57df32485d814ce4da82406cc546")
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
