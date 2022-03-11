@@ -1,8 +1,5 @@
-import 'dart:developer';
 import 'package:algolia/algolia.dart';
 import 'package:convas/common/logic/commonLogic.dart';
-import 'package:convas/searchUsersConditionPageUI.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,7 +15,7 @@ final searchUsersProvider = ChangeNotifierProvider(
 );
 
 class SearchUsersNotifier extends ChangeNotifier {
-  List<AlgoliaObjectSnapshot> _searchResultList = [];
+  List<SearchHitUsers> _searchResultList = [];
 
   get searchResultList => _searchResultList;
 
@@ -67,7 +64,8 @@ class SearchUsersNotifier extends ChangeNotifier {
   Future<void> searchUsers(WidgetRef ref)async {
 
     _searchResultList = await selectUsersByConditions(ref,
-        searchConditionAge:_tmpSearchConditionAge);
+        searchConditionAge:_tmpSearchConditionAge,
+        userDocId: ref.watch(userDataProvider).userData["userDocId"]);
 
     await setFriendPhoto();
     _searchProcessFlg=false;
@@ -188,7 +186,7 @@ class SearchUsersNotifier extends ChangeNotifier {
     _userImages.clear();
 
     for (int i = 0; i < _searchResultList.length; i++) {
-      getUsersSmallPhoto(_searchResultList[i].data["objectID"],_searchResultList[i].data["profilePhotoNameSuffix"]);
+      getUsersSmallPhoto(_searchResultList[i].objectID,_searchResultList[i].profilePhotoNameSuffix);
     }
   }
 }

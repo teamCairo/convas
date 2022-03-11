@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common/UI/commonButtonUI.dart';
 import 'common/UI/commonOthersUI.dart';
 import 'common/UI/commonTextUI.dart';
+import 'daoAlgolia/usersDaoAlgolia.dart';
 
 class SearchUsersMainPage extends ConsumerWidget {
   SearchUsersMainPage({
@@ -96,11 +97,11 @@ class SearchUsersMainPage extends ConsumerWidget {
     }
   }
 
-  Widget userResultList(BuildContext context, WidgetRef ref,AlgoliaObjectSnapshot userData){
+  Widget userResultList(BuildContext context, WidgetRef ref,SearchHitUsers userData){
 
     String lastLoginStr="";
     //最終ログイン日付の計算
-    int differentDays =DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(userData.data["lastLoginTime"])).inDays;
+    int differentDays =DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(userData.lastLoginTime)).inDays;
     if(differentDays==0){
       lastLoginStr="today";
     }else if(differentDays == 1){
@@ -135,21 +136,21 @@ class SearchUsersMainPage extends ConsumerWidget {
                 children:[Padding(
                   padding: const EdgeInsets.only(right:8.0,top:8),
                   child: imageAvatar(radius:32,
-                          image:ref.watch(searchUsersProvider).userImages[userData.data["objectID"]] ==null
+                          image:ref.watch(searchUsersProvider).userImages[userData.objectID] ==null
                               ? null
-                              : ref.watch(searchUsersProvider).userImages[userData.data["objectID"]]!.image,),
+                              : ref.watch(searchUsersProvider).userImages[userData.objectID]!.image,),
                 ),
                   Expanded(
                       child:Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children:[
                           Row(children:[
-                            black16TextCenter(userData.data["name"]),
-                            black16TextCenter(userData.data["age"].toString()),
+                            black16TextCenter(userData.name),
+                            black16TextCenter(userData.age.toString()),
                             // CircleAvatar(radius:10,
                             //     backgroundImage:ref.watch(countryDataProvider).countryData[userData.data["country"]]["imageFile"].image)
                           ]),
-                          gray12TextLeft(userData.data["greeting"]),
+                          gray12TextLeft(userData.greeting),
                           // Wrap(children: featureList)
                         ],
                       )
