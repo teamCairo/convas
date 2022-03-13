@@ -161,7 +161,7 @@ class SettingPage extends ConsumerWidget {
 
     }else if(databaseItem=="birthDate"){
 
-      DateTime birthDate = value.toDate();
+      DateTime birthDate = value;
       displayedValue=birthDate.year.toString()+"/"+birthDate.month.toString()+"/"+birthDate.day.toString();
     }else{
       displayedValue=value;

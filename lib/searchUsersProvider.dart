@@ -65,6 +65,7 @@ class SearchUsersNotifier extends ChangeNotifier {
 
     _searchResultList = await selectUsersByConditions(ref,
         searchConditionAge:_tmpSearchConditionAge,
+        searchConditionAllKeyword:"",
         userDocId: ref.watch(userDataProvider).userData["userDocId"]);
 
     await setFriendPhoto();
