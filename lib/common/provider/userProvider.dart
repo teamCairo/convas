@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
@@ -92,7 +90,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
       _userData["userDocId"] =tmpUser.userDocId;
       _userData['name'] =tmpUser.name;
       _userData['email'] =tmpUser.email;
-      _userData['age'] =tmpUser.age;
+      _userData['birthDate'] =tmpUser.birthDate;
       _userData['level'] =tmpUser.level;
       _userData['occupation'] =tmpUser.occupation;
       _userData['motherTongue'] =tmpUser.motherTongue;
@@ -177,7 +175,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
         _userData["userDocId"] = snapshot.docs[0].id;
         _userData['name'] = snapshot.docs[0].get('name');
         _userData['email'] = snapshot.docs[0].get('email');
-        _userData['age'] = snapshot.docs[0].get('age');
+        _userData['birthDate'] = snapshot.docs[0].get('birthDate').toDate();
         _userData['level'] = snapshot.docs[0].get('level');
         _userData['occupation'] = snapshot.docs[0].get('occupation');
         _userData['motherTongue'] = snapshot.docs[0].get('motherTongue');
@@ -214,7 +212,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
             userDocId: snapshot.docs[0].id,
             name: snapshot.docs[0].get('name'),
             email: snapshot.docs[0].get('email'),
-            age: snapshot.docs[0].get('age'),
+            birthDate: snapshot.docs[0].get('birthDate').toDate(),
             level: snapshot.docs[0].get('level'),
             occupation: snapshot.docs[0].get('occupation'),
             motherTongue: snapshot.docs[0].get('motherTongue'),

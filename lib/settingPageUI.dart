@@ -129,7 +129,7 @@ class SettingPage extends ConsumerWidget {
                     child: black18TextLeft("Personal Info")),
                 linePadding(context,ref,"Name","name", ref.watch(userDataProvider).userData["name"]!),
                 // linePadding(context,ref,"E-mail","email", ref.watch(userDataProvider).userData["email"]!),
-                linePadding(context,ref,"Age","age", ref.watch(userDataProvider).userData["age"]!),
+                linePadding(context,ref,"Birth Date","birthDate", ref.watch(userDataProvider).userData["birthDate"]!),
                 linePadding(context,ref,"English Level","level", ref.watch(userDataProvider).userData["level"]!),
                 linePadding(context,ref,"Occupation","occupation", ref.watch(userDataProvider).userData["occupation"]!),
                 linePadding(context,ref,"mother Tongue","motherTongue", ref.watch(userDataProvider).userData["motherTongue"]!),
@@ -159,8 +159,10 @@ class SettingPage extends ConsumerWidget {
     }else if(databaseItem=="motherTongue"){
       displayedValue=ref.watch(masterDataProvider.notifier).languageMasterData[value]!;
 
-    }else if(databaseItem=="age"){
-      displayedValue=value.toString();
+    }else if(databaseItem=="birthDate"){
+
+      DateTime birthDate = value.toDate();
+      displayedValue=birthDate.year.toString()+"/"+birthDate.month.toString()+"/"+birthDate.day.toString();
     }else{
       displayedValue=value;
     }
@@ -195,16 +197,16 @@ class SettingPage extends ConsumerWidget {
                                   );
                                 }),
                               );
-                            }else if(databaseItem=="age"){
-                              await Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) {
-                                  return SettingEditNumberPage(
-                                    displayedItem: displayedItem,
-                                    databaseItem: databaseItem,
-                                    value:value,
-                                  );
-                                }),
-                              );
+                            }else if(databaseItem=="birthDate"){
+                              // await Navigator.of(context).push(
+                              //   MaterialPageRoute(builder: (context) {
+                              //     return SettingEditNumberPage(
+                              //       displayedItem: displayedItem,
+                              //       databaseItem: databaseItem,
+                              //       value:value,
+                              //     );
+                              //   }),
+                              // );
                             }else{
                               await Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {

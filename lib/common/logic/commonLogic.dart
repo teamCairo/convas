@@ -17,6 +17,16 @@ Future<void> closeStreams(WidgetRef ref) async {
   //TODO 編集必要
 }
 
+int fromBirthToAge(DateTime birthDate){
+
+  if(DateTime(DateTime.now().year,birthDate.month,birthDate.day).isAfter(DateTime.now())){
+    return DateTime.now().year-birthDate.year-1;
+  }else{
+    return DateTime.now().year-birthDate.year;
+
+  }
+
+}
 
 List<String> fromTextToList(String txt) {
   String workText = txt;

@@ -17,12 +17,12 @@ extension GetUserCollection on Isar {
 final UserSchema = CollectionSchema(
   name: 'User',
   schema:
-      '{"name":"User","idName":"id","properties":[{"name":"age","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourses","type":"String"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionMotherTongue","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"User","idName":"id","properties":[{"name":"birthDate","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourses","type":"String"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionMotherTongue","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
   nativeAdapter: const _UserNativeAdapter(),
   webAdapter: const _UserWebAdapter(),
   idName: 'id',
   propertyIds: {
-    'age': 0,
+    'birthDate': 0,
     'country': 1,
     'deleteFlg': 2,
     'description': 3,
@@ -82,7 +82,8 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
   @override
   Object serialize(IsarCollection<User> collection, User object) {
     final jsObj = IsarNative.newJsObject();
-    IsarNative.jsObjectSet(jsObj, 'age', object.age);
+    IsarNative.jsObjectSet(
+        jsObj, 'birthDate', object.birthDate?.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'country', object.country);
     IsarNative.jsObjectSet(jsObj, 'deleteFlg', object.deleteFlg);
     IsarNative.jsObjectSet(jsObj, 'description', object.description);
@@ -139,7 +140,12 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
       IsarNative.jsObjectGet(jsObj, 'userDocId') ?? '',
       IsarNative.jsObjectGet(jsObj, 'name'),
       IsarNative.jsObjectGet(jsObj, 'email'),
-      IsarNative.jsObjectGet(jsObj, 'age'),
+      IsarNative.jsObjectGet(jsObj, 'birthDate') != null
+          ? DateTime.fromMillisecondsSinceEpoch(
+                  IsarNative.jsObjectGet(jsObj, 'birthDate'),
+                  isUtc: true)
+              .toLocal()
+          : null,
       IsarNative.jsObjectGet(jsObj, 'level'),
       IsarNative.jsObjectGet(jsObj, 'occupation'),
       IsarNative.jsObjectGet(jsObj, 'motherTongue'),
@@ -194,8 +200,13 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
   @override
   P deserializeProperty<P>(Object jsObj, String propertyName) {
     switch (propertyName) {
-      case 'age':
-        return (IsarNative.jsObjectGet(jsObj, 'age')) as P;
+      case 'birthDate':
+        return (IsarNative.jsObjectGet(jsObj, 'birthDate') != null
+            ? DateTime.fromMillisecondsSinceEpoch(
+                    IsarNative.jsObjectGet(jsObj, 'birthDate'),
+                    isUtc: true)
+                .toLocal()
+            : null) as P;
       case 'country':
         return (IsarNative.jsObjectGet(jsObj, 'country')) as P;
       case 'deleteFlg':
@@ -299,8 +310,8 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
   void serialize(IsarCollection<User> collection, IsarRawObject rawObj,
       User object, int staticSize, List<int> offsets, AdapterAlloc alloc) {
     var dynamicSize = 0;
-    final value0 = object.age;
-    final _age = value0;
+    final value0 = object.birthDate;
+    final _birthDate = value0;
     final value1 = object.country;
     IsarUint8List? _country;
     if (value1 != null) {
@@ -485,7 +496,7 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
     rawObj.buffer_length = size;
     final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
     final writer = IsarBinaryWriter(buffer, staticSize);
-    writer.writeLong(offsets[0], _age);
+    writer.writeDateTime(offsets[0], _birthDate);
     writer.writeBytes(offsets[1], _country);
     writer.writeBool(offsets[2], _deleteFlg);
     writer.writeBytes(offsets[3], _description);
@@ -529,7 +540,7 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       reader.readString(offsets[33]),
       reader.readStringOrNull(offsets[18]),
       reader.readStringOrNull(offsets[4]),
-      reader.readLongOrNull(offsets[0]),
+      reader.readDateTimeOrNull(offsets[0]),
       reader.readStringOrNull(offsets[15]),
       reader.readStringOrNull(offsets[19]),
       reader.readStringOrNull(offsets[17]),
@@ -573,7 +584,7 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       case -1:
         return id as P;
       case 0:
-        return (reader.readLongOrNull(offset)) as P;
+        return (reader.readDateTimeOrNull(offset)) as P;
       case 1:
         return (reader.readStringOrNull(offset)) as P;
       case 2:
@@ -731,54 +742,55 @@ extension UserQueryWhere on QueryBuilder<User, User, QWhereClause> {
 }
 
 extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
-  QueryBuilder<User, User, QAfterFilterCondition> ageIsNull() {
+  QueryBuilder<User, User, QAfterFilterCondition> birthDateIsNull() {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.isNull,
-      property: 'age',
+      property: 'birthDate',
       value: null,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> ageEqualTo(int? value) {
+  QueryBuilder<User, User, QAfterFilterCondition> birthDateEqualTo(
+      DateTime? value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
-      property: 'age',
+      property: 'birthDate',
       value: value,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> ageGreaterThan(
-    int? value, {
+  QueryBuilder<User, User, QAfterFilterCondition> birthDateGreaterThan(
+    DateTime? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: include,
-      property: 'age',
+      property: 'birthDate',
       value: value,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> ageLessThan(
-    int? value, {
+  QueryBuilder<User, User, QAfterFilterCondition> birthDateLessThan(
+    DateTime? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: include,
-      property: 'age',
+      property: 'birthDate',
       value: value,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> ageBetween(
-    int? lower,
-    int? upper, {
+  QueryBuilder<User, User, QAfterFilterCondition> birthDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return addFilterConditionInternal(FilterCondition.between(
-      property: 'age',
+      property: 'birthDate',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
@@ -4211,12 +4223,12 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
 extension UserQueryLinks on QueryBuilder<User, User, QFilterCondition> {}
 
 extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
-  QueryBuilder<User, User, QAfterSortBy> sortByAge() {
-    return addSortByInternal('age', Sort.asc);
+  QueryBuilder<User, User, QAfterSortBy> sortByBirthDate() {
+    return addSortByInternal('birthDate', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortByAgeDesc() {
-    return addSortByInternal('age', Sort.desc);
+  QueryBuilder<User, User, QAfterSortBy> sortByBirthDateDesc() {
+    return addSortByInternal('birthDate', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> sortByCountry() {
@@ -4502,12 +4514,12 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
 }
 
 extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
-  QueryBuilder<User, User, QAfterSortBy> thenByAge() {
-    return addSortByInternal('age', Sort.asc);
+  QueryBuilder<User, User, QAfterSortBy> thenByBirthDate() {
+    return addSortByInternal('birthDate', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenByAgeDesc() {
-    return addSortByInternal('age', Sort.desc);
+  QueryBuilder<User, User, QAfterSortBy> thenByBirthDateDesc() {
+    return addSortByInternal('birthDate', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> thenByCountry() {
@@ -4793,8 +4805,8 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
 }
 
 extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
-  QueryBuilder<User, User, QDistinct> distinctByAge() {
-    return addDistinctByInternal('age');
+  QueryBuilder<User, User, QDistinct> distinctByBirthDate() {
+    return addDistinctByInternal('birthDate');
   }
 
   QueryBuilder<User, User, QDistinct> distinctByCountry(
@@ -4980,8 +4992,8 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
 }
 
 extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
-  QueryBuilder<User, int?, QQueryOperations> ageProperty() {
-    return addPropertyNameInternal('age');
+  QueryBuilder<User, DateTime?, QQueryOperations> birthDateProperty() {
+    return addPropertyNameInternal('birthDate');
   }
 
   QueryBuilder<User, String?, QQueryOperations> countryProperty() {

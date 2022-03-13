@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:isar/isar.dart';
 
 part 'userEntityIsar.g.dart';
@@ -12,7 +10,7 @@ class User {
       this.userDocId,
       this.name,
       this.email,
-      this.age,
+      this.birthDate,
       this.level,
       this.occupation,
       this.motherTongue,
@@ -52,7 +50,7 @@ class User {
   late String userDocId;
   String? name;
   String? email;
-  int? age;
+  DateTime? birthDate;
   String? level;
   String? occupation;
   String? motherTongue;

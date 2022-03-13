@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:isar/isar.dart';
 
 import '../entityIsar/userEntityIsar.dart';
@@ -25,7 +24,7 @@ Future<int> insertOrUpdateIsarUser({
   required String userDocId,
   String? name,
   String? email,
-  int? age,
+  DateTime? birthDate,
   String? level,
   String? occupation,
   String? motherTongue,
@@ -67,7 +66,7 @@ Future<int> insertOrUpdateIsarUser({
       userDocId: userDocId,
       name: name,
       email: email,
-      age: age,
+      birthDate: birthDate,
       level: level,
       occupation: occupation,
       motherTongue: motherTongue,
@@ -109,7 +108,7 @@ Future<int> insertOrUpdateIsarUser({
       userDocId: userDocId,
       name: name,
       email: email,
-      age: age,
+      birthDate: birthDate,
       level: level,
       occupation: occupation,
       motherTongue: motherTongue,
@@ -154,7 +153,7 @@ Future<int> insertOrUpdateIsarUser({
 Future<int> insertIsarUser({required String userDocId,
   String? name,
   String? email,
-  int? age,
+  DateTime? birthDate,
   String? level,
   String? occupation,
   String? motherTongue,
@@ -193,7 +192,7 @@ Future<int> insertIsarUser({required String userDocId,
     userDocId,
     name,
     email,
-    age,
+    birthDate,
     level,
     occupation,
     motherTongue,
@@ -244,7 +243,7 @@ Future<int> insertIsarUser({required String userDocId,
 Future<int> updateIsarUser({required String userDocId,
   String? name,
   String? email,
-  int? age,
+  DateTime? birthDate,
   String? level,
   String? occupation,
   String? motherTongue,
@@ -286,7 +285,7 @@ Future<int> updateIsarUser({required String userDocId,
     userDocId: userDocId,
     name: name,
     email: email,
-    age: age,
+    birthDate: birthDate,
     level: level,
     occupation: occupation,
     motherTongue: motherTongue,
@@ -372,7 +371,7 @@ User setIsarUserParameters({
   required String userDocId,
   String? name,
   String? email,
-  int? age,
+  DateTime? birthDate,
   String? level,
   String? occupation,
   String? motherTongue,
@@ -411,7 +410,7 @@ User setIsarUserParameters({
   tmpUser.userDocId=userDocId;
   tmpUser.name=name;
   tmpUser.email=email;
-  tmpUser.age=age;
+  tmpUser.birthDate=birthDate;
   tmpUser.level=level;
   tmpUser.occupation=occupation;
   tmpUser.motherTongue=motherTongue;

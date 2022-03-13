@@ -46,7 +46,7 @@ Future<void> insertUser(WidgetRef ref,String email)async {
   String userDocId=await insertFirebaseUser(
       email: email,
       name: "my name",
-      age: 31,
+      birthDate: DateTime(1990,9,2,0,0),
       level: "1",
       occupation: "consultant",
       motherTongue: "JPN",

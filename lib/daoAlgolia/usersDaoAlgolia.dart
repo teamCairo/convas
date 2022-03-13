@@ -9,7 +9,7 @@ class SearchHitUsers {
   final String objectID;
   final String name;
   final String path;
-  final int age;
+  final int birthDate;
   final String country;
   final String gender;
   final String greeting;
@@ -26,7 +26,7 @@ class SearchHitUsers {
   SearchHitUsers(this.objectID,
       this.name,
       this.path,
-      this.age,
+      this.birthDate,
       this.country,
       this.gender,
       this.greeting,
@@ -44,7 +44,7 @@ class SearchHitUsers {
     return SearchHitUsers(json['objectID'],
         json['name'],
         json['path'],
-        json['age'],
+        json['birthDate'],
         json['country'],
         json['gender'],
         json['greeting'],

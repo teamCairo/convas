@@ -39,14 +39,23 @@ class AlgoliaAPIFlutterAdapter(
 //        String? searchConditionCountry,
 //        String? searchConditionGender,
 
-        var searchConditionAllKeyword =  fromTextToList(args[1])
+        var searchConditionAllKeyword =  args[1]
         var searchConditionAgeArrayList =  fromTextToList(args[2])
         var searchConditionLevelArrayList =  fromTextToList(args[3])
         var searchConditionMotherTongueArrayList =  fromTextToList(args[4])
         var searchConditionCountryArrayList =  fromTextToList(args[5])
         var searchConditionGenderArrayList =  fromTextToList(args[6])
 
-        val query = query {
+        val query = query(searchConditionAllKeyword) {
+
+            filters{
+                and{
+//                    range("age", searchConditionAgeArrayList[0].toIntOrNull()!! until searchConditionAgeArrayList[1].toIntOrNull()!!)
+
+                }
+
+            }
+
 //            filters {
 //                and {
 ////                    facet("color", "red")

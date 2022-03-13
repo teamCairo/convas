@@ -27,8 +27,8 @@ Future<DocumentSnapshot> selectFirebaseUserByUserDocId(String userDocId)async{
 
 Future<String> insertFirebaseUser({
   String? name,
-  String? email,
-  int? age,
+  required String email,
+  DateTime? birthDate,
   String? level,
   String? occupation,
   String? motherTongue,
@@ -50,7 +50,7 @@ Future<String> insertFirebaseUser({
         {
           'email': email,
           'name': name,
-          'age': age,
+          'birthDate': birthDate==null?null:Timestamp.fromDate(birthDate),
           'level': level,
           'occupation': occupation,
           'motherTongue': motherTongue,

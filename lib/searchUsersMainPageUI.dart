@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common/UI/commonButtonUI.dart';
 import 'common/UI/commonOthersUI.dart';
 import 'common/UI/commonTextUI.dart';
+import 'common/logic/commonLogic.dart';
 import 'daoAlgolia/usersDaoAlgolia.dart';
 
 class SearchUsersMainPage extends ConsumerWidget {
@@ -109,7 +110,7 @@ class SearchUsersMainPage extends ConsumerWidget {
     }else{
       lastLoginStr=differentDays.toString()+" days ago";
     }
-    //
+    //TODO スライドさせる
     // List<Widget> featureList=[];
     // featureList.add(orangeBorderContainer( text:"intermediate"));
     // featureList.add(orangeBorderContainer( text:"cate1"));
@@ -146,7 +147,7 @@ class SearchUsersMainPage extends ConsumerWidget {
                         children:[
                           Row(children:[
                             black16TextCenter(userData.name),
-                            black16TextCenter(userData.age.toString()),
+                            black16TextCenter(fromBirthToAge(DateTime.fromMillisecondsSinceEpoch(userData.birthDate)).toString()),
                             // CircleAvatar(radius:10,
                             //     backgroundImage:ref.watch(countryDataProvider).countryData[userData.data["country"]]["imageFile"].image)
                           ]),
