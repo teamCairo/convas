@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'dart:developer';
+import 'package:convas/common/logic/commonLogic.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/commonValues.dart';
@@ -71,10 +72,13 @@ Future<List<SearchHitUsers>> selectUsersByConditions(WidgetRef ref,{
   required String userDocId,
   }) async {
 
+
+
   List<String?> tmpList=[
     "users",//index name
     searchConditionAllKeyword,
-    searchConditionAge,
+    birthDateMinFromAge(int.parse(fromTextToList(searchConditionAge)[1])).millisecondsSinceEpoch.toString(),
+    birthDateMaxFromAge(int.parse(fromTextToList(searchConditionAge)[0])).millisecondsSinceEpoch.toString(),
     searchConditionLevel,
     searchConditionMotherTongue,
     searchConditionCountry,

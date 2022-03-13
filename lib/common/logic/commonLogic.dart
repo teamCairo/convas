@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'dart:io';
 import 'dart:math';
 
@@ -25,6 +26,16 @@ int fromBirthToAge(DateTime birthDate){
     return DateTime.now().year-birthDate.year;
 
   }
+
+}
+
+DateTime birthDateMaxFromAge(int age){
+  return DateTime(DateTime.now().year-age,DateTime.now().month,DateTime.now().day);
+
+}
+
+DateTime birthDateMinFromAge (int age){
+  return DateTime(DateTime.now().year-age-1,DateTime.now().month,DateTime.now().day).add(const Duration(days:1));
 
 }
 

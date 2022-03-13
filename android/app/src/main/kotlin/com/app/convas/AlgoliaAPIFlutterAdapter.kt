@@ -33,24 +33,27 @@ class AlgoliaAPIFlutterAdapter(
 
         //引数
 //        String? searchConditionAllKeyword,
-//        required String searchConditionAge,
+//        required String birthDateMin in epochmillisedonds,
+//        required String birthDateMax in epochmillisedonds,
 //        String? searchConditionLevel,
 //        String? searchConditionMotherTongue,
 //        String? searchConditionCountry,
 //        String? searchConditionGender,
 
         var searchConditionAllKeyword =  args[1]
-        var searchConditionAgeArrayList =  fromTextToList(args[2])
-        var searchConditionLevelArrayList =  fromTextToList(args[3])
-        var searchConditionMotherTongueArrayList =  fromTextToList(args[4])
-        var searchConditionCountryArrayList =  fromTextToList(args[5])
-        var searchConditionGenderArrayList =  fromTextToList(args[6])
+        var searchConditionbirthDateMin =  args[2]
+        var searchConditionbirthDateMax =  args[3]
+        var searchConditionLevelArrayList =  fromTextToList(args[4])
+        var searchConditionMotherTongueArrayList =  fromTextToList(args[5])
+        var searchConditionCountryArrayList =  fromTextToList(args[6])
+        var searchConditionGenderArrayList =  fromTextToList(args[7])
+        var userDocId =  args[8]
 
         val query = query(searchConditionAllKeyword) {
 
             filters{
                 and{
-//                    range("age", searchConditionAgeArrayList[0].toIntOrNull()!! until searchConditionAgeArrayList[1].toIntOrNull()!!)
+                    range("birthDate", searchConditionbirthDateMin.toIntOrNull()!! until searchConditionbirthDateMax.toIntOrNull()!!)
 
                 }
 

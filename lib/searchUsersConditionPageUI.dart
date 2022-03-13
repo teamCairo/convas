@@ -3,7 +3,6 @@ import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/searchUsersConditionEditNumberDialogUI.dart';
 import 'package:convas/searchUsersConditionEditTypeUI.dart';
 import 'package:convas/searchUsersProvider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
