@@ -149,6 +149,9 @@ class SearchUsersMainPage extends ConsumerWidget {
                             black16TextCenter(userData.name),
                             black16TextCenter(fromBirthToAge(DateTime.fromMillisecondsSinceEpoch(userData.birthDate)).toString()),
                             black16TextCenter(userData.motherTongue),
+                            black16TextCenter(userData.level),
+                            black16TextCenter(userData.country),
+                            black16TextCenter(userData.gender),
                             // CircleAvatar(radius:10,
                             //     backgroundImage:ref.watch(countryDataProvider).countryData[userData.data["country"]]["imageFile"].image)
                           ]),

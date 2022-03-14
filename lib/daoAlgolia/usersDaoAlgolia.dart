@@ -65,10 +65,10 @@ class SearchHitUsers {
 Future<List<SearchHitUsers>> selectUsersByConditions(WidgetRef ref,{
   String? searchConditionAllKeyword,
   required String searchConditionAge,
-  String? searchConditionLevel,
-  String? searchConditionMotherTongue,
-  String? searchConditionCountry,
-  String? searchConditionGender,
+  required String searchConditionLevel,
+  required String searchConditionMotherTongue,
+  required String searchConditionCountry,
+  required String searchConditionGender,
   required String userDocId,
   }) async {
 
@@ -79,14 +79,15 @@ Future<List<SearchHitUsers>> selectUsersByConditions(WidgetRef ref,{
     searchConditionAllKeyword,
     birthDateMinFromAge(int.parse(fromTextToList(searchConditionAge)[1])).millisecondsSinceEpoch.toString(),
     birthDateMaxFromAge(int.parse(fromTextToList(searchConditionAge)[0])).millisecondsSinceEpoch.toString(),
-    searchConditionLevel,
-    searchConditionMotherTongue,
-    searchConditionCountry,
-    searchConditionGender,
+    searchConditionLevel.replaceAll(", ", "@ "),
+    searchConditionMotherTongue.replaceAll(", ", "@ "),
+    searchConditionCountry.replaceAll(", ", "@ "),
+    searchConditionGender.replaceAll(", ", "@ "),
     userDocId,
   ];
 
   List<SearchHitUsers> searchUsersResult = await selectUsersByConditionsOnKotlin(tmpList);
+  log("XXXXXXXXXXXXXX件数"+searchUsersResult.length.toString());
   return searchUsersResult;
 }
 

@@ -65,6 +65,10 @@ class SearchUsersNotifier extends ChangeNotifier {
 
     _searchResultList = await selectUsersByConditions(ref,
         searchConditionAge:_tmpSearchConditionAge,
+        searchConditionLevel:_tmpSearchConditionLevel,
+        searchConditionMotherTongue:_tmpSearchConditionMotherTongue,
+        searchConditionCountry:_tmpSearchConditionCountry,
+        searchConditionGender:_tmpSearchConditionGender,
         searchConditionAllKeyword:"",
         userDocId: ref.watch(userDataProvider).userData["userDocId"]);
 
