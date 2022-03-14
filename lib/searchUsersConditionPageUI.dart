@@ -29,6 +29,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
                     linePadding(context,ref,"Mother tongue","searchConditionMotherTongue", ref.watch(searchUsersProvider).tmpSearchConditionMotherTongue),
                     linePadding(context,ref,"Country","searchConditionCountry", ref.watch(searchUsersProvider).tmpSearchConditionCountry),
                     linePadding(context,ref,"Gender","searchConditionGender", ref.watch(searchUsersProvider).tmpSearchConditionGender),
+
                   ]),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),

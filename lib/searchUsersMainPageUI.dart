@@ -164,7 +164,7 @@ class SearchUsersMainPage extends ConsumerWidget {
                       width:70,
                       child:Column(
                           children:[
-                            gray12TextRight(lastLoginStr ),
+                            gray12TextRight(lastLoginStr),
                           ]
                       )
                   )

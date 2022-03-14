@@ -46,6 +46,10 @@ class SearchUsersNotifier extends ChangeNotifier {
     _userImages = {};
   }
 
+  void setImage(String userDocId, Image? image){
+    _userImages[userDocId]=image;
+  }
+
   Future<void> setConditionsToFirebaseAndSearchUsers(WidgetRef ref)async {
     String userDocId =ref.watch(userDataProvider).userData["userDocId"];
     await searchUsers(ref);
@@ -72,7 +76,7 @@ class SearchUsersNotifier extends ChangeNotifier {
         searchConditionAllKeyword:"",
         userDocId: ref.watch(userDataProvider).userData["userDocId"]);
 
-    await setFriendPhoto();
+    await setFriendPhoto(ref);
     _searchProcessFlg=false;
     notifyListeners();
 
@@ -187,11 +191,11 @@ class SearchUsersNotifier extends ChangeNotifier {
 
 
 
-  Future<void> setFriendPhoto() async {
+  Future<void> setFriendPhoto(WidgetRef ref) async {
     _userImages.clear();
 
     for (int i = 0; i < _searchResultList.length; i++) {
-      getUsersSmallPhoto(_searchResultList[i].objectID,_searchResultList[i].profilePhotoNameSuffix);
+      await getUsersSmallPhoto(_searchResultList[i].objectID,_searchResultList[i].profilePhotoNameSuffix,ref);
     }
   }
 }
