@@ -25,5 +25,5 @@ Future<void> getUsersSmallPhoto(String userDocId, String profilePhotoNameSuffix,
   } else {
     log("写真設定されていない");
   }
-  // return ref.read(searchUsersProvider.notifier).setImage(userDocId, image);
+  ref.read(searchUsersProvider.notifier).setImage(userDocId, image);
 }

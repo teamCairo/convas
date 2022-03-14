@@ -30,6 +30,15 @@ class SearchConditionValueEditType extends ConsumerWidget {
       initialProcessFlg=false;
       ref.read(searchUsersConditionEditTypeProvider.notifier).initialize(ref, databaseItem, value);
     }
+    checkList.add(
+        CheckboxListTile(
+          title: gray20TextLeft("Doesn't matter"),
+          value: ref.watch(searchUsersConditionEditTypeProvider).doesntMatterCheck,
+          onChanged: (bool? value) {
+            ref.read(searchUsersConditionEditTypeProvider.notifier).changeDoesntMatterCheck(value??false);
+          },
+          controlAffinity: ListTileControlAffinity.trailing,
+        ));
 
     ref.watch(searchUsersConditionEditTypeProvider).masterMap.forEach((key, value) {
       checkList.add(

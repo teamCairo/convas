@@ -66,3 +66,24 @@ Future<dynamic> showOkInfoDialog(BuildContext context,  String message)async{
     },
   );
 }
+
+Padding orangeBorderRoundSquareSmall({required String text}){
+  return Padding(
+    padding: const EdgeInsets.all(3.0),
+    child: Container(
+      child:Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text(text,
+          style:const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 13,
+            color: Colors.orange,
+          ),
+        ),
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.deepOrange),
+        borderRadius: BorderRadius.circular(20),
+      ),),
+  );
+}

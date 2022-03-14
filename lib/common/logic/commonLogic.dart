@@ -7,6 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../../daoIsar/categoryDaoIsar.dart';
+import '../../entityIsar/categoryEntityIsar.dart';
+import '../commonValues.dart';
 import '../provider/userProvider.dart';
 
 Future<void> closeStreams(WidgetRef ref) async {
@@ -42,10 +45,12 @@ DateTime birthDateMinFromAge (int age){
 List<String> fromTextToList(String txt) {
   String workText = txt;
   List<String> outputList = [];
-
-  for (; workText.contains(', ');) {
-    outputList.add(workText.substring(0, workText.indexOf(', ')));
-    workText = workText.substring(workText.indexOf(', ') + 2);
+if(txt==""){
+  return outputList;
+}
+  for (; workText.contains(separatingCharacter);) {
+    outputList.add(workText.substring(0, workText.indexOf(separatingCharacter)));
+    workText = workText.substring(workText.indexOf(separatingCharacter) + separatingCharacter.length);
   }
   outputList.add(workText);
 
@@ -56,7 +61,7 @@ String fromListToTextDot(List<String> codeList){
   String result ="";
   for(int i=0;i<codeList.length;i++){
     if(i!=0){
-      result=result+", ";
+      result=result+separatingCharacter;
     }
     result=result+codeList[i];
   }
@@ -64,11 +69,26 @@ String fromListToTextDot(List<String> codeList){
   return result;
 }
 
+Future<List<String>> categoryNameListfromText(String text) async{
+  List<String> categoriesCodeList= fromTextToList(text);
+  List<String> categoriesNameList=[];
+  if(categoriesCodeList.isEmpty){
+    return categoriesNameList;
+  }
+  for(int i =0;i<categoriesCodeList.length;i++){
+    Category? cate =await selectIsarCategoryById(categoriesCodeList[i]);
+    categoriesNameList.add(cate!.categoryName);
+
+  }
+return categoriesNameList;
+
+}
+
 String fromCodeListToTextDot(List<String> codeList,masterName,WidgetRef ref){
   String result ="";
   for(int i=0;i<codeList.length;i++){
     if(i!=0){
-      result=result+", ";
+      result=result+separatingCharacter;
     }
     result=result+getMasterName(masterName, codeList[i], ref);
   }
@@ -113,5 +133,25 @@ String fromDateToHourMinuteText(DateTime datetime){
     ("00"+datetime.hour.toString()).substring(datetime.hour.toString().length) +
         ":" +
         ("00"+datetime.minute.toString()).substring(datetime.minute.toString().length);
+
+}
+
+String lastLoginInfo(bool onlineStatus,int lastLoginTime){
+
+  if(onlineStatus){
+    return "Online";
+  }
+  int differentDays = DateTime.now()
+      .difference(DateTime.fromMillisecondsSinceEpoch(lastLoginTime))
+      .inDays;
+  if (differentDays == 0) {
+    return "Today";
+  } else if (differentDays == 1) {
+    return  "Yesterday";
+  } else if(differentDays<7){
+    return  differentDays.toString() + " days ago";
+  }else{
+    return DateTime.fromMillisecondsSinceEpoch(lastLoginTime).month.toString()+"/"+DateTime.fromMillisecondsSinceEpoch(lastLoginTime).day.toString();
+  }
 
 }

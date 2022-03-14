@@ -20,8 +20,13 @@ class SearchUsersNotifier extends ChangeNotifier {
   get searchResultList => _searchResultList;
 
   Map<String, Image?> _userImages = {};
-
   get userImages => _userImages;
+
+  Map<String, List<String>> _userCategories = {};
+  get userCategories => _userCategories;
+
+  Map<int, bool?> _userImagesLoadStartFlg = {};
+  get userImagesLoadStartFlg => _userImagesLoadStartFlg;
 
   bool _searchProcessFlg=true;
   get  searchProcessFlg => _searchProcessFlg;
@@ -46,9 +51,6 @@ class SearchUsersNotifier extends ChangeNotifier {
     _userImages = {};
   }
 
-  void setImage(String userDocId, Image? image){
-    _userImages[userDocId]=image;
-  }
 
   Future<void> setConditionsToFirebaseAndSearchUsers(WidgetRef ref)async {
     String userDocId =ref.watch(userDataProvider).userData["userDocId"];
@@ -67,6 +69,9 @@ class SearchUsersNotifier extends ChangeNotifier {
 
   Future<void> searchUsers(WidgetRef ref)async {
 
+    _userImages.clear();
+    _userImagesLoadStartFlg.clear();
+    _userCategories.clear();
     _searchResultList = await selectUsersByConditions(ref,
         searchConditionAge:_tmpSearchConditionAge,
         searchConditionLevel:_tmpSearchConditionLevel,
@@ -75,8 +80,6 @@ class SearchUsersNotifier extends ChangeNotifier {
         searchConditionGender:_tmpSearchConditionGender,
         searchConditionAllKeyword:"",
         userDocId: ref.watch(userDataProvider).userData["userDocId"]);
-
-    await setFriendPhoto(ref);
     _searchProcessFlg=false;
     notifyListeners();
 
@@ -121,23 +124,14 @@ class SearchUsersNotifier extends ChangeNotifier {
   
   void setConditionByMap(WidgetRef ref,String databaseItem,Map<String,bool> values){
 
-    bool allTrueCheck=true;
     List<String> tmpList =[];
     values.forEach((k, v){
       if(v){
         tmpList.add(k);
-      }else{
-        allTrueCheck=false;
       }
     });
 
-    String value="";
-
-    if(allTrueCheck){
-
-    }else{
-      value=fromListToTextDot(tmpList);
-    }
+    String value=fromListToTextDot(tmpList);
     
     switch(databaseItem){
       case "searchConditionAge":
@@ -190,12 +184,18 @@ class SearchUsersNotifier extends ChangeNotifier {
   }
 
 
+  void setImage(String userDocId, Image? image){
+    _userImages[userDocId]=image;
+  }
 
-  Future<void> setFriendPhoto(WidgetRef ref) async {
-    _userImages.clear();
+  Future<void> setFriendPhotoAndCategories(WidgetRef ref,int index) async {
 
-    for (int i = 0; i < _searchResultList.length; i++) {
-      await getUsersSmallPhoto(_searchResultList[i].objectID,_searchResultList[i].profilePhotoNameSuffix,ref);
-    }
+    _userImagesLoadStartFlg[index]=true;
+    await getUsersSmallPhoto(_searchResultList[index].objectID,_searchResultList[index].profilePhotoNameSuffix,ref);
+
+    List<String> categoriesNameList=await categoryNameListfromText(_searchResultList[index].interestingCategories);
+
+    _userCategories[_searchResultList[index].objectID]=categoriesNameList;
+    notifyListeners();
   }
 }

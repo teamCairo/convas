@@ -17,7 +17,7 @@ Padding gray12TextRight(String text) {
   );
 }
 
-Padding gray12TextLeft(String text) {
+Padding gray14TextLeft(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 4.0),
     child: Align(
@@ -26,7 +26,7 @@ Padding gray12TextLeft(String text) {
           text,
           style: const TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 12,
+            fontSize: 14,
             color: Colors.black54,
           ),
         )),

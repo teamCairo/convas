@@ -9,6 +9,20 @@ class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
   Map<String, bool> _masterBoolMap = {};
   get masterBoolMap => _masterBoolMap;
 
+  bool _doesntMatterCheck =false;
+  get doesntMatterCheck=>_doesntMatterCheck;
+
+  void setDoesntMatterCheck() {
+    bool allFalseCheckBool= true;
+    _masterBoolMap.forEach((key, value) {
+      if(value == true){
+        allFalseCheckBool=false;
+      }
+    });
+
+    _doesntMatterCheck=allFalseCheckBool;
+  }
+
   void initialize(
       WidgetRef ref, String databaseItem, String inputValue) async {
     _masterBoolMap = {};
@@ -39,11 +53,26 @@ class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
       });
     }
 
+    setDoesntMatterCheck();
     notifyListeners();
   }
 
   void setBool(String key, bool value) {
     _masterBoolMap[key] = !value;
+    setDoesntMatterCheck();
+    notifyListeners();
+  }
+
+  void changeDoesntMatterCheck(bool changedDoesntMatter){
+    if(changedDoesntMatter){
+      _doesntMatterCheck = changedDoesntMatter;
+
+      _masterBoolMap.forEach((key, value) {
+        _masterBoolMap[key]=false;
+      });
+    }else{
+    }
+
     notifyListeners();
   }
 }

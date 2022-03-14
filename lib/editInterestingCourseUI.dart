@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common/UI/commonButtonUI.dart';
 import 'common/UI/commonOthersUI.dart';
 import 'common/UI/commonTextUI.dart';
+import 'common/commonValues.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
 
 
@@ -54,7 +55,10 @@ class EditInterestingCourse extends ConsumerWidget {
                   String interestingCourses="";
                   ref.watch(editInterestingCourseProvider).courseDocIdBoolMap.forEach((key, value) {
                     if(value){
-                      interestingCourses=interestingCourses+key.toString()+",";
+                      if(interestingCourses!=""){
+                        interestingCourses=interestingCourses+separatingCharacter;
+                      }
+                      interestingCourses=interestingCourses+key.toString();
                     }
                     updateUserSelectedItem(ref,"interestingCourses",interestingCourses,"editInterestingCourse");
 
