@@ -28,6 +28,11 @@ class User {
       this.searchConditionMotherTongue,
       this.searchConditionCountry,
       this.searchConditionGender,
+      this.searchConditionHomeCountry,
+      this.searchConditionLoginTime,
+      this.searchConditionCategories,
+      this.searchConditionCourses,
+      this.searchConditionUserType,
       this.profilePhotoNameSuffix,
       this.profilePhotoUpdateCnt,
       this.messageTokenId,
@@ -68,6 +73,11 @@ class User {
   String? searchConditionMotherTongue;
   String? searchConditionCountry;
   String? searchConditionGender;
+  String? searchConditionHomeCountry;
+  String? searchConditionLoginTime;
+  String? searchConditionCategories;
+  String? searchConditionCourses;
+  String? searchConditionUserType;
   String? profilePhotoNameSuffix;
   int? profilePhotoUpdateCnt;
   String? messageTokenId;

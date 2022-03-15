@@ -1,6 +1,6 @@
-import 'dart:async';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/searchUsersConditionEditNumberDialogUI.dart';
+import 'package:convas/searchUsersConditionEditRadioUI.dart';
 import 'package:convas/searchUsersConditionEditTypeUI.dart';
 import 'package:convas/searchUsersProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,6 +29,11 @@ class SearchUsersConditionPage extends ConsumerWidget {
                     linePadding(context,ref,"Mother tongue","searchConditionMotherTongue", ref.watch(searchUsersProvider).tmpSearchConditionMotherTongue),
                     linePadding(context,ref,"Country","searchConditionCountry", ref.watch(searchUsersProvider).tmpSearchConditionCountry),
                     linePadding(context,ref,"Gender","searchConditionGender", ref.watch(searchUsersProvider).tmpSearchConditionGender),
+                    linePadding(context,ref,"Home Country","searchConditionHomeCountry", ref.watch(searchUsersProvider).tmpSearchConditionHomeCountry),
+                    linePadding(context,ref,"Last login","searchConditionLoginTime", ref.watch(searchUsersProvider).tmpSearchConditionLoginTime),
+                    linePadding(context,ref,"Favorite categories","searchConditionCategories", ref.watch(searchUsersProvider).tmpSearchConditionCategories),
+                    linePadding(context,ref,"Favorite courses","searchConditionCourses", ref.watch(searchUsersProvider).tmpSearchConditionCourses),
+                    linePadding(context,ref,"Teacher/User","searchConditionUserType", ref.watch(searchUsersProvider).tmpSearchConditionUserType),
 
                   ]),
                   Padding(
@@ -68,7 +73,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
       case "searchConditionLevel":
 
         if(value==""){
-          displayedValue="All level";
+          displayedValue="Any level";
         }else{
           displayedValue = fromCodeListToTextDot(tmpList,"level", ref);
         }
@@ -76,7 +81,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
 
       case "searchConditionMotherTongue":
         if(value==""){
-          displayedValue="All language";
+          displayedValue="Any language";
         }else{
           displayedValue = fromCodeListToTextDot(tmpList,"language", ref);
         }
@@ -84,7 +89,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
 
       case "searchConditionCountry":
         if(value==""){
-          displayedValue="All country";
+          displayedValue="Any country";
         }else{
           displayedValue = fromCodeListToTextDot(tmpList,"country", ref);
         }
@@ -92,11 +97,52 @@ class SearchUsersConditionPage extends ConsumerWidget {
 
       case "searchConditionGender":
         if(value==""){
-          displayedValue="All gender";
+          displayedValue="Any gender";
         }else{
           displayedValue = fromCodeListToTextDot(tmpList,"gender", ref);
         }
         break;
+
+      case "searchConditionHomeCountry":
+        if(value==""){
+          displayedValue="Any country";
+        }else{
+          displayedValue = fromCodeListToTextDot(tmpList,"country", ref);
+        }
+        break;
+
+      case "searchConditionLoginTime":
+        if(value==""){
+          displayedValue="Any time";
+        }else{
+          displayedValue = fromCodeListToTextDot(tmpList,"lastLogin", ref);
+        }
+        break;
+
+      case "searchConditionCategories":
+        if(value==""){
+          displayedValue="Any category";
+        }else{
+          displayedValue = fromListToTextDot(categoryNameListFromText(ref.watch(searchUsersProvider).tmpSearchConditionCategories,ref));
+        }
+        break;
+
+      case "searchConditionCourses":
+        if(value==""){
+          displayedValue="Any course";
+        }else{
+          displayedValue = fromListToTextDot(courseNameListFromText(ref.watch(searchUsersProvider).tmpSearchConditionCourses,ref));
+        }
+        break;
+
+      case "searchConditionUserType":
+        if(value==""){
+          displayedValue="Any type";
+        }else{
+          displayedValue = fromCodeListToTextDot(tmpList,"userType", ref);
+        }
+        break;
+
       default:
         displayedValue = "";
         break;
@@ -109,12 +155,19 @@ class SearchUsersConditionPage extends ConsumerWidget {
 
             if(databaseItem=="searchConditionAge"){
 
-           showDialog<void>(
-            context: context,
-            builder: (_) {
-            return SearchUsersConditionEditNumberDialog(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
-            },
-            );
+              showDialog<void>(
+                context: context,
+                builder: (_) {
+                  return SearchUsersConditionEditNumberDialog(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
+                },
+              );
+
+            }else if(databaseItem=="searchConditionLoginTime"){
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) {
+                  return  SearchConditionValueEditRadio(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
+                }),
+              );
 
           }else{
               Navigator.of(context).push(
@@ -131,7 +184,8 @@ class SearchUsersConditionPage extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:[
                     black16TextLeft(displayedItem),
-                    gray16TextRightEllipsis(displayedValue,200)
+                    gray16TextRightEllipsis(displayedValue)
+                    // gray16TextRightEllipsis(displayedValue,200)
               ]),
             ),
             decoration: const BoxDecoration(

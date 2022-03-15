@@ -25,9 +25,24 @@ class CategoryDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<bool>();
   StreamSubscription<QuerySnapshot>? streamSub;
+  List<category.Category> _categoryList = [];
+  get categoryList => _categoryList;
+  Map<String,String> _categoryNameMap = {};
+  get categoryNameMap => _categoryNameMap;
 
   void closeStream() async {
     streamSub!.cancel();
+  }
+
+  Future<void> readCategoryDataFromIsarToMemory() async {
+
+    _categoryList=(await selectIsarCategoryAll())!;
+
+    _categoryNameMap.clear();
+    for(int i =0;i<_categoryList.length;i++){
+      _categoryNameMap[_categoryList[i].categoryDocId]=_categoryList[i].categoryName;
+    }
+    notifyListeners();
   }
 
   void clearIsar()async {
@@ -43,20 +58,19 @@ class CategoryDataNotifier extends ChangeNotifier {
   void controlStreamOfReadCategoryNewDataFromFirebaseToIsar()async {
 
     //最初は必ず呼び出し
-    //log("XXXXXXXXXXXXX初回readCategoryNewDataFromFirebaseToHiveAndMemorycallする");
     streamSub=await readCategoryNewDataFromFirebaseToIsar();
-    //log("XXXXXXXXXXXXX初回readCategoryNewDataFromFirebaseToHiveAndMemorycallした");
+
 
     if(controller.hasListener){
 
     }else{
-      //log("XXXXXXXXXXXXXControlListener開始");
+
       //2回目以降は新しいデータを更新するたびに起動
       controller.stream.listen((value)  async{
         streamSub!.cancel();
-        //log("XXXXXXXXXXXXXreadCategoryNewDataFromFirebaseToHiveAndMemorycallする");
+
         streamSub=await readCategoryNewDataFromFirebaseToIsar();
-        //log("XXXXXXXXXXXXXreadCategoryNewDataFromFirebaseToHiveAndMemorycallした");
+
       });
     }
 
@@ -127,8 +141,8 @@ class CategoryDataNotifier extends ChangeNotifier {
           }
 
         }
+        await readCategoryDataFromIsarToMemory();
         controller.sink.add(true);
-        notifyListeners();
       }
 
     });

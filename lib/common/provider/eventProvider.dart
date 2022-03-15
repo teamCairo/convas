@@ -32,7 +32,6 @@ class EventDataNotifier extends ChangeNotifier {
   Future<void> readEventDataFromIsarToMemory() async {
 
     _eventList=(await selectIsarEventAll())!;
-    log("XXXXXXXXイベント件数"+_eventList.length.toString());
     notifyListeners();
   }
 
@@ -55,9 +54,9 @@ class EventDataNotifier extends ChangeNotifier {
     }else{
       controller.stream.listen((value)  async{
         streamSub!.cancel();
-        log("cancel後");
+
         streamSub=await readEventNewDataFromFirebaseToIsar(userDocId);
-        log("Stram設定後");
+
       });
     }
 
@@ -65,10 +64,8 @@ class EventDataNotifier extends ChangeNotifier {
 
   Future<StreamSubscription<QuerySnapshot>> readEventNewDataFromFirebaseToIsar(String userDocId) async {
     Setting? tmpSetting = await selectIsarSettingByCode("eventsUpdateCheck");
-    log("XXXXXXXXXXXXXXXXXXXXXXXXeventProvider68行目");
     DateTime eventUpdatedTime = tmpSetting!.dateTimeValue1!;
 
-    log("XXXXXXXXXXXXXXeventUpdateTime"+eventUpdatedTime.toString());
     _callStream = FirebaseFirestore.instance
         .collection('events')
         .where('updateTime',
@@ -83,7 +80,6 @@ class EventDataNotifier extends ChangeNotifier {
     StreamSubscription<QuerySnapshot> streamSub=_callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
         for(int i=0;i<snapshot.size;i++){
-          log("XXXXXXXXXXXXXXイベント件数"+snapshot.size.toString());
           if(snapshot.docs[i].get("deleteFlg")){
 
             await deleteIsarEventsById(snapshot.docs[i].id);

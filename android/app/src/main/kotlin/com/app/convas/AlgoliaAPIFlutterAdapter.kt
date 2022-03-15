@@ -42,7 +42,14 @@ class AlgoliaAPIFlutterAdapter(
         var searchConditionMotherTongueList =  fromTextToList(args[5],"motherTongue")
         var searchConditionCountryList =  fromTextToList(args[6],"country")
         var searchConditionGenderList =  fromTextToList(args[7],"gender")
-        var userDocId =  args[8]
+
+        var searchConditionHomeCountryList =  fromTextToList(args[8],"homeCoutry")
+        var searchConditionlastLogin=args[9];
+//        var searchConditionCategoriesList =  fromTextToList(args[10],"gender")
+//        var searchConditionCoursesList =  fromTextToList(args[11],"gender")
+        var searchConditionUserTypeList =  fromTextToList(args[12],"userType")
+
+        var userDocId =  args[13]
 
 
 
@@ -52,9 +59,13 @@ class AlgoliaAPIFlutterAdapter(
                 searchConditionMotherTongueList,
                 searchConditionCountryList,
                 searchConditionGenderList,
+                searchConditionUserTypeList,
+                searchConditionHomeCountryList,
                 listOf("objectID:-$userDocId")),
             numericFilters = listOf(listOf("birthDate<$searchConditionbirthDateMax"),
-                listOf("birthDate>$searchConditionbirthDateMin"))
+                listOf("birthDate>$searchConditionbirthDateMin"),
+                listOf("lastLoginTime>$searchConditionlastLogin"),
+            )
         )
 
         Log.d("AlgoliaAPIAdapter",query.toString())

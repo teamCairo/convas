@@ -108,6 +108,11 @@ class UserDataProviderNotifier extends ChangeNotifier {
       _userData['searchConditionMotherTongue'] =tmpUser.searchConditionMotherTongue;
       _userData['searchConditionCountry'] =tmpUser.searchConditionCountry;
       _userData['searchConditionGender'] =tmpUser.searchConditionGender;
+      _userData['searchConditionHomeCountry'] =tmpUser.searchConditionHomeCountry;
+      _userData['searchConditionLoginTime'] =tmpUser.searchConditionLoginTime;
+      _userData['searchConditionCategories'] =tmpUser.searchConditionCategories;
+      _userData['searchConditionCourses'] =tmpUser.searchConditionCourses;
+      _userData['searchConditionUserType'] =tmpUser.searchConditionUserType;
       _userData['profilePhotoNameSuffix'] =tmpUser.profilePhotoNameSuffix;
       _userData['profilePhotoUpdateCnt'] =tmpUser.profilePhotoUpdateCnt;
       _userData['messageTokenId'] =tmpUser.messageTokenId;
@@ -193,6 +198,11 @@ class UserDataProviderNotifier extends ChangeNotifier {
         _userData['searchConditionMotherTongue'] = snapshot.docs[0].get('searchConditionMotherTongue');
         _userData['searchConditionCountry'] = snapshot.docs[0].get('searchConditionCountry');
         _userData['searchConditionGender'] = snapshot.docs[0].get('searchConditionGender');
+        _userData['searchConditionHomeCountry'] = snapshot.docs[0].get('searchConditionHomeCountry');
+        _userData['searchConditionLoginTime'] = snapshot.docs[0].get('searchConditionLoginTime');
+        _userData['searchConditionCategories'] = snapshot.docs[0].get('searchConditionCategories');
+        _userData['searchConditionCourses'] = snapshot.docs[0].get('searchConditionCourses');
+        _userData['searchConditionUserType'] = snapshot.docs[0].get('searchConditionUserType');
         _userData['profilePhotoNameSuffix'] = snapshot.docs[0].get('profilePhotoNameSuffix');
         _userData['profilePhotoUpdateCnt'] = snapshot.docs[0].get('profilePhotoUpdateCnt');
         _userData['messageTokenId'] = snapshot.docs[0].get('messageTokenId');
@@ -230,10 +240,15 @@ class UserDataProviderNotifier extends ChangeNotifier {
             searchConditionMotherTongue: snapshot.docs[0].get('searchConditionMotherTongue'),
             searchConditionCountry: snapshot.docs[0].get('searchConditionCountry'),
             searchConditionGender: snapshot.docs[0].get('searchConditionGender'),
+            searchConditionHomeCountry: snapshot.docs[0].get('searchConditionHomeCountry'),
+            searchConditionLoginTime: snapshot.docs[0].get('searchConditionLoginTime'),
+            searchConditionCategories: snapshot.docs[0].get('searchConditionCategories'),
+            searchConditionCourses: snapshot.docs[0].get('searchConditionCourses'),
+            searchConditionUserType: snapshot.docs[0].get('searchConditionUserType'),
             profilePhotoNameSuffix: snapshot.docs[0].get('profilePhotoNameSuffix'),
             profilePhotoUpdateCnt: snapshot.docs[0].get('profilePhotoUpdateCnt'),
             messageTokenId: snapshot.docs[0].get('messageTokenId'),
-          informationModifiedTime: snapshot.docs[0].get('informationModifiedTime').toDate(),
+            informationModifiedTime: snapshot.docs[0].get('informationModifiedTime').toDate(),
             interestingCategories: snapshot.docs[0].get('interestingCategories'),
             interestingCourses: snapshot.docs[0].get('interestingCourses'),
             insertUserDocId: snapshot.docs[0].get('insertUserDocId'),

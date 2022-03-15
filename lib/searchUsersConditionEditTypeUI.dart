@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'common/UI/commonOthersUI.dart';
 import 'common/UI/commonTextUI.dart';
+import 'common/commonValues.dart';
 
 
 class SearchConditionValueEditType extends ConsumerWidget {
@@ -32,7 +33,7 @@ class SearchConditionValueEditType extends ConsumerWidget {
     }
     checkList.add(
         CheckboxListTile(
-          title: gray20TextLeft("Doesn't matter"),
+          title: gray20TextLeft(searchConditionAlmightyWord),
           value: ref.watch(searchUsersConditionEditTypeProvider).doesntMatterCheck,
           onChanged: (bool? value) {
             ref.read(searchUsersConditionEditTypeProvider.notifier).changeDoesntMatterCheck(value??false);

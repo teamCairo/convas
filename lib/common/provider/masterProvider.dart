@@ -13,6 +13,10 @@ String getMasterName(String masterName, String code, WidgetRef ref){
     return ref.watch(masterDataProvider).languageMasterData[code];
     case "gender":
     return ref.watch(masterDataProvider).genderMasterData[code];
+    case "lastLogin":
+      return ref.watch(masterDataProvider).lastLoginMasterData[code];
+    case "userType":
+      return ref.watch(masterDataProvider).userTypeMasterData[code];
     default:
       return "";
   }
@@ -31,6 +35,10 @@ Map<String,String> getMasterMap(String masterName, WidgetRef ref){
       return ref.watch(masterDataProvider).languageMasterData;
     case "gender":
       return ref.watch(masterDataProvider).genderMasterData;
+    case "lastLogin":
+      return ref.watch(masterDataProvider).lastLoginMasterData;
+    case "userType":
+      return ref.watch(masterDataProvider).userTypeMasterData;
     default:
       return {};
   }
@@ -61,7 +69,6 @@ class MasterDataProvider extends ChangeNotifier {
 
   final Map<String,String> _languageMasterData={
     "ENG":"English",
-    "USA":"English(USA)",
     "JPN":"Japanese",
     "CHN":"Chinese",
     "SPN":"Spanish",
@@ -85,5 +92,19 @@ class MasterDataProvider extends ChangeNotifier {
     "ARG":"Argentina",
   };
   get countryMasterData => _countryMasterData ;
+
+  final Map<String,String> _lastLoginMasterData={
+    "1":"Today",
+    "2":"Last 3days",
+    "3":"This week",
+    "4":"This month",
+  };
+  get lastLoginMasterData => _lastLoginMasterData ;
+
+  final Map<String,String> _userTypeMasterData={
+    "1":"User",
+    "2":"Teacher",
+  };
+  get userTypeMasterData => _userTypeMasterData ;
 }
 

@@ -2,6 +2,9 @@ import 'package:convas/common/provider/masterProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'common/provider/categoryProvider.dart';
+import 'common/provider/courseProvider.dart';
+
 class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
   Map<String, String> _masterMap = {};
   get masterMap => _masterMap;
@@ -23,7 +26,7 @@ class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
     _doesntMatterCheck=allFalseCheckBool;
   }
 
-  void initialize(
+  Future<void> initialize(
       WidgetRef ref, String databaseItem, String inputValue) async {
     _masterBoolMap = {};
 
@@ -39,6 +42,21 @@ class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
         break;
       case "searchConditionGender":
         _masterMap = getMasterMap("gender", ref);
+        break;
+      case "searchConditionHomeCountry":
+        _masterMap = getMasterMap("country", ref);
+        break;
+      case "searchConditionLoginTime":
+        _masterMap = getMasterMap("lastLogin", ref);
+        break;
+      case "searchConditionCategories":
+        _masterMap = ref.watch(categoryDataProvider).categoryNameMap;
+        break;
+      case "searchConditionCourses":
+        _masterMap = ref.watch(courseDataProvider).courseNameMap;
+        break;
+      case "searchConditionUserType":
+        _masterMap = getMasterMap("userType", ref);
         break;
     }
 

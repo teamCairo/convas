@@ -1,4 +1,3 @@
-import 'package:algolia/algolia.dart';
 import 'package:convas/common/logic/commonLogic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,11 +45,25 @@ class SearchUsersNotifier extends ChangeNotifier {
   String _tmpSearchConditionGender="";
   get  tmpSearchConditionGender => _tmpSearchConditionGender;
 
+  String _tmpSearchConditionHomeCountry="";
+  get  tmpSearchConditionHomeCountry => _tmpSearchConditionHomeCountry;
+
+  String _tmpSearchConditionLoginTime="";
+  get  tmpSearchConditionLoginTime => _tmpSearchConditionLoginTime;
+
+  String _tmpSearchConditionCategories="";
+  get  tmpSearchConditionCategories => _tmpSearchConditionCategories;
+
+  String _tmpSearchConditionCourses="";
+  get  tmpSearchConditionCourses => _tmpSearchConditionCourses;
+
+  String _tmpSearchConditionUserType="";
+  get  tmpSearchConditionUserType => _tmpSearchConditionUserType;
+
   void clear() {
     _searchResultList = [];
     _userImages = {};
   }
-
 
   Future<void> setConditionsToFirebaseAndSearchUsers(WidgetRef ref)async {
     String userDocId =ref.watch(userDataProvider).userData["userDocId"];
@@ -62,6 +75,11 @@ class SearchUsersNotifier extends ChangeNotifier {
         'searchConditionMotherTongue':_tmpSearchConditionMotherTongue,
         'searchConditionCountry':_tmpSearchConditionCountry,
         'searchConditionGender':_tmpSearchConditionGender,
+        'searchConditionHomeCountry':_tmpSearchConditionHomeCountry,
+        'searchConditionLoginTime':_tmpSearchConditionLoginTime,
+        'searchConditionCategories':_tmpSearchConditionCategories,
+        'searchConditionCourses':_tmpSearchConditionCourses,
+        'searchConditionUserType':_tmpSearchConditionUserType,
       }, programId: "searchUsers"
       , );
 
@@ -78,6 +96,11 @@ class SearchUsersNotifier extends ChangeNotifier {
         searchConditionMotherTongue:_tmpSearchConditionMotherTongue,
         searchConditionCountry:_tmpSearchConditionCountry,
         searchConditionGender:_tmpSearchConditionGender,
+        searchConditionHomeCountry:_tmpSearchConditionHomeCountry,
+        searchConditionLoginTime:_tmpSearchConditionLoginTime,
+        searchConditionCategories:_tmpSearchConditionCategories,
+        searchConditionCourses:_tmpSearchConditionCourses,
+        searchConditionUserType:_tmpSearchConditionUserType,
         searchConditionAllKeyword:"",
         userDocId: ref.watch(userDataProvider).userData["userDocId"]);
     _searchProcessFlg=false;
@@ -86,16 +109,16 @@ class SearchUsersNotifier extends ChangeNotifier {
   }
 
   void resetConditions(WidgetRef ref){
-
     _tmpSearchConditionAge=searchConditionAgeMin.toString()+", "+searchConditionAgeMax.toString();
-
     _tmpSearchConditionLevel="";
-
     _tmpSearchConditionMotherTongue="";
-
     _tmpSearchConditionCountry="";
-
     _tmpSearchConditionGender="";
+    _tmpSearchConditionHomeCountry="";
+    _tmpSearchConditionLoginTime="";
+    _tmpSearchConditionCategories="";
+    _tmpSearchConditionCourses="";
+    _tmpSearchConditionUserType="";
     notifyListeners();
 
   }
@@ -104,17 +127,16 @@ class SearchUsersNotifier extends ChangeNotifier {
   void readConditionsFromUserData(WidgetRef ref){
 
     _tmpSearchConditionAge=ref.watch(userDataProvider).userData["searchConditionAge"]!;
-
     _tmpSearchConditionLevel=ref.watch(userDataProvider).userData["searchConditionLevel"]!;
-
     _tmpSearchConditionMotherTongue=ref.watch(userDataProvider).userData["searchConditionMotherTongue"]!;
-
     _tmpSearchConditionCountry=ref.watch(userDataProvider).userData["searchConditionCountry"]!;
-
     _tmpSearchConditionGender=ref.watch(userDataProvider).userData["searchConditionGender"]!;
-
-    // notifyListeners();
-
+    _tmpSearchConditionHomeCountry=ref.watch(userDataProvider).userData["searchConditionHomeCountry"]!;
+    _tmpSearchConditionLoginTime=ref.watch(userDataProvider).userData["searchConditionLoginTime"]!;
+    _tmpSearchConditionCategories=ref.watch(userDataProvider).userData["searchConditionCategories"]!;
+    _tmpSearchConditionCourses=ref.watch(userDataProvider).userData["searchConditionCourses"]!;
+    _tmpSearchConditionUserType=ref.watch(userDataProvider).userData["searchConditionUserType"]!;
+    notifyListeners();
   }
 
   void setSearchProcessingFlgTrue(){
@@ -132,29 +154,7 @@ class SearchUsersNotifier extends ChangeNotifier {
     });
 
     String value=fromListToTextDot(tmpList);
-    
-    switch(databaseItem){
-      case "searchConditionAge":
-        _tmpSearchConditionAge=value;
-        break;
-
-      case "searchConditionLevel":
-        _tmpSearchConditionLevel=value;
-        break;
-
-      case "searchConditionMotherTongue":
-        _tmpSearchConditionMotherTongue=value;
-        break;
-
-      case "searchConditionCountry":
-        _tmpSearchConditionCountry=value;
-        break;
-
-      case "searchConditionGender":
-        _tmpSearchConditionGender=value;
-        break;
-    }
-    notifyListeners();
+    setCondition(ref, databaseItem, value);
   }
 
 
@@ -179,10 +179,29 @@ class SearchUsersNotifier extends ChangeNotifier {
       case "searchConditionGender":
         _tmpSearchConditionGender=value;
         break;
+
+      case "searchConditionHomeCountry":
+        _tmpSearchConditionHomeCountry=value;
+        break;
+
+      case "searchConditionLoginTime":
+        _tmpSearchConditionLoginTime=value;
+        break;
+
+      case "searchConditionCategories":
+        _tmpSearchConditionCategories=value;
+        break;
+
+      case "searchConditionCourses":
+        _tmpSearchConditionCourses=value;
+        break;
+
+      case "searchConditionUserType":
+        _tmpSearchConditionUserType=value;
+        break;
     }
     notifyListeners();
   }
-
 
   void setImage(String userDocId, Image? image){
     _userImages[userDocId]=image;
@@ -193,7 +212,7 @@ class SearchUsersNotifier extends ChangeNotifier {
     _userImagesLoadStartFlg[index]=true;
     await getUsersSmallPhoto(_searchResultList[index].objectID,_searchResultList[index].profilePhotoNameSuffix,ref);
 
-    List<String> categoriesNameList=await categoryNameListfromText(_searchResultList[index].interestingCategories);
+    List<String> categoriesNameList=categoryNameListFromText(_searchResultList[index].interestingCategories,ref);
 
     _userCategories[_searchResultList[index].objectID]=categoriesNameList;
     notifyListeners();

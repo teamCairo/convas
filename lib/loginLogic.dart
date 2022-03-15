@@ -107,6 +107,15 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   await ref
       .read(eventDataProvider.notifier)
       .readEventDataFromIsarToMemory();
+
+  await ref
+      .read(categoryDataProvider.notifier)
+      .readCategoryDataFromIsarToMemory();
+
+
+  await ref
+      .read(courseDataProvider.notifier)
+      .readCourseDataFromIsarToMemory();
   log("initialProcessLogic　readEventDataFromIsarToMemory();のあと");
   // ref
   //     .read(friendDataProvider.notifier)

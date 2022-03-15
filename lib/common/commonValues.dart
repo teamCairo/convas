@@ -11,3 +11,7 @@ const searchUsersImageLoadExtraNumber = 5;
 
 
 const separatingCharacter = ", ";
+
+const searchConditionLastLoginInDays = 365;
+
+const searchConditionAlmightyWord="Doesn't matter";

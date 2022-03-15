@@ -25,13 +25,27 @@ class CourseDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<bool>();
   StreamSubscription<QuerySnapshot>? streamSub;
+  List<Course> _courseList = [];
+  get courseList => _courseList;
+  Map<String,String> _courseNameMap = {};
+  get courseNameMap => _courseNameMap;
 
   void closeStream() async {
     streamSub!.cancel();
   }
 
-  void clearIsar()async {
+  Future<void> readCourseDataFromIsarToMemory() async {
 
+    _courseList=(await selectIsarCourseAll())!;
+
+    _courseNameMap.clear();
+    for(int i =0;i<_courseList.length;i++){
+      _courseNameMap[_courseList[i].courseDocId]=_courseList[i].courseName;
+    }
+    notifyListeners();
+  }
+
+  void clearIsar()async {
 
     deleteIsarSettingsByCode("coursesUpdateCheck");
     var isarInstance = Isar.getInstance();
@@ -41,33 +55,26 @@ class CourseDataNotifier extends ChangeNotifier {
   }
 
   void controlStreamOfReadCourseNewDataFromFirebaseToIsar()async {
-    //TODO パフォーマンスを鑑み、コースデータは常にリッスンしない
+    //TODO パフォーマンスを鑑み、コースデータは常にリッスンしない?
 
     //最初は必ず呼び出し
-    //log("XXXXXXXXXXXXX初回readCourseNewDataFromFirebaseToHiveAndMemorycallする");
     streamSub=await readCourseNewDataFromFirebaseToIsar();
-    //log("XXXXXXXXXXXXX初回readCourseNewDataFromFirebaseToHiveAndMemorycallした");
 
     if(controller.hasListener){
 
     }else{
-      //log("XXXXXXXXXXXXXControlListener開始");
       //2回目以降は新しいデータを更新するたびに起動
       controller.stream.listen((value)  async{
         streamSub!.cancel();
-        //log("XXXXXXXXXXXXXreadCourseNewDataFromFirebaseToHiveAndMemorycallする");
         streamSub=await readCourseNewDataFromFirebaseToIsar();
-        //log("XXXXXXXXXXXXXreadCourseNewDataFromFirebaseToHiveAndMemorycallした");
       });
     }
-
   }
 
   Future<StreamSubscription<QuerySnapshot>> readCourseNewDataFromFirebaseToIsar() async {
     Setting? tmpSetting = await selectIsarSettingByCode("coursesUpdateCheck");
     DateTime courseUpdatedTime = tmpSetting!.dateTimeValue1!;
 
-    ////log("XXXXXXXXXXXXXQueryする"+courseUpdatedTime.toString());
     _callStream = FirebaseFirestore.instance
         .collection('courses')
         .where('updateTime',
@@ -126,10 +133,9 @@ class CourseDataNotifier extends ChangeNotifier {
                 dateTimeValue1: snapshot.docs[i].get("updateTime").toDate()
             );
           }
-
         }
+        await readCourseDataFromIsarToMemory();
         controller.sink.add(true);
-        notifyListeners();
       }
 
     });

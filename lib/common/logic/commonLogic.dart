@@ -2,14 +2,19 @@ import 'dart:core';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:convas/common/provider/categoryProvider.dart';
 import 'package:convas/common/provider/masterProvider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../../daoIsar/categoryDaoIsar.dart';
+import '../../daoIsar/courseDaoIsar.dart';
 import '../../entityIsar/categoryEntityIsar.dart';
+import '../../entityIsar/courseEntityIsar.dart';
 import '../commonValues.dart';
+import '../provider/courseProvider.dart';
 import '../provider/userProvider.dart';
 
 Future<void> closeStreams(WidgetRef ref) async {
@@ -69,16 +74,28 @@ String fromListToTextDot(List<String> codeList){
   return result;
 }
 
-Future<List<String>> categoryNameListfromText(String text) async{
+List<String> courseNameListFromText(String text,WidgetRef ref){
+  List<String> coursesCodeList= fromTextToList(text);
+  List<String> coursesNameList=[];
+  if(coursesCodeList.isEmpty){
+    return coursesNameList;
+  }
+  for(int i =0;i<coursesCodeList.length;i++){
+    coursesNameList.add(ref.read(courseDataProvider.notifier).courseNameMap[coursesCodeList[i]]);
+
+  }
+  return coursesNameList;
+
+}
+
+List<String> categoryNameListFromText(String text,WidgetRef ref){
   List<String> categoriesCodeList= fromTextToList(text);
   List<String> categoriesNameList=[];
   if(categoriesCodeList.isEmpty){
     return categoriesNameList;
   }
   for(int i =0;i<categoriesCodeList.length;i++){
-    Category? cate =await selectIsarCategoryById(categoriesCodeList[i]);
-    categoriesNameList.add(cate!.categoryName);
-
+    categoriesNameList.add(ref.read(categoryDataProvider.notifier).categoryNameMap[categoriesCodeList[i]]);
   }
 return categoriesNameList;
 
@@ -104,7 +121,7 @@ Future<File> urlToFile(String imageUrl) async {
 // get temporary path from temporary directory.
   String tempPath = tempDir.path;
 // create a new file in temporary path with random file name.
-  File file = File('$tempPath'+ (rng.nextInt(100)).toString() +'.png');
+  File file = File(tempPath+ (rng.nextInt(100)).toString() +'.png');
 // call http.get method and pass imageUrl into it to get response.
   http.Response response = await http.get( Uri.parse(imageUrl));
 // write bodyBytes received in response to file.

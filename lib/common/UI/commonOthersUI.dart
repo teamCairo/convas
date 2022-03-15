@@ -69,7 +69,7 @@ Padding orangeBorderRoundSquareSmall({required String text}){
         padding: const EdgeInsets.all(4.0),
         child: Text(text,
           style:const TextStyle(
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.normal,
             fontSize: 14,
             color: Colors.white,
           ),

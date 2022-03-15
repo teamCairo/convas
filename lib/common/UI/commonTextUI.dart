@@ -50,13 +50,8 @@ Padding gray16TextRight(String text) {
 }
 
 
-Padding gray16TextRightEllipsis(String text,double width) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.topRight,
-        child: SizedBox(
-          width:width,
+Widget gray16TextRightEllipsis(String text) {
+  return Expanded(
           child: Text(
             text,
             textAlign:TextAlign.end,
@@ -67,9 +62,29 @@ Padding gray16TextRightEllipsis(String text,double width) {
               color: Colors.black54,
             ),
           ),
-        )),
   );
 }
+
+// Padding gray16TextRightEllipsis(String text,double width) {
+//   return Padding(
+//     padding: const EdgeInsets.only(top: 8.0),
+//     child: Align(
+//         alignment: Alignment.topRight,
+//         child: SizedBox(
+//           width:width,
+//           child: Text(
+//             text,
+//             textAlign:TextAlign.end,
+//             overflow: TextOverflow.ellipsis,
+//             style: const TextStyle(
+//               fontWeight: FontWeight.w400,
+//               fontSize: 16,
+//               color: Colors.black54,
+//             ),
+//           ),
+//         )),
+//   );
+// }
 
 Padding gray20TextLeft(String text) {
   return Padding(
