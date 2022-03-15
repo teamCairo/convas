@@ -1,5 +1,3 @@
-import 'package:algolia/algolia.dart';
-import 'package:convas/common/provider/categoryProvider.dart';
 import 'package:convas/searchUsersConditionPageUI.dart';
 import 'package:convas/searchUsersProvider.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +9,6 @@ import 'common/UI/commonTextUI.dart';
 import 'common/commonValues.dart';
 import 'common/logic/commonLogic.dart';
 import 'daoAlgolia/usersDaoAlgolia.dart';
-import 'faoFirebaseStorage/usersPhotoFaoFirebase.dart';
 
 class SearchUsersMainPage extends ConsumerWidget {
   SearchUsersMainPage({
@@ -121,7 +118,7 @@ class SearchUsersMainPage extends ConsumerWidget {
         },
         child: Container(
             color: Colors.white10,
-            height: 130,
+            height: 100,
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8.0, top: 8),
@@ -137,37 +134,28 @@ class SearchUsersMainPage extends ConsumerWidget {
                             .userImages[userData.objectID]!),
               ),
               Expanded(
-                  child: Column(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(children: [
-                    black16TextCenter(userData.name),
-                    black16TextCenter(fromBirthToAge(
-                            DateTime.fromMillisecondsSinceEpoch(
-                                userData.birthDate))
-                        .toString()),
-                    black16TextCenter(userData.motherTongue),
-                    black16TextCenter(userData.level),
-                    black16TextCenter(userData.country),
-                    black16TextCenter(userData.gender),
-                    // CircleAvatar(radius:10,
-                    //     backgroundImage:ref.watch(countryDataProvider).countryData[userData.data["country"]]["imageFile"].image)
-                  ]),
-                  gray14TextLeft(userData.greeting),
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                              children: featureList
-                          )))
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                      black16TextCenter(userData.name),
+                          gray12TextRight(lastLoginStr),
+                    ]),
+                    gray14TextLeft(userData.greeting),
+                    Padding(
+                        padding: const EdgeInsets.only(top:3.0),
+                        child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                                children: featureList
+                            )))
                 ],
-              )),
-              SizedBox(
-                  width: 70,
-                  child: Column(children: [
-                    gray12TextRight(lastLoginStr),
-                  ]))
+              ),
+                  )),
             ])),
       ),
     );

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
-
 AppBar whiteAppbar(String text) {
   return AppBar(
     backgroundColor: Colors.white10,
@@ -17,9 +14,6 @@ AppBar whiteAppbar(String text) {
     ),
   );
 }
-
-
-
 
 CircleAvatar imageAvatar({Image? image, required double radius}) {
   return CircleAvatar(
@@ -75,14 +69,16 @@ Padding orangeBorderRoundSquareSmall({required String text}){
         padding: const EdgeInsets.all(4.0),
         child: Text(text,
           style:const TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 13,
-            color: Colors.orange,
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: Colors.white,
           ),
         ),
       ),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.deepOrange),
+        color:Colors.orange,
+        border: Border.all(
+        style:BorderStyle.none),
         borderRadius: BorderRadius.circular(20),
       ),),
   );
