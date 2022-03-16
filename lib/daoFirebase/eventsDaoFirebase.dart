@@ -22,7 +22,7 @@ Future<String> insertEventData(
     if (friendUserDocId != "") {
       DocumentSnapshot friendUserData =
       await selectFirebaseUserByUserDocId(friendUserDocId);
-      friendName = friendUserData.get("userName");
+      friendName = friendUserData.get("name");
     }
     String insertedDocId = "";
     await FirebaseFirestore.instance.collection('events').add(
@@ -76,7 +76,7 @@ Future<void> updateEventData(
     if (friendUserDocId != "") {
       DocumentSnapshot friendUserData =
       await selectFirebaseUserByUserDocId(friendUserDocId);
-      friendName = friendUserData.get("userName");
+      friendName = friendUserData.get("name");
     }
 
     await FirebaseFirestore.instance

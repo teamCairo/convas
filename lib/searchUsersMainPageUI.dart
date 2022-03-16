@@ -9,6 +9,7 @@ import 'common/UI/commonTextUI.dart';
 import 'common/commonValues.dart';
 import 'common/logic/commonLogic.dart';
 import 'daoAlgolia/usersDaoAlgolia.dart';
+import 'friendProfileUI.dart';
 
 class SearchUsersMainPage extends ConsumerWidget {
   SearchUsersMainPage({
@@ -108,13 +109,13 @@ class SearchUsersMainPage extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
         onTap: () async {
-          // await Navigator.of(context).push(
-          //   MaterialPageRoute(builder: (context) {
-          //     return FriendProfile(
-          //       argumentFriendUserDocId:userData.data["objectID"],
-          //     );
-          //   }),
-          // );
+          await Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return FriendProfile(
+                argumentFriendUserDocId:userData.objectID,
+              );
+            }),
+          );
         },
         child: Container(
             color: Colors.white10,
@@ -125,13 +126,8 @@ class SearchUsersMainPage extends ConsumerWidget {
                 child: imageAvatar(
                     radius: 32,
                     image: ref
-                                .watch(searchUsersProvider)
-                                .userImages[userData.objectID] ==
-                            null
-                        ? null
-                        : ref
-                            .watch(searchUsersProvider)
-                            .userImages[userData.objectID]!),
+                        .watch(searchUsersProvider)
+                        .userImages[userData.objectID])
               ),
               Expanded(
                   child: Padding(
@@ -143,7 +139,16 @@ class SearchUsersMainPage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                       black16TextCenter(userData.name),
-                          gray12TextRight(lastLoginStr),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top:4,right: 4.0),
+                                child: loginLampFromSecondsSmall(userData.lastLoginTime,userData.onlineStatus),
+                              ),
+                              gray12TextRight(lastLoginStr),
+                            ],
+                          ),
                     ]),
                     gray14TextLeft(userData.greeting),
                     Padding(

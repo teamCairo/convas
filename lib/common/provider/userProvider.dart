@@ -269,9 +269,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
             dateTimeValue1: snapshot.docs[0].get("informationModifiedTime").toDate()
         );
 
-        log("XXXXXXXXXXXXXADDするUSER用");
         controller.sink.add(true);
-        log("XXXXXXXXXXXXXADDしたUSER用");
         notifyListeners();
       }
     });

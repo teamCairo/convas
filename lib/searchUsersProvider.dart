@@ -210,7 +210,8 @@ class SearchUsersNotifier extends ChangeNotifier {
   Future<void> setFriendPhotoAndCategories(WidgetRef ref,int index) async {
 
     _userImagesLoadStartFlg[index]=true;
-    await getUsersSmallPhoto(_searchResultList[index].objectID,_searchResultList[index].profilePhotoNameSuffix,ref);
+    ref.read(searchUsersProvider.notifier).setImage(_searchResultList[index].objectID, await getUsersSmallPhoto(_searchResultList[index].objectID,_searchResultList[index].profilePhotoNameSuffix,ref));
+
 
     List<String> categoriesNameList=categoryNameListFromText(_searchResultList[index].interestingCategories,ref);
 

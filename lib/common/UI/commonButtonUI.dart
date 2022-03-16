@@ -10,6 +10,13 @@ Widget closeButtonForModal(BuildContext context) {
   ]);
 }
 
+Widget singleFooterButton(
+    {required String text, required Function()? onPressed}) {
+  return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+  child:orangeRoundButton(text:text,onPressed:onPressed));
+    }
+
 Widget orangeRoundButton(
     {required String text, required Function()? onPressed}) {
   return Padding(

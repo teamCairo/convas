@@ -11,11 +11,13 @@ import 'common/UI/commonOthersUI.dart';
 import 'common/provider/categoryProvider.dart';
 import 'common/provider/courseProvider.dart';
 import 'common/provider/eventProvider.dart';
+import 'common/provider/friendProvider.dart';
 import 'common/provider/topicProvider.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
 import 'daoIsar/settingDaoIsar.dart';
 import 'entityIsar/eventEntityIsar.dart';
+import 'entityIsar/friendEntityIsar.dart';
 import 'entityIsar/settingEntityIsar.dart';
 import 'entityIsar/topicEntityIsar.dart';
 import 'entityIsar/userEntityIsar.dart';
@@ -32,7 +34,7 @@ Future<void> insertUserToFirebase(BuildContext context,WidgetRef ref, String ema
   }else {
     if(tmpSetting.stringValue1!=email) {
 
-      await showOkWarningDialog(context,"Different e-mail,Delete Local Data");
+      await showOkWarningDialog(context,"Different E-mail,Delete Local Data");
 
     }else{
       await insertUser(ref,email);
@@ -89,8 +91,6 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   await updateTimeCheck("countries");
 
   await ref.read(userDataProvider.notifier).readUserDataFromIsarToMemory();
-  // await ref.read(friendDataProvider.notifier).readFriendDataFromHiveToMemory();
-  // await ref.read(countryDataProvider.notifier).readCountryDataFromIsarToMemory();
 
   log("initialProcessLogic　readUserDataFromIsarToMemoryのあと");
   QuerySnapshot tmpUserData=await selectFirebaseUserByEmail(email);
@@ -105,6 +105,10 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .controlStreamOfReadUserDataFirebaseToIsarAndMemory(email);
 
   await ref
+      .read(friendDataProvider.notifier)
+      .readFriendDataFromIsarToMemory();
+
+  await ref
       .read(eventDataProvider.notifier)
       .readEventDataFromIsarToMemory();
 
@@ -116,16 +120,15 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   await ref
       .read(courseDataProvider.notifier)
       .readCourseDataFromIsarToMemory();
-  log("initialProcessLogic　readEventDataFromIsarToMemory();のあと");
-  // ref
-  //     .read(friendDataProvider.notifier)
-  //     .controlStreamOfReadFriendNewDataFromFirebaseToHiveAndMemory(
-  //     ref, boxSetting.get("userDocId"));
+
+  ref
+      .read(friendDataProvider.notifier)
+      .controlStreamOfReadFriendNewDataFromFirebaseToHiveAndMemory(ref,tmpUserData.docs[0].id);
+
   ref
       .read(eventDataProvider.notifier)
       .controlStreamOfReadEventNewDataFromFirebaseToIsar(tmpUserData.docs[0].id);
 
-  log("initialProcessLogic　controlStreamOfReadEventNewDataFromFirebaseToIsar();のあと");
   ref
       .read(topicDataProvider.notifier)
       .controlStreamOfReadTopicNewDataFromFirebaseToIsar();
@@ -135,12 +138,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   ref
       .read(courseDataProvider.notifier)
       .controlStreamOfReadCourseNewDataFromFirebaseToIsar();
-  // ref
-  //     .read(chatMessagesDataProvider.notifier)
-  //     .controlStreamOfReadChatMessageNewDataFromFirebaseToIsar(
-  //     ref, boxSetting.get("userDocId"));
 
-  // ref.read(countryDataProvider.notifier).controlStreamOfReadCountryNewDataFromFirebaseToIsarAndMemory();
   ref.read(userDataProvider.notifier).updateLastLoginTime();
   //TODO Master、Topic、Category、Countryは常にWatchする必要ないよね
 }
@@ -149,7 +147,6 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
 Future<void> updateTimeCheck(String itemName) async {
 
-  log("XXXXXXXXXXloginLogic143行目");
   Setting? updateTime = await selectIsarSettingByCode(itemName + "UpdateCheck");
   if (updateTime == null) {
     await insertIsarSetting(settingCode:itemName + "UpdateCheck", dateTimeValue1:DateTime(2022, 1, 1, 0, 0));
@@ -171,14 +168,14 @@ Future<void> openIsarInstances() async {
   final dir = await getApplicationSupportDirectory();
   if (isarInstance == null) {
     await Isar.open(
-      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema],
+      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema,FriendSchema],
       directory: dir.path,
       inspector: true,
     );
   } else {
     if (!isarInstance.isOpen) {
       await Isar.open(
-        schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema],
+        schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema,FriendSchema],
         directory: dir.path,
         inspector: true,
       );

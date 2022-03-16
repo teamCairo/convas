@@ -25,6 +25,53 @@ Future<DocumentSnapshot> selectFirebaseUserByUserDocId(String userDocId)async{
   return snapshot;
 }
 
+Future<Map<String,dynamic>> selectFirebaseMapUserByUserDocId(String userDocId)async{
+  DocumentSnapshot snapshot = await selectFirebaseUserByUserDocId(userDocId);
+  Map<String,dynamic> returnMap = {};
+  returnMap['userDocId']=userDocId;
+  returnMap['name']=snapshot.get('name');
+  returnMap['email']=snapshot.get('email');
+  returnMap['birthDate']=snapshot.get('birthDate').toDate();
+  returnMap['level']=snapshot.get('level');
+  returnMap['occupation']=snapshot.get('occupation');
+  returnMap['motherTongue']=snapshot.get('motherTongue');
+  returnMap['country']=snapshot.get('country');
+  returnMap['town']=snapshot.get('town');
+  returnMap['homeCountry']=snapshot.get('homeCountry');
+  returnMap['homeTown']=snapshot.get('homeTown');
+  returnMap['gender']=snapshot.get('gender');
+  returnMap['placeWannaGo']=snapshot.get('placeWannaGo');
+  returnMap['greeting']=snapshot.get('greeting');
+  returnMap['description']=snapshot.get('description');
+  returnMap['userType']=snapshot.get('userType');
+  returnMap['searchConditionAge']=snapshot.get('searchConditionAge');
+  returnMap['searchConditionLevel']=snapshot.get('searchConditionLevel');
+  returnMap['searchConditionMotherTongue']=snapshot.get('searchConditionMotherTongue');
+  returnMap['searchConditionCountry']=snapshot.get('searchConditionCountry');
+  returnMap['searchConditionGender']=snapshot.get('searchConditionGender');
+  returnMap['searchConditionHomeCountry']=snapshot.get('searchConditionHomeCountry');
+  returnMap['searchConditionLoginTime']=snapshot.get('searchConditionLoginTime');
+  returnMap['searchConditionCategories']=snapshot.get('searchConditionCategories');
+  returnMap['searchConditionCourses']=snapshot.get('searchConditionCourses');
+  returnMap['searchConditionUserType']=snapshot.get('searchConditionUserType');
+  returnMap['profilePhotoNameSuffix']=snapshot.get('profilePhotoNameSuffix');
+  returnMap['profilePhotoUpdateCnt']=snapshot.get('profilePhotoUpdateCnt');
+  returnMap['messageTokenId']=snapshot.get('messageTokenId');
+  returnMap['onlineStatus']=snapshot.get('onlineStatus');
+  returnMap['lastLoginTime']=snapshot.get('lastLoginTime').toDate();
+  returnMap['informationModifiedTime']=snapshot.get('informationModifiedTime').toDate();
+  returnMap['interestingCategories']=snapshot.get('interestingCategories');
+  returnMap['interestingCourses']=snapshot.get('interestingCourses');
+  returnMap['insertUserDocId']=snapshot.get('insertUserDocId');
+  returnMap['insertProgramId']=snapshot.get('insertProgramId');
+  returnMap['insertTime']=snapshot.get('insertTime').toDate();
+  returnMap['updateUserDocId']=snapshot.get('updateUserDocId');
+  returnMap['updateProgramId']=snapshot.get('updateProgramId');
+  returnMap['updateTime']=snapshot.get('updateTime').toDate();
+  returnMap['readableFlg']=snapshot.get('readableFlg');
+  return returnMap;
+}
+
 Future<String> insertFirebaseUser({
   String? name,
   required String email,

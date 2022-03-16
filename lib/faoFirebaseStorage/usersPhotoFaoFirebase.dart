@@ -1,10 +1,23 @@
 import 'dart:developer';
-import 'package:convas/searchUsersProvider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Future<void> getUsersSmallPhoto(String userDocId, String profilePhotoNameSuffix,WidgetRef ref) async {
+Future<Image?> getUsersSmallPhoto(String userDocId, String profilePhotoNameSuffix,WidgetRef ref) async {
+
+  String tmp ="mainPhoto_small";
+  return await getUsersPhoto( userDocId,  profilePhotoNameSuffix, tmp);
+}
+
+Future<Image?> getUsersBigPhoto(String userDocId, String profilePhotoNameSuffix,WidgetRef ref) async {
+
+  String tmp ="mainPhoto";
+  return await getUsersPhoto( userDocId,  profilePhotoNameSuffix,tmp);
+}
+
+Future<Image?> getUsersPhoto(String userDocId,
+    String profilePhotoNameSuffix,
+    String profilePhotoNamePrefix) async {
 
   FirebaseStorage storage = FirebaseStorage.instance;
   Image? image;
@@ -14,10 +27,10 @@ Future<void> getUsersSmallPhoto(String userDocId, String profilePhotoNameSuffix,
           .ref()
           .child("profile")
           .child(userDocId)
-          .child("mainPhoto_small" + profilePhotoNameSuffix);
+          .child(profilePhotoNamePrefix + profilePhotoNameSuffix);
       String imageUrl =await imageRef.getDownloadURL();
-        log("写真取れた");
-        image= Image.network(imageUrl, width: 90);
+      log("写真取れた");
+      image= Image.network(imageUrl, width: 90);
     } catch (e) {
 
       log("写真あるはずなのになぜかエラーだった");
@@ -25,5 +38,6 @@ Future<void> getUsersSmallPhoto(String userDocId, String profilePhotoNameSuffix,
   } else {
     log("写真設定されていない");
   }
-  ref.read(searchUsersProvider.notifier).setImage(userDocId, image);
+
+  return image;
 }

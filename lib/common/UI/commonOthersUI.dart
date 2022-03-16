@@ -83,3 +83,29 @@ Padding orangeBorderRoundSquareSmall({required String text}){
       ),),
   );
 }
+
+Widget loginLampFromSecondsSmall(int epochTimeMilliSeconds,bool onlineStatus){
+  return loginLampFromSeconds(epochTimeMilliSeconds,onlineStatus,8);
+}
+
+Widget loginLampFromSeconds(int epochTimeMilliSeconds,bool onlineStatus,double size){
+
+  Color? lampColor;
+
+  if(onlineStatus){
+    lampColor=Colors.green;
+  }
+  int differentDays = DateTime.now()
+      .difference(DateTime.fromMillisecondsSinceEpoch(epochTimeMilliSeconds))
+      .inDays;
+  if (differentDays <= 7) {
+    lampColor=Colors.amberAccent;
+  }else{
+    lampColor=Colors.grey;
+  }
+
+return Icon(Icons.circle,
+    color:lampColor,
+   size:size);
+
+}

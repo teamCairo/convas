@@ -119,6 +119,7 @@ Future<List<SearchHitUsers>> selectUsersByConditions(WidgetRef ref,{
     userDocId,
   ];
 
+  //TODO ・検索条件のカテゴリ、コースの検索ロジックを実装
   List<SearchHitUsers> searchUsersResult = await selectUsersByConditionsOnKotlin(tmpList);
   log("XXXXXXXXXXXXXX件数"+searchUsersResult.length.toString());
   return searchUsersResult;

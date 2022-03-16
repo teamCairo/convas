@@ -7,6 +7,7 @@ import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.SortFacetsBy
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.runBlocking
@@ -50,8 +51,6 @@ class AlgoliaAPIFlutterAdapter(
         var searchConditionUserTypeList =  fromTextToList(args[12],"userType")
 
         var userDocId =  args[13]
-
-
 
         val query = Query(query=searchConditionAllKeyword,
             facetFilters= listOf(

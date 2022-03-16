@@ -4,26 +4,31 @@ import 'dart:math';
 
 import 'package:convas/common/provider/categoryProvider.dart';
 import 'package:convas/common/provider/masterProvider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
-import '../../daoIsar/categoryDaoIsar.dart';
-import '../../daoIsar/courseDaoIsar.dart';
-import '../../entityIsar/categoryEntityIsar.dart';
-import '../../entityIsar/courseEntityIsar.dart';
 import '../commonValues.dart';
 import '../provider/courseProvider.dart';
+import '../provider/eventProvider.dart';
+import '../provider/friendProvider.dart';
 import '../provider/userProvider.dart';
 
 Future<void> closeStreams(WidgetRef ref) async {
-  // ref.read(categoryDataProvider.notifier).closeStream();
+  ref.read(categoryDataProvider.notifier).closeStream();
+  ref.read(courseDataProvider.notifier).closeStream();
   // ref.read(topicDataProvider.notifier).closeStream();
   ref.read(userDataProvider.notifier).closeStream();
-  // ref.read(friendDataProvider.notifier).closeStream();
+  ref.read(friendDataProvider.notifier).closeStream();
+  ref.read(eventDataProvider.notifier).closeStream();
   // ref.read(chatMessagesDataProvider.notifier).closeStream();
   //TODO 編集必要
+}
+
+int fromBirthMillisecondsToAge(int birthDateMilliSeconds){
+
+  return fromBirthToAge(DateTime.fromMillisecondsSinceEpoch(birthDateMilliSeconds));
+
 }
 
 int fromBirthToAge(DateTime birthDate){
@@ -32,9 +37,7 @@ int fromBirthToAge(DateTime birthDate){
     return DateTime.now().year-birthDate.year-1;
   }else{
     return DateTime.now().year-birthDate.year;
-
   }
-
 }
 
 DateTime birthDateMaxFromAge(int age){
