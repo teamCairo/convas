@@ -39,7 +39,7 @@ class MyPage extends ConsumerWidget {
                           black20BoldTextLeft(
                               ref.watch(userDataProvider).userData["name"] ??
                                   ""),
-                          whiteRoundSquareSmallButton(
+                          commonButtonWhiteRoundSquareSmall(
                             text: "Edit Profile",
                             onPressed: () async {
                               await Navigator.of(context).push(

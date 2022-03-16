@@ -45,7 +45,7 @@ class CalendarEditDeleteDialog extends ConsumerWidget {
                     children:[
                       Column(
                         children: [
-                          closeButtonForModal(context),
+                          commonButtonCloseForModal(context),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 14.0),
                             child: gray16TextLeft("Are you sure you wanna delete?"),
@@ -58,12 +58,12 @@ class CalendarEditDeleteDialog extends ConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            smallOrangeRoundButton(text: "Cancel",
+                            commonButtonSmallOrangeRound(text: "Cancel",
                                 onPressed: (){
                                   Navigator.pop(context);
                                 }),
 
-                            smallOrangeRoundButton(text: "Delete",
+                            commonButtonSmallOrangeRound(text: "Delete",
                                 onPressed: ()async{
                                   await logicalDeleteEventData(details.appointments![0].eventDocId,ref.watch(userDataProvider).userData["userDocId"],"CalendarEditDeleteDialog");
                                   Navigator.pop(context);

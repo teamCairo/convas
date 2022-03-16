@@ -62,26 +62,23 @@ class SettingEditRadioPage extends ConsumerWidget {
       whiteAppbar(displayedItem),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(children:radioTileList),
-                  ),
-                ],
+            Expanded(
+              child: SingleChildScrollView(
+                child:
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(children:radioTileList),
+                    ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical:30,horizontal: 10),
-              child: orangeRoundButton(text:"OK", onPressed: () async{
+            commonButtonSingleFooter(text:"OK", onPressed: () async{
+
                 await updateUserSelectedItem(ref,databaseItem,ref.watch(settingEditRadioPageProvider).onRadioGroupValue,"settingEditTextPage");
                 ref.read(userDataProvider.notifier).setUserDataOneItem(databaseItem,ref.watch(settingEditRadioPageProvider).onRadioGroupValue);
                 Navigator.pop(context);
-              },),
-            )
+              },)
           ],
         ),
       ),

@@ -64,9 +64,9 @@ class FriendProfile extends ConsumerWidget {
                     ])),
               ),
             ),
-            singleFooterButton(
+            commonButtonSingleFooter(
                   onPressed: () async {
-                    if(ref.watch(friendProfileDataProvider).friendProfileData["friendFlg"]){
+                    if(!ref.watch(friendProfileDataProvider).friendProfileData["friendFlg"]){
                       await insertFriend(ref, argumentFriendUserDocId);
                     }
                     // await Navigator.of(context).pushReplacement(

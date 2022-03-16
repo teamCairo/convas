@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-Widget closeButtonForModal(BuildContext context) {
+Widget commonButtonCloseForModal(BuildContext context) {
   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-    graySmallerIconButton(
+    commonButtonGraySmallerIcon(
         icon: Icons.clear,
         onPressed: () {
           Navigator.of(context).pop();
@@ -10,14 +10,14 @@ Widget closeButtonForModal(BuildContext context) {
   ]);
 }
 
-Widget singleFooterButton(
+Widget commonButtonSingleFooter(
     {required String text, required Function()? onPressed}) {
   return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-  child:orangeRoundButton(text:text,onPressed:onPressed));
+  child:commonButtonOrangeRound(text:text,onPressed:onPressed));
     }
 
-Widget orangeRoundButton(
+Widget commonButtonOrangeRound(
     {required String text, required Function()? onPressed}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -47,7 +47,7 @@ Widget orangeRoundButton(
 
 
 
-Widget roundButtonByWidthAndHeight(
+Widget commonButtonRoundByWidthAndHeight(
     {required String text, required Function()? onPressed, required Color color,required double width,required double height}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -75,7 +75,7 @@ Widget roundButtonByWidthAndHeight(
   );
 }
 
-Widget roundHalfButton(
+Widget commonButtonRoundHalf(
     {required String text, required Function()? onPressed, required Color color}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -103,7 +103,7 @@ Widget roundHalfButton(
   );
 }
 
-Widget smallOrangeRoundButton(
+Widget commonButtonSmallOrangeRound(
     {required String text, required Function()? onPressed}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -130,7 +130,7 @@ Widget smallOrangeRoundButton(
   );
 }
 
-Widget whiteBorderRoundButton(
+Widget commonButtonWhiteBorderRound(
     {required String text, required Function()? onPressed}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -158,7 +158,7 @@ Widget whiteBorderRoundButton(
   );
 }
 
-Widget grayWideIconTextButton(
+Widget commonButtonIconTextGrayWide(
     {required IconData icon,
     required String text,
     required Function()? onPressed}) {
@@ -188,7 +188,7 @@ Widget grayWideIconTextButton(
       ));
 }
 
-IconButton graySmallerIconButton(
+IconButton commonButtonGraySmallerIcon(
     {required IconData icon, required Function()? onPressed}) {
   return IconButton(
     icon: Icon(icon),
@@ -198,7 +198,7 @@ IconButton graySmallerIconButton(
   );
 }
 
-IconButton blackSmallerIconButton(
+IconButton commonButtonBlackSmallerIcon(
     {required IconData icon, Function()? onPressed}) {
   return IconButton(
     icon: Icon(icon),
@@ -208,7 +208,7 @@ IconButton blackSmallerIconButton(
   );
 }
 
-ElevatedButton whiteRoundSquareSmallButton(
+ElevatedButton commonButtonWhiteRoundSquareSmall(
     {required String text, required Function()? onPressed}) {
   return ElevatedButton(
       onPressed: onPressed,
@@ -230,7 +230,7 @@ ElevatedButton whiteRoundSquareSmallButton(
       ));
 }
 
-ElevatedButton orangeRoundSquareSmallButton(
+ElevatedButton commonButtonOrangeRoundSquareSmall(
     {required String text, required Function()? onPressed}) {
   return ElevatedButton(
       onPressed: onPressed,

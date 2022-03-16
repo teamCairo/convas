@@ -45,7 +45,7 @@ class SettingEditDescriptionPage extends ConsumerWidget {
                 ),),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical:30,horizontal: 10),
-                child: orangeRoundButton(text:"OK", onPressed: () async{
+                child: commonButtonOrangeRound(text:"OK", onPressed: () async{
                   await updateUserSelectedItem(ref,"description",inputValue,"settingEditDescriptionPage");
                   ref.read(userDataProvider.notifier).setUserDataOneItem("description",inputValue);
                   Navigator.pop(context);

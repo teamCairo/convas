@@ -40,7 +40,7 @@ class SearchUsersMainPage extends ConsumerWidget {
                         height: 42,
                         child: Row(children: [
                           Expanded(
-                            child: grayWideIconTextButton(
+                            child: commonButtonIconTextGrayWide(
                                 onPressed: () async {
                                   await Navigator.of(context).push(
                                     MaterialPageRoute(builder: (context) {
@@ -146,11 +146,11 @@ class SearchUsersMainPage extends ConsumerWidget {
                                 padding: const EdgeInsets.only(top:4,right: 4.0),
                                 child: loginLampFromSecondsSmall(userData.lastLoginTime,userData.onlineStatus),
                               ),
-                              gray12TextRight(lastLoginStr),
+                              commonText12GrayRight(lastLoginStr),
                             ],
                           ),
                     ]),
-                    gray14TextLeft(userData.greeting),
+                    commonText14GrayLeft(userData.greeting),
                     Padding(
                         padding: const EdgeInsets.only(top:3.0),
                         child: SingleChildScrollView(

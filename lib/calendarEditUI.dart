@@ -100,7 +100,7 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  closeButtonForModal(context),
+                  commonButtonCloseForModal(context),
                   borderedTextBox(
                     text: "title",
                     initialValue: ref.watch(calendarEditProvider).editedEventName ,
@@ -113,7 +113,7 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
                   dateTimeRow(ref,context,"to",setState),
                   Padding(
                     padding: const EdgeInsets.only(bottom:14.0),
-                    child: orangeRoundButton(text: ref.watch(calendarEditProvider).editMode=="insert"?"Create Event":"Update Event",
+                    child: commonButtonOrangeRound(text: ref.watch(calendarEditProvider).editMode=="insert"?"Create Event":"Update Event",
                         onPressed: ()async {
 
                       if(ref.watch(calendarEditProvider).editMode=="insert"){

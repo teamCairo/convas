@@ -61,7 +61,7 @@ class LoginPage extends ConsumerWidget {
               Column(
                 children: <Widget>[
                   Text(infoText),
-                  orangeRoundButton(
+                  commonButtonOrangeRound(
                     text: "Sign Up",
                     onPressed: () async {
                       try {
@@ -92,7 +92,7 @@ class LoginPage extends ConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 8),
-                  whiteBorderRoundButton(
+                  commonButtonWhiteBorderRound(
                     text: "Log In",
                     onPressed: () async {
                       try {

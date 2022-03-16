@@ -49,7 +49,7 @@ class CategoryRegister extends ConsumerWidget {
                 },
               ),
               const SizedBox(height: 8),
-              orangeRoundButton(
+              commonButtonOrangeRound(
                     text:"Register",
                   onPressed:() async {
                     if (await checkCategoryData(context, ref, categoryName)) {

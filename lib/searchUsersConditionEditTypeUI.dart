@@ -66,7 +66,7 @@ class SearchConditionValueEditType extends ConsumerWidget {
                 children:checkList),
               ),
             ),
-            orangeRoundButton(text: "OK", onPressed: (){
+            commonButtonOrangeRound(text: "OK", onPressed: (){
               ref.read(searchUsersProvider.notifier).setConditionByMap(ref,databaseItem,ref.watch(searchUsersConditionEditTypeProvider).masterBoolMap);
               Navigator.pop(context);
 

@@ -42,7 +42,7 @@ class CalendarEditSelectModeDialog extends ConsumerWidget {
                     children:[
                       Column(
                         children: [
-                          closeButtonForModal(context),
+                          commonButtonCloseForModal(context),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 14.0),
                             child: gray16TextLeft("What do you want to do?"),
@@ -70,7 +70,7 @@ class CalendarEditSelectModeDialog extends ConsumerWidget {
 Padding buttonPadding(String text,String mode,WidgetRef ref,BuildContext context){
   return Padding(
     padding: const EdgeInsets.symmetric(vertical:7.0),
-    child: orangeRoundButton(text: text,
+    child: commonButtonOrangeRound(text: text,
         onPressed: (){
           ref.read(calendarEditProvider.notifier).setEditMode(mode);
           Navigator.pop(context);

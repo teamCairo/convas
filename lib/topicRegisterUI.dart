@@ -115,7 +115,7 @@ class TopicRegister extends ConsumerWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom:14.0),
-                child: orangeRoundButton(
+                child: commonButtonOrangeRound(
                   text:"Register",
                   onPressed:() async {
                     if (await checkTopicData(context,ref,ref.watch(topicRegisterProvider).topicName)) {
@@ -183,7 +183,7 @@ class SelectCategoryDialog extends ConsumerWidget {
                       Column(
                         children:radioTileList
                       ),
-                      orangeRoundButton(text: "OK",
+                      commonButtonOrangeRound(text: "OK",
                           onPressed: (){
                       Navigator.pop(context);
                       })

@@ -49,7 +49,7 @@ class CourseRegister extends ConsumerWidget {
                 },
               ),
               const SizedBox(height: 8),
-              orangeRoundButton(
+              commonButtonOrangeRound(
                 text:"Register",
                 onPressed:() async {
                   if (await checkCourseData(context, ref, courseName)) {

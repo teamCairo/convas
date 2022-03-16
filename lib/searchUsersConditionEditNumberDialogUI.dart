@@ -87,7 +87,7 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
 
-                          roundButtonByWidthAndHeight(text: 'Cancel',
+                          commonButtonRoundByWidthAndHeight(text: 'Cancel',
                               height: 40,
                               color: Colors.black26,
                               width: 90,
@@ -96,7 +96,7 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
 
                               }),
 
-                          roundButtonByWidthAndHeight(text: 'OK',
+                          commonButtonRoundByWidthAndHeight(text: 'OK',
                               height: 40,
                               color: Colors.orange,
                               width: 90,

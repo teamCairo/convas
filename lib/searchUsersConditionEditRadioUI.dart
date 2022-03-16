@@ -56,7 +56,7 @@ class SearchConditionValueEditRadio extends ConsumerWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20 ,vertical:30),
-              child: orangeRoundButton(text: "OK", onPressed: (){
+              child: commonButtonOrangeRound(text: "OK", onPressed: (){
                 ref.read(searchUsersProvider.notifier).setCondition(ref,databaseItem,ref.watch(searchUsersConditionEditRadioProvider).onRadioGroupValue);
                 Navigator.pop(context);
               }),
