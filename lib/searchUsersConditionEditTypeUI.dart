@@ -33,7 +33,7 @@ class SearchConditionValueEditType extends ConsumerWidget {
     }
     checkList.add(
         CheckboxListTile(
-          title: gray20TextLeft(searchConditionAlmightyWord),
+          title: commonText20GrayLeft(searchConditionAlmightyWord),
           value: ref.watch(searchUsersConditionEditTypeProvider).doesntMatterCheck,
           onChanged: (bool? value) {
             ref.read(searchUsersConditionEditTypeProvider.notifier).changeDoesntMatterCheck(value??false);
@@ -44,7 +44,7 @@ class SearchConditionValueEditType extends ConsumerWidget {
     ref.watch(searchUsersConditionEditTypeProvider).masterMap.forEach((key, value) {
       checkList.add(
           CheckboxListTile(
-            title: gray20TextLeft(value),
+            title: commonText20GrayLeft(value),
             value: ref.watch(searchUsersConditionEditTypeProvider).masterBoolMap[key.toString()],
             onChanged: (bool? value) {
               ref.read(searchUsersConditionEditTypeProvider.notifier).setBool(key.toString(),!(value!));
@@ -54,7 +54,7 @@ class SearchConditionValueEditType extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: whiteAppbar(displayedItem),
+      appBar: commonAppbarWhite(displayedItem),
       body: SafeArea(
         child:Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

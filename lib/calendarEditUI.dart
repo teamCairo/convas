@@ -145,7 +145,7 @@ Widget dateTimeRow(WidgetRef ref,BuildContext context,String fromTo,StateSetter 
     padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical:8),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       GestureDetector(
-          child: gray20TextRight(fromDateToYearMonthDayText(dateTime),
+          child: commonText20BlackRight(fromDateToYearMonthDayText(dateTime),
           ),
           onTap: () async{
             log("XXXXXXXタップした　日付");
@@ -170,7 +170,7 @@ Widget dateTimeRow(WidgetRef ref,BuildContext context,String fromTo,StateSetter 
           }
       ),
       GestureDetector(
-          child: gray20TextRight( fromDateToHourMinuteText(dateTime),
+          child: commonText20BlackRight( fromDateToHourMinuteText(dateTime),
           ),
           onTap: () async{
             log("XXXXXXXタップした　時間");

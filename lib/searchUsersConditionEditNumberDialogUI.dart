@@ -49,7 +49,7 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
                 children:[
                           Padding(
                             padding: const EdgeInsets.only(right: 14.0,left:14,bottom:35,top:10),
-                            child: black20TextCenter("Age"),
+                            child: commonText20BlackCenter("Age"),
                           ),
                           Expanded(
                             child: Column(
@@ -74,8 +74,8 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      deepOrange16TextLeft(ref.watch(searchUsersConditionEditNumberDialogProvider).start.toString()),
-                                      deepOrange16TextRight(ref.watch(searchUsersConditionEditNumberDialogProvider).end.toString())
+                                      commonText16DeepOrangeLeft(ref.watch(searchUsersConditionEditNumberDialogProvider).start.toString()),
+                                      commonText16DeepOrangeRight(ref.watch(searchUsersConditionEditNumberDialogProvider).end.toString())
                                     ],
                                   ),
                                 ),

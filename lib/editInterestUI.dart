@@ -25,7 +25,7 @@ class EditInterest extends ConsumerWidget {
     }
     ref.watch(editInterestProvider).categoryDocIdNameMap.forEach((key, value) {
       checkList.add(CheckboxListTile(
-        title: gray20TextLeft(value),
+        title: commonText20GrayLeft(value),
         value: ref
             .watch(editInterestProvider)
             .categoryDocIdboolMap[key.toString()],
@@ -39,7 +39,7 @@ class EditInterest extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: whiteAppbar("edit Interest"),
+      appBar: commonAppbarWhite("edit Interest"),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

@@ -11,7 +11,6 @@ import 'loginPageUI.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print("バックグラウンドでメッセージを受け取りました");
 }
 
 Future<void> main() async {
@@ -39,6 +38,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.orange,
+            scaffoldBackgroundColor:Colors.white
         ),
         // navigatorObservers: <NavigatorObserver>[observer],
         home: _LoginCheck()

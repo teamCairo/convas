@@ -25,7 +25,7 @@ class SettingEditNumberPage extends ConsumerWidget {
 
     return Scaffold(
       appBar:
-      whiteAppbar(displayedItem),
+      commonAppbarWhite(displayedItem),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

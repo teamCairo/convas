@@ -50,7 +50,7 @@ Padding commonText16GrayRight(String text) {
 }
 
 
-Widget gray16TextRightEllipsis(String text) {
+Widget commonText16GrayRightEllipsis(String text) {
   return Expanded(
           child: Text(
             text,
@@ -65,7 +65,7 @@ Widget gray16TextRightEllipsis(String text) {
   );
 }
 
-Padding gray20TextLeft(String text) {
+Padding commonText20GrayLeft(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
     child: Align(
@@ -73,7 +73,7 @@ Padding gray20TextLeft(String text) {
         child: Text(
           text,
           style: const TextStyle(
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.normal,
             fontSize: 20,
             color: Colors.black54,
           ),
@@ -82,7 +82,7 @@ Padding gray20TextLeft(String text) {
 }
 
 
-Padding black20TextCenter(String text) {
+Padding commonText20BlackCenter(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
     child: Align(
@@ -90,7 +90,7 @@ Padding black20TextCenter(String text) {
         child: Text(
           text,
           style: const TextStyle(
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.normal,
             fontSize: 20,
             color: Colors.black87,
           ),
@@ -98,7 +98,7 @@ Padding black20TextCenter(String text) {
   );
 }
 
-Padding gray20TextRight(String text) {
+Padding commonText20BlackRight(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
     child: Align(
@@ -106,29 +106,14 @@ Padding gray20TextRight(String text) {
         child: Text(
           text,
           style: const TextStyle(
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.normal,
             fontSize: 20,
             color: Colors.black54,
           ),
         )),
   );
 }
-Padding gray16TextLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-            color: Colors.black54,
-          ),
-        )),
-  );
-}
-Padding black16TextCenter(String text) {
+Padding commonText16BlackCenter(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
     child: Align(
@@ -152,6 +137,38 @@ Padding black16TextLeft(String text) {
         child: Text(
           text,
           style: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: Colors.black87,
+          ),
+        )),
+  );
+}
+
+Padding commonText16GrayLeft(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 0.0),
+    child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: Colors.black54,
+          ),
+        )),
+  );
+}
+
+Padding commonText16BlackLeft(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 0.0),
+    child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          text,
+          style: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 16,
             color: Colors.black87,
@@ -159,23 +176,8 @@ Padding black16TextLeft(String text) {
         )),
   );
 }
-Padding black18TextLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 18,
-            color: Colors.black87,
-          ),
-        )),
-  );
-}
 
-Padding black20BoldTextLeft(String text) {
+Padding commonText20BlackLeftBold(String text) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: Align(
@@ -192,7 +194,7 @@ Padding black20BoldTextLeft(String text) {
 }
 
 
-Text deepOrange12TextLeft(String text) {
+Text commonText12DeepOrangeLeft(String text) {
   return Text(
     text,
     textAlign: TextAlign.left,
@@ -204,7 +206,7 @@ Text deepOrange12TextLeft(String text) {
   );
 }
 
-Text deepOrange16TextLeft(String text) {
+Text commonText16DeepOrangeLeft(String text) {
   return Text(
     text,
     textAlign: TextAlign.left,
@@ -216,7 +218,7 @@ Text deepOrange16TextLeft(String text) {
   );
 }
 
-Text deepOrange16TextRight(String text) {
+Text commonText16DeepOrangeRight(String text) {
   return Text(
     text,
     textAlign: TextAlign.right,
@@ -227,10 +229,21 @@ Text deepOrange16TextRight(String text) {
     ),
   );
 }
+Text commonText22DeepOrangeLeftBold(String text) {
+  return Text(
+    text,
+    textAlign: TextAlign.left,
+    style: const TextStyle(
+      fontWeight: FontWeight.w400,
+      fontSize: 22,
+      color: Colors.deepOrange,
+    ),
+  );
+}
 
 
 
-Padding orangeBorderContainerText(String text) {
+Padding commonText13OrangeBorderContainer(String text) {
   return Padding(
     padding: const EdgeInsets.all(3.0),
     child: Container(

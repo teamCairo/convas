@@ -48,7 +48,7 @@ class CalendarEditDeleteDialog extends ConsumerWidget {
                           commonButtonCloseForModal(context),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                            child: gray16TextLeft("Are you sure you wanna delete?"),
+                            child: commonText16BlackLeft("Are you sure you wanna delete?"),
                           ),
 
                         ],

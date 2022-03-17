@@ -95,13 +95,11 @@ class SearchUsersMainPage extends ConsumerWidget {
       }
     }
 
-    String lastLoginStr = lastLoginInfo(userData.onlineStatus,userData.lastLoginTime);
-
     List<Widget> featureList=[];
     if(ref.watch(searchUsersProvider).userCategories[userData.objectID]!=null) {
       ref.watch(searchUsersProvider)
           .userCategories[userData.objectID].forEach((item) {
-        featureList.add(orangeBorderRoundSquareSmall(text: item));
+        featureList.add(commonContainerOrangeBorderRoundSquareSmall(text: item));
       });
     }
 
@@ -138,17 +136,8 @@ class SearchUsersMainPage extends ConsumerWidget {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                      black16TextCenter(userData.name),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top:4,right: 4.0),
-                                child: loginLampFromSecondsSmall(userData.lastLoginTime,userData.onlineStatus),
-                              ),
-                              commonText12GrayRight(lastLoginStr),
-                            ],
-                          ),
+                          commonText16BlackCenter(userData.name),
+                          loginLampFromSecondsSmall(userData.lastLoginTime,userData.onlineStatus,true)
                     ]),
                     commonText14GrayLeft(userData.greeting),
                     Padding(

@@ -76,12 +76,12 @@ class TopicRegister extends ConsumerWidget {
             child:Column(children:[
               SizedBox(
                   width: double.infinity,
-                  child: gray16TextLeft("Category Name")
+                  child: commonText16BlackLeft("Category Name")
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    gray16TextLeft(
+                    commonText16BlackLeft(
                       ref.watch(topicRegisterProvider).categoryItemName),
                     Padding(padding:const EdgeInsets.only(left:5),
                       child:GestureDetector(

@@ -22,7 +22,7 @@ class SettingPage extends ConsumerWidget {
 
 
     return Scaffold(
-        appBar: whiteAppbar("Settings"),
+        appBar: commonAppbarWhite("Settings"),
         body: SingleChildScrollView(
           child: SafeArea(
               child: Column(children: <Widget>[
@@ -82,7 +82,7 @@ class SettingPage extends ConsumerWidget {
                     )),
                 Padding(
                     padding: const EdgeInsets.only(left: 14.0,bottom: 8),
-                    child: black18TextLeft("Self-Introduction")),
+                    child: commonText16BlackLeft("Self-Introduction")),
                 Padding(
                       padding: const EdgeInsets.only(left: 14.0),
                       child: Align(
@@ -124,7 +124,7 @@ class SettingPage extends ConsumerWidget {
 
                 Padding(
                     padding: const EdgeInsets.only(left: 14.0,bottom: 6),
-                    child: black18TextLeft("Personal Info")),
+                    child: commonText16BlackLeft("Personal Info")),
                 linePadding(context,ref,"Name","name", ref.watch(userDataProvider).userData["name"]!),
                 // linePadding(context,ref,"E-mail","email", ref.watch(userDataProvider).userData["email"]!),
                 linePadding(context,ref,"Birth Date","birthDate", ref.watch(userDataProvider).userData["birthDate"]!),
@@ -171,12 +171,12 @@ class SettingPage extends ConsumerWidget {
           child:Column(children:[
             SizedBox(
               width: double.infinity,
-              child: deepOrange12TextLeft(displayedItem)
+              child: commonText12DeepOrangeLeft(displayedItem)
             ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    gray16TextLeft(displayedValue),
+                    commonText16BlackLeft(displayedValue),
                     Padding(padding:const EdgeInsets.only(left:5),
                       child:GestureDetector(
                           onTap: () async{

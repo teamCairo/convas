@@ -18,7 +18,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-        appBar: whiteAppbar("Search conditions"),
+        appBar: commonAppbarWhite("Search conditions"),
         body: SafeArea(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -184,7 +184,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:[
                     black16TextLeft(displayedItem),
-                    gray16TextRightEllipsis(displayedValue)
+                    commonText16GrayRightEllipsis(displayedValue)
                     // gray16TextRightEllipsis(displayedValue,200)
               ]),
             ),

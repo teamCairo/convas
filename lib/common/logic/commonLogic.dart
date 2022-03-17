@@ -156,13 +156,13 @@ String fromDateToHourMinuteText(DateTime datetime){
 
 }
 
-String lastLoginInfo(bool onlineStatus,int lastLoginTime){
+String lastLoginInfo(bool onlineStatus,DateTime lastLoginTime){
 
   if(onlineStatus){
     return "Online";
   }
   int differentDays = DateTime.now()
-      .difference(DateTime.fromMillisecondsSinceEpoch(lastLoginTime))
+      .difference(lastLoginTime)
       .inDays;
   if (differentDays == 0) {
     return "Today";
@@ -171,7 +171,7 @@ String lastLoginInfo(bool onlineStatus,int lastLoginTime){
   } else if(differentDays<7){
     return  differentDays.toString() + " days ago";
   }else{
-    return DateTime.fromMillisecondsSinceEpoch(lastLoginTime).month.toString()+"/"+DateTime.fromMillisecondsSinceEpoch(lastLoginTime).day.toString();
+    return lastLoginTime.month.toString()+"/"+lastLoginTime.day.toString();
   }
 
 }

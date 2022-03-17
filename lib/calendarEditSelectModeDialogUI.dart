@@ -45,7 +45,7 @@ class CalendarEditSelectModeDialog extends ConsumerWidget {
                           commonButtonCloseForModal(context),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                            child: gray16TextLeft("What do you want to do?"),
+                            child: commonText16BlackLeft("What do you want to do?"),
                           ),
 
                         ],

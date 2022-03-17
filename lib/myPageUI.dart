@@ -36,7 +36,7 @@ class MyPage extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10),
                         child: Column(children: [
-                          black20BoldTextLeft(
+                          commonText20BlackLeftBold(
                               ref.watch(userDataProvider).userData["name"] ??
                                   ""),
                           commonButtonWhiteRoundSquareSmall(
@@ -206,7 +206,7 @@ class MyPage extends ConsumerWidget {
               mainAxisAlignment:MainAxisAlignment.center,
               children: [Icon(icon, size: 50
               ,color:Colors.black54),
-                black16TextCenter(text)],
+                commonText16BlackCenter(text)],
             ),
           ),
           onTap: onPressed),

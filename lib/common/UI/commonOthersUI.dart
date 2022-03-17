@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-AppBar whiteAppbar(String text) {
+import '../logic/commonLogic.dart';
+import 'commonTextUI.dart';
+
+AppBar commonAppbarWhite(String text) {
   return AppBar(
     backgroundColor: Colors.white10,
     elevation: 0.0,
@@ -15,6 +18,20 @@ AppBar whiteAppbar(String text) {
   );
 }
 
+AppBar commonAppbarTransparent(String text) {
+  return AppBar(
+    backgroundColor: Colors.transparent,
+    elevation: 0.0,
+    title: Text(
+      text,
+      style: const TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 20,
+        color: Colors.black87,
+      ),
+    ),
+  );
+}
 CircleAvatar imageAvatar({Image? image, required double radius}) {
   return CircleAvatar(
     radius: radius,
@@ -61,7 +78,7 @@ Future<dynamic> showOkInfoDialog(BuildContext context,  String message)async{
   );
 }
 
-Padding orangeBorderRoundSquareSmall({required String text}){
+Widget commonContainerOrangeBorderRoundSquareSmall({required String text}){
   return Padding(
     padding: const EdgeInsets.all(3.0),
     child: Container(
@@ -84,11 +101,30 @@ Padding orangeBorderRoundSquareSmall({required String text}){
   );
 }
 
-Widget loginLampFromSecondsSmall(int epochTimeMilliSeconds,bool onlineStatus){
-  return loginLampFromSeconds(epochTimeMilliSeconds,onlineStatus,8);
+Widget commonWrapMultiLineOrangeBorderRoundList(List<String> textList){
+
+  List<Widget> tmpList=[];
+  if(textList.isEmpty){
+    tmpList.add(commonContainerOrangeBorderRoundSquareSmall(text:"Not registered"));
+  }
+  for(int i=0;i<textList.length;i++){
+    tmpList.add(commonContainerOrangeBorderRoundSquareSmall( text:textList[i]));
+  }
+
+  return SizedBox(
+    width:double.infinity,
+      child: Wrap(children: tmpList,));
 }
 
-Widget loginLampFromSeconds(int epochTimeMilliSeconds,bool onlineStatus,double size){
+Widget loginLampFromSecondsSmall(int epochTimeMilliSeconds,bool onlineStatus,bool textShow){
+  return loginLampFromSeconds(epochTimeMilliSeconds,onlineStatus,8, textShow);
+}
+
+Widget loginLampSmall(DateTime lastLoginTime,bool onlineStatus,bool textShow){
+  return loginLamp(lastLoginTime,onlineStatus,8, textShow);
+}
+
+Widget loginLamp(DateTime lastLoginTime,bool onlineStatus,double size,bool textShow){
 
   Color? lampColor;
 
@@ -96,7 +132,7 @@ Widget loginLampFromSeconds(int epochTimeMilliSeconds,bool onlineStatus,double s
     lampColor=Colors.green;
   }
   int differentDays = DateTime.now()
-      .difference(DateTime.fromMillisecondsSinceEpoch(epochTimeMilliSeconds))
+      .difference(lastLoginTime)
       .inDays;
   if (differentDays <= 7) {
     lampColor=Colors.amberAccent;
@@ -104,8 +140,38 @@ Widget loginLampFromSeconds(int epochTimeMilliSeconds,bool onlineStatus,double s
     lampColor=Colors.grey;
   }
 
-return Icon(Icons.circle,
-    color:lampColor,
-   size:size);
+  Icon lampIcon= Icon(Icons.circle,
+      color:lampColor,
+      size:size);
 
+  if(textShow){
+    String lastLoginStr = lastLoginInfo(onlineStatus,lastLoginTime);
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top:4,right: 4.0),
+          child: lampIcon,
+        ),
+        commonText12GrayRight(lastLoginStr),
+      ],
+    );
+  }else{
+    return(lampIcon);
+  }
+}
+
+Widget loginLampFromSeconds(int epochTimeMilliSeconds,bool onlineStatus,double size,bool textShow){
+
+  return loginLamp(DateTime.fromMillisecondsSinceEpoch(epochTimeMilliSeconds), onlineStatus, size, textShow);
+
+}
+Widget commonLineHorizontalGrayThin(double upperPadding,double bottomPadding){
+  return Padding(
+    padding: EdgeInsets.only(top:upperPadding,bottom:bottomPadding),
+    child: Container(
+      height:0.5,
+      width:double.infinity,
+      color:Colors.black26
+    ),
+  );
 }

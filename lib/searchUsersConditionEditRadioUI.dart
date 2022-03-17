@@ -42,7 +42,7 @@ class SearchConditionValueEditRadio extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: whiteAppbar(displayedItem),
+      appBar: commonAppbarWhite(displayedItem),
       body: SafeArea(
         child:Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,6 +66,5 @@ class SearchConditionValueEditRadio extends ConsumerWidget {
       ),
     );
   }
-
 
 }

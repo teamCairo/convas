@@ -21,7 +21,7 @@ class SettingEditDescriptionPage extends ConsumerWidget {
 
     return Scaffold(
       appBar:
-      whiteAppbar("Description"),
+      commonAppbarWhite("Description"),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

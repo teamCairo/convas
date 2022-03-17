@@ -27,7 +27,7 @@ class EditInterestingCourse extends ConsumerWidget {
     ref.watch(editInterestingCourseProvider).courseDocIdNameMap.forEach((key, value) {
       checkList.add(
           CheckboxListTile(
-            title: gray20TextLeft(value),
+            title: commonText20GrayLeft(value),
             value: ref.watch(editInterestingCourseProvider).courseDocIdBoolMap[key.toString()],
             onChanged: (bool? value) {
               ref.read(editInterestingCourseProvider.notifier).setBool(key.toString(),!(value!));
@@ -40,7 +40,7 @@ class EditInterestingCourse extends ConsumerWidget {
 
     return Scaffold(
       appBar:
-      whiteAppbar("edit Interest"),
+      commonAppbarWhite("edit Interest"),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
