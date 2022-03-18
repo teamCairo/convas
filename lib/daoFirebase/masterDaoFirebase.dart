@@ -53,8 +53,8 @@ Future<String> insertFirebaseMaster(WidgetRef ref,
         'optionText2': optionText2,
         'optionBool1': optionBool1,
         'optionBool2': optionBool2,
-        'fileNameSuffix1': pathStrFile1.substring(pathStrFile1.lastIndexOf('.')),
-        'fileNameSuffix2': pathStrFile2.substring(pathStrFile2.lastIndexOf('.')),
+        'fileNameSuffix1': pathStrFile1==""?"":pathStrFile1.substring(pathStrFile1.lastIndexOf('.')),
+        'fileNameSuffix2': pathStrFile2==""?"":pathStrFile2.substring(pathStrFile2.lastIndexOf('.')),
         'insertUserDocId':userDocId,
         'insertProgramId': programId,
         'insertTime': FieldValue.serverTimestamp(),
@@ -74,4 +74,17 @@ Future<String> insertFirebaseMaster(WidgetRef ref,
     log(e.toString());
     return "";
   }
+}
+
+Future<void> updateFirebaseMasterPhotoInfo(String masterDocId,String userDocId,String fileNameSuffix1,String fileNameSuffix2,String programId)async {
+  await FirebaseFirestore.instance
+      .collection('masters')
+      .doc(masterDocId)
+      .update({
+    "fileNameSuffix1": fileNameSuffix1,
+    "fileNameSuffix2": fileNameSuffix2,
+    'updateUserDocId': userDocId,
+    'updateProgramId': programId,
+    'updateTime': FieldValue.serverTimestamp(),
+  });
 }
