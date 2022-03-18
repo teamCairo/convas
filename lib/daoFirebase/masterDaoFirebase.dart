@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
 
-Future<void> insertFirebaseMaster(WidgetRef ref,
+Future<String> insertFirebaseMaster(WidgetRef ref,
     String masterGroupCode,
     String code,
     String name,
@@ -30,10 +30,14 @@ Future<void> insertFirebaseMaster(WidgetRef ref,
     FirebaseStorage storage =FirebaseStorage.instance;
     if(optionFile1!=null){
       pathStrFile1= optionFile1.path;
+      await storage.ref("masters/" + masterGroupCode+"/" +code+ pathStrFile1.substring(pathStrFile1.lastIndexOf('.'),))
+          .putFile(optionFile1);
     }
 
     if(optionFile2!=null){
       pathStrFile2= optionFile2.path;
+      await storage.ref("masters/" + masterGroupCode+"/" +code+ pathStrFile2.substring(pathStrFile2.lastIndexOf('.'),))
+          .putFile(optionFile2);
     }
 
     await FirebaseFirestore.instance.collection('masters').add(
@@ -57,35 +61,17 @@ Future<void> insertFirebaseMaster(WidgetRef ref,
         'updateUserDocId':userDocId,
         'updateProgramId': programId,
         'updateTime': FieldValue.serverTimestamp(),
-        'readableFlg': false,
+        'readableFlg': true,
         'deleteFlg': false,
       },
     ).then((value){
       insertedDocId=value.id;
     });
-    if(optionFile1!=null){
-      await storage.ref("masters/" + masterGroupCode+"/" +code+ pathStrFile1.substring(pathStrFile1.lastIndexOf('.'),))
-          .putFile(optionFile1);
-    }
 
-    if(optionFile2!=null){
-      await storage.ref("masters/" + masterGroupCode+"/" +code+ pathStrFile2.substring(pathStrFile2.lastIndexOf('.'),))
-          .putFile(optionFile2);
-    }
-
-    await FirebaseFirestore.instance
-        .collection('masters')
-        .doc(insertedDocId)
-        .update({
-      'readableFlg': true,
-      'photoUpdateCnt':1,
-      'updateUserDocId':userDocId,
-      'updateProgramId': programId,
-      'updateTime': FieldValue.serverTimestamp(),
-    });
-
+    return insertedDocId;
 
   } catch (e) {
     log(e.toString());
+    return "";
   }
 }
