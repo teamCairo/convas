@@ -110,7 +110,7 @@ String fromCodeListToTextDot(List<String> codeList,masterName,WidgetRef ref){
     if(i!=0){
       result=result+separatingCharacter;
     }
-    result=result+getMasterName(masterName, codeList[i], ref);
+    result=result+getMasterName(masterName, codeList[i], ref).name;
   }
 
   return result;

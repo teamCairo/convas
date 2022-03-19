@@ -35,6 +35,14 @@ Future<void> insertTestMasterData(WidgetRef ref) async {
   insertMasterUnitData(ref:ref,masterGroupCode:"country",code:"ATG",name:"Antigua and Barbuda",  onMemoryFlg: true, photoURL1: 'https://www.mofa.go.jp/mofaj/kids/kokki/image/f2.gif', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"country",code:"ARG",name:"Argentina",  onMemoryFlg: true, photoURL1: 'https://www.mofa.go.jp/mofaj/kids/kokki/image/g1.gif', photoURL2: '',programId: "insertTestMastersData");
 
+
+  insertMasterUnitData(ref:ref,masterGroupCode:"lastLogin",code:"1",name:"Today",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"lastLogin",code:"2",name:"Last 3days",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"lastLogin",code:"3",name:"This week",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"lastLogin",code:"4",name:"This month",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+
+  insertMasterUnitData(ref:ref,masterGroupCode:"userType",code:"1",name:"user",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"userType",code:"2",name:"teacher",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
 }
 
 Future<String> insertMasterUnitData({
@@ -77,12 +85,12 @@ Future<String> insertMasterUnitData({
   FirebaseStorage storage = FirebaseStorage.instance;
   try {
     if(photoURL1!=""){
-      await storage.ref("masters/" + masterGroupCode+"/" +code+ photoURL1.substring(photoURL1.lastIndexOf('.'),))
+      await storage.ref("masters/" + masterGroupCode+"/" +code+"_1"+ photoURL1.substring(photoURL1.lastIndexOf('.'),))
           .putFile(await urlToFile(photoURL1));
     }
 
     if(photoURL2!=""){
-      await storage.ref("masters/" + masterGroupCode+"/" +code+ photoURL2.substring(photoURL2.lastIndexOf('.'),))
+      await storage.ref("masters/" + masterGroupCode+"/" +code+"_2"+ photoURL2.substring(photoURL2.lastIndexOf('.'),))
           .putFile(await urlToFile(photoURL2));
     }
 

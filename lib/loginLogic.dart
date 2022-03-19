@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/entityIsar/categoryEntityIsar.dart';
 import 'package:convas/entityIsar/courseEntityIsar.dart';
+import 'package:convas/entityIsar/masterEntityIsar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
@@ -12,6 +13,7 @@ import 'common/provider/categoryProvider.dart';
 import 'common/provider/courseProvider.dart';
 import 'common/provider/eventProvider.dart';
 import 'common/provider/friendProvider.dart';
+import 'common/provider/masterProvider.dart';
 import 'common/provider/topicProvider.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
@@ -85,6 +87,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   await updateTimeCheck("courses");
   await updateTimeCheck("topics");
   await updateTimeCheck("friends");
+  await updateTimeCheck("masters");
   await updateTimeCheck("user");
   await updateTimeCheck("chatMessages");
   await updateTimeCheck("categories");
@@ -104,6 +107,11 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .read(userDataProvider.notifier)
       .controlStreamOfReadUserDataFirebaseToIsarAndMemory(email);
 
+
+  await ref
+      .read(masterDataProvider.notifier)
+      .readMasterDataFromIsarToMemory();
+
   await ref
       .read(friendDataProvider.notifier)
       .readFriendDataFromIsarToMemory();
@@ -122,8 +130,12 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .readCourseDataFromIsarToMemory();
 
   ref
+      .read(masterDataProvider.notifier)
+      .readMasterFromFirebaseToIsarAndMemory();
+
+  ref
       .read(friendDataProvider.notifier)
-      .controlStreamOfReadFriendNewDataFromFirebaseToHiveAndMemory(ref,tmpUserData.docs[0].id);
+      .controlStreamOfReadFriendNewDataFromFirebaseToIsarAndMemory(ref,tmpUserData.docs[0].id);
 
   ref
       .read(eventDataProvider.notifier)
@@ -140,7 +152,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .controlStreamOfReadCourseNewDataFromFirebaseToIsar();
 
   ref.read(userDataProvider.notifier).updateLastLoginTime();
-  //TODO Master、Topic、Category、Countryは常にWatchする必要ないよね
+  //TODO Topic、Category、Countryは常にWatchする必要ないよね
 }
 
 
@@ -168,14 +180,14 @@ Future<void> openIsarInstances() async {
   final dir = await getApplicationSupportDirectory();
   if (isarInstance == null) {
     await Isar.open(
-      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema,FriendSchema],
+      schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema,FriendSchema,MasterSchema],
       directory: dir.path,
       inspector: true,
     );
   } else {
     if (!isarInstance.isOpen) {
       await Isar.open(
-        schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema,FriendSchema],
+        schemas: [SettingSchema,UserSchema,CategorySchema,TopicSchema,CourseSchema,EventSchema,FriendSchema,MasterSchema],
         directory: dir.path,
         inspector: true,
       );

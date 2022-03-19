@@ -148,14 +148,16 @@ class SettingPage extends ConsumerWidget {
 
     String displayedValue;
     if(databaseItem=="gender"){
-      displayedValue=ref.watch(masterDataProvider.notifier).genderMasterData[value]!;
+      displayedValue=getMasterName("gender",value,ref).name;
 
     }else if(databaseItem=="level"){
-      displayedValue=ref.watch(masterDataProvider.notifier).levelMasterData[value]!;
+      displayedValue=getMasterName("level",value,ref).name;
+
     }else if(databaseItem=="country"||databaseItem=="homeCountry"){
-      displayedValue=ref.watch(masterDataProvider.notifier).countryMasterData[value]!;
+      displayedValue=getMasterName("country",value,ref).name;
+
     }else if(databaseItem=="motherTongue"){
-      displayedValue=ref.watch(masterDataProvider.notifier).languageMasterData[value]!;
+      displayedValue=getMasterName("language",value,ref).name;
 
     }else if(databaseItem=="birthDate"){
 
@@ -169,9 +171,12 @@ class SettingPage extends ConsumerWidget {
         child: Container(
           height: 52,
           child:Column(children:[
-            SizedBox(
-              width: double.infinity,
-              child: commonText12DeepOrangeLeft(displayedItem)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: commonText12DeepOrangeLeft(displayedItem)
+              ),
             ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.start,

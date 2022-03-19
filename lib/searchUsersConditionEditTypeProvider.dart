@@ -4,10 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'common/provider/categoryProvider.dart';
 import 'common/provider/courseProvider.dart';
+import 'entityIsar/masterEntityIsar.dart';
 
 class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
-  Map<String, String> _masterMap = {};
-  get masterMap => _masterMap;
+  Map<String, Master> _masterMap = {};
+  Map<String, Master> get masterMap => _masterMap;
 
   Map<String, bool> _masterBoolMap = {};
   get masterBoolMap => _masterBoolMap;

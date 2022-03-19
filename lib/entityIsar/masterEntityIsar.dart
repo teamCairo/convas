@@ -30,9 +30,9 @@ class Master {
       this.insertTime,
       this.updateUserDocId,
       this.updateProgramId,
-      DateTime? updateTime,
-      bool? readableFlg,
-      bool? deleteFlg,
+      this.updateTime,
+      this.readableFlg,
+      this.deleteFlg,
 
       );
 

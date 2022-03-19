@@ -2,9 +2,11 @@ import 'package:convas/common/provider/masterProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'entityIsar/masterEntityIsar.dart';
+
 class SearchUsersConditionEditRadioNotifier extends ChangeNotifier {
-  Map<String, String> _masterMap = {};
-  get masterMap => _masterMap;
+  Map<String, Master> _masterMap = {};
+  Map<String, Master> get masterMap => _masterMap;
   String _onRadioGroupValue = "";
 
   get onRadioGroupValue => _onRadioGroupValue;

@@ -44,7 +44,7 @@ class SearchConditionValueEditType extends ConsumerWidget {
     ref.watch(searchUsersConditionEditTypeProvider).masterMap.forEach((key, value) {
       checkList.add(
           CheckboxListTile(
-            title: commonText20GrayLeft(value),
+            title: commonText20GrayLeft(value.name),
             value: ref.watch(searchUsersConditionEditTypeProvider).masterBoolMap[key.toString()],
             onChanged: (bool? value) {
               ref.read(searchUsersConditionEditTypeProvider.notifier).setBool(key.toString(),!(value!));

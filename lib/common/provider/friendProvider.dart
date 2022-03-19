@@ -76,23 +76,23 @@ class FriendDataNotifier extends ChangeNotifier {
     deleteIsarFriends();
   }
 
-  void controlStreamOfReadFriendNewDataFromFirebaseToHiveAndMemory(
+  void controlStreamOfReadFriendNewDataFromFirebaseToIsarAndMemory(
       WidgetRef ref,String userDocId) async {
     //最初は必ず呼び出し
-    streamSub = await readFriendFromFirebaseToHiveAndMemory(ref,userDocId);
+    streamSub = await readFriendFromFirebaseToIsarAndMemory(ref,userDocId);
 
     if (controller.hasListener) {
     } else {
       //2回目以降は新しいデータを更新するたびに起動
       controller.stream.listen((value) async {
         streamSub!.cancel();
-        streamSub = await readFriendFromFirebaseToHiveAndMemory(ref,userDocId);
+        streamSub = await readFriendFromFirebaseToIsarAndMemory(ref,userDocId);
       });
     }
   }
 
   Future<StreamSubscription<QuerySnapshot>>
-  readFriendFromFirebaseToHiveAndMemory(WidgetRef ref,String userDocId) async {
+  readFriendFromFirebaseToIsarAndMemory(WidgetRef ref,String userDocId) async {
 
     Setting? tmpSetting = await selectIsarSettingByCode("friendsUpdateCheck");
     DateTime friendsUpdatedTime = tmpSetting!.dateTimeValue1!;

@@ -7,6 +7,7 @@ import 'common/UI/commonOthersUI.dart';
 import 'common/provider/masterProvider.dart';
 import 'common/provider/userProvider.dart';
 import 'daoFirebase/usersDaoFirebase.dart';
+import 'entityIsar/masterEntityIsar.dart';
 
 class SettingEditRadioPage extends ConsumerWidget {
   SettingEditRadioPage({
@@ -20,7 +21,7 @@ class SettingEditRadioPage extends ConsumerWidget {
   String value;
 
   bool initialProcessFlg=true;
-  Map<String,String> masterMap = {};
+  Map<String,Master> masterMap = {};
   List<Widget> radioTileList = [];
 
 
@@ -36,18 +37,18 @@ class SettingEditRadioPage extends ConsumerWidget {
     radioTileList=[];
 
     if(databaseItem=="gender"){
-      masterMap.addAll(ref.watch(masterDataProvider).genderMasterData);
+      masterMap.addAll(getMasterMap("gender",ref));
     }else if(databaseItem=="level"){
-      masterMap.addAll(ref.watch(masterDataProvider).levelMasterData);
+      masterMap.addAll(getMasterMap("level",ref));
     }else if(databaseItem=="motherTongue"){
-      masterMap.addAll(ref.watch(masterDataProvider).languageMasterData);
+      masterMap.addAll(getMasterMap("language",ref));
     }else{
-      masterMap.addAll(ref.watch(masterDataProvider).countryMasterData);
+      masterMap.addAll(getMasterMap("country",ref));
       }
 
     masterMap.forEach((key, value) {
       radioTileList.add(RadioListTile(
-        title: Text(value),
+        title: Text(value.name),
         value: key,
         groupValue: ref.watch(settingEditRadioPageProvider).onRadioGroupValue,
         onChanged: (key) => ref.read(settingEditRadioPageProvider.notifier).setOnRadioGroupValue(key.toString()),

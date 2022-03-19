@@ -170,13 +170,13 @@ class FriendProfile extends ConsumerWidget {
     dynamic value = ref.watch(friendProfileDataProvider).friendProfileData[databaseItem];
     String displayedValue;
     if (databaseItem == "gender" || databaseItem == "level"){
-      displayedValue =getMasterName( databaseItem, value,  ref);
+      displayedValue =getMasterName( databaseItem, value,  ref).name;
 
     }else if(databaseItem == "motherTongue" ){
-      displayedValue =getMasterName( "language", value,  ref);
+      displayedValue =getMasterName( "language", value,  ref).name;
 
     }else if(databaseItem == "country"||databaseItem == "homeCountry" ){
-      displayedValue =getMasterName( "country", value,  ref);
+      displayedValue =getMasterName( "country", value,  ref).name;
 
     }else if(databaseItem == "birthDate" ){
       displayedValue =fromBirthToAge(value).toString();

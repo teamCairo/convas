@@ -32,7 +32,7 @@ class SearchConditionValueEditRadio extends ConsumerWidget {
 
     ref.watch(searchUsersConditionEditRadioProvider).masterMap.forEach((key, value) {
       radioTileList.add(RadioListTile(
-          title: Text(value),
+          title: Text(value.name),
           value: key.toString(),
           groupValue: ref.watch(searchUsersConditionEditRadioProvider).onRadioGroupValue,
           onChanged: (key) => ref.read(searchUsersConditionEditRadioProvider.notifier).setOnRadioGroupValue(key.toString()),
