@@ -27,20 +27,17 @@ class FriendDataNotifier extends ChangeNotifier {
   StreamSubscription<QuerySnapshot>? streamSub;
 
   Future<Uint8List?> readFriendPhotoFromFirebase(
-      WidgetRef ref, String friendUserDocId) async {
+      WidgetRef ref, String friendUserDocId, String profilePhotoNameSuffix) async {
 
-    if ((_friendData[friendUserDocId]!.profilePhotoNameSuffix??"") == "" ) {
+    if (profilePhotoNameSuffix == "" ) {
       return null;
     }else{
       //画像ファイルの取得
       FirebaseStorage storage = FirebaseStorage.instance;
-      Reference imageRef = storage.ref().child("profile").child(friendUserDocId).child("mainPhoto_small" + _friendData[friendUserDocId]!.profilePhotoNameSuffix!);
+      Reference imageRef = storage.ref().child("profile").child(friendUserDocId).child("mainPhoto_small" + profilePhotoNameSuffix);
       String imageUrl = await imageRef.getDownloadURL();
       File imgFile=await urlToFile(imageUrl);
 
-      if(imgFile==null){
-        return null;
-      }else{
         Uint8List? bytes;
         await imgFile.readAsBytes().then((value) {
           bytes = Uint8List.fromList(value);
@@ -51,7 +48,6 @@ class FriendDataNotifier extends ChangeNotifier {
         });
         return bytes;
 
-      }
     }
   }
 
@@ -122,14 +118,14 @@ class FriendDataNotifier extends ChangeNotifier {
             if (_friendData[snapshot.docs[i].get('friendUserDocId')] != null){
               if(_friendData[snapshot.docs[i].get('friendUserDocId')]!.profilePhotoUpdateCnt<(snapshot.docs[i].get('profilePhotoUpdateCnt')!)){
                 // ２回目移行かつ写真の更新あり
-                photoUint8List=await readFriendPhotoFromFirebase(ref,snapshot.docs[i].get('friendUserDocId'));
+                photoUint8List=await readFriendPhotoFromFirebase(ref,snapshot.docs[i].get('friendUserDocId'),snapshot.docs[i].get('profilePhotoNameSuffix'));
               }else{
                 // ２回目移行かつ写真の更新なし
                 photoUint8List=_friendData[snapshot.docs[i].get('friendUserDocId')]!.profilePhoto;
               }
             }else{
               //初回連携時
-              photoUint8List=await readFriendPhotoFromFirebase(ref,snapshot.docs[i].get('friendUserDocId'));
+              photoUint8List=await readFriendPhotoFromFirebase(ref,snapshot.docs[i].get('friendUserDocId'),snapshot.docs[i].get('profilePhotoNameSuffix'));
             }
 
             _friendData[snapshot.docs[i].get('friendUserDocId')]=Friend(
@@ -139,17 +135,17 @@ class FriendDataNotifier extends ChangeNotifier {
               snapshot.docs[i].get('friendUserName'),
               snapshot.docs[i].get('lastMessageContent'),
               snapshot.docs[i].get('lastMessageDocId'),
-              snapshot.docs[i].get('lastMessageTime').toDateTime(),
+              snapshot.docs[i].get('lastMessageTime').toDate(),
               photoUint8List,
               snapshot.docs[i].get('profilePhotoUpdateCnt'),
               snapshot.docs[i].get('profilePhotoNameSuffix'),
               snapshot.docs[i].get('mute'),
               snapshot.docs[i].get('insertUserDocId'),
               snapshot.docs[i].get('insertProgramId'),
-              snapshot.docs[i].get('insertTime').toDateTime(),
+              snapshot.docs[i].get('insertTime').toDate(),
               snapshot.docs[i].get('updateUserDocId'),
               snapshot.docs[i].get('updateProgramId'),
-              snapshot.docs[i].get('updateTime').toDateTime(),
+              snapshot.docs[i].get('updateTime').toDate(),
               snapshot.docs[i].get('readableFlg'),
               snapshot.docs[i].get('deleteFlg'),
             );

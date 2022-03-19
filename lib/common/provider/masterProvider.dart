@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:convas/entityIsar/masterEntityIsar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../daoFirebase/masterDaoFirebase.dart';
+import '../../daoFirebase/mastersDaoFirebase.dart';
 import '../../daoIsar/masterDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/masterEntityIsar.dart';
