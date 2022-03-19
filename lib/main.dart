@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'login/loginAutoPageUI.dart';
+import 'UIs/login/loginAutoPageUI.dart';
 import 'config/firebase_config.dart';
-import 'login/loginPageUI.dart';
+import 'UIs/login/loginPageUI.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
