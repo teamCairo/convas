@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'categoryRegisterUI.dart';
-import 'courseRegisterUI.dart';
 import 'developerLogic/insertTestMastersData.dart';
 import 'developerLogic/insertTestUsersData.dart';
 // import 'topicRegisterUI.dart';
@@ -55,42 +53,6 @@ class DeveloperPage extends ConsumerWidget {
                   //     ),
                   //   ),
                   // ),
-                  ElevatedButton(
-                    style: const ButtonStyle(),
-                    onPressed: () async {
-                      await Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) {
-                          return CategoryRegister();
-                        }),
-                      );
-                    },
-                    child: Text(
-                      "Register category",
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ElevatedButton(
-                  style: ButtonStyle(),
-                  onPressed: () async {
-                    await Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) {
-                        return CourseRegister();
-                      }),
-                    );
-                  },
-                  child: Text(
-                    "Register course",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 8),
                 SizedBox(
                   width: double.infinity,

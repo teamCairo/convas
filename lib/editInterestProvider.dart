@@ -1,44 +1,44 @@
-import 'dart:io';
 import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'daoIsar/categoryDaoIsar.dart';
-import 'entityIsar/categoryEntityIsar.dart';
+import 'common/provider/masterProvider.dart';
+import 'entityIsar/masterEntityIsar.dart';
+
 
 
 class EditInterestNotifier extends ChangeNotifier {
 
-  Map<String,String> _categoryDocIdNameMap={};
-  get categoryDocIdNameMap=>_categoryDocIdNameMap;
+  Map<String,String> _categoryCdNameMap={};
+  get categoryCdNameMap=>_categoryCdNameMap;
 
-  Map<String,bool> _categoryDocIdboolMap={};
-  get categoryDocIdboolMap=>_categoryDocIdboolMap;
+  Map<String,bool> _categoryCdBoolMap={};
+  get categoryCdBoolMap=>_categoryCdBoolMap;
 
-  Future<void> initialize(WidgetRef ref)async{
-    _categoryDocIdNameMap={};
-    _categoryDocIdboolMap={};
-    List<Category>? categoryList=await selectIsarCategoryAll();
+  void initialize(WidgetRef ref)async{
+    _categoryCdNameMap={};
+    _categoryCdBoolMap={};
+    Map<String, Master> categoryMap=getMasterMap("category", ref);
 
-    if(categoryList!.isEmpty){
+    if(categoryMap.isEmpty){
 
     }else{
-      for(int i=0;i<categoryList.length;i++){
-        _categoryDocIdNameMap[categoryList[i].categoryDocId]=categoryList[i].categoryName;
-        if(ref.watch(userDataProvider).userData["interestingCategories"].contains(categoryList[i].categoryDocId)){
-          _categoryDocIdboolMap[categoryList[i].categoryDocId]=true;
+      categoryMap.forEach((key, value) {
+        _categoryCdNameMap[value.code]=value.name;
+        if(ref.watch(userDataProvider).userData["interestingCategories"].contains(value.code)){
+          _categoryCdBoolMap[value.code]=true;
         }else{
-          _categoryDocIdboolMap[categoryList[i].categoryDocId]=false;
+          _categoryCdBoolMap[value.code]=false;
         }
-      }
+
+      });
     }
 
-    notifyListeners();
   }
 
   void setBool(String key,bool value){
-    _categoryDocIdboolMap[key]=!value;
+    _categoryCdBoolMap[key]=!value;
     notifyListeners();
   }
 }

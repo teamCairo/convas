@@ -3,9 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'daoIsar/categoryDaoIsar.dart';
-import 'entityIsar/categoryEntityIsar.dart';
-
+import 'common/provider/masterProvider.dart';
+import 'entityIsar/masterEntityIsar.dart';
 
 class TopicRegisterNotifier extends ChangeNotifier {
 
@@ -31,22 +30,21 @@ class TopicRegisterNotifier extends ChangeNotifier {
   }
 
 
-  Future<void> initialize()async{
+  Future<void> initialize(WidgetRef ref)async{
     _topicImagePhotoFile=null;
     _categoryItemDocId="";
     _topicName="";
     _categoryItemName="Please select category";
     _categoryMap={};
-    List<Category>? categoryList=await selectIsarCategoryAll();
+    Map<String, Master> categoryMap=getMasterMap("category", ref);
 
-    if(categoryList!.isEmpty){
+    if(categoryMap.isEmpty){
 
     }else{
-      for(int i=0;i<categoryList.length;i++){
-        _categoryMap[categoryList[i].categoryDocId]=categoryList[i].categoryName;
-      }
+      categoryMap.forEach((key, value) {
+        _categoryMap[value.code]=value.name;
+      });
     }
-
       notifyListeners();
   }
 

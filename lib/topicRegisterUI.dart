@@ -27,7 +27,7 @@ class TopicRegister extends ConsumerWidget {
 
     if(initialProcessFlg){
       initialProcessFlg=false;
-      ref.read(topicRegisterProvider.notifier).initialize();
+      ref.read(topicRegisterProvider.notifier).initialize(ref);
     }
 
     return Scaffold(
@@ -126,7 +126,7 @@ class TopicRegister extends ConsumerWidget {
                           ref.watch(userDataProvider).userData["userDocId"],
                         "topicResister");
                       ref.watch(topicRegisterProvider.notifier)
-                          .initialize();
+                          .initialize(ref);
 
                       topicEditingController =  TextEditingController(text: '');
 

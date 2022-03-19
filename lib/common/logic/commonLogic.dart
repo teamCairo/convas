@@ -2,21 +2,17 @@ import 'dart:core';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:convas/common/provider/categoryProvider.dart';
 import 'package:convas/common/provider/masterProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../commonValues.dart';
-import '../provider/courseProvider.dart';
 import '../provider/eventProvider.dart';
 import '../provider/friendProvider.dart';
 import '../provider/userProvider.dart';
 
 Future<void> closeStreams(WidgetRef ref) async {
-  ref.read(categoryDataProvider.notifier).closeStream();
-  ref.read(courseDataProvider.notifier).closeStream();
   // ref.read(topicDataProvider.notifier).closeStream();
   ref.read(userDataProvider.notifier).closeStream();
   ref.read(friendDataProvider.notifier).closeStream();
@@ -77,32 +73,19 @@ String fromListToTextDot(List<String> codeList){
   return result;
 }
 
-List<String> courseNameListFromText(String text,WidgetRef ref){
+List<String> masterNameListFromText(String text,String masterGroupCode,WidgetRef ref){
   List<String> coursesCodeList= fromTextToList(text);
   List<String> coursesNameList=[];
   if(coursesCodeList.isEmpty){
     return coursesNameList;
   }
   for(int i =0;i<coursesCodeList.length;i++){
-    coursesNameList.add(ref.read(courseDataProvider.notifier).courseNameMap[coursesCodeList[i]]);
-
+    coursesNameList.add(getMasterName(masterGroupCode, coursesCodeList[i], ref).name);
   }
   return coursesNameList;
 
 }
 
-List<String> categoryNameListFromText(String text,WidgetRef ref){
-  List<String> categoriesCodeList= fromTextToList(text);
-  List<String> categoriesNameList=[];
-  if(categoriesCodeList.isEmpty){
-    return categoriesNameList;
-  }
-  for(int i =0;i<categoriesCodeList.length;i++){
-    categoriesNameList.add(ref.read(categoryDataProvider.notifier).categoryNameMap[categoriesCodeList[i]]);
-  }
-return categoriesNameList;
-
-}
 
 String fromCodeListToTextDot(List<String> codeList,masterName,WidgetRef ref){
   String result ="";

@@ -43,6 +43,15 @@ Future<void> insertTestMasterData(WidgetRef ref) async {
 
   insertMasterUnitData(ref:ref,masterGroupCode:"userType",code:"1",name:"user",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"userType",code:"2",name:"teacher",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+
+  insertMasterUnitData(ref:ref,masterGroupCode:"category",code:"1",name:"food",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"category",code:"2",name:"sports",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"category",code:"3",name:"art",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"category",code:"4",name:"travel",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+
+  insertMasterUnitData(ref:ref,masterGroupCode:"course",code:"1",name:"free talk",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"course",code:"2",name:"discussion",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"course",code:"3",name:"topic talk",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
 }
 
 Future<String> insertMasterUnitData({

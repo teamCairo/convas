@@ -23,12 +23,12 @@ class EditInterest extends ConsumerWidget {
       initialProcessFlg = false;
       ref.read(editInterestProvider.notifier).initialize(ref);
     }
-    ref.watch(editInterestProvider).categoryDocIdNameMap.forEach((key, value) {
+    ref.watch(editInterestProvider).categoryCdNameMap.forEach((key, value) {
       checkList.add(CheckboxListTile(
         title: commonText20GrayLeft(value),
         value: ref
             .watch(editInterestProvider)
-            .categoryDocIdboolMap[key.toString()],
+            .categoryCdBoolMap[key.toString()],
         onChanged: (bool? value) {
           ref
               .read(editInterestProvider.notifier)
@@ -51,11 +51,11 @@ class EditInterest extends ConsumerWidget {
                   child: Column(children: checkList),
                 ),
                 commonButtonOrangeRound(
-                    onPressed: () {
+                    onPressed: () async{
                       String interestingCategories = "";
                       ref
                           .watch(editInterestProvider)
-                          .categoryDocIdboolMap
+                          .categoryCdBoolMap
                           .forEach((key, value) {
                         if (value) {
                           if (interestingCategories != "") {
@@ -63,8 +63,8 @@ class EditInterest extends ConsumerWidget {
                           }
                           interestingCategories = interestingCategories + key.toString();
                         }
-                        updateUserSelectedItem(ref, "interestingCategories",interestingCategories, "editInterest");
                       });
+                      await updateUserSelectedItem(ref, "interestingCategories",interestingCategories, "editInterest");
 
                       Navigator.pop(context);
                     },

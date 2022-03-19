@@ -213,7 +213,7 @@ class SearchUsersNotifier extends ChangeNotifier {
     ref.read(searchUsersProvider.notifier).setImage(_searchResultList[index].objectID, await getUsersSmallPhoto(_searchResultList[index].objectID,_searchResultList[index].profilePhotoNameSuffix,ref));
 
 
-    List<String> categoriesNameList=categoryNameListFromText(_searchResultList[index].interestingCategories,ref);
+    List<String> categoriesNameList=masterNameListFromText(_searchResultList[index].interestingCategories,"category",ref);
 
     _userCategories[_searchResultList[index].objectID]=categoriesNameList;
     notifyListeners();

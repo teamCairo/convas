@@ -1,43 +1,43 @@
+import 'package:convas/common/provider/masterProvider.dart';
 import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'daoIsar/courseDaoIsar.dart';
-import 'entityIsar/courseEntityIsar.dart';
+import 'entityIsar/masterEntityIsar.dart';
 
 
 class EditInterestingCourseNotifier extends ChangeNotifier {
 
-  Map<String,String> _courseDocIdNameMap={};
-  get courseDocIdNameMap=>_courseDocIdNameMap;
+  Map<String,String> _courseCdNameMap={};
+  get courseCdNameMap=>_courseCdNameMap;
 
-  Map<String,bool> _courseDocIdBoolMap={};
-  get courseDocIdBoolMap=>_courseDocIdBoolMap;
+  Map<String,bool> _courseCdBoolMap={};
+  get courseCdBoolMap=>_courseCdBoolMap;
 
-  Future<void> initialize(WidgetRef ref)async{
-    _courseDocIdNameMap={};
-    _courseDocIdBoolMap={};
-    List<Course>? courseList=await selectIsarCourseAll();
+  void initialize(WidgetRef ref)async{
+    _courseCdNameMap={};
+    _courseCdBoolMap={};
+    Map<String, Master> courseMap=getMasterMap("course", ref);
 
-    if(courseList!.isEmpty){
+    if(courseMap.isEmpty){
 
     }else{
-      for(int i=0;i<courseList.length;i++){
-        _courseDocIdNameMap[courseList[i].courseDocId]=courseList[i].courseName;
-        if(ref.watch(userDataProvider).userData["interestingCourses"].contains(courseList[i].courseDocId)){
-          _courseDocIdBoolMap[courseList[i].courseDocId]=true;
+      courseMap.forEach((key, value) {
+        _courseCdNameMap[value.code]=value.name;
+        if(ref.watch(userDataProvider).userData["interestingCourses"].contains(value.code)){
+          _courseCdBoolMap[value.code]=true;
         }else{
-          _courseDocIdBoolMap[courseList[i].courseDocId]=false;
+          _courseCdBoolMap[value.code]=false;
         }
-      }
+
+      });
     }
 
-    notifyListeners();
   }
 
   void setBool(String key,bool value){
-    _courseDocIdBoolMap[key]=!value;
+    _courseCdBoolMap[key]=!value;
     notifyListeners();
   }
 }

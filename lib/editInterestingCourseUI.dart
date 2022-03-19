@@ -24,11 +24,11 @@ class EditInterestingCourse extends ConsumerWidget {
       initialProcessFlg=false;
       ref.read(editInterestingCourseProvider.notifier).initialize(ref);
     }
-    ref.watch(editInterestingCourseProvider).courseDocIdNameMap.forEach((key, value) {
+    ref.watch(editInterestingCourseProvider).courseCdNameMap.forEach((key, value) {
       checkList.add(
           CheckboxListTile(
             title: commonText20GrayLeft(value),
-            value: ref.watch(editInterestingCourseProvider).courseDocIdBoolMap[key.toString()],
+            value: ref.watch(editInterestingCourseProvider).courseCdBoolMap[key.toString()],
             onChanged: (bool? value) {
               ref.read(editInterestingCourseProvider.notifier).setBool(key.toString(),!(value!));
             },
@@ -51,18 +51,18 @@ class EditInterestingCourse extends ConsumerWidget {
                   child: Column(children: checkList),
                 ),
 
-                commonButtonOrangeRound(onPressed: () {
+                commonButtonOrangeRound(onPressed: () async{
                   String interestingCourses="";
-                  ref.watch(editInterestingCourseProvider).courseDocIdBoolMap.forEach((key, value) {
+                  ref.watch(editInterestingCourseProvider).courseCdBoolMap.forEach((key, value) {
                     if(value){
                       if(interestingCourses!=""){
                         interestingCourses=interestingCourses+separatingCharacter;
                       }
                       interestingCourses=interestingCourses+key.toString();
                     }
-                    updateUserSelectedItem(ref,"interestingCourses",interestingCourses,"editInterestingCourse");
 
                   });
+                  await updateUserSelectedItem(ref,"interestingCourses",interestingCourses,"editInterestingCourse");
 
                   Navigator.pop(context);
                 }, text: 'OK')

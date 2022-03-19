@@ -2,8 +2,6 @@ import 'package:convas/common/provider/masterProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'common/provider/categoryProvider.dart';
-import 'common/provider/courseProvider.dart';
 import 'entityIsar/masterEntityIsar.dart';
 
 class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
@@ -51,10 +49,10 @@ class SearchUsersConditionEditTypeNotifier extends ChangeNotifier {
         _masterMap = getMasterMap("lastLogin", ref);
         break;
       case "searchConditionCategories":
-        _masterMap = ref.watch(categoryDataProvider).categoryNameMap;
+        _masterMap = getMasterMap("category", ref);
         break;
       case "searchConditionCourses":
-        _masterMap = ref.watch(courseDataProvider).courseNameMap;
+        _masterMap = getMasterMap("course", ref);
         break;
       case "searchConditionUserType":
         _masterMap = getMasterMap("userType", ref);

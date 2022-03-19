@@ -100,13 +100,13 @@ class FriendProfile extends ConsumerWidget {
                                     padding: const EdgeInsets.only(bottom: 8),
                                     child: black16TextLeft("Categories")),
                                 commonWrapMultiLineOrangeBorderRoundList(
-                                  categoryNameListFromText(ref.watch(friendProfileDataProvider).friendProfileData["interestingCategories"], ref)
+                                    masterNameListFromText(ref.watch(friendProfileDataProvider).friendProfileData["interestingCategories"],"category", ref)
                                 ),
                                 Padding(
                                     padding: const EdgeInsets.only(bottom: 8),
                                     child: black16TextLeft("Courses")),
                                 commonWrapMultiLineOrangeBorderRoundList(
-                                    categoryNameListFromText(ref.watch(friendProfileDataProvider).friendProfileData["interestingCourses"], ref)
+                                    masterNameListFromText(ref.watch(friendProfileDataProvider).friendProfileData["interestingCourses"], "course",ref)
                                 ),
                                 Padding(
                                     padding: const EdgeInsets.only(top:12,bottom: 8),

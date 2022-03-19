@@ -123,7 +123,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
         if(value==""){
           displayedValue="Any category";
         }else{
-          displayedValue = fromListToTextDot(categoryNameListFromText(ref.watch(searchUsersProvider).tmpSearchConditionCategories,ref));
+          displayedValue = fromListToTextDot(masterNameListFromText(ref.watch(searchUsersProvider).tmpSearchConditionCategories,"category",ref));
         }
         break;
 
@@ -131,7 +131,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
         if(value==""){
           displayedValue="Any course";
         }else{
-          displayedValue = fromListToTextDot(courseNameListFromText(ref.watch(searchUsersProvider).tmpSearchConditionCourses,ref));
+          displayedValue = fromListToTextDot(masterNameListFromText(ref.watch(searchUsersProvider).tmpSearchConditionCourses,"course",ref));
         }
         break;
 
