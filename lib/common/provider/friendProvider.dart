@@ -114,7 +114,7 @@ class FriendDataNotifier extends ChangeNotifier {
         for (int i = 0; i < snapshot.size; i++) {
           if (snapshot.docs[i].get("deleteFlg")) {
               _friendData.remove(snapshot.docs[i].get('friendUserDocId'));
-              await deleteIsarFriendsById(snapshot.docs[i].get('friendUserDocId'));
+              await deleteIsarFriendsByFriendUserDocId(snapshot.docs[i].get('friendUserDocId'));
           } else {
 
             Uint8List? photoUint8List;
@@ -154,25 +154,8 @@ class FriendDataNotifier extends ChangeNotifier {
               snapshot.docs[i].get('deleteFlg'),
             );
 
-            insertOrUpdateIsarFriend(
-              friendDocId:snapshot.docs[i].id,
-              userDocId:snapshot.docs[i].get('userDocId'),
-              friendUserDocId:snapshot.docs[i].get('friendUserDocId'),
-              friendUserName:snapshot.docs[i].get('friendUserName'),
-              lastMessageContent:snapshot.docs[i].get('lastMessageContent'),
-              lastMessageDocId:snapshot.docs[i].get('lastMessageDocId'),
-              lastMessageTime:snapshot.docs[i].get('lastMessageTime').toDateTime(),
-              profilePhoto:photoUint8List,
-              profilePhotoUpdateCnt:snapshot.docs[i].get('profilePhotoUpdateCnt'),
-              profilePhotoNameSuffix:snapshot.docs[i].get('profilePhotoNameSuffix'),
-              mute:snapshot.docs[i].get('mute'),
-              insertUserDocId:snapshot.docs[i].get('insertUserDocId'),
-              insertProgramId:snapshot.docs[i].get('insertProgramId'),
-              insertTime:snapshot.docs[i].get('insertTime').toDateTime(),
-              updateUserDocId:snapshot.docs[i].get('updateUserDocId'),
-              updateProgramId:snapshot.docs[i].get('updateProgramId'),
-              updateTime:snapshot.docs[i].get('updateTime').toDateTime(),
-              readableFlg:snapshot.docs[i].get('readableFlg'),
+            await insertOrUpdateIsarFriend(
+                _friendData[snapshot.docs[i].get('friendUserDocId')]!
             );
           }
 
