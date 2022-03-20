@@ -131,14 +131,16 @@ Widget loginLamp(DateTime lastLoginTime,bool onlineStatus,double size,bool textS
 
   if(onlineStatus){
     lampColor=Colors.green;
-  }
-  int differentDays = DateTime.now()
-      .difference(lastLoginTime)
-      .inDays;
-  if (differentDays <= 7) {
-    lampColor=Colors.amberAccent;
-  }else{
-    lampColor=Colors.grey;
+  }else {
+    int differentDays = DateTime
+        .now()
+        .difference(lastLoginTime)
+        .inDays;
+    if (differentDays <= 7) {
+      lampColor = Colors.amberAccent;
+    } else {
+      lampColor = Colors.grey;
+    }
   }
 
   Icon lampIcon= Icon(Icons.circle,

@@ -22,7 +22,8 @@ import '../../entityIsar/friendEntityIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
 import '../../entityIsar/topicEntityIsar.dart';
 import '../../entityIsar/userEntityIsar.dart';
-import '../../mainMessageLogic.dart';
+import 'loginLogicMessage.dart';
+import 'loginLogicOnlieStatus.dart';
 
 Future<void> insertUserToFirebase(BuildContext context,WidgetRef ref, String email) async {
 
@@ -149,6 +150,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   ref.read(userDataProvider.notifier).updateUserWhenLogin();
 
   listenNotification();
+  updateOnlineStatus(ref,tmpUserData.docs[0].id);
 
 }
 
