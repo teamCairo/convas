@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:isar/isar.dart';
 
 import '../entityIsar/friendEntityIsar.dart';
@@ -26,7 +25,7 @@ Future<List<Friend>?> selectIsarFriendAll() async {
   var isarInstance = Isar.getInstance();
   await isarInstance?.writeTxn((isar) async {
     resultFriendList =
-    await isar.friends.filter().deleteFlgEqualTo(false).findAll();
+    await isar.friends.filter().deleteFlgEqualTo(false).sortByLastMessageTimeDesc().findAll();
 
   });
   return resultFriendList;

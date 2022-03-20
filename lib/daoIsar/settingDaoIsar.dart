@@ -36,7 +36,7 @@ Future<int> insertOrUpdateIsarSettingBySettingCode({required String settingCode,
   Uint8List? uint8ListValue2,
 }) async {
 
-  log("XXXXXXXXXXXXXXXXXXXXXXXXsettingDaoIsar39行目");
+
   Setting? targetSetting =await selectIsarSettingByCode(settingCode);
 
   int returnValue=0;
@@ -127,7 +127,7 @@ Future<int> updateIsarSettingByCode({required String settingCode,
   Uint8List? uint8ListValue2,
 }) async {
 
-  log("XXXXXXXXXXXXXXXXXXXXXXXXsettingDaoIsar130行目");
+
   Setting? targetSetting =await selectIsarSettingByCode(settingCode);
 
   Setting updateSetting = setIsarSettingParameters(

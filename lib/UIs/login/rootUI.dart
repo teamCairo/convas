@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
 
 import '../myPageRoute/myPageUI.dart';
+import '../talk/talkUI.dart';
 
 final _selectedIndexProvider = StateProvider.autoDispose((ref) {
   return 0;
@@ -45,8 +46,8 @@ class Root extends ConsumerWidget {
     switch (selectedIndex) {
       // case 0:
       //   return Now();
-      // case 1:
-      //   return Talk();
+      case 1:
+        return Talk();
       case 2:
         return SearchUsersMainPage();
       // case 3:

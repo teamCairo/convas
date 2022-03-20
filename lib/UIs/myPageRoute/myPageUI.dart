@@ -7,7 +7,7 @@ import 'calendarEditUI.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
-import '../../common/logic/commonLogic.dart';
+import '../../common/logic/commonLogicDate.dart';
 import '../../common/provider/userProvider.dart';
 import 'developerPageUI.dart';
 import 'editInterestUI.dart';
@@ -52,7 +52,7 @@ class MyPage extends ConsumerWidget {
                         ])),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: imageAvatar(
+                      child: commonCircleAvatarImage(
                           radius: 40,
                           image: ref.watch(userDataProvider).mainPhotoData),
                     ),

@@ -7,7 +7,6 @@ import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/commonValues.dart';
-import '../../common/logic/commonLogic.dart';
 import '../../daoAlgolia/usersDaoAlgolia.dart';
 import 'friendProfileUI.dart';
 
@@ -121,7 +120,7 @@ class SearchUsersMainPage extends ConsumerWidget {
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8.0, top: 8),
-                child: imageAvatar(
+                child: commonCircleAvatarImage(
                     radius: 32,
                     image: ref
                         .watch(searchUsersProvider)

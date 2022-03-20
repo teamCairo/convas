@@ -27,7 +27,7 @@ class SettingPage extends ConsumerWidget {
           child: SafeArea(
               child: Column(children: <Widget>[
                 Center(
-                  child: imageAvatar(
+                  child: commonCircleAvatarImage(
                     radius: 80,
                       image:ref.watch(userDataProvider).mainPhotoData
                   ),

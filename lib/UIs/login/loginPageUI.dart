@@ -40,7 +40,7 @@ class LoginPage extends ConsumerWidget {
                         ),
                       )),
                   const SizedBox(height: 200),
-                  borderedTextBox(
+                  commonTextBoxBordered(
                       text: "e-Mail",
                       onChanged: (String value) {
                         ref.read(emailProvider.state).update((state) => value);
@@ -48,7 +48,7 @@ class LoginPage extends ConsumerWidget {
                       passwordSecure:false
                   ),
                   const SizedBox(height: 20),
-                  borderedTextBox(
+                  commonTextBoxBordered(
                       text: "Password(more than 6 letters)",
                       onChanged: (String value) {
                         ref.read(passwordProvider.state).update((state) => value);

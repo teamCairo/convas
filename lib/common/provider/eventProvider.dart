@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:core';
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/entityIsar/eventEntityIsar.dart';
 import 'package:flutter/foundation.dart';
@@ -86,7 +85,7 @@ class EventDataNotifier extends ChangeNotifier {
 
           }else{
 
-            insertOrUpdateIsarEvent(
+            await insertOrUpdateIsarEvent(
               eventDocId: snapshot.docs[i].id,
               eventName: snapshot.docs[i].get('eventName'),
               eventType: snapshot.docs[i].get('eventType'),

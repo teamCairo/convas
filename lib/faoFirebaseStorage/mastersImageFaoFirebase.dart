@@ -6,7 +6,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '../common/logic/commonLogic.dart';
+import '../common/logic/commonLogicFile.dart';
 
 Future<Uint8List?> readMasterImageFromFirebase(
      String masterGroupCode,String code,String fileNameSuffix,int no) async {

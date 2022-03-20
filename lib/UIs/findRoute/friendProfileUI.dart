@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
-import '../../common/logic/commonLogic.dart';
+import '../../common/logic/commonLogicDate.dart';
+import '../../common/logic/commonLogicList.dart';
 import '../../common/provider/masterProvider.dart';
+import '../talk/chatPageUI.dart';
 import 'friendProfileLogic.dart';
 import 'friendProfileProvider.dart';
 
@@ -57,7 +59,7 @@ class FriendProfile extends ConsumerWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical:30.0),
                           child: Center(
-                            child: imageAvatar(
+                            child: commonCircleAvatarImage(
                                 radius: 110,
                                 image: ref
                                     .watch(friendProfileDataProvider)
@@ -147,17 +149,8 @@ class FriendProfile extends ConsumerWidget {
             ),
             commonButtonSingleFooter(
                   onPressed: () async {
-                    if(!ref.watch(friendProfileDataProvider).friendProfileData["friendFlg"]){
-                      await insertFriend(ref, argumentFriendUserDocId);
-                    }
-                    // await Navigator.of(context).pushReplacement(
-                    //   MaterialPageRoute(builder: (context) {
-                    //     return ChatPage(
-                    //         friendUserDocId:argumentFriendUserDocId
-                    //         ,friendUserName:ref.watch(friendProfileDataProvider).friendProfileData["name"]
-                    //     );
-                    //   }),
-                    // );
+                    await insertFriendAndMoveToChatPage(ref,context, argumentFriendUserDocId);
+
                   },
                   text: ref.watch(friendProfileDataProvider).friendProfileData["friendFlg"]
                       ? "Talk":"Add to Friends",

@@ -15,7 +15,7 @@ import '../../daoIsar/topicDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
 import '../../entityIsar/topicEntityIsar.dart' as topic;
-import '../logic/commonLogic.dart';
+import '../logic/commonLogicFile.dart';
 
 final topicDataProvider = ChangeNotifierProvider(
       (ref) => TopicDataNotifier(),

@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/common/provider/chatDetailProvider.dart';
+import 'package:convas/entityIsar/chatDetailEntityIsar.dart';
 import 'package:convas/entityIsar/masterEntityIsar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,21 +75,18 @@ Future<void> insertUser(WidgetRef ref,String email)async {
 
 Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   log("initialProcessLogic1行目");
-  await makeDir("chatMessages");
+  await makeDir("chat");
   await makeDir("media");
 
   await openIsarInstances();
 
   log("initialProcessLogic6行目くらい");
   await updateTimeCheck("events");
-  await updateTimeCheck("courses");
   await updateTimeCheck("topics");
   await updateTimeCheck("friends");
   await updateTimeCheck("masters");
   await updateTimeCheck("user");
-  await updateTimeCheck("chatMessages");
-  await updateTimeCheck("categories");
-  await updateTimeCheck("countries");
+  await updateTimeCheck("chatDetails");
 
   await ref.read(userDataProvider.notifier).readUserDataFromIsarToMemory();
 
@@ -125,9 +124,15 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .read(friendDataProvider.notifier)
       .controlStreamOfReadFriendNewDataFromFirebaseToIsarAndMemory(ref,tmpUserData.docs[0].id);
 
+
+  ref
+      .read(chatDetailDataProvider.notifier)
+      .controlStreamOfReadChatDetailNewDataFromFirebaseToIsar(tmpUserData.docs[0].id);
+  
   ref
       .read(eventDataProvider.notifier)
       .controlStreamOfReadEventNewDataFromFirebaseToIsar(tmpUserData.docs[0].id);
+  
 
   ref
       .read(topicDataProvider.notifier)
@@ -162,14 +167,14 @@ Future<void> openIsarInstances() async {
   final dir = await getApplicationSupportDirectory();
   if (isarInstance == null) {
     await Isar.open(
-      schemas: [SettingSchema,UserSchema,TopicSchema,EventSchema,FriendSchema,MasterSchema],
+      schemas: [SettingSchema,UserSchema,TopicSchema,EventSchema,FriendSchema,MasterSchema,ChatDetailSchema],
       directory: dir.path,
       inspector: true,
     );
   } else {
     if (!isarInstance.isOpen) {
       await Isar.open(
-        schemas: [SettingSchema,UserSchema,TopicSchema,EventSchema,FriendSchema,MasterSchema],
+        schemas: [SettingSchema,UserSchema,TopicSchema,EventSchema,FriendSchema,MasterSchema,ChatDetailSchema],
         directory: dir.path,
         inspector: true,
       );

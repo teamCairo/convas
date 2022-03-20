@@ -15,3 +15,15 @@ const separatingCharacter = ", ";
 const searchConditionLastLoginInDays = 365;
 
 const searchConditionAlmightyWord="Doesn't matter";
+
+const LinearGradient commonLinearGradientForChatBox = LinearGradient(
+    begin: FractionalOffset.topLeft,
+    end: FractionalOffset.bottomRight,
+    colors: [
+      Color.fromARGB(255, 108, 132, 235),
+      Color.fromARGB(255, 132, 199, 250),
+    ],
+    stops: [
+      0.0,
+      1.0,
+    ]);

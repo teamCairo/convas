@@ -12,7 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../daoIsar/friendDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
-import '../logic/commonLogic.dart';
+import '../logic/commonLogicFile.dart';
 
 final friendDataProvider = ChangeNotifierProvider(
       (ref) => FriendDataNotifier(),
@@ -20,7 +20,20 @@ final friendDataProvider = ChangeNotifierProvider(
 
 class FriendDataNotifier extends ChangeNotifier {
   Map<String, Friend> _friendData = {}; //キーはFriendのuserDocId
-  get friendData => _friendData;
+  Map<String, Friend> get friendData => _friendData;
+
+  List<Friend> getFriendList(){
+
+    List<Friend> friendList=[];
+
+    _friendData.forEach((key, value) {
+      friendList.add(value);
+    });
+
+    friendList.sort((a,b) => b.lastMessageTime.compareTo(a.lastMessageTime));
+
+    return friendList;
+  }
 
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<bool>();
@@ -140,6 +153,7 @@ class FriendDataNotifier extends ChangeNotifier {
               snapshot.docs[i].get('profilePhotoUpdateCnt'),
               snapshot.docs[i].get('profilePhotoNameSuffix'),
               snapshot.docs[i].get('mute'),
+              snapshot.docs[i].get('chatHeaderDocId'),
               snapshot.docs[i].get('insertUserDocId'),
               snapshot.docs[i].get('insertProgramId'),
               snapshot.docs[i].get('insertTime').toDate(),

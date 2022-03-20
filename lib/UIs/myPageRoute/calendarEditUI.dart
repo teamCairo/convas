@@ -11,7 +11,7 @@ import 'calendarEditSelectModeDialogUI.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
-import '../../common/logic/commonLogic.dart';
+import '../../common/logic/commonLogicDate.dart';
 import '../../common/provider/eventProvider.dart';
 
 class CalendarEdit extends ConsumerStatefulWidget  {
@@ -100,7 +100,7 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   commonButtonCloseForModal(context),
-                  borderedTextBox(
+                  commonTextBoxBordered(
                     text: "title",
                     initialValue: ref.watch(calendarEditProvider).editedEventName ,
                     onChanged: (String value) {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:isar/isar.dart';
 
@@ -21,6 +19,7 @@ class Friend {
   this.profilePhotoUpdateCnt,
   this.profilePhotoNameSuffix,
   this.mute,
+  this.chatHeaderId,
   this.insertUserDocId,
   this.insertProgramId,
   this.insertTime,
@@ -38,21 +37,22 @@ class Friend {
   late String friendDocId;
   late String userDocId;
   late String friendUserDocId;
-  String? friendUserName;
-  String? lastMessageContent;
-  String? lastMessageDocId;
-  DateTime? lastMessageTime;
+  late String friendUserName;
+  late String lastMessageContent;
+  late String lastMessageDocId;
+  late DateTime lastMessageTime;
   Uint8List? profilePhoto;
   late int profilePhotoUpdateCnt;
-  String? profilePhotoNameSuffix;
-  bool? mute;
-  String? insertUserDocId;
-  String? insertProgramId;
-  DateTime? insertTime;
-  String? updateUserDocId;
-  String? updateProgramId;
-  DateTime? updateTime;
-  bool? readableFlg;
-  bool? deleteFlg;
+  late String profilePhotoNameSuffix;
+  late bool mute;
+  late String chatHeaderId;
+  late String insertUserDocId;
+  late String insertProgramId;
+  late DateTime insertTime;
+  late String updateUserDocId;
+  late String updateProgramId;
+  late DateTime updateTime;
+  late bool readableFlg;
+  late bool deleteFlg;
 
 }

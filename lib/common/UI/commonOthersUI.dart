@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../logic/commonLogic.dart';
+import '../commonValues.dart';
+import '../logic/commonLogicOthers.dart';
 import 'commonTextUI.dart';
 
 AppBar commonAppbarWhite(String text) {
@@ -32,7 +33,7 @@ AppBar commonAppbarTransparent(String text) {
     ),
   );
 }
-CircleAvatar imageAvatar({Image? image, required double radius}) {
+CircleAvatar commonCircleAvatarImage({Image? image, required double radius}) {
   return CircleAvatar(
     radius: radius,
     backgroundColor: Colors.white,
@@ -175,3 +176,50 @@ Widget commonLineHorizontalGrayThin(double upperPadding,double bottomPadding){
     ),
   );
 }
+
+Widget commonBalloonRight(Widget child){
+  return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(40),
+                topLeft: Radius.circular(40),
+                bottomLeft: Radius.circular(40),
+              ),
+              gradient: commonLinearGradientForChatBox),
+          child: child));
+}
+
+
+Widget commonBalloon(Widget child,String rightLeft){
+  if(rightLeft=="right"){
+    return Align(
+        alignment: Alignment.centerRight,
+        child: Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(40),
+                  topLeft: Radius.circular(40),
+                  bottomLeft: Radius.circular(40),
+                ),
+                gradient: commonLinearGradientForChatBox),
+            child: child));
+
+  }else{
+    return Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(40),
+                  topLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                ),
+                gradient: commonLinearGradientForChatBox),
+            child: child));
+
+  }
+
+}
+
