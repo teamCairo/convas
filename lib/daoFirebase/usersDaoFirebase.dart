@@ -88,6 +88,7 @@ Future<String> insertFirebaseUser({
   String? greeting,
   String? description,
   String? userType,
+  required String messageTokenId,
   bool? readableFlg,
   required String  programId
 }) async {
@@ -122,7 +123,7 @@ Future<String> insertFirebaseUser({
           'searchConditionUserType': '',
           'profilePhotoNameSuffix':"",
           'profilePhotoUpdateCnt': 0,
-          'messageTokenId':"",
+          'messageTokenId':messageTokenId,
           'onlineStatus':false,
           'lastLoginTime':FieldValue.serverTimestamp(),
           'informationModifiedTime': FieldValue.serverTimestamp(),

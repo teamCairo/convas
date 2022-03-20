@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/common/provider/chatDetailProvider.dart';
 import 'package:convas/entityIsar/chatDetailEntityIsar.dart';
 import 'package:convas/entityIsar/masterEntityIsar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
@@ -21,6 +22,7 @@ import '../../entityIsar/friendEntityIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
 import '../../entityIsar/topicEntityIsar.dart';
 import '../../entityIsar/userEntityIsar.dart';
+import '../../mainMessageLogic.dart';
 
 Future<void> insertUserToFirebase(BuildContext context,WidgetRef ref, String email) async {
 
@@ -45,6 +47,11 @@ Future<void> insertUserToFirebase(BuildContext context,WidgetRef ref, String ema
 
 Future<void> insertUser(WidgetRef ref,String email)async {
 
+  //メッセージトークンなどの取得
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  String  messageTokenId=await _firebaseMessaging.getToken()??"";
+  log("XXXXXXmessageTokenId:"+messageTokenId);
+
   String userDocId=await insertFirebaseUser(
       email: email,
       name: "my name",
@@ -61,6 +68,7 @@ Future<void> insertUser(WidgetRef ref,String email)async {
       greeting: "good morning",
       description: "I'm my name",
       userType: "1",
+      messageTokenId:messageTokenId,
       programId:"loginLogic"
   );
   insertOrUpdateIsarSettingBySettingCode(settingCode:"localUserInfo",
@@ -138,7 +146,9 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .read(topicDataProvider.notifier)
       .controlStreamOfReadTopicNewDataFromFirebaseToIsar();
 
-  ref.read(userDataProvider.notifier).updateLastLoginTime();
+  ref.read(userDataProvider.notifier).updateUserWhenLogin();
+
+  listenNotification();
 
 }
 

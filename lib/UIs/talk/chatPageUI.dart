@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 
+import '../../common/UI/commonIconsUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
 import '../../common/provider/friendProvider.dart';
 import '../../common/provider/userProvider.dart';
@@ -33,6 +34,7 @@ class ChatPage extends ConsumerWidget {
 
 
   String message="";
+  // var _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,14 +46,10 @@ class ChatPage extends ConsumerWidget {
             Expanded(
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
-                child: Column(
-                  children: <Widget>[
-                    buildMessageList(ref.watch(userDataProvider).userData["userDocId"]!,
-                        friendUserDocId,
-                        chatHeaderDocId),
-                  ],
-                ),
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0.0),
+                child: buildMessageList(ref.watch(userDataProvider).userData["userDocId"]!,
+                    friendUserDocId,
+                    chatHeaderDocId),
               ),
             ),
             textInputWidget(ref),
@@ -61,13 +59,20 @@ class ChatPage extends ConsumerWidget {
 
   AppBar appbarImageAndButtons(WidgetRef ref,BuildContext context){
 
-    Friend friendData = ref.watch(friendDataProvider).friendData[friendUserDocId]!;
+    Friend? friendData = ref.watch(friendDataProvider).friendData[friendUserDocId];
 
     Image? friendImage;
-    if(friendData.profilePhoto!=null){
-      friendImage=Image.memory(friendData.profilePhoto!);
+    String friendNameTmp="";
+    if(friendData!=null){
+      friendNameTmp=friendData.friendUserName;
+      if(friendData.profilePhoto==null){
+        friendData.profilePhoto;
+      }else{
+        friendImage=Image.memory(friendData.profilePhoto!);
+      }
     }else if(friendPhoto!=null){
       friendImage=Image.memory(friendPhoto!);
+      friendNameTmp=friendUserName;
     }else{
       friendImage=null;
     }
@@ -92,7 +97,7 @@ class ChatPage extends ConsumerWidget {
       title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           commonText20BlackLeftBold(
-              friendData.friendUserName
+              friendNameTmp
           ),
           SizedBox(
               width: 40,
@@ -126,7 +131,8 @@ class ChatPage extends ConsumerWidget {
       child: commonBalloon(Padding(
           padding: const EdgeInsets.all(16.0),
           child:
-          commonText14GrayLeft(chatDetail.message)),
+          commonText14Gray(chatDetail.message)
+      ),
           rightLeft)
     );
   }
@@ -135,19 +141,22 @@ class ChatPage extends ConsumerWidget {
     var _controller = TextEditingController();
 
     return SizedBox(
-      height: 68,
+      height: 52,
       child: Row(children: [
         commonButtonGraySmallerIcon(icon: Icons.camera_alt_outlined, onPressed: () {  }),
         commonButtonGraySmallerIcon(icon: Icons.photo_outlined, onPressed: () {  }),
         Expanded(
-            child: commonTextBoxGray(
-              onChanged: (String value) {
-                message = value;
-              },
-              controller: _controller,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: commonTextBoxGray(
+                onChanged: (String value) {
+                  message = value;
+                },
+                controller: _controller,
+              ),
             )),
         commonButtonGraySmallerIcon(
-            icon: Icons.arrow_forward_ios_rounded,
+            icon: MyFlutterApp.send,
             onPressed: () async {
               await insertChatDetailsDataMessage(
                 ref:ref,
@@ -170,7 +179,6 @@ class ChatPage extends ConsumerWidget {
         .chatHeaderDocIdEqualTo(chatHeaderDocId)
         .sortBySendTimeDesc()
         .build();
-    log("クエリ発行後");
 
     return StreamBuilder<List<ChatDetail>>(
       stream: chatDetailDataQuery?.watch(initialReturn: true),
@@ -184,7 +192,8 @@ class ChatPage extends ConsumerWidget {
           return const Text('Something went wrong');
         }
         return ListView(
-          shrinkWrap: true, //エラー対策
+          reverse: true,
+          // controller: _scrollController,
           children: chatDetailsList.data!.map((ChatDetail chatDetail) {
             if (chatDetail.senderUserDocId == userDocId) {
               return balloon(chatDetail,"right");

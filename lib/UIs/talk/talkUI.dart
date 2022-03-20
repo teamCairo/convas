@@ -64,19 +64,18 @@ class Talk extends ConsumerWidget {
                         radius: 35*screenAdjustSizeH,
                         image:friendData.profilePhoto==null?null:Image.memory(friendData.profilePhoto!)),
                   ),
-                  Expanded(
-                    child: Column(children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: commonText16BlackLeft(
-                            friendData.friendUserName
+                  Expanded(child:Column(children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: commonText16BlackLeft(
+                                friendData.friendUserName
+                              ),
                           ),
-                      ),
-                      commonText14GrayLeft(
-                          friendData.lastMessageContent,
-                        ),
-                    ]),
-                  ),
+                          commonText14GrayLeft(
+                              friendData.lastMessageContent,
+                            ),
+                        ]),
+                    ),
                   SizedBox(
                       width: 60*screenAdjustSizeH,
                       child: Column(children: [

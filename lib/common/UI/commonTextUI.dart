@@ -33,6 +33,20 @@ Padding commonText14GrayLeft(String text) {
   );
 }
 
+Padding commonText14Gray(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 4.0),
+    child: Text(
+      text,
+      style: const TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+        color: Colors.black54,
+      ),
+    ),
+  );
+}
+
 Padding commonText16GrayRight(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),

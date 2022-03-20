@@ -24,7 +24,7 @@ Widget commonTextBoxGray(
       TextEditingController? controller}){
 
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+    padding: const EdgeInsets.symmetric(horizontal: 12.0),
     decoration: BoxDecoration(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(40)),
