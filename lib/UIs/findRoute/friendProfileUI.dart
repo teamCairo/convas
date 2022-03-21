@@ -6,7 +6,6 @@ import '../../common/UI/commonTextUI.dart';
 import '../../common/logic/commonLogicDate.dart';
 import '../../common/logic/commonLogicList.dart';
 import '../../common/provider/masterProvider.dart';
-import '../talk/chatPageUI.dart';
 import 'friendProfileLogic.dart';
 import 'friendProfileProvider.dart';
 
@@ -32,8 +31,6 @@ class FriendProfile extends ConsumerWidget {
           body: const Center(child: CircularProgressIndicator()));
 
     } else {
-
-
       return Scaffold(
           appBar: commonAppbarTransparent("Friend Profile"),
           body: Column(children: [

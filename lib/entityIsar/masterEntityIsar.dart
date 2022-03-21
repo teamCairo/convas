@@ -14,7 +14,7 @@ class Master {
       this.name,
       this.onMemoryFlg,
       this.optionTime1,
-      this.optionTIme2,
+      this.optionTime2,
       this.optionNumber1,
       this.optionNumber2,
       this.optionText1,
@@ -44,7 +44,7 @@ class Master {
   late String name;
   late bool onMemoryFlg;
   DateTime? optionTime1;
-  DateTime? optionTIme2;
+  DateTime? optionTime2;
   int? optionNumber1;
   int? optionNumber2;
   String? optionText1;

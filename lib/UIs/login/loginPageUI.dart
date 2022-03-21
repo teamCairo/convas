@@ -41,7 +41,7 @@ class LoginPage extends ConsumerWidget {
                       )),
                   const SizedBox(height: 200),
                   commonTextBoxBordered(
-                      text: "e-Mail",
+                      text: "E-Mail",
                       onChanged: (String value) {
                         ref.read(emailProvider.state).update((state) => value);
                       },

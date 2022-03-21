@@ -17,7 +17,7 @@ extension GetMasterCollection on Isar {
 final MasterSchema = CollectionSchema(
   name: 'Master',
   schema:
-      '{"name":"Master","idName":"id","properties":[{"name":"code","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"fileNameSuffix1","type":"String"},{"name":"fileNameSuffix2","type":"String"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"masterDocId","type":"String"},{"name":"masterGroupCode","type":"String"},{"name":"name","type":"String"},{"name":"onMemoryFlg","type":"Bool"},{"name":"optionBool1","type":"Bool"},{"name":"optionBool2","type":"Bool"},{"name":"optionFile1","type":"ByteList"},{"name":"optionFile2","type":"ByteList"},{"name":"optionNumber1","type":"Long"},{"name":"optionNumber2","type":"Long"},{"name":"optionTIme2","type":"Long"},{"name":"optionText1","type":"String"},{"name":"optionText2","type":"String"},{"name":"optionTime1","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"Master","idName":"id","properties":[{"name":"code","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"fileNameSuffix1","type":"String"},{"name":"fileNameSuffix2","type":"String"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"masterDocId","type":"String"},{"name":"masterGroupCode","type":"String"},{"name":"name","type":"String"},{"name":"onMemoryFlg","type":"Bool"},{"name":"optionBool1","type":"Bool"},{"name":"optionBool2","type":"Bool"},{"name":"optionFile1","type":"ByteList"},{"name":"optionFile2","type":"ByteList"},{"name":"optionNumber1","type":"Long"},{"name":"optionNumber2","type":"Long"},{"name":"optionText1","type":"String"},{"name":"optionText2","type":"String"},{"name":"optionTime1","type":"Long"},{"name":"optionTime2","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"}],"indexes":[],"links":[]}',
   nativeAdapter: const _MasterNativeAdapter(),
   webAdapter: const _MasterWebAdapter(),
   idName: 'id',
@@ -39,10 +39,10 @@ final MasterSchema = CollectionSchema(
     'optionFile2': 14,
     'optionNumber1': 15,
     'optionNumber2': 16,
-    'optionTIme2': 17,
-    'optionText1': 18,
-    'optionText2': 19,
-    'optionTime1': 20,
+    'optionText1': 17,
+    'optionText2': 18,
+    'optionTime1': 19,
+    'optionTime2': 20,
     'readableFlg': 21,
     'updateProgramId': 22,
     'updateTime': 23,
@@ -91,12 +91,12 @@ class _MasterWebAdapter extends IsarWebTypeAdapter<Master> {
     IsarNative.jsObjectSet(jsObj, 'optionFile2', object.optionFile2);
     IsarNative.jsObjectSet(jsObj, 'optionNumber1', object.optionNumber1);
     IsarNative.jsObjectSet(jsObj, 'optionNumber2', object.optionNumber2);
-    IsarNative.jsObjectSet(jsObj, 'optionTIme2',
-        object.optionTIme2?.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'optionText1', object.optionText1);
     IsarNative.jsObjectSet(jsObj, 'optionText2', object.optionText2);
     IsarNative.jsObjectSet(jsObj, 'optionTime1',
         object.optionTime1?.toUtc().millisecondsSinceEpoch);
+    IsarNative.jsObjectSet(jsObj, 'optionTime2',
+        object.optionTime2?.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'readableFlg', object.readableFlg);
     IsarNative.jsObjectSet(jsObj, 'updateProgramId', object.updateProgramId);
     IsarNative.jsObjectSet(
@@ -119,9 +119,9 @@ class _MasterWebAdapter extends IsarWebTypeAdapter<Master> {
                   isUtc: true)
               .toLocal()
           : null,
-      IsarNative.jsObjectGet(jsObj, 'optionTIme2') != null
+      IsarNative.jsObjectGet(jsObj, 'optionTime2') != null
           ? DateTime.fromMillisecondsSinceEpoch(
-                  IsarNative.jsObjectGet(jsObj, 'optionTIme2'),
+                  IsarNative.jsObjectGet(jsObj, 'optionTime2'),
                   isUtc: true)
               .toLocal()
           : null,
@@ -203,13 +203,6 @@ class _MasterWebAdapter extends IsarWebTypeAdapter<Master> {
         return (IsarNative.jsObjectGet(jsObj, 'optionNumber1')) as P;
       case 'optionNumber2':
         return (IsarNative.jsObjectGet(jsObj, 'optionNumber2')) as P;
-      case 'optionTIme2':
-        return (IsarNative.jsObjectGet(jsObj, 'optionTIme2') != null
-            ? DateTime.fromMillisecondsSinceEpoch(
-                    IsarNative.jsObjectGet(jsObj, 'optionTIme2'),
-                    isUtc: true)
-                .toLocal()
-            : null) as P;
       case 'optionText1':
         return (IsarNative.jsObjectGet(jsObj, 'optionText1')) as P;
       case 'optionText2':
@@ -218,6 +211,13 @@ class _MasterWebAdapter extends IsarWebTypeAdapter<Master> {
         return (IsarNative.jsObjectGet(jsObj, 'optionTime1') != null
             ? DateTime.fromMillisecondsSinceEpoch(
                     IsarNative.jsObjectGet(jsObj, 'optionTime1'),
+                    isUtc: true)
+                .toLocal()
+            : null) as P;
+      case 'optionTime2':
+        return (IsarNative.jsObjectGet(jsObj, 'optionTime2') != null
+            ? DateTime.fromMillisecondsSinceEpoch(
+                    IsarNative.jsObjectGet(jsObj, 'optionTime2'),
                     isUtc: true)
                 .toLocal()
             : null) as P;
@@ -300,22 +300,22 @@ class _MasterNativeAdapter extends IsarNativeTypeAdapter<Master> {
     final _optionNumber1 = value15;
     final value16 = object.optionNumber2;
     final _optionNumber2 = value16;
-    final value17 = object.optionTIme2;
-    final _optionTIme2 = value17;
-    final value18 = object.optionText1;
+    final value17 = object.optionText1;
     IsarUint8List? _optionText1;
-    if (value18 != null) {
-      _optionText1 = IsarBinaryWriter.utf8Encoder.convert(value18);
+    if (value17 != null) {
+      _optionText1 = IsarBinaryWriter.utf8Encoder.convert(value17);
     }
     dynamicSize += (_optionText1?.length ?? 0) as int;
-    final value19 = object.optionText2;
+    final value18 = object.optionText2;
     IsarUint8List? _optionText2;
-    if (value19 != null) {
-      _optionText2 = IsarBinaryWriter.utf8Encoder.convert(value19);
+    if (value18 != null) {
+      _optionText2 = IsarBinaryWriter.utf8Encoder.convert(value18);
     }
     dynamicSize += (_optionText2?.length ?? 0) as int;
-    final value20 = object.optionTime1;
-    final _optionTime1 = value20;
+    final value19 = object.optionTime1;
+    final _optionTime1 = value19;
+    final value20 = object.optionTime2;
+    final _optionTime2 = value20;
     final value21 = object.readableFlg;
     final _readableFlg = value21;
     final value22 = object.updateProgramId;
@@ -355,10 +355,10 @@ class _MasterNativeAdapter extends IsarNativeTypeAdapter<Master> {
     writer.writeBytes(offsets[14], _optionFile2);
     writer.writeLong(offsets[15], _optionNumber1);
     writer.writeLong(offsets[16], _optionNumber2);
-    writer.writeDateTime(offsets[17], _optionTIme2);
-    writer.writeBytes(offsets[18], _optionText1);
-    writer.writeBytes(offsets[19], _optionText2);
-    writer.writeDateTime(offsets[20], _optionTime1);
+    writer.writeBytes(offsets[17], _optionText1);
+    writer.writeBytes(offsets[18], _optionText2);
+    writer.writeDateTime(offsets[19], _optionTime1);
+    writer.writeDateTime(offsets[20], _optionTime2);
     writer.writeBool(offsets[21], _readableFlg);
     writer.writeBytes(offsets[22], _updateProgramId);
     writer.writeDateTime(offsets[23], _updateTime);
@@ -374,12 +374,12 @@ class _MasterNativeAdapter extends IsarNativeTypeAdapter<Master> {
       reader.readString(offsets[0]),
       reader.readString(offsets[9]),
       reader.readBool(offsets[10]),
+      reader.readDateTimeOrNull(offsets[19]),
       reader.readDateTimeOrNull(offsets[20]),
-      reader.readDateTimeOrNull(offsets[17]),
       reader.readLongOrNull(offsets[15]),
       reader.readLongOrNull(offsets[16]),
+      reader.readStringOrNull(offsets[17]),
       reader.readStringOrNull(offsets[18]),
-      reader.readStringOrNull(offsets[19]),
       reader.readBoolOrNull(offsets[11]),
       reader.readBoolOrNull(offsets[12]),
       reader.readBytesOrNull(offsets[13]),
@@ -440,11 +440,11 @@ class _MasterNativeAdapter extends IsarNativeTypeAdapter<Master> {
       case 16:
         return (reader.readLongOrNull(offset)) as P;
       case 17:
-        return (reader.readDateTimeOrNull(offset)) as P;
+        return (reader.readStringOrNull(offset)) as P;
       case 18:
         return (reader.readStringOrNull(offset)) as P;
       case 19:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readDateTimeOrNull(offset)) as P;
       case 20:
         return (reader.readDateTimeOrNull(offset)) as P;
       case 21:
@@ -1678,62 +1678,6 @@ extension MasterQueryFilter on QueryBuilder<Master, Master, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<Master, Master, QAfterFilterCondition> optionTIme2IsNull() {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.isNull,
-      property: 'optionTIme2',
-      value: null,
-    ));
-  }
-
-  QueryBuilder<Master, Master, QAfterFilterCondition> optionTIme2EqualTo(
-      DateTime? value) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.eq,
-      property: 'optionTIme2',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<Master, Master, QAfterFilterCondition> optionTIme2GreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.gt,
-      include: include,
-      property: 'optionTIme2',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<Master, Master, QAfterFilterCondition> optionTIme2LessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.lt,
-      include: include,
-      property: 'optionTIme2',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<Master, Master, QAfterFilterCondition> optionTIme2Between(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return addFilterConditionInternal(FilterCondition.between(
-      property: 'optionTIme2',
-      lower: lower,
-      includeLower: includeLower,
-      upper: upper,
-      includeUpper: includeUpper,
-    ));
-  }
-
   QueryBuilder<Master, Master, QAfterFilterCondition> optionText1IsNull() {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.isNull,
@@ -2005,6 +1949,62 @@ extension MasterQueryFilter on QueryBuilder<Master, Master, QFilterCondition> {
   }) {
     return addFilterConditionInternal(FilterCondition.between(
       property: 'optionTime1',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+    ));
+  }
+
+  QueryBuilder<Master, Master, QAfterFilterCondition> optionTime2IsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'optionTime2',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<Master, Master, QAfterFilterCondition> optionTime2EqualTo(
+      DateTime? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'optionTime2',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<Master, Master, QAfterFilterCondition> optionTime2GreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'optionTime2',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<Master, Master, QAfterFilterCondition> optionTime2LessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'optionTime2',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<Master, Master, QAfterFilterCondition> optionTime2Between(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'optionTime2',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
@@ -2441,14 +2441,6 @@ extension MasterQueryWhereSortBy on QueryBuilder<Master, Master, QSortBy> {
     return addSortByInternal('optionNumber2', Sort.desc);
   }
 
-  QueryBuilder<Master, Master, QAfterSortBy> sortByOptionTIme2() {
-    return addSortByInternal('optionTIme2', Sort.asc);
-  }
-
-  QueryBuilder<Master, Master, QAfterSortBy> sortByOptionTIme2Desc() {
-    return addSortByInternal('optionTIme2', Sort.desc);
-  }
-
   QueryBuilder<Master, Master, QAfterSortBy> sortByOptionText1() {
     return addSortByInternal('optionText1', Sort.asc);
   }
@@ -2471,6 +2463,14 @@ extension MasterQueryWhereSortBy on QueryBuilder<Master, Master, QSortBy> {
 
   QueryBuilder<Master, Master, QAfterSortBy> sortByOptionTime1Desc() {
     return addSortByInternal('optionTime1', Sort.desc);
+  }
+
+  QueryBuilder<Master, Master, QAfterSortBy> sortByOptionTime2() {
+    return addSortByInternal('optionTime2', Sort.asc);
+  }
+
+  QueryBuilder<Master, Master, QAfterSortBy> sortByOptionTime2Desc() {
+    return addSortByInternal('optionTime2', Sort.desc);
   }
 
   QueryBuilder<Master, Master, QAfterSortBy> sortByReadableFlg() {
@@ -2636,14 +2636,6 @@ extension MasterQueryWhereSortThenBy
     return addSortByInternal('optionNumber2', Sort.desc);
   }
 
-  QueryBuilder<Master, Master, QAfterSortBy> thenByOptionTIme2() {
-    return addSortByInternal('optionTIme2', Sort.asc);
-  }
-
-  QueryBuilder<Master, Master, QAfterSortBy> thenByOptionTIme2Desc() {
-    return addSortByInternal('optionTIme2', Sort.desc);
-  }
-
   QueryBuilder<Master, Master, QAfterSortBy> thenByOptionText1() {
     return addSortByInternal('optionText1', Sort.asc);
   }
@@ -2666,6 +2658,14 @@ extension MasterQueryWhereSortThenBy
 
   QueryBuilder<Master, Master, QAfterSortBy> thenByOptionTime1Desc() {
     return addSortByInternal('optionTime1', Sort.desc);
+  }
+
+  QueryBuilder<Master, Master, QAfterSortBy> thenByOptionTime2() {
+    return addSortByInternal('optionTime2', Sort.asc);
+  }
+
+  QueryBuilder<Master, Master, QAfterSortBy> thenByOptionTime2Desc() {
+    return addSortByInternal('optionTime2', Sort.desc);
   }
 
   QueryBuilder<Master, Master, QAfterSortBy> thenByReadableFlg() {
@@ -2779,10 +2779,6 @@ extension MasterQueryWhereDistinct on QueryBuilder<Master, Master, QDistinct> {
     return addDistinctByInternal('optionNumber2');
   }
 
-  QueryBuilder<Master, Master, QDistinct> distinctByOptionTIme2() {
-    return addDistinctByInternal('optionTIme2');
-  }
-
   QueryBuilder<Master, Master, QDistinct> distinctByOptionText1(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('optionText1', caseSensitive: caseSensitive);
@@ -2795,6 +2791,10 @@ extension MasterQueryWhereDistinct on QueryBuilder<Master, Master, QDistinct> {
 
   QueryBuilder<Master, Master, QDistinct> distinctByOptionTime1() {
     return addDistinctByInternal('optionTime1');
+  }
+
+  QueryBuilder<Master, Master, QDistinct> distinctByOptionTime2() {
+    return addDistinctByInternal('optionTime2');
   }
 
   QueryBuilder<Master, Master, QDistinct> distinctByReadableFlg() {
@@ -2891,10 +2891,6 @@ extension MasterQueryProperty on QueryBuilder<Master, Master, QQueryProperty> {
     return addPropertyNameInternal('optionNumber2');
   }
 
-  QueryBuilder<Master, DateTime?, QQueryOperations> optionTIme2Property() {
-    return addPropertyNameInternal('optionTIme2');
-  }
-
   QueryBuilder<Master, String?, QQueryOperations> optionText1Property() {
     return addPropertyNameInternal('optionText1');
   }
@@ -2905,6 +2901,10 @@ extension MasterQueryProperty on QueryBuilder<Master, Master, QQueryProperty> {
 
   QueryBuilder<Master, DateTime?, QQueryOperations> optionTime1Property() {
     return addPropertyNameInternal('optionTime1');
+  }
+
+  QueryBuilder<Master, DateTime?, QQueryOperations> optionTime2Property() {
+    return addPropertyNameInternal('optionTime2');
   }
 
   QueryBuilder<Master, bool?, QQueryOperations> readableFlgProperty() {

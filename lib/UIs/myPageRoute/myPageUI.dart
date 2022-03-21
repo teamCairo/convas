@@ -52,7 +52,8 @@ class MyPage extends ConsumerWidget {
                         ])),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: commonCircleAvatarImage(
+                      child:
+                      commonCircleAvatarImage(
                           radius: 40,
                           image: ref.watch(userDataProvider).mainPhotoData),
                     ),

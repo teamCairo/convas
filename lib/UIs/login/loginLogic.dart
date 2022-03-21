@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../common/UI/commonOthersUI.dart';
+import '../../common/logic/commonLogicLog.dart';
 import '../../common/provider/eventProvider.dart';
 import '../../common/provider/friendProvider.dart';
 import '../../common/provider/masterProvider.dart';
@@ -83,6 +84,8 @@ Future<void> insertUser(WidgetRef ref,String email)async {
 
 
 Future<void> initialProcessLogic(WidgetRef ref, String email) async {
+
+  commonLogAddOthers(processName: 'login', processDescription: 'start loginProcess',moduleName:'initialProcessLogic');
   log("initialProcessLogic1行目");
   await makeDir("chat");
   await makeDir("media");
@@ -109,7 +112,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
   ref
       .read(userDataProvider.notifier)
-      .controlStreamOfReadUserDataFirebaseToIsarAndMemory(email);
+      .controlStreamOfReadUserDataFirebaseToIsarAndMemory(email,tmpUserData.docs[0].id);
 
 
   await ref
@@ -151,6 +154,8 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
   listenNotification();
   updateOnlineStatus(ref,tmpUserData.docs[0].id);
+
+  commonLogAddOthers(processName: 'login', processDescription: 'end loginProcess',moduleName:'initialProcessLogic');
 
 }
 

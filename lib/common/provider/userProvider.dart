@@ -56,7 +56,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> readMainPhotoFromFirebaseToDirectoryAndMemory(String profilePhotoNameSuffix) async {
+  Future<void> readMainPhotoFromFirebaseToDirectoryAndMemory(String profilePhotoNameSuffix,String userDocId) async {
     if (profilePhotoNameSuffix == "") {
       _mainPhotoData = null;
     } else {
@@ -65,7 +65,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
       Reference imageRef = storage
           .ref()
           .child("profile")
-          .child(_userData["userDocId"]!)
+          .child(userDocId)
           .child("mainPhoto" + profilePhotoNameSuffix);
       String imageUrl = await imageRef.getDownloadURL();
 
@@ -143,10 +143,10 @@ class UserDataProviderNotifier extends ChangeNotifier {
     log("XXXXXX after read user");
   }
 
-  void controlStreamOfReadUserDataFirebaseToIsarAndMemory(
+  void controlStreamOfReadUserDataFirebaseToIsarAndMemory(String email,
       String userDocId) async {
     //最初は必ず呼び出し
-    streamSub = await readUserDataFirebaseToIsarAndMemory(userDocId);
+    streamSub = await readUserDataFirebaseToIsarAndMemory(email,userDocId);
 
     if (controller.hasListener) {
     } else {
@@ -154,13 +154,13 @@ class UserDataProviderNotifier extends ChangeNotifier {
       controller.stream.listen((value) async {
         log("XXXXXXXXXXXXXCANCELする");
         streamSub!.cancel();
-        streamSub = await readUserDataFirebaseToIsarAndMemory(userDocId);
+        streamSub = await readUserDataFirebaseToIsarAndMemory(email,userDocId);
       });
     }
   }
 
   Future<StreamSubscription<QuerySnapshot>> readUserDataFirebaseToIsarAndMemory(
-      String email) async {
+      String email,String userDocId) async {
 
     Setting? tmpSetting = await selectIsarSettingByCode("userUpdateCheck");
 
@@ -184,8 +184,12 @@ class UserDataProviderNotifier extends ChangeNotifier {
           if (_userData["profilePhotoUpdateCnt"]<
               snapshot.docs[0].get("profilePhotoUpdateCnt")) {
             //自デバイス以外で写真が更新された場合は写真をDL
-            await readMainPhotoFromFirebaseToDirectoryAndMemory(snapshot.docs[0].get("profilePhotoNameSuffix") ?? "");
+            await readMainPhotoFromFirebaseToDirectoryAndMemory(snapshot.docs[0].get("profilePhotoNameSuffix") ?? "",userDocId);
           }
+        }else{
+          //そのデバイスで初回にデータ読み込むときも同様
+          await readMainPhotoFromFirebaseToDirectoryAndMemory(snapshot.docs[0].get("profilePhotoNameSuffix") ?? "",userDocId);
+
         }
 
         _userData["userDocId"] = snapshot.docs[0].id;
