@@ -14,7 +14,7 @@ Future<File> urlToFile(String imageUrl) async {
 // get temporary path from temporary directory.
   String tempPath = tempDir.path;
 // create a new file in temporary path with random file name.
-  File file = File(tempPath+ (rng.nextInt(100)).toString() +'.png');
+  File file = File(tempPath+ (rng.nextInt(30)).toString() +'.png');
 // call http.get method and pass imageUrl into it to get response.
   http.Response response = await http.get( Uri.parse(imageUrl));
 // write bodyBytes received in response to file.

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:convas/UIs/login/rootUI.dart';
+import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/UI/commonOthersUI.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
 import 'loginLogic.dart';
@@ -24,27 +26,11 @@ class LoginAutoPage extends ConsumerWidget  {
       body: SafeArea(
           child:Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:const [
+              children:[
+                commonLogoMain(100),
+                const SizedBox(height: 30),
                 Center(
-                  child: Text(
-                    "Logo",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 90,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30),
-                Center(
-                  child: Text(
-                    "logging in",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 20,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  child: commonText16Gray("logging in...")
                 ),
               ])
       ),

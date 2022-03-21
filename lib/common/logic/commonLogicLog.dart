@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
@@ -8,29 +9,22 @@ Future<void> addLog(String column1,String column2,String column3,String column4,
     String column6,String column7,String column8, String column9,) async{
 
   final logDirectory = await getApplicationDocumentsDirectory();
-  String logPath = '${logDirectory.path}/log.txt';
+  String logPath = '${logDirectory.path}/logfile.txt';
   File textFilePath = File(logPath);
+  String logStr=DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())+
+      ", "+column1+
+      ", "+column2+
+      ", "+column3+
+      ", "+column4+
+      ", "+column5+
+      ", "+column6+
+      ", "+column7+
+      ", "+column8+
+      ", "+column9+
+      "  \n";
 
-  await textFilePath.writeAsString(DateFormat('yyyy-MM-dd(E) hh:mm:ss').format(DateTime.now()),mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column1,mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column2,mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column3,mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column4,mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column5,mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column6,mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column7,mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column8,mode:FileMode.append);
-  await textFilePath.writeAsString(", ",mode:FileMode.append);
-  await textFilePath.writeAsString(column9,mode:FileMode.append);
-  await textFilePath.writeAsString("\n",mode:FileMode.append);
+
+  await textFilePath.writeAsString(logStr,mode:FileMode.append);
 
 }
 
@@ -39,12 +33,12 @@ Future<void> commonLogAddDBProcess({
     required String databaseName,
     required String entityName,
     required String crudType,
+    required String methodName,
     required String columnName1,
     required String columnValue1,
     String? columnName2,
     String? columnValue2,
-    String? columnName3,
-    String? columnValue3}) async{
+    String? optionString}) async{
   addLog(databaseName+" access",
       entityName,
       crudType,
@@ -52,8 +46,8 @@ Future<void> commonLogAddDBProcess({
       columnValue1,
       columnName2??"",
       columnValue2??"",
-      columnName3??"",
-      columnValue3??""
+      methodName,
+      optionString??""
   );
 }
 

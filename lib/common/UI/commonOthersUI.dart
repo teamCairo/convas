@@ -19,6 +19,37 @@ AppBar commonAppbarWhite(String text) {
   );
 }
 
+Widget commonLogoMain(double size){
+
+  return Container(
+    height: size,
+    width: size,
+    child:Icon(Icons.phone,
+    size:size*0.75,
+    color:Colors.white60),
+    decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.circular(size/2)
+    ),
+  );
+
+}
+
+//丸角の写真を表示する元ネタ
+// Widget _userIconImage() {
+//   return new Container(
+//       width: 150.0,
+//       height: 150.0,
+//       decoration: new BoxDecoration(
+//           shape: BoxShape.circle,
+//           image: new DecorationImage(
+//               fit: BoxFit.fill,
+//               image: new NetworkImage(
+//                   "画像URL")
+//           )
+//       ));
+// }
+
 AppBar commonAppbarTransparent(String text) {
   return AppBar(
     backgroundColor: Colors.transparent,
@@ -33,12 +64,42 @@ AppBar commonAppbarTransparent(String text) {
     ),
   );
 }
-CircleAvatar commonCircleAvatarImage({Image? image, required double radius}) {
-  return CircleAvatar(
-    radius: radius,
-    backgroundColor: Colors.white,
-    backgroundImage: image?.image,
-  );
+Widget commonCircleAvatarImage({Image? image, required double radius, String? name}) {
+
+  String character="";
+  if(image==null){
+
+    if(name!=null){
+      if(name.isNotEmpty){
+        character=name.substring(0,1).toUpperCase();
+      }
+    }
+
+    return Container(
+      height:radius*2,
+      width:radius*2,
+      child:Text(character,
+          style: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: radius,
+            color: Colors.white70,
+          ),),
+      decoration: BoxDecoration(
+        color:Colors.amber,
+        border: Border.all(
+            style:BorderStyle.none),
+        borderRadius: BorderRadius.circular(radius),
+      ),
+      alignment: Alignment.center, //
+    );
+  }else{
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: Colors.white,
+      backgroundImage: image.image,
+    );
+
+  }
 }
 
 Future<dynamic> showOkWarningDialog(BuildContext context,  String message)async{

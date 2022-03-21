@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonButtonUI.dart';
+import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
 import 'loginLogic.dart';
 import 'loginProvider.dart';
@@ -25,21 +26,13 @@ class LoginPage extends ConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
                 children: <Widget>[
-                  const SizedBox(height: 20),
-                  Container(
-                      child: const Text(
-                        "Logo",
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 90,
-                          color: Colors.black87,
-                        ),
-                      )),
-                  const SizedBox(height: 200),
+                  const SizedBox(height: 45),
+                  commonLogoMain(120),
+                  const SizedBox(height: 45),
                   commonTextBoxBordered(
                       text: "E-Mail",
                       onChanged: (String value) {

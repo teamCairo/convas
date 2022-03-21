@@ -62,7 +62,9 @@ class Talk extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 14),
                     child: commonCircleAvatarImage(
                         radius: 35*screenAdjustSizeH,
-                        image:friendData.profilePhoto==null?null:Image.memory(friendData.profilePhoto!)),
+                        image:friendData.profilePhoto==null?null:Image.memory(friendData.profilePhoto!),
+                        name:friendData.friendUserName
+                    ),
                   ),
                   Expanded(child:Column(children: [
                           Padding(

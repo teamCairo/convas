@@ -3,13 +3,15 @@ import 'package:convas/UIs/myPageRoute/topicRegisterUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import '../../developerLogic/insertTestUsersData.dart';
 import 'calendarEditUI.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/logic/commonLogicDate.dart';
 import '../../common/provider/userProvider.dart';
-import 'developerPageUI.dart';
+import 'conceptUI.dart';
 import 'editInterestUI.dart';
 import 'editInterestingCourseUI.dart';
 import '../login/loginPageUI.dart';
@@ -160,8 +162,8 @@ class MyPage extends ConsumerWidget {
                       },
                     ),
                     bigIconButton(
-                      text: "Edit Calendar",
-                      icon: Icons.calendar_today,
+                      text: "Payment",
+                      icon: Icons.attach_money,
                       onPressed: () async {
                         await Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) {
@@ -171,8 +173,49 @@ class MyPage extends ConsumerWidget {
                       },
                     ),
                     bigIconButton(
-                      text: "Help",
-                      icon: Icons.question_mark,
+                      text: "Concept",
+                      icon: Icons.vpn_key,
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return Concept();
+                          }),
+                        );
+                      },
+                    ),
+                  ]),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    bigIconButton(
+                      text: "Contact",
+                      icon: Icons.mail_outline,
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return EditInterestingCourse();
+                          }),
+                        );
+                      },
+                    ),
+                    bigIconButton(
+                      text: "",
+                      icon: Icons.attach_money,
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return const CalendarEdit();
+                          }),
+                        );
+                      },
+                    ),
+                    bigIconButton(
+                      text: "",
+                      icon: Icons.vpn_key,
                       onPressed: () async {
                         await Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) {
@@ -185,15 +228,29 @@ class MyPage extends ConsumerWidget {
             )
           ]),
         )),
-        floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: () async {
-              await Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return const DeveloperPage();
-                }),
-              );
-            }));
+        floatingActionButton: SpeedDial(
+          animatedIcon: AnimatedIcons.menu_close,
+          animatedIconTheme: const IconThemeData(size: 22.0),
+          curve: Curves.bounceIn,
+          children: [
+            SpeedDialChild(
+                child: const Icon(Icons.perm_contact_cal),
+                backgroundColor: Colors.teal,
+                label: "Create test user data",
+                onTap: () {
+                  insertTestUserData(ref);
+                },
+                labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
+            SpeedDialChild(
+                child: const Icon(Icons.code),
+                backgroundColor: Colors.blue,
+                label: "Create test master data",
+                onTap: () {
+                  insertTestUserData(ref);
+                },
+                labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
+          ],
+        ),);
   }
 
   Widget bigIconButton(

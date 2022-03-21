@@ -175,6 +175,22 @@ Padding commonText16GrayLeft(String text) {
   );
 }
 
+Padding commonText16Gray(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 0.0),
+    child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: Colors.black54,
+          ),
+        )),
+  );
+}
+
 Padding commonText16BlackLeft(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 0.0),

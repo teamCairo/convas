@@ -13,8 +13,8 @@ Future<String> insertChatDetailsDataMessage(
   //相手側データ
   await insertFirebaseChatDetails(
       chatHeaderDocId:chatHeaderDocId,
-      senderDocId:friendUserDocId,
-      receiverDocId:ref.watch(userDataProvider).userData["userDocId"],
+      senderDocId:ref.watch(userDataProvider).userData["userDocId"],
+      receiverDocId:friendUserDocId,
       ownerUserDocId:friendUserDocId,
       messageType:"2",
       fileNameSuffix:"",

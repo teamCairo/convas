@@ -60,7 +60,9 @@ class FriendProfile extends ConsumerWidget {
                                 radius: 110,
                                 image: ref
                                     .watch(friendProfileDataProvider)
-                                    .friendProfilePhotoData),
+                                    .friendProfilePhotoData,
+                                name:ref.watch(friendProfileDataProvider).friendProfileData["name"]),
+
                           ),
                         ),
 

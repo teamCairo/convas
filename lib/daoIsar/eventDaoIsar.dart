@@ -1,23 +1,23 @@
 import 'dart:developer';
 import 'package:isar/isar.dart';
 
+import '../common/logic/commonLogicLog.dart';
 import '../entityIsar/eventEntityIsar.dart';
 
 Future<Event?> selectIsarEventById(String eventDocId) async {
 
   var isarInstance = Isar.getInstance();
-  Event? resultEvent;
+  Event? result;
   await isarInstance?.writeTxn((isar) async {
-    List<Event> resultList =
-    await isar.events.filter().deleteFlgEqualTo(false).and().eventDocIdEqualTo(eventDocId).findAll();
+    result =
+    await isar.events.filter().deleteFlgEqualTo(false).and().eventDocIdEqualTo(eventDocId).findFirst();
 
-    if(resultList.length == 0){
-      resultEvent = null;
-    }else{
-      resultEvent = resultList[0];
-    }
   });
-  return resultEvent;
+
+  commonLogAddDBProcess(databaseName: 'Isar', entityName: 'event', crudType: 'read', columnName1: 'eventDocId',
+      columnValue1: eventDocId,methodName: 'selectIsarEventById');
+
+  return result;
 }
 
 Future<List<Event>?> selectIsarEventAll() async {
@@ -27,9 +27,10 @@ Future<List<Event>?> selectIsarEventAll() async {
   await isarInstance?.writeTxn((isar) async {
     resultEventList =
     await isar.events.filter().deleteFlgEqualTo(false).findAll();
-
-    log("XXXXXXXXXXイベントIsar件数"+resultEventList!.length.toString());
   });
+
+  commonLogAddDBProcess(databaseName: 'Isar', entityName: 'event', crudType: 'read', columnName1: '',
+      columnValue1:'' , optionString: 'count='+resultEventList!.length.toString(), methodName: 'selectIsarEventAll');
   return resultEventList;
 }
 

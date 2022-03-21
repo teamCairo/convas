@@ -53,12 +53,11 @@ String fromDateToYearMonthDayText(DateTime datetime){
 
 }
 
-String fromDateToYearMonthText(DateTime datetime){
+String fromDateToMonthDayText(DateTime datetime){
 
   return
-    datetime.year.toString() +
-        "/" +
-        ("00"+datetime.month.toString()).substring(datetime.month.toString().length);
+    datetime.month.toString() +
+        "/" +datetime.day.toString();
 
 }
 
@@ -78,7 +77,7 @@ String fromLastTimeToText(DateTime lastMessageTime){
   if(today==lastDay){
     return fromDateToHourMinuteText(lastMessageTime);
   }else{
-    return fromDateToYearMonthText(lastMessageTime);
+    return fromDateToMonthDayText(lastMessageTime);
   }
   String todayStr=DateFormat('MM/dd', "ja_JP").format(DateTime.now());
 

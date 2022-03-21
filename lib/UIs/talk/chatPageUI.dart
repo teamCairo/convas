@@ -32,9 +32,7 @@ class ChatPage extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
 
-
   String message="";
-  // var _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -81,7 +79,8 @@ class ChatPage extends ConsumerWidget {
       leading: IconButton(
         icon: commonCircleAvatarImage(
           image: friendImage,
-          radius: 16,
+          radius: 20,
+          name:friendUserName
         ),
         onPressed:()async{
           await Navigator.of(context).push(
