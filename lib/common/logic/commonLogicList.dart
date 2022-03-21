@@ -38,7 +38,7 @@ List<String> masterNameListFromText(String text,String masterGroupCode,WidgetRef
     return coursesNameList;
   }
   for(int i =0;i<coursesCodeList.length;i++){
-    coursesNameList.add(getMasterName(masterGroupCode, coursesCodeList[i], ref).name);
+    coursesNameList.add(getMasterData(masterGroupCode, coursesCodeList[i], ref).name);
   }
   return coursesNameList;
 
@@ -51,7 +51,7 @@ String fromCodeListToTextDot(List<String> codeList,masterName,WidgetRef ref){
     if(i!=0){
       result=result+separatingCharacter;
     }
-    result=result+getMasterName(masterName, codeList[i], ref).name;
+    result=result+getMasterData(masterName, codeList[i], ref).name;
   }
 
   return result;

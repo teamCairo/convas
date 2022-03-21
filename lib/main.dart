@@ -6,11 +6,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'UIs/login/loginAutoPageUI.dart';
+import 'UIs/login/loginLogicBadge.dart';
 import 'config/firebase_config.dart';
 import 'UIs/login/loginPageUI.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
+  setIconBadge(1);
 }
 
 Future<void> main() async {
@@ -21,7 +23,7 @@ Future<void> main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MyApp(),
     ),
   );
@@ -58,7 +60,7 @@ class _LoginCheck extends ConsumerWidget {
       return LoginPage(
       );
     }else{
-      return LoginAutoPage();
+      return const LoginAutoPage();
     }
   }
 }

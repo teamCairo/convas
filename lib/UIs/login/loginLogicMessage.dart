@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'loginLogicBadge.dart';
+
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel', // id
   'High Importance Notifications', // name
@@ -34,5 +36,7 @@ void listenNotification(){
             ),
           ));
     }
+
+    setIconBadge(1);
   });
 }

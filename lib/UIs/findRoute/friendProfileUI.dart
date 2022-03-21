@@ -80,7 +80,15 @@ class FriendProfile extends ConsumerWidget {
                               children: [
                                 SizedBox(
                                     width:double.infinity,
-                                    child: commonText22DeepOrangeLeftBold(ref.watch(friendProfileDataProvider).friendProfileData["name"]),),
+                                    child: Row(
+                                      children: [
+                                        commonText22DeepOrangeLeftBold(ref.watch(friendProfileDataProvider).friendProfileData["name"]),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left:6.0),
+                                          child: commonImageCountry(ref.watch(friendProfileDataProvider).friendProfileData["country"],20, ref),
+                                        ),
+                                      ],
+                                    ),),
                                     loginLampSmall(ref.watch(friendProfileDataProvider).friendProfileData["lastLoginTime"],
                                         ref.watch(friendProfileDataProvider).friendProfileData["onlineStatus"],true),
                                 commonLineHorizontalGrayThin(10,2),
@@ -162,13 +170,13 @@ class FriendProfile extends ConsumerWidget {
     dynamic value = ref.watch(friendProfileDataProvider).friendProfileData[databaseItem];
     String displayedValue;
     if (databaseItem == "gender" || databaseItem == "level"){
-      displayedValue =getMasterName( databaseItem, value,  ref).name;
+      displayedValue =getMasterData( databaseItem, value,  ref).name;
 
     }else if(databaseItem == "motherTongue" ){
-      displayedValue =getMasterName( "language", value,  ref).name;
+      displayedValue =getMasterData( "language", value,  ref).name;
 
     }else if(databaseItem == "country"||databaseItem == "homeCountry" ){
-      displayedValue =getMasterName( "country", value,  ref).name;
+      displayedValue =getMasterData( "country", value,  ref).name;
 
     }else if(databaseItem == "birthDate" ){
       displayedValue =fromBirthToAge(value).toString();

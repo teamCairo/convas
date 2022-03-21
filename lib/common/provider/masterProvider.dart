@@ -70,7 +70,7 @@ class MasterDataNotifier extends ChangeNotifier {
   }
 }
 
-Master getMasterName(String masterGroupCode, String code, WidgetRef ref){
+Master getMasterData(String masterGroupCode, String code, WidgetRef ref){
   return ref.watch(masterDataProvider).masterData[masterGroupCode]![code];
 }
 

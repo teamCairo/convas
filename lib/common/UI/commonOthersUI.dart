@@ -1,4 +1,6 @@
+import 'package:convas/common/provider/masterProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../commonValues.dart';
 import '../logic/commonLogicOthers.dart';
@@ -27,7 +29,8 @@ Widget commonLogoMain(double size){
     child:Icon(Icons.phone,
     size:size*0.75,
     color:Colors.white60),
-    decoration: BoxDecoration(
+    decoration:
+    BoxDecoration(
         color: Colors.orange,
         borderRadius: BorderRadius.circular(size/2)
     ),
@@ -284,3 +287,10 @@ Widget commonBalloon(Widget child,String rightLeft){
 
 }
 
+Widget commonImageCountry(String countryCode,double height, WidgetRef ref){
+
+  return SizedBox(
+      height:height,
+      child:Image.memory(getMasterData("country", countryCode, ref).optionFile1!));
+
+}

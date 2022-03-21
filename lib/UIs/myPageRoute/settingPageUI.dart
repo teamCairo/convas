@@ -149,16 +149,16 @@ class SettingPage extends ConsumerWidget {
 
     String displayedValue;
     if(databaseItem=="gender"){
-      displayedValue=getMasterName("gender",value,ref).name;
+      displayedValue=getMasterData("gender",value,ref).name;
 
     }else if(databaseItem=="level"){
-      displayedValue=getMasterName("level",value,ref).name;
+      displayedValue=getMasterData("level",value,ref).name;
 
     }else if(databaseItem=="country"||databaseItem=="homeCountry"){
-      displayedValue=getMasterName("country",value,ref).name;
+      displayedValue=getMasterData("country",value,ref).name;
 
     }else if(databaseItem=="motherTongue"){
-      displayedValue=getMasterName("language",value,ref).name;
+      displayedValue=getMasterData("language",value,ref).name;
 
     }else if(databaseItem=="birthDate"){
 

@@ -136,7 +136,16 @@ class SearchUsersMainPage extends ConsumerWidget {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          commonText16BlackCenter(userData.name),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              commonText16BlackCenter(userData.name),
+                              Padding(
+                                padding: const EdgeInsets.only(left:4,top:7),
+                                child: commonImageCountry(userData.country,13, ref),
+                              ),
+                            ],
+                          ),
                           loginLampFromSecondsSmall(userData.lastLoginTime,userData.onlineStatus,true)
                     ]),
                     commonText14GrayLeft(userData.greeting),
