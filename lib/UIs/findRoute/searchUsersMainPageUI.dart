@@ -124,7 +124,8 @@ class SearchUsersMainPage extends ConsumerWidget {
                     radius: 32,
                     image: ref
                         .watch(searchUsersProvider)
-                        .userImages[userData.objectID])
+                        .userImages[userData.objectID],
+                name:userData.name)
               ),
               Expanded(
                   child: Padding(

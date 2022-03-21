@@ -41,6 +41,7 @@ class TopicRegister extends ConsumerWidget {
                     padding: const EdgeInsets.only(top:20.0),
                     child: Center(
                       child: commonCircleAvatarImage(
+                        name:"",
                         radius: 80,
                         image:
                         ref.watch(topicRegisterProvider).topicImagePhotoFile == null

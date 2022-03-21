@@ -29,7 +29,8 @@ class SettingPage extends ConsumerWidget {
                 Center(
                   child: commonCircleAvatarImage(
                     radius: 80,
-                      image:ref.watch(userDataProvider).mainPhotoData
+                    image:ref.watch(userDataProvider).mainPhotoData,
+                    name:ref.watch(userDataProvider).userData["name"]
                   ),
                 ),
                 MaterialButton(

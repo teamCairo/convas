@@ -57,7 +57,8 @@ class MyPage extends ConsumerWidget {
                       child:
                       commonCircleAvatarImage(
                           radius: 40,
-                          image: ref.watch(userDataProvider).mainPhotoData),
+                          image: ref.watch(userDataProvider).mainPhotoData,
+                          name:ref.watch(userDataProvider).userData["name"]),
                     ),
                   ]),
             ),

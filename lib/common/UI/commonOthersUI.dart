@@ -64,15 +64,13 @@ AppBar commonAppbarTransparent(String text) {
     ),
   );
 }
-Widget commonCircleAvatarImage({Image? image, required double radius, String? name}) {
+Widget commonCircleAvatarImage({Image? image, required double radius, required String name}) {
 
   String character="";
   if(image==null){
 
-    if(name!=null){
-      if(name.isNotEmpty){
-        character=name.substring(0,1).toUpperCase();
-      }
+    if(name.isNotEmpty){
+      character=name.substring(0,1).toUpperCase();
     }
 
     return Container(
