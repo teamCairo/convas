@@ -18,7 +18,7 @@ class NowPage extends ConsumerWidget {
     return Scaffold(
         body: SafeArea(
             child: SfCalendar(
-                view: CalendarView.week,
+                view: CalendarView.timelineDay,
                 monthViewSettings: const MonthViewSettings(showAgenda: true),
                 dataSource: EventDataSource(
                   ref.watch(nowPageProvider).eventList
