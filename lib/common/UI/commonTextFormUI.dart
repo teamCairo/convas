@@ -21,7 +21,8 @@ Widget commonTextBoxBordered(
 
 Widget commonTextBoxGray(
     {Function(String)? onChanged,
-      TextEditingController? controller}){
+      TextEditingController? controller,
+    bool? multiLine}){
 
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -29,9 +30,12 @@ Widget commonTextBoxGray(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(40)),
     child: TextField(
-      autofocus: true,
+        keyboardType: multiLine??false==false?null:TextInputType.multiline,
+        autofocus: true,
       controller: controller,
       decoration: const InputDecoration(border: InputBorder.none),
+      maxLines: multiLine??false==false?1:null,
+      textInputAction: multiLine??false==false?null:TextInputAction.newline,
       onChanged: onChanged
     ),
   );

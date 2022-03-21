@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'calendarEditDeleteDialogUI.dart';
-import 'calendarEditLogic.dart';
+import '../../common/commonClassEventDataSource.dart';
 import 'calendarEditProvider.dart';
 import 'calendarEditSelectModeDialogUI.dart';
 import '../../common/UI/commonButtonUI.dart';
@@ -15,9 +15,11 @@ import '../../common/logic/commonLogicDate.dart';
 import '../../common/provider/eventProvider.dart';
 
 class CalendarEdit extends ConsumerStatefulWidget  {
-  const CalendarEdit({
+  const CalendarEdit(this.argumentFriendUserDocId, {
     Key? key,
+    //argumentFriendUserDocIdがNULLかどうかでモードを判断
   }) : super(key: key);
+  final String? argumentFriendUserDocId;
 
   @override
   CalendarEditState createState() => CalendarEditState();
