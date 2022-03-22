@@ -1,0 +1,7 @@
+https://minpro.net/flutter_launcher_icons-formatexception-invalid-number
+
+External packages の中の flutter_aundher_icons-0.9.2 android.dart の
+３０９行目を下記に変更。
+      final String minSdk ="21";
+
+その後Pubgetしてからflutter pub run flutter_launcher_icons:main

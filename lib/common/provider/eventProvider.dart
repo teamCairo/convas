@@ -74,7 +74,6 @@ class EventDataNotifier extends ChangeNotifier {
         .where('readableFlg', isEqualTo: true)
         .orderBy('updateTime', descending: false)
         .snapshots();
-    // _callStream!.first;
 
 
     //TODO 1データを複数件として取得してしまう問題有り
@@ -82,6 +81,7 @@ class EventDataNotifier extends ChangeNotifier {
     StreamSubscription<QuerySnapshot> streamSub =
         _callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
+
         for (int i = 0; i < snapshot.size; i++) {
           commonLogAddDBProcess(
               databaseName: 'Firebase',
