@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:isar/isar.dart';
 
 import '../common/logic/commonLogicLog.dart';
@@ -37,6 +36,7 @@ Future<List<Event>?> selectIsarEventAll() async {
 
 Future<int> insertOrUpdateIsarEvent({
   required String eventDocId,
+  required String userDocId,
   required String eventName,
   required String eventType,
   required String friendUserDocId,
@@ -62,6 +62,7 @@ Future<int> insertOrUpdateIsarEvent({
   if(targetEvent==null){
     returnValue= await insertIsarEvent(
       eventDocId: eventDocId,
+      userDocId: userDocId,
       eventName: eventName,
       eventType: eventType,
       friendUserDocId: friendUserDocId,
@@ -85,6 +86,7 @@ Future<int> insertOrUpdateIsarEvent({
 
     returnValue= await updateIsarEvent(
       eventDocId: eventDocId,
+      userDocId: userDocId,
       eventName: eventName,
       eventType: eventType,
       friendUserDocId: friendUserDocId,
@@ -115,6 +117,7 @@ Future<int> insertOrUpdateIsarEvent({
 
 Future<int> insertIsarEvent({
   required String eventDocId,
+  required String userDocId,
   required String eventName,
   required String eventType,
   required String friendUserDocId,
@@ -138,6 +141,7 @@ Future<int> insertIsarEvent({
 
   Event insertEvent = Event(
     eventDocId,
+    userDocId,
     eventName,
     eventType,
     friendUserDocId,
@@ -163,6 +167,9 @@ Future<int> insertIsarEvent({
     returnResult=  await isar.events.put(insertEvent);
   });
 
+  commonLogAddDBProcess(databaseName: 'Isar', entityName: 'event', crudType: 'create', columnName1: 'eventDocId',
+      columnValue1:eventDocId ,columnName2: 'id', columnValue2:returnResult.toString() ,methodName: 'insertIsarEvent');
+
   return returnResult;
 
 }
@@ -171,6 +178,7 @@ Future<int> insertIsarEvent({
 
 Future<int> updateIsarEvent({
   required String eventDocId,
+  required String userDocId,
   required String eventName,
   required String eventType,
   required String friendUserDocId,
@@ -195,6 +203,7 @@ Future<int> updateIsarEvent({
   Event updateEvent = setIsarEventParameters(
     inputEvent: targetEvent!,
     eventDocId: eventDocId,
+    userDocId: userDocId,
     eventName: eventName,
     eventType: eventType,
     friendUserDocId: friendUserDocId,
@@ -221,6 +230,9 @@ Future<int> updateIsarEvent({
     returnResult=  await isar.events.put(updateEvent);
   });
 
+  commonLogAddDBProcess(databaseName: 'Isar', entityName: 'event', crudType: 'update', columnName1: 'eventDocId',
+      columnValue1:eventDocId ,columnName2: 'id', columnValue2:returnResult.toString() ,methodName: 'updateIsarEvent');
+
   return returnResult;
 
 }
@@ -233,6 +245,8 @@ Future<int> deleteIsarEventsById(eventDocId) async {
   await isarInstance?.writeTxn((isar) async {
     returnInt = await isar.events.filter().deleteFlgEqualTo(false).and().eventDocIdEqualTo(eventDocId).deleteAll();
   });
+  commonLogAddDBProcess(databaseName: 'Isar', entityName: 'event', crudType: 'delete', columnName1: 'eventDocId',
+      columnValue1:eventDocId ,columnName2: 'id', columnValue2:returnInt.toString() ,methodName: 'deleteIsarEventsById');
 
   return returnInt;
 
@@ -243,6 +257,7 @@ Future<int> deleteIsarEventsById(eventDocId) async {
 Event setIsarEventParameters({
   required Event inputEvent,
   required String eventDocId,
+  required String userDocId,
   required String eventName,
   required String eventType,
   required String friendUserDocId,
@@ -264,6 +279,7 @@ Event setIsarEventParameters({
 
   Event tmpEvent =inputEvent;
   tmpEvent.eventDocId=eventDocId;
+  tmpEvent.userDocId=userDocId;
   tmpEvent.eventName=eventName;
   tmpEvent.eventType=eventType;
   tmpEvent.friendUserDocId=friendUserDocId;

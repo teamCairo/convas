@@ -1,5 +1,6 @@
 import 'package:convas/UIs/login/rootProvider.dart';
 import 'package:convas/UIs/findRoute/searchUsersMainPageUI.dart';
+import 'package:convas/UIs/now/nowPageUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
@@ -44,8 +45,8 @@ class Root extends ConsumerWidget {
   Widget routeElement(
       int selectedIndex, WidgetRef ref) {
     switch (selectedIndex) {
-      // case 0:
-      //   return Now();
+      case 0:
+        return NowPage();
       case 1:
         return Talk();
       case 2:

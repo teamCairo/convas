@@ -1,3 +1,4 @@
+import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -76,6 +77,7 @@ class CalendarEditNotifier extends ChangeNotifier {
 
     await updateEventData(
       ref: ref,
+      userDocId: ref.watch(userDataProvider).userData["userDocId"],
       eventDocId: _editedEventDocId,
       eventName:_editedEventName,
       eventType:"1",

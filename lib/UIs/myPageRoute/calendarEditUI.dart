@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'calendarEditDeleteDialogUI.dart';
-import '../../common/commonClassEventDataSource.dart';
+import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import 'calendarEditProvider.dart';
 import 'calendarEditSelectModeDialogUI.dart';
 import '../../common/UI/commonButtonUI.dart';

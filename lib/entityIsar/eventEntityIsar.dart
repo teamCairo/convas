@@ -7,6 +7,7 @@ part 'eventEntityIsar.g.dart';
 class Event {
 
   Event(this.eventDocId,
+      this.userDocId,
       this.eventName,
       this.eventType,
       this.friendUserDocId,
@@ -29,6 +30,7 @@ class Event {
   @Id()
   int id = Isar.autoIncrement;
   late String eventDocId;
+  late String userDocId;
   late String eventName;
   late String eventType;
   late String friendUserDocId;

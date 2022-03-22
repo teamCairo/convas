@@ -11,6 +11,7 @@ import '../../daoIsar/eventDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
 import '../../entityIsar/eventEntityIsar.dart' as event;
+import '../logic/commonLogicLog.dart';
 
 final eventDataProvider = ChangeNotifierProvider(
       (ref) => EventDataNotifier(),
@@ -79,6 +80,10 @@ class EventDataNotifier extends ChangeNotifier {
     StreamSubscription<QuerySnapshot> streamSub=_callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
         for(int i=0;i<snapshot.size;i++){
+
+          commonLogAddDBProcess(databaseName: 'Firebase', entityName: 'events', crudType: 'read', columnName1: 'eventDocId',
+              columnValue1: snapshot.docs[i].id,methodName: 'readEventNewDataFromFirebaseToIsar');
+
           if(snapshot.docs[i].get("deleteFlg")){
 
             await deleteIsarEventsById(snapshot.docs[i].id);
@@ -87,6 +92,7 @@ class EventDataNotifier extends ChangeNotifier {
 
             await insertOrUpdateIsarEvent(
               eventDocId: snapshot.docs[i].id,
+              userDocId: snapshot.docs[i].get('userDocId'),
               eventName: snapshot.docs[i].get('eventName'),
               eventType: snapshot.docs[i].get('eventType'),
               friendUserDocId: snapshot.docs[i].get('friendUserDocId'),

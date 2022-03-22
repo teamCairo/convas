@@ -27,3 +27,16 @@ const LinearGradient commonLinearGradientForChatBox = LinearGradient(
       0.0,
       1.0,
     ]);
+const calendarTimelineMaxPeople =10;
+
+const List<Color> calendarTimelineColors = [Color(0xFF0F8644),
+  Color(0xFFF0F000),
+  Color(0xF22040D0),
+  Color(0xF540F000),
+  Color(0xFFF0F000),
+  Color(0xF22040D0),
+  Color(0xF540F000),
+  Color(0xFFF0F000),
+  Color(0xF22040D0),
+  Color(0xF540F000),
+];

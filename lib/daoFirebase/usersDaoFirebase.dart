@@ -16,6 +16,29 @@ Future<QuerySnapshot> selectFirebaseUserByEmail(String email)async{
 }
 
 
+Future<QuerySnapshot> selectFirebaseAll()async{
+  QuerySnapshot snapshot = await FirebaseFirestore.instance
+      .collection('users')
+      .get();
+
+  return snapshot;
+}
+
+Future<Map<String, dynamic>> selectFirebaseByUserDocIdList(List<String> strList)async{
+  QuerySnapshot snapshot = await FirebaseFirestore.instance
+      .collection('users')
+      .where(FieldPath.documentId,whereIn:strList).
+      get();
+  Map<String,dynamic> returnMap={};
+
+  for(int i=0;i<snapshot.size;i++){
+    returnMap[snapshot.docs[i].id]=snapshot.docs[i];
+  }
+
+  return returnMap;
+}
+
+
 Future<DocumentSnapshot> selectFirebaseUserByUserDocId(String userDocId)async{
   DocumentSnapshot snapshot  = await FirebaseFirestore.instance
       .collection('users')

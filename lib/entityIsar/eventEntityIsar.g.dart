@@ -17,7 +17,7 @@ extension GetEventCollection on Isar {
 final EventSchema = CollectionSchema(
   name: 'Event',
   schema:
-      '{"name":"Event","idName":"id","properties":[{"name":"callChannelId","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"eventDocId","type":"String"},{"name":"eventName","type":"String"},{"name":"eventType","type":"String"},{"name":"friendUserDocId","type":"String"},{"name":"friendUserName","type":"String"},{"name":"fromTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"isAllDay","type":"Bool"},{"name":"readableFlg","type":"Bool"},{"name":"toTime","type":"Long"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"Event","idName":"id","properties":[{"name":"callChannelId","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"eventDocId","type":"String"},{"name":"eventName","type":"String"},{"name":"eventType","type":"String"},{"name":"friendUserDocId","type":"String"},{"name":"friendUserName","type":"String"},{"name":"fromTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"isAllDay","type":"Bool"},{"name":"readableFlg","type":"Bool"},{"name":"toTime","type":"Long"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"}],"indexes":[],"links":[]}',
   nativeAdapter: const _EventNativeAdapter(),
   webAdapter: const _EventWebAdapter(),
   idName: 'id',
@@ -38,7 +38,8 @@ final EventSchema = CollectionSchema(
     'toTime': 13,
     'updateProgramId': 14,
     'updateTime': 15,
-    'updateUserDocId': 16
+    'updateUserDocId': 16,
+    'userDocId': 17
   },
   listProperties: {},
   indexIds: {},
@@ -86,6 +87,7 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
     IsarNative.jsObjectSet(
         jsObj, 'updateTime', object.updateTime.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'updateUserDocId', object.updateUserDocId);
+    IsarNative.jsObjectSet(jsObj, 'userDocId', object.userDocId);
     return jsObj;
   }
 
@@ -93,6 +95,7 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
   Event deserialize(IsarCollection<Event> collection, dynamic jsObj) {
     final object = Event(
       IsarNative.jsObjectGet(jsObj, 'eventDocId') ?? '',
+      IsarNative.jsObjectGet(jsObj, 'userDocId') ?? '',
       IsarNative.jsObjectGet(jsObj, 'eventName') ?? '',
       IsarNative.jsObjectGet(jsObj, 'eventType') ?? '',
       IsarNative.jsObjectGet(jsObj, 'friendUserDocId') ?? '',
@@ -194,6 +197,8 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
             : DateTime.fromMillisecondsSinceEpoch(0)) as P;
       case 'updateUserDocId':
         return (IsarNative.jsObjectGet(jsObj, 'updateUserDocId') ?? '') as P;
+      case 'userDocId':
+        return (IsarNative.jsObjectGet(jsObj, 'userDocId') ?? '') as P;
       default:
         throw 'Illegal propertyName';
     }
@@ -257,6 +262,9 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
     final value16 = object.updateUserDocId;
     final _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value16);
     dynamicSize += (_updateUserDocId.length) as int;
+    final value17 = object.userDocId;
+    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value17);
+    dynamicSize += (_userDocId.length) as int;
     final size = staticSize + dynamicSize;
 
     rawObj.buffer = alloc(size);
@@ -280,6 +288,7 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
     writer.writeBytes(offsets[14], _updateProgramId);
     writer.writeDateTime(offsets[15], _updateTime);
     writer.writeBytes(offsets[16], _updateUserDocId);
+    writer.writeBytes(offsets[17], _userDocId);
   }
 
   @override
@@ -287,6 +296,7 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
       IsarBinaryReader reader, List<int> offsets) {
     final object = Event(
       reader.readString(offsets[2]),
+      reader.readString(offsets[17]),
       reader.readString(offsets[3]),
       reader.readString(offsets[4]),
       reader.readString(offsets[5]),
@@ -347,6 +357,8 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
       case 15:
         return (reader.readDateTime(offset)) as P;
       case 16:
+        return (reader.readString(offset)) as P;
+      case 17:
         return (reader.readString(offset)) as P;
       default:
         throw 'Illegal propertyIndex';
@@ -1756,6 +1768,109 @@ extension EventQueryFilter on QueryBuilder<Event, Event, QFilterCondition> {
       caseSensitive: caseSensitive,
     ));
   }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> userDocIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'userDocId',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> userDocIdGreaterThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'userDocId',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> userDocIdLessThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'userDocId',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> userDocIdBetween(
+    String lower,
+    String upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'userDocId',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> userDocIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'userDocId',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> userDocIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'userDocId',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> userDocIdContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'userDocId',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> userDocIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'userDocId',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
 }
 
 extension EventQueryLinks on QueryBuilder<Event, Event, QFilterCondition> {}
@@ -1904,6 +2019,14 @@ extension EventQueryWhereSortBy on QueryBuilder<Event, Event, QSortBy> {
   QueryBuilder<Event, Event, QAfterSortBy> sortByUpdateUserDocIdDesc() {
     return addSortByInternal('updateUserDocId', Sort.desc);
   }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByUserDocId() {
+    return addSortByInternal('userDocId', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByUserDocIdDesc() {
+    return addSortByInternal('userDocId', Sort.desc);
+  }
 }
 
 extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
@@ -2050,6 +2173,14 @@ extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
   QueryBuilder<Event, Event, QAfterSortBy> thenByUpdateUserDocIdDesc() {
     return addSortByInternal('updateUserDocId', Sort.desc);
   }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByUserDocId() {
+    return addSortByInternal('userDocId', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByUserDocIdDesc() {
+    return addSortByInternal('userDocId', Sort.desc);
+  }
 }
 
 extension EventQueryWhereDistinct on QueryBuilder<Event, Event, QDistinct> {
@@ -2140,6 +2271,11 @@ extension EventQueryWhereDistinct on QueryBuilder<Event, Event, QDistinct> {
     return addDistinctByInternal('updateUserDocId',
         caseSensitive: caseSensitive);
   }
+
+  QueryBuilder<Event, Event, QDistinct> distinctByUserDocId(
+      {bool caseSensitive = true}) {
+    return addDistinctByInternal('userDocId', caseSensitive: caseSensitive);
+  }
 }
 
 extension EventQueryProperty on QueryBuilder<Event, Event, QQueryProperty> {
@@ -2213,5 +2349,9 @@ extension EventQueryProperty on QueryBuilder<Event, Event, QQueryProperty> {
 
   QueryBuilder<Event, String, QQueryOperations> updateUserDocIdProperty() {
     return addPropertyNameInternal('updateUserDocId');
+  }
+
+  QueryBuilder<Event, String, QQueryOperations> userDocIdProperty() {
+    return addPropertyNameInternal('userDocId');
   }
 }

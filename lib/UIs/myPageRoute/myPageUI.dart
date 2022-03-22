@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import '../../developerLogic/insertTestEventsData.dart';
 import '../../developerLogic/insertTestUsersData.dart';
 import 'calendarEditUI.dart';
 import '../../common/UI/commonButtonUI.dart';
@@ -234,6 +235,14 @@ class MyPage extends ConsumerWidget {
           animatedIconTheme: const IconThemeData(size: 22.0),
           curve: Curves.bounceIn,
           children: [
+            SpeedDialChild(
+                child: const Icon(Icons.calendar_today_outlined),
+                backgroundColor: Colors.amberAccent,
+                label: "Create test event data",
+                onTap: () {
+                  insertTestEventsData(ref);
+                },
+                labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
             SpeedDialChild(
                 child: const Icon(Icons.perm_contact_cal),
                 backgroundColor: Colors.teal,
