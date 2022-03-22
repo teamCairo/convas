@@ -2,11 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
 import '../../../entityIsar/eventEntityIsar.dart';
+import 'commonClassCalendarEvent.dart';
+
 
 class EventDataSource extends CalendarDataSource {
-  EventDataSource(List<Event> source) {
+  EventDataSource(List<CalendarEvent> source) {
+
     appointments = source;
   }
 
@@ -28,13 +30,7 @@ class EventDataSource extends CalendarDataSource {
   @override
   Color getColor(int index) {
 
-
-    if(appointments![index].eventType=="1"){
-      return const Color(0xFF0F8644);
-    }else{
-
-      return const Color(0xFFF0F000);
-    }
+    return appointments![index].color;
   }
 
   @override

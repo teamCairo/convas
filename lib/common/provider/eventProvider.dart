@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:core';
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/entityIsar/eventEntityIsar.dart';
 import 'package:flutter/foundation.dart';
@@ -14,30 +15,19 @@ import '../../entityIsar/eventEntityIsar.dart' as event;
 import '../logic/commonLogicLog.dart';
 
 final eventDataProvider = ChangeNotifierProvider(
-      (ref) => EventDataNotifier(),
+  (ref) => EventDataNotifier(),
 );
 
 class EventDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<bool>();
   StreamSubscription<QuerySnapshot>? streamSub;
-  List<Event> _eventList = [];
-  get eventList => _eventList;
-
 
   void closeStream() async {
     streamSub!.cancel();
   }
 
-  Future<void> readEventDataFromIsarToMemory() async {
-
-    _eventList=(await selectIsarEventAll())!;
-    notifyListeners();
-  }
-
-  void clearIsar()async {
-
-
+  void clearIsar() async {
     deleteIsarSettingsByCode("eventsUpdateCheck");
     var isarInstance = Isar.getInstance();
     await isarInstance?.writeTxn((isar) async {
@@ -45,31 +35,40 @@ class EventDataNotifier extends ChangeNotifier {
     });
   }
 
-  void controlStreamOfReadEventNewDataFromFirebaseToIsar(String userDocId)async {
+  void controlStreamOfReadEventNewDataFromFirebaseToIsar(
+      String userDocId) async {
+    streamSub = await readEventNewDataFromFirebaseToIsar(userDocId);
 
-    streamSub=await readEventNewDataFromFirebaseToIsar(userDocId);
-
-    if(controller.hasListener){
-
-    }else{
-      controller.stream.listen((value)  async{
+    if (controller.hasListener) {
+    } else {
+      controller.stream.listen((value) async {
         streamSub!.cancel();
 
-        streamSub=await readEventNewDataFromFirebaseToIsar(userDocId);
-
+        streamSub = await readEventNewDataFromFirebaseToIsar(userDocId);
       });
     }
-
   }
 
-  Future<StreamSubscription<QuerySnapshot>> readEventNewDataFromFirebaseToIsar(String userDocId) async {
+  Future<StreamSubscription<QuerySnapshot>> readEventNewDataFromFirebaseToIsar(
+      String userDocId) async {
     Setting? tmpSetting = await selectIsarSettingByCode("eventsUpdateCheck");
     DateTime eventUpdatedTime = tmpSetting!.dateTimeValue1!;
+
+    log("listen");
+    commonLogAddDBProcess(
+        databaseName: 'Firebase',
+        entityName: 'events',
+        crudType: 'ListenStart',
+        columnName1: 'updateTime',
+        columnValue1: eventUpdatedTime.toString(),
+        columnName2: 'userDocId',
+        columnValue2: userDocId,
+        methodName: 'readEventNewDataFromFirebaseToIsar');
 
     _callStream = FirebaseFirestore.instance
         .collection('events')
         .where('updateTime',
-        isGreaterThan: Timestamp.fromDate(eventUpdatedTime))
+            isGreaterThan: Timestamp.fromDate(eventUpdatedTime))
         .where('userDocId', isEqualTo: userDocId)
         .where('readableFlg', isEqualTo: true)
         .orderBy('updateTime', descending: false)
@@ -77,55 +76,52 @@ class EventDataNotifier extends ChangeNotifier {
 
     //TODO 1データを複数件として取得してしまう問題有り
 
-    StreamSubscription<QuerySnapshot> streamSub=_callStream!.listen((QuerySnapshot snapshot) async {
+    StreamSubscription<QuerySnapshot> streamSub =
+        _callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
-        for(int i=0;i<snapshot.size;i++){
+        for (int i = 0; i < snapshot.size; i++) {
+          commonLogAddDBProcess(
+              databaseName: 'Firebase',
+              entityName: 'events',
+              crudType: 'read',
+              columnName1: '',
+              columnValue1: '',
+              methodName: 'StreamSubscription<QuerySnapshot> streamSub',
+              optionString: 'count:' + snapshot.size.toString());
 
-          commonLogAddDBProcess(databaseName: 'Firebase', entityName: 'events', crudType: 'read', columnName1: 'eventDocId',
-              columnValue1: snapshot.docs[i].id,methodName: 'readEventNewDataFromFirebaseToIsar');
-
-          if(snapshot.docs[i].get("deleteFlg")){
-
+          if (snapshot.docs[i].get("deleteFlg")) {
             await deleteIsarEventsById(snapshot.docs[i].id);
-
-          }else{
-
-            await insertOrUpdateIsarEvent(
-              eventDocId: snapshot.docs[i].id,
-              userDocId: snapshot.docs[i].get('userDocId'),
-              eventName: snapshot.docs[i].get('eventName'),
-              eventType: snapshot.docs[i].get('eventType'),
-              friendUserDocId: snapshot.docs[i].get('friendUserDocId'),
-              friendUserName: snapshot.docs[i].get('friendUserName'),
-              callChannelId: snapshot.docs[i].get('callChannelId'),
-              fromTime: snapshot.docs[i].get('fromTime').toDate(),
-              toTime: snapshot.docs[i].get('toTime').toDate(),
-              isAllDay: snapshot.docs[i].get('isAllDay'),
-              insertUserDocId: snapshot.docs[i].get('insertUserDocId'),
-              insertProgramId: snapshot.docs[i].get('insertProgramId'),
-              insertTime: snapshot.docs[i].get('insertTime').toDate(),
-              updateUserDocId: snapshot.docs[i].get('updateUserDocId'),
-              updateProgramId: snapshot.docs[i].get('updateProgramId'),
-              updateTime: snapshot.docs[i].get('updateTime').toDate(),
-              readableFlg: snapshot.docs[i].get('readableFlg'),
-              deleteFlg: snapshot.docs[i].get('deleteFlg'),
-
-
-            );
-
+          } else {
+            await insertOrUpdateIsarEvent(Event(
+                snapshot.docs[i].id,
+                snapshot.docs[i].get('userDocId'),
+                snapshot.docs[i].get('eventName'),
+                snapshot.docs[i].get('eventType'),
+                snapshot.docs[i].get('friendUserDocId'),
+                snapshot.docs[i].get('callChannelId'),
+                snapshot.docs[i].get('fromTime').toDate(),
+                snapshot.docs[i].get('toTime').toDate(),
+                snapshot.docs[i].get('isAllDay'),
+                snapshot.docs[i].get('insertUserDocId'),
+                snapshot.docs[i].get('insertProgramId'),
+                snapshot.docs[i].get('insertTime').toDate(),
+                snapshot.docs[i].get('updateUserDocId'),
+                snapshot.docs[i].get('updateProgramId'),
+                snapshot.docs[i].get('updateTime').toDate(),
+                snapshot.docs[i].get('readableFlg'),
+                snapshot.docs[i].get('deleteFlg')));
           }
-          if (snapshot.docs[i].get("updateTime").toDate().isAfter(eventUpdatedTime)) {
+          if (snapshot.docs[i]
+              .get("updateTime")
+              .toDate()
+              .isAfter(eventUpdatedTime)) {
             await insertOrUpdateIsarSettingBySettingCode(
                 settingCode: "eventsUpdateCheck",
-                dateTimeValue1: snapshot.docs[i].get("updateTime").toDate()
-            );
+                dateTimeValue1: snapshot.docs[i].get("updateTime").toDate());
           }
-
         }
-        await readEventDataFromIsarToMemory();
         controller.sink.add(true);
       }
-
     });
     return streamSub;
   }

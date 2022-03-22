@@ -18,7 +18,6 @@ import '../../daoFirebase/chatDetailsDaoFirebase.dart';
 import '../../entityIsar/chatDetailEntityIsar.dart';
 import '../../entityIsar/friendEntityIsar.dart';
 import '../findRoute/friendProfileUI.dart';
-import '../myPageRoute/calendarEditUI.dart';
 import 'appointmentRequest.dart';
 
 class ChatPage extends ConsumerWidget {
@@ -55,23 +54,8 @@ class ChatPage extends ConsumerWidget {
           ),
             textInputWidget(ref,context)
         ])));
-        // floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
-        // floatingActionButton: speedDialButton(ref));
-        // bottomNavigationBar: buttomAppBar(ref, context));
   }
 
-  // BottomAppBar buttomAppBar(WidgetRef ref, BuildContext context) {
-  //   return BottomAppBar(
-  //       color: Theme.of(context).primaryColor,
-  //       notchMargin: 6.0,
-  //       shape: const AutomaticNotchedShape(
-  //         RoundedRectangleBorder(),
-  //         StadiumBorder(
-  //           side: BorderSide(),
-  //         ),
-  //       ),
-  //       child:textInputWidget(ref),);
-  // }
 
   SpeedDial speedDialButton(WidgetRef ref,BuildContext context) {
     return SpeedDial(

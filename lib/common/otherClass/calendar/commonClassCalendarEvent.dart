@@ -7,7 +7,6 @@ class CalendarEvent {
       this.eventName,
       this.eventType,
       this.friendUserDocId,
-      this.friendUserName,
       this.callChannelId,
       this.fromTime,
       this.toTime,
@@ -21,7 +20,6 @@ class CalendarEvent {
   late String eventName;
   late String eventType;
   late String friendUserDocId;
-  late String friendUserName;
   String? callChannelId;
   DateTime? fromTime;
   DateTime? toTime;

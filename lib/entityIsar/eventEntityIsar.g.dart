@@ -17,7 +17,7 @@ extension GetEventCollection on Isar {
 final EventSchema = CollectionSchema(
   name: 'Event',
   schema:
-      '{"name":"Event","idName":"id","properties":[{"name":"callChannelId","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"eventDocId","type":"String"},{"name":"eventName","type":"String"},{"name":"eventType","type":"String"},{"name":"friendUserDocId","type":"String"},{"name":"friendUserName","type":"String"},{"name":"fromTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"isAllDay","type":"Bool"},{"name":"readableFlg","type":"Bool"},{"name":"toTime","type":"Long"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"Event","idName":"id","properties":[{"name":"callChannelId","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"eventDocId","type":"String"},{"name":"eventName","type":"String"},{"name":"eventType","type":"String"},{"name":"friendUserDocId","type":"String"},{"name":"fromTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"isAllDay","type":"Bool"},{"name":"readableFlg","type":"Bool"},{"name":"toTime","type":"Long"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"}],"indexes":[],"links":[]}',
   nativeAdapter: const _EventNativeAdapter(),
   webAdapter: const _EventWebAdapter(),
   idName: 'id',
@@ -28,18 +28,17 @@ final EventSchema = CollectionSchema(
     'eventName': 3,
     'eventType': 4,
     'friendUserDocId': 5,
-    'friendUserName': 6,
-    'fromTime': 7,
-    'insertProgramId': 8,
-    'insertTime': 9,
-    'insertUserDocId': 10,
-    'isAllDay': 11,
-    'readableFlg': 12,
-    'toTime': 13,
-    'updateProgramId': 14,
-    'updateTime': 15,
-    'updateUserDocId': 16,
-    'userDocId': 17
+    'fromTime': 6,
+    'insertProgramId': 7,
+    'insertTime': 8,
+    'insertUserDocId': 9,
+    'isAllDay': 10,
+    'readableFlg': 11,
+    'toTime': 12,
+    'updateProgramId': 13,
+    'updateTime': 14,
+    'updateUserDocId': 15,
+    'userDocId': 16
   },
   listProperties: {},
   indexIds: {},
@@ -71,7 +70,6 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
     IsarNative.jsObjectSet(jsObj, 'eventName', object.eventName);
     IsarNative.jsObjectSet(jsObj, 'eventType', object.eventType);
     IsarNative.jsObjectSet(jsObj, 'friendUserDocId', object.friendUserDocId);
-    IsarNative.jsObjectSet(jsObj, 'friendUserName', object.friendUserName);
     IsarNative.jsObjectSet(
         jsObj, 'fromTime', object.fromTime?.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'id', object.id);
@@ -99,7 +97,6 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
       IsarNative.jsObjectGet(jsObj, 'eventName') ?? '',
       IsarNative.jsObjectGet(jsObj, 'eventType') ?? '',
       IsarNative.jsObjectGet(jsObj, 'friendUserDocId') ?? '',
-      IsarNative.jsObjectGet(jsObj, 'friendUserName') ?? '',
       IsarNative.jsObjectGet(jsObj, 'callChannelId'),
       IsarNative.jsObjectGet(jsObj, 'fromTime') != null
           ? DateTime.fromMillisecondsSinceEpoch(
@@ -152,8 +149,6 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
         return (IsarNative.jsObjectGet(jsObj, 'eventType') ?? '') as P;
       case 'friendUserDocId':
         return (IsarNative.jsObjectGet(jsObj, 'friendUserDocId') ?? '') as P;
-      case 'friendUserName':
-        return (IsarNative.jsObjectGet(jsObj, 'friendUserName') ?? '') as P;
       case 'fromTime':
         return (IsarNative.jsObjectGet(jsObj, 'fromTime') != null
             ? DateTime.fromMillisecondsSinceEpoch(
@@ -235,35 +230,32 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
     final value5 = object.friendUserDocId;
     final _friendUserDocId = IsarBinaryWriter.utf8Encoder.convert(value5);
     dynamicSize += (_friendUserDocId.length) as int;
-    final value6 = object.friendUserName;
-    final _friendUserName = IsarBinaryWriter.utf8Encoder.convert(value6);
-    dynamicSize += (_friendUserName.length) as int;
-    final value7 = object.fromTime;
-    final _fromTime = value7;
-    final value8 = object.insertProgramId;
-    final _insertProgramId = IsarBinaryWriter.utf8Encoder.convert(value8);
+    final value6 = object.fromTime;
+    final _fromTime = value6;
+    final value7 = object.insertProgramId;
+    final _insertProgramId = IsarBinaryWriter.utf8Encoder.convert(value7);
     dynamicSize += (_insertProgramId.length) as int;
-    final value9 = object.insertTime;
-    final _insertTime = value9;
-    final value10 = object.insertUserDocId;
-    final _insertUserDocId = IsarBinaryWriter.utf8Encoder.convert(value10);
+    final value8 = object.insertTime;
+    final _insertTime = value8;
+    final value9 = object.insertUserDocId;
+    final _insertUserDocId = IsarBinaryWriter.utf8Encoder.convert(value9);
     dynamicSize += (_insertUserDocId.length) as int;
-    final value11 = object.isAllDay;
-    final _isAllDay = value11;
-    final value12 = object.readableFlg;
-    final _readableFlg = value12;
-    final value13 = object.toTime;
-    final _toTime = value13;
-    final value14 = object.updateProgramId;
-    final _updateProgramId = IsarBinaryWriter.utf8Encoder.convert(value14);
+    final value10 = object.isAllDay;
+    final _isAllDay = value10;
+    final value11 = object.readableFlg;
+    final _readableFlg = value11;
+    final value12 = object.toTime;
+    final _toTime = value12;
+    final value13 = object.updateProgramId;
+    final _updateProgramId = IsarBinaryWriter.utf8Encoder.convert(value13);
     dynamicSize += (_updateProgramId.length) as int;
-    final value15 = object.updateTime;
-    final _updateTime = value15;
-    final value16 = object.updateUserDocId;
-    final _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value16);
+    final value14 = object.updateTime;
+    final _updateTime = value14;
+    final value15 = object.updateUserDocId;
+    final _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value15);
     dynamicSize += (_updateUserDocId.length) as int;
-    final value17 = object.userDocId;
-    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value17);
+    final value16 = object.userDocId;
+    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value16);
     dynamicSize += (_userDocId.length) as int;
     final size = staticSize + dynamicSize;
 
@@ -277,18 +269,17 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
     writer.writeBytes(offsets[3], _eventName);
     writer.writeBytes(offsets[4], _eventType);
     writer.writeBytes(offsets[5], _friendUserDocId);
-    writer.writeBytes(offsets[6], _friendUserName);
-    writer.writeDateTime(offsets[7], _fromTime);
-    writer.writeBytes(offsets[8], _insertProgramId);
-    writer.writeDateTime(offsets[9], _insertTime);
-    writer.writeBytes(offsets[10], _insertUserDocId);
-    writer.writeBool(offsets[11], _isAllDay);
-    writer.writeBool(offsets[12], _readableFlg);
-    writer.writeDateTime(offsets[13], _toTime);
-    writer.writeBytes(offsets[14], _updateProgramId);
-    writer.writeDateTime(offsets[15], _updateTime);
-    writer.writeBytes(offsets[16], _updateUserDocId);
-    writer.writeBytes(offsets[17], _userDocId);
+    writer.writeDateTime(offsets[6], _fromTime);
+    writer.writeBytes(offsets[7], _insertProgramId);
+    writer.writeDateTime(offsets[8], _insertTime);
+    writer.writeBytes(offsets[9], _insertUserDocId);
+    writer.writeBool(offsets[10], _isAllDay);
+    writer.writeBool(offsets[11], _readableFlg);
+    writer.writeDateTime(offsets[12], _toTime);
+    writer.writeBytes(offsets[13], _updateProgramId);
+    writer.writeDateTime(offsets[14], _updateTime);
+    writer.writeBytes(offsets[15], _updateUserDocId);
+    writer.writeBytes(offsets[16], _userDocId);
   }
 
   @override
@@ -296,22 +287,21 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
       IsarBinaryReader reader, List<int> offsets) {
     final object = Event(
       reader.readString(offsets[2]),
-      reader.readString(offsets[17]),
+      reader.readString(offsets[16]),
       reader.readString(offsets[3]),
       reader.readString(offsets[4]),
       reader.readString(offsets[5]),
-      reader.readString(offsets[6]),
       reader.readStringOrNull(offsets[0]),
-      reader.readDateTimeOrNull(offsets[7]),
-      reader.readDateTimeOrNull(offsets[13]),
+      reader.readDateTimeOrNull(offsets[6]),
+      reader.readDateTimeOrNull(offsets[12]),
+      reader.readBool(offsets[10]),
+      reader.readString(offsets[9]),
+      reader.readString(offsets[7]),
+      reader.readDateTime(offsets[8]),
+      reader.readString(offsets[15]),
+      reader.readString(offsets[13]),
+      reader.readDateTime(offsets[14]),
       reader.readBool(offsets[11]),
-      reader.readString(offsets[10]),
-      reader.readString(offsets[8]),
-      reader.readDateTime(offsets[9]),
-      reader.readString(offsets[16]),
-      reader.readString(offsets[14]),
-      reader.readDateTime(offsets[15]),
-      reader.readBool(offsets[12]),
       reader.readBool(offsets[1]),
     );
     object.id = id;
@@ -337,28 +327,26 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
       case 5:
         return (reader.readString(offset)) as P;
       case 6:
-        return (reader.readString(offset)) as P;
-      case 7:
         return (reader.readDateTimeOrNull(offset)) as P;
+      case 7:
+        return (reader.readString(offset)) as P;
       case 8:
-        return (reader.readString(offset)) as P;
-      case 9:
         return (reader.readDateTime(offset)) as P;
-      case 10:
+      case 9:
         return (reader.readString(offset)) as P;
+      case 10:
+        return (reader.readBool(offset)) as P;
       case 11:
         return (reader.readBool(offset)) as P;
       case 12:
-        return (reader.readBool(offset)) as P;
-      case 13:
         return (reader.readDateTimeOrNull(offset)) as P;
+      case 13:
+        return (reader.readString(offset)) as P;
       case 14:
-        return (reader.readString(offset)) as P;
-      case 15:
         return (reader.readDateTime(offset)) as P;
-      case 16:
+      case 15:
         return (reader.readString(offset)) as P;
-      case 17:
+      case 16:
         return (reader.readString(offset)) as P;
       default:
         throw 'Illegal propertyIndex';
@@ -976,109 +964,6 @@ extension EventQueryFilter on QueryBuilder<Event, Event, QFilterCondition> {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.matches,
       property: 'friendUserDocId',
-      value: pattern,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<Event, Event, QAfterFilterCondition> friendUserNameEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.eq,
-      property: 'friendUserName',
-      value: value,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<Event, Event, QAfterFilterCondition> friendUserNameGreaterThan(
-    String value, {
-    bool caseSensitive = true,
-    bool include = false,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.gt,
-      include: include,
-      property: 'friendUserName',
-      value: value,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<Event, Event, QAfterFilterCondition> friendUserNameLessThan(
-    String value, {
-    bool caseSensitive = true,
-    bool include = false,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.lt,
-      include: include,
-      property: 'friendUserName',
-      value: value,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<Event, Event, QAfterFilterCondition> friendUserNameBetween(
-    String lower,
-    String upper, {
-    bool caseSensitive = true,
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return addFilterConditionInternal(FilterCondition.between(
-      property: 'friendUserName',
-      lower: lower,
-      includeLower: includeLower,
-      upper: upper,
-      includeUpper: includeUpper,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<Event, Event, QAfterFilterCondition> friendUserNameStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.startsWith,
-      property: 'friendUserName',
-      value: value,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<Event, Event, QAfterFilterCondition> friendUserNameEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.endsWith,
-      property: 'friendUserName',
-      value: value,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<Event, Event, QAfterFilterCondition> friendUserNameContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.contains,
-      property: 'friendUserName',
-      value: value,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<Event, Event, QAfterFilterCondition> friendUserNameMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.matches,
-      property: 'friendUserName',
       value: pattern,
       caseSensitive: caseSensitive,
     ));
@@ -1924,14 +1809,6 @@ extension EventQueryWhereSortBy on QueryBuilder<Event, Event, QSortBy> {
     return addSortByInternal('friendUserDocId', Sort.desc);
   }
 
-  QueryBuilder<Event, Event, QAfterSortBy> sortByFriendUserName() {
-    return addSortByInternal('friendUserName', Sort.asc);
-  }
-
-  QueryBuilder<Event, Event, QAfterSortBy> sortByFriendUserNameDesc() {
-    return addSortByInternal('friendUserName', Sort.desc);
-  }
-
   QueryBuilder<Event, Event, QAfterSortBy> sortByFromTime() {
     return addSortByInternal('fromTime', Sort.asc);
   }
@@ -2078,14 +1955,6 @@ extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
     return addSortByInternal('friendUserDocId', Sort.desc);
   }
 
-  QueryBuilder<Event, Event, QAfterSortBy> thenByFriendUserName() {
-    return addSortByInternal('friendUserName', Sort.asc);
-  }
-
-  QueryBuilder<Event, Event, QAfterSortBy> thenByFriendUserNameDesc() {
-    return addSortByInternal('friendUserName', Sort.desc);
-  }
-
   QueryBuilder<Event, Event, QAfterSortBy> thenByFromTime() {
     return addSortByInternal('fromTime', Sort.asc);
   }
@@ -2214,12 +2083,6 @@ extension EventQueryWhereDistinct on QueryBuilder<Event, Event, QDistinct> {
         caseSensitive: caseSensitive);
   }
 
-  QueryBuilder<Event, Event, QDistinct> distinctByFriendUserName(
-      {bool caseSensitive = true}) {
-    return addDistinctByInternal('friendUserName',
-        caseSensitive: caseSensitive);
-  }
-
   QueryBuilder<Event, Event, QDistinct> distinctByFromTime() {
     return addDistinctByInternal('fromTime');
   }
@@ -2301,10 +2164,6 @@ extension EventQueryProperty on QueryBuilder<Event, Event, QQueryProperty> {
 
   QueryBuilder<Event, String, QQueryOperations> friendUserDocIdProperty() {
     return addPropertyNameInternal('friendUserDocId');
-  }
-
-  QueryBuilder<Event, String, QQueryOperations> friendUserNameProperty() {
-    return addPropertyNameInternal('friendUserName');
   }
 
   QueryBuilder<Event, DateTime?, QQueryOperations> fromTimeProperty() {

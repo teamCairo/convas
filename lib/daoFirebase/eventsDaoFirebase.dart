@@ -1,11 +1,10 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:convas/daoFirebase/usersDaoFirebase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../common/logic/commonLogicLog.dart';
 import '../common/provider/userProvider.dart';
 import '../entityIsar/eventEntityIsar.dart';
-
 
 Future<List<Event>> selectFirebaseEventsByDateTimeAndFriend(DateTime from, DateTime to,userDocId)async{
   QuerySnapshot snapshot = await FirebaseFirestore.instance
@@ -17,9 +16,7 @@ Future<List<Event>> selectFirebaseEventsByDateTimeAndFriend(DateTime from, DateT
 
   List<Event> returnList = setEventListFromSnapshot(snapshot);
   return returnList;
-
 }
-
 
 Future<List<Event>> selectFirebaseEventsByDateTimeOrderByFrom(DateTime from, DateTime to)async{
   QuerySnapshot snapshot = await FirebaseFirestore.instance
@@ -42,7 +39,6 @@ List<Event> setEventListFromSnapshot(QuerySnapshot snapshot){
       snapshot.docs[i].get('eventName'),
       snapshot.docs[i].get('eventType'),
       snapshot.docs[i].get('friendUserDocId'),
-      snapshot.docs[i].get('friendUserName'),
       snapshot.docs[i].get('callChannelId'),
       snapshot.docs[i].get('fromTime').toDate(),
       snapshot.docs[i].get('toTime').toDate(),
@@ -73,13 +69,6 @@ Future<String> insertEventData(
     required String programId}) async {
   try {
 
-    String friendName = "";
-
-    if (friendUserDocId != "") {
-      DocumentSnapshot friendUserData =
-      await selectFirebaseUserByUserDocId(friendUserDocId);
-      friendName = friendUserData.get("name");
-    }
     String insertedDocId = "";
     await FirebaseFirestore.instance.collection('events').add(
       {
@@ -87,7 +76,6 @@ Future<String> insertEventData(
         'eventName': eventName,
         'eventType': eventType,
         'friendUserDocId': friendUserDocId,
-        'friendUserName': friendName,
         'callChannelId': callChannelId,
         'fromTime': Timestamp.fromDate(fromTime),
         'toTime': Timestamp.fromDate(toTime),
@@ -104,6 +92,9 @@ Future<String> insertEventData(
     ).then((value) {
       insertedDocId = value.id;
     });
+
+    commonLogAddDBProcess(databaseName: 'Firebase', entityName: 'events', crudType: 'create', columnName1: 'eventDocId',
+        columnValue1: insertedDocId, methodName: 'insertEventData');
 
     return insertedDocId;
   } catch (e) {
@@ -128,14 +119,6 @@ Future<void> updateEventData(
       required String programId}) async {
   try {
 
-    String friendName = "";
-
-    if (friendUserDocId != "") {
-      DocumentSnapshot friendUserData =
-      await selectFirebaseUserByUserDocId(friendUserDocId);
-      friendName = friendUserData.get("name");
-    }
-
     await FirebaseFirestore.instance
         .collection('events')
         .doc(eventDocId)
@@ -144,7 +127,6 @@ Future<void> updateEventData(
       'eventName': eventName,
       'eventType': eventType,
       'friendUserDocId': friendUserDocId,
-      'friendUserName': friendName,
       'callChannelId': callChannelId,
       'fromTime': Timestamp.fromDate(fromTime),
       'toTime': Timestamp.fromDate(toTime),
@@ -156,6 +138,9 @@ Future<void> updateEventData(
   } catch (e) {
     log(e.toString());
   }
+
+  commonLogAddDBProcess(databaseName: 'Firebase', entityName: 'events', crudType: 'update', columnName1: 'eventDocId',
+      columnValue1: eventDocId, methodName: 'updateEventData');
 }
 
 
@@ -171,5 +156,6 @@ Future<void> logicalDeleteEventData(String eventDocId,String userDocId,String pr
     'updateProgramId': programId,
     'updateTime': FieldValue.serverTimestamp(),
   });
-
+  commonLogAddDBProcess(databaseName: 'Firebase', entityName: 'events', crudType: 'delete logial', columnName1: 'eventDocId',
+      columnValue1: eventDocId, methodName: 'logicalDeleteEventData');
 }

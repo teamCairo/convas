@@ -25,7 +25,6 @@ class ChatDetailDataNotifier extends ChangeNotifier {
     streamSub!.cancel();
   }
 
-
   void clearIsar()async {
 
 
@@ -50,7 +49,6 @@ class ChatDetailDataNotifier extends ChangeNotifier {
 
       });
     }
-
   }
 
   Future<StreamSubscription<QuerySnapshot>> readChatDetailNewDataFromFirebaseToIsar(String userDocId) async {

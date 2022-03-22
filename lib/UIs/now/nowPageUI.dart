@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../common/otherClass/calendar/commonClassEventDataSourceNew.dart';
+import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 
 class NowPage extends ConsumerWidget {
   NowPage({

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/commonValues.dart';
 import '../../common/otherClass/calendar/commonClassCalendarEvent.dart';
-import '../../common/otherClass/calendar/commonClassEventDataSourceNew.dart';
+import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../daoFirebase/eventsDaoFirebase.dart';
 import '../../daoFirebase/usersDaoFirebase.dart';
 import '../../entityIsar/eventEntityIsar.dart';
@@ -18,8 +18,8 @@ class NowPageNotifier extends ChangeNotifier {
   List<Event> _firebaseEventList =[];
   List<Event> get firebaseEventList => _firebaseEventList;
 
-  EventDataSourceNew? _eventDataSource =null;
-  EventDataSourceNew? get eventDataSource =>_eventDataSource;
+  EventDataSource? _eventDataSource =null;
+  EventDataSource? get eventDataSource =>_eventDataSource;
 
 
   void initializeEditedEvent(DateTime from,DateTime to)async{
@@ -52,7 +52,6 @@ class NowPageNotifier extends ChangeNotifier {
             _firebaseEventList[i].eventName,
             _firebaseEventList[i].eventType,
             _firebaseEventList[i].friendUserDocId,
-            _firebaseEventList[i].friendUserName,
             _firebaseEventList[i].callChannelId,
             _firebaseEventList[i].fromTime,
             _firebaseEventList[i].toTime,
@@ -64,7 +63,7 @@ class NowPageNotifier extends ChangeNotifier {
     }
 
 
-    _eventDataSource=EventDataSourceNew(calendarEventList);
+    _eventDataSource=EventDataSource(calendarEventList);
   }
 }
 

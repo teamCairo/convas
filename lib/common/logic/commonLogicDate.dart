@@ -3,6 +3,7 @@ import 'dart:core';
 import "package:intl/intl.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../provider/chatDetailProvider.dart';
 import '../provider/eventProvider.dart';
 import '../provider/friendProvider.dart';
 import '../provider/userProvider.dart';
@@ -12,7 +13,7 @@ Future<void> closeStreams(WidgetRef ref) async {
   ref.read(userDataProvider.notifier).closeStream();
   ref.read(friendDataProvider.notifier).closeStream();
   ref.read(eventDataProvider.notifier).closeStream();
-  // ref.read(chatMessagesDataProvider.notifier).closeStream();
+  ref.read(chatDetailDataProvider.notifier).closeStream();
   //TODO 編集必要
 }
 

@@ -40,3 +40,5 @@ const List<Color> calendarTimelineColors = [Color(0xFF0F8644),
   Color(0xF22040D0),
   Color(0xF540F000),
 ];
+
+const Color calendarColorForMe = Colors.orangeAccent;

@@ -123,12 +123,8 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .read(friendDataProvider.notifier)
       .readFriendDataFromIsarToMemory();
 
+
   await ref
-      .read(eventDataProvider.notifier)
-      .readEventDataFromIsarToMemory();
-
-
-  ref
       .read(masterDataProvider.notifier)
       .readMasterFromFirebaseToIsarAndMemory();
 
