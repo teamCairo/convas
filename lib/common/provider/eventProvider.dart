@@ -22,6 +22,7 @@ class EventDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<bool>();
   StreamSubscription<QuerySnapshot>? streamSub;
+  DateTime? updateTime;//追加
 
   void closeStream() async {
     streamSub!.cancel();
@@ -68,11 +69,13 @@ class EventDataNotifier extends ChangeNotifier {
     _callStream = FirebaseFirestore.instance
         .collection('events')
         .where('updateTime',
-            isGreaterThan: Timestamp.fromDate(eventUpdatedTime))
+        isGreaterThan: Timestamp.fromDate(eventUpdatedTime))
         .where('userDocId', isEqualTo: userDocId)
         .where('readableFlg', isEqualTo: true)
         .orderBy('updateTime', descending: false)
         .snapshots();
+    // _callStream!.first;
+
 
     //TODO 1データを複数件として取得してしまう問題有り
 
