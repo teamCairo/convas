@@ -27,6 +27,7 @@ class NowPageNotifier extends ChangeNotifier {
 
     List<String> userDocIdList=[];
     List<CalendarEvent> calendarEventList=[];
+
     //まずは表示するユーザを選定
     for(int i=0;i<_firebaseEventList.length&&userDocIdList.length<calendarTimelineMaxPeople;i++){
       //過去のイベントもしくはもうすでにリストに加えたユーザなら何もしない
@@ -48,7 +49,7 @@ class NowPageNotifier extends ChangeNotifier {
         calendarEventList.add(
           CalendarEvent(_firebaseEventList[i].eventDocId,
               _firebaseEventList[i].userDocId,
-              userDataMap[_firebaseEventList[i].userDocId],
+              userDataMap[_firebaseEventList[i].userDocId].get("name"),
             _firebaseEventList[i].eventName,
             _firebaseEventList[i].eventType,
             _firebaseEventList[i].friendUserDocId,
@@ -64,6 +65,8 @@ class NowPageNotifier extends ChangeNotifier {
 
 
     _eventDataSource=EventDataSource(calendarEventList);
+
+    notifyListeners();
   }
 }
 

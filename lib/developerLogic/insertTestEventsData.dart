@@ -12,23 +12,16 @@ Future<void> insertTestEventsData(WidgetRef ref) async {
   var rng = Random();
   int times = 0;
   QuerySnapshot snapshot = await selectFirebaseAll();
-  for(int i=0;i<10;i++){
+  for(int i=0;i<7;i++){
 
     times =rng.nextInt(5);
 
-    for(int i = 0;i<times; i++){
+    for(int j = 0;j<times; j++){
 
       DateTime from = DateTime.now().add(Duration(hours:rng.nextInt(100)));
       DateTime to = from.add(Duration(hours:rng.nextInt(5)));
       insertEventUnitData(ref:ref,userDocId:snapshot.docs[i].id,fromTime:from,toTime:to);
 
-      from = DateTime.now().add(Duration(hours:rng.nextInt(100)));
-      to = from.add(Duration(hours:rng.nextInt(5)));
-      insertEventUnitData(ref:ref,userDocId:snapshot.docs[i].id,fromTime:from,toTime:to);
-
-      from = DateTime.now().add(Duration(hours:rng.nextInt(100)));
-      to = from.add(Duration(hours:rng.nextInt(5)));
-      insertEventUnitData(ref:ref,userDocId:snapshot.docs[i].id,fromTime:from,toTime:to);
 
     }
   }
@@ -43,6 +36,7 @@ Future<String> insertEventUnitData({
   String insertedDocId = await insertEventData(
       ref:ref,
       eventName:"available",
+      userDocId:userDocId,
       eventType:"1",
       friendUserDocId:"",
       callChannelId:"",

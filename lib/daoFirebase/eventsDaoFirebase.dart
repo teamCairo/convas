@@ -21,8 +21,8 @@ Future<List<Event>> selectFirebaseEventsByDateTimeAndFriend(DateTime from, DateT
 Future<List<Event>> selectFirebaseEventsByDateTimeOrderByFrom(DateTime from, DateTime to)async{
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('events')
-      .where('toTime', isGreaterThan: from)
-      .where('fromTime', isLessThan: to)
+      .where('fromTime', isGreaterThan: Timestamp.fromDate(from))
+      .where('fromTime', isLessThan: Timestamp.fromDate(to))
       .orderBy('fromTime')
       .get();
 
@@ -59,6 +59,7 @@ List<Event> setEventListFromSnapshot(QuerySnapshot snapshot){
 
 Future<String> insertEventData(
     {required WidgetRef ref,
+    required String userDocId,
     required String eventName,
     required String eventType,
     required String friendUserDocId,
@@ -72,7 +73,7 @@ Future<String> insertEventData(
     String insertedDocId = "";
     await FirebaseFirestore.instance.collection('events').add(
       {
-        'userDocId': ref.watch(userDataProvider).userData["userDocId"],
+        'userDocId': userDocId,
         'eventName': eventName,
         'eventType': eventType,
         'friendUserDocId': friendUserDocId,

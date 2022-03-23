@@ -61,6 +61,7 @@ class CalendarEditNotifier extends ChangeNotifier {
 
     await insertEventData(
       ref: ref,
+      userDocId:ref.watch(userDataProvider).userData["userDocId"],
       eventName:_editedEventName,
       eventType:"1",
       friendUserDocId:"",
