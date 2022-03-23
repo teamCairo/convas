@@ -3,13 +3,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Future<Image?> getUsersSmallPhoto(String userDocId, String profilePhotoNameSuffix,WidgetRef ref) async {
+Future<Image?> getUsersSmallPhoto(String userDocId, String profilePhotoNameSuffix) async {
 
   String tmp ="mainPhoto_small";
   return await getUsersPhoto( userDocId,  profilePhotoNameSuffix, tmp);
 }
 
-Future<Image?> getUsersBigPhoto(String userDocId, String profilePhotoNameSuffix,WidgetRef ref) async {
+Future<Image?> getUsersBigPhoto(String userDocId, String profilePhotoNameSuffix) async {
 
   String tmp ="mainPhoto";
   return await getUsersPhoto( userDocId,  profilePhotoNameSuffix,tmp);

@@ -2,6 +2,7 @@ import 'package:convas/common/provider/masterProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../UIs/findRoute/friendProfileUI.dart';
 import '../commonValues.dart';
 import '../logic/commonLogicOthers.dart';
 import 'commonTextUI.dart';
@@ -67,6 +68,26 @@ AppBar commonAppbarTransparent(String text) {
     ),
   );
 }
+
+Widget commonCircleAvatarUserImage({Image? image,
+required double radius,
+required String userDocId,
+required String name,
+required BuildContext context}
+){
+  return GestureDetector(
+      onTap: () async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) {
+        return FriendProfile(
+          argumentFriendUserDocId:userDocId,
+        );
+      }),
+    );
+  },
+  child:commonCircleAvatarImage(image:image, radius:radius, name:name)
+  );
+}
 Widget commonCircleAvatarImage({Image? image, required double radius, required String name}) {
 
   String character="";
@@ -89,7 +110,7 @@ Widget commonCircleAvatarImage({Image? image, required double radius, required S
         color:Colors.amber,
         border: Border.all(
             style:BorderStyle.none),
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: BorderRadius.circular(radius*1.2),
       ),
       alignment: Alignment.center, //
     );

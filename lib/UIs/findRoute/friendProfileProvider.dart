@@ -25,7 +25,7 @@ class FriendProfileDataNotifier extends ChangeNotifier {
   }
 
   Future<void> readFriendProfilePhotoDataFromFirebaseToMemory(WidgetRef ref,String userDocId,String profilePhotoNameSuffix) async {
-    _friendProfilePhotoData = await getUsersBigPhoto(userDocId, profilePhotoNameSuffix, ref);
+    _friendProfilePhotoData = await getUsersBigPhoto(userDocId, profilePhotoNameSuffix);
   }
 
 

@@ -24,18 +24,13 @@ Future<QuerySnapshot> selectFirebaseAll()async{
   return snapshot;
 }
 
-Future<Map<String, dynamic>> selectFirebaseByUserDocIdList(List<String> strList)async{
+Future<QuerySnapshot> selectFirebaseByUserDocIdList(List<String> strList)async{
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('users')
       .where(FieldPath.documentId,whereIn:strList).
       get();
-  Map<String,dynamic> returnMap={};
 
-  for(int i=0;i<snapshot.size;i++){
-    returnMap[snapshot.docs[i].id]=snapshot.docs[i];
-  }
-
-  return returnMap;
+  return snapshot;
 }
 
 

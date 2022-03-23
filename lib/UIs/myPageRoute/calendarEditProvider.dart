@@ -2,8 +2,8 @@ import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../common/otherClass/calendar/commonClassCalendarEvent.dart';
 import '../../daoFirebase/eventsDaoFirebase.dart';
-import '../../entityIsar/eventEntityIsar.dart';
 
 final calendarEditProvider = ChangeNotifierProvider(
       (ref) => CalendarEditNotifier(),
@@ -49,7 +49,7 @@ class CalendarEditNotifier extends ChangeNotifier {
   }
 
 
-  void setEditedEventInfo(Event event){
+  void setEditedEventInfo(CalendarEvent event){
     _editedDateTimeFrom =event.fromTime;
     _editedDateTimeTo =event.toTime;
     _editedEventName = event.eventName;

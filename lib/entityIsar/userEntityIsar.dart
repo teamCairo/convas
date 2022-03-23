@@ -47,7 +47,6 @@ class User {
       this.updateTime,
       this.readableFlg,
       this.deleteFlg,
-
       );
 
   @Id()

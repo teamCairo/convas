@@ -18,12 +18,13 @@ Future<List<Event>> selectFirebaseEventsByDateTimeAndFriend(DateTime from, DateT
   return returnList;
 }
 
-Future<List<Event>> selectFirebaseEventsByDateTimeOrderByFrom(DateTime from, DateTime to)async{
+Future<List<Event>> selectFirebaseEventsByDateTimeOrderByFromLimitNum(DateTime from, DateTime to,int limitNum)async{
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('events')
       .where('fromTime', isGreaterThan: Timestamp.fromDate(from))
       .where('fromTime', isLessThan: Timestamp.fromDate(to))
       .orderBy('fromTime')
+      .limit(limitNum)
       .get();
 
   List<Event> returnList = setEventListFromSnapshot(snapshot);
