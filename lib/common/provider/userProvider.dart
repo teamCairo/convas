@@ -24,7 +24,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
   get mainPhotoData => _mainPhotoData;
 
   Stream<QuerySnapshot>? _callStream;
-  final controller = StreamController<bool>();
+  final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
 
 
@@ -150,11 +150,13 @@ class UserDataProviderNotifier extends ChangeNotifier {
 
     if (controller.hasListener) {
     } else {
-      //2回目以降は新しいデータを更新するたびに起動
       controller.stream.listen((value) async {
-        log("XXXXXXXXXXXXXCANCELする");
-        streamSub!.cancel();
-        streamSub = await readUserDataFirebaseToIsarAndMemory(email,userDocId);
+        if(value=="listen"){
+          streamSub = await readUserDataFirebaseToIsarAndMemory(email,userDocId);
+        }
+        if(value=="cancel"){
+          streamSub!.cancel();
+        }
       });
     }
   }
@@ -164,11 +166,8 @@ class UserDataProviderNotifier extends ChangeNotifier {
 
     Setting? tmpSetting = await selectIsarSettingByCode("userUpdateCheck");
 
-    log("XXXXXXXXXX"+tmpSetting.toString()+"：TMPSETTINGの内容");
-
     DateTime userUpdatedTime = tmpSetting!.dateTimeValue1!;
 
-    log("XXXXXXXXXXXXXXXXXXXXXXXXクエリ用日付" + userUpdatedTime.toString());
     _callStream = FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: email)
@@ -178,8 +177,10 @@ class UserDataProviderNotifier extends ChangeNotifier {
 
     StreamSubscription<QuerySnapshot> streamSub =
     _callStream!.listen((QuerySnapshot snapshot) async {
-      log("XXXXXXXXXXXXXXXXXXXXXXXXListen処理開始　Size" + snapshot.size.toString());
       if (snapshot.size != 0) {
+
+        controller.sink.add("cancel");
+
         if(_userData["profilePhotoUpdateCnt"]!=null){
           if (_userData["profilePhotoUpdateCnt"]<
               snapshot.docs[0].get("profilePhotoUpdateCnt")) {
@@ -276,15 +277,12 @@ class UserDataProviderNotifier extends ChangeNotifier {
             deleteFlg: snapshot.docs[0].get('deleteFlg'),
       );
 
-        log("XXXXXXXXXXXXXXXXXXXXXXXX日付セット前　ID" + snapshot.docs[0].id);
-        log("XXXXXXXXXXXXXXXXXXXXXXXX日付セット　SnapshotDocsDate" +
-            snapshot.docs[0].get("informationModifiedTime").toDate().toString());
         await insertOrUpdateIsarSettingBySettingCode(
             settingCode: "userUpdateCheck",
             dateTimeValue1: snapshot.docs[0].get("informationModifiedTime").toDate()
         );
 
-        controller.sink.add(true);
+        controller.sink.add("listen");
         notifyListeners();
       }
     });
@@ -332,7 +330,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
           pathStrEx)
           .putFile(localSmallFile);
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
 
     notifyListeners();

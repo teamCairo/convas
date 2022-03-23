@@ -23,7 +23,7 @@ final topicDataProvider = ChangeNotifierProvider(
 
 class TopicDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
-  final controller = StreamController<bool>();
+  final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
 
   void closeStream() async {
@@ -47,9 +47,15 @@ class TopicDataNotifier extends ChangeNotifier {
     if(controller.hasListener){
 
     }else{
-      controller.stream.listen((value)  async{
-        streamSub!.cancel();
-        streamSub=await readTopicNewDataFromFirebaseToIsar();
+      controller.stream.listen((value) async {
+        if(value=="listen"){
+          streamSub=await readTopicNewDataFromFirebaseToIsar();
+        }
+
+        if(value=="cancel"){
+          streamSub!.cancel();
+        }
+
       });
     }
 
@@ -70,6 +76,9 @@ class TopicDataNotifier extends ChangeNotifier {
 
     StreamSubscription<QuerySnapshot> streamSub=_callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
+
+        controller.sink.add("cancel");
+
         for(int i=0;i<snapshot.size;i++){
 
           if(snapshot.docs[i].get("deleteFlg")){
@@ -121,7 +130,7 @@ class TopicDataNotifier extends ChangeNotifier {
           }
 
         }
-        controller.sink.add(true);
+        controller.sink.add("listen");
         notifyListeners();
       }
 

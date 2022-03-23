@@ -36,7 +36,7 @@ class FriendDataNotifier extends ChangeNotifier {
   }
 
   Stream<QuerySnapshot>? _callStream;
-  final controller = StreamController<bool>();
+  final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
 
   Future<Uint8List?> readFriendPhotoFromFirebase(
@@ -92,10 +92,15 @@ class FriendDataNotifier extends ChangeNotifier {
 
     if (controller.hasListener) {
     } else {
-      //2回目以降は新しいデータを更新するたびに起動
       controller.stream.listen((value) async {
-        streamSub!.cancel();
-        streamSub = await readFriendFromFirebaseToIsarAndMemory(ref,userDocId);
+        if(value=="listen"){
+          streamSub = await readFriendFromFirebaseToIsarAndMemory(ref,userDocId);
+        }
+
+        if(value=="cancel"){
+          streamSub!.cancel();
+        }
+
       });
     }
   }
@@ -119,6 +124,7 @@ class FriendDataNotifier extends ChangeNotifier {
     StreamSubscription<QuerySnapshot> streamSub =
     _callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
+        controller.sink.add("cancel");
 
         for (int i = 0; i < snapshot.size; i++) {
           if (snapshot.docs[i].get("deleteFlg")) {
@@ -176,7 +182,7 @@ class FriendDataNotifier extends ChangeNotifier {
             );
           }
         }
-        controller.sink.add(true);
+        controller.sink.add("listen");
         notifyListeners();
       }
     });

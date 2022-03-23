@@ -18,7 +18,7 @@ final chatDetailDataProvider = ChangeNotifierProvider(
 
 class ChatDetailDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
-  final controller = StreamController<bool>();
+  final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
 
   void closeStream() async {
@@ -42,10 +42,15 @@ class ChatDetailDataNotifier extends ChangeNotifier {
     if(controller.hasListener){
 
     }else{
-      controller.stream.listen((value)  async{
-        streamSub!.cancel();
 
-        streamSub=await readChatDetailNewDataFromFirebaseToIsar(userDocId);
+      controller.stream.listen((value) async {
+        if(value=="listen"){
+          streamSub=await readChatDetailNewDataFromFirebaseToIsar(userDocId);
+        }
+
+        if(value=="cancel"){
+          streamSub!.cancel();
+        }
 
       });
     }
@@ -67,6 +72,9 @@ class ChatDetailDataNotifier extends ChangeNotifier {
 
     StreamSubscription<QuerySnapshot> streamSub=_callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
+
+        controller.sink.add("cancel");
+
         for(int i=0;i<snapshot.size;i++){
           if(snapshot.docs[i].get("deleteFlg")){
 
@@ -108,7 +116,7 @@ class ChatDetailDataNotifier extends ChangeNotifier {
 
         }
 
-        controller.sink.add(true);
+        controller.sink.add("listen");
       }
 
     });

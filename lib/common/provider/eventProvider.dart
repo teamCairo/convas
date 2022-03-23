@@ -6,12 +6,10 @@ import 'package:convas/entityIsar/eventEntityIsar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar/isar.dart';
 
 import '../../daoIsar/eventDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
-import '../../entityIsar/eventEntityIsar.dart' as event;
 import '../logic/commonLogicLog.dart';
 
 final eventDataProvider = ChangeNotifierProvider(
@@ -20,20 +18,12 @@ final eventDataProvider = ChangeNotifierProvider(
 
 class EventDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
-  final controller = StreamController<bool>();
+  final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
   DateTime? updateTime;//追加
 
   void closeStream() async {
     streamSub!.cancel();
-  }
-
-  void clearIsar() async {
-    deleteIsarSettingsByCode("eventsUpdateCheck");
-    var isarInstance = Isar.getInstance();
-    await isarInstance?.writeTxn((isar) async {
-      isar.events.clear();
-    });
   }
 
   void controlStreamOfReadEventNewDataFromFirebaseToIsar(
@@ -43,9 +33,14 @@ class EventDataNotifier extends ChangeNotifier {
     if (controller.hasListener) {
     } else {
       controller.stream.listen((value) async {
-        streamSub!.cancel();
+        if(value=="listen"){
+          streamSub = await readEventNewDataFromFirebaseToIsar(userDocId);
+        }
 
-        streamSub = await readEventNewDataFromFirebaseToIsar(userDocId);
+        if(value=="cancel"){
+          streamSub!.cancel();
+        }
+
       });
     }
   }
@@ -76,11 +71,11 @@ class EventDataNotifier extends ChangeNotifier {
         .snapshots();
 
 
-    //TODO 1データを複数件として取得してしまう問題有り
-
     StreamSubscription<QuerySnapshot> streamSub =
         _callStream!.listen((QuerySnapshot snapshot) async {
       if (snapshot.size != 0) {
+
+        controller.sink.add("cancel");
 
         for (int i = 0; i < snapshot.size; i++) {
           commonLogAddDBProcess(
@@ -123,7 +118,7 @@ class EventDataNotifier extends ChangeNotifier {
                 dateTimeValue1: snapshot.docs[i].get("updateTime").toDate());
           }
         }
-        controller.sink.add(true);
+        controller.sink.add("listen");
       }
     });
     return streamSub;
