@@ -15,6 +15,10 @@ class Concept extends ConsumerWidget {
     "assets/Slide1.JPG",
     "assets/Slide2.JPG",
     "assets/Slide3.JPG",
+    "assets/Slide4.JPG",
+    "assets/Slide5.JPG",
+    "assets/Slide6.JPG",
+    "assets/Slide7.JPG",
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {

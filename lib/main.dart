@@ -7,6 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 import 'UIs/login/loginAutoPageUI.dart';
 import 'UIs/login/loginLogicBadge.dart';
+import 'common/provider/settingProvider.dart';
 import 'config/firebase_config.dart';
 import 'UIs/login/loginPageUI.dart';
 
@@ -55,6 +56,7 @@ class _LoginCheck extends ConsumerWidget {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? _currentUser = _auth.currentUser;
 
+    ref.read(settingDataProvider.notifier).readSettingDataFromIsarToMemory();
 
     if(_currentUser==null){
       return LoginPage(

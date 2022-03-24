@@ -1,15 +1,13 @@
 import 'dart:async';
 import 'dart:core';
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/common/provider/settingProvider.dart';
 import 'package:convas/entityIsar/eventEntityIsar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../daoIsar/eventDaoIsar.dart';
-import '../../daoIsar/settingDaoIsar.dart';
-import '../../entityIsar/settingEntityIsar.dart';
 import '../logic/commonLogicLog.dart';
 
 final eventDataProvider = ChangeNotifierProvider(
@@ -26,15 +24,15 @@ class EventDataNotifier extends ChangeNotifier {
     streamSub!.cancel();
   }
 
-  void controlStreamOfReadEventNewDataFromFirebaseToIsar(
+  void controlStreamOfReadEventNewDataFromFirebaseToIsar(WidgetRef ref,
       String userDocId) async {
-    streamSub = await readEventNewDataFromFirebaseToIsar(userDocId);
+    streamSub = await readEventNewDataFromFirebaseToIsar(ref,userDocId);
 
     if (controller.hasListener) {
     } else {
       controller.stream.listen((value) async {
         if(value=="listen"){
-          streamSub = await readEventNewDataFromFirebaseToIsar(userDocId);
+          streamSub = await readEventNewDataFromFirebaseToIsar(ref,userDocId);
         }
 
         if(value=="cancel"){
@@ -45,21 +43,9 @@ class EventDataNotifier extends ChangeNotifier {
     }
   }
 
-  Future<StreamSubscription<QuerySnapshot>> readEventNewDataFromFirebaseToIsar(
+  Future<StreamSubscription<QuerySnapshot>> readEventNewDataFromFirebaseToIsar(WidgetRef ref,
       String userDocId) async {
-    Setting? tmpSetting = await selectIsarSettingByCode("eventsUpdateCheck");
-    DateTime eventUpdatedTime = tmpSetting!.dateTimeValue1!;
-
-    log("listen");
-    commonLogAddDBProcess(
-        databaseName: 'Firebase',
-        entityName: 'events',
-        crudType: 'ListenStart',
-        columnName1: 'updateTime',
-        columnValue1: eventUpdatedTime.toString(),
-        columnName2: 'userDocId',
-        columnValue2: userDocId,
-        methodName: 'readEventNewDataFromFirebaseToIsar');
+    DateTime eventUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("events");
 
     _callStream = FirebaseFirestore.instance
         .collection('events')
@@ -109,15 +95,8 @@ class EventDataNotifier extends ChangeNotifier {
                 snapshot.docs[i].get('readableFlg'),
                 snapshot.docs[i].get('deleteFlg')));
           }
-          if (snapshot.docs[i]
-              .get("updateTime")
-              .toDate()
-              .isAfter(eventUpdatedTime)) {
-            await insertOrUpdateIsarSettingBySettingCode(
-                settingCode: "eventsUpdateCheck",
-                dateTimeValue1: snapshot.docs[i].get("updateTime").toDate());
-          }
         }
+        ref.read(settingDataProvider).setSettingUpdateCheckData("events", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
         controller.sink.add("listen");
       }
     });

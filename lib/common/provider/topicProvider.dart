@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/common/provider/settingProvider.dart';
 import 'package:convas/entityIsar/topicEntityIsar.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
@@ -30,26 +31,16 @@ class TopicDataNotifier extends ChangeNotifier {
     streamSub!.cancel();
   }
 
-  void clearIsar()async {
+  void controlStreamOfReadTopicNewDataFromFirebaseToIsar(WidgetRef ref)async {
 
-
-    deleteIsarSettingsByCode("topicsUpdateCheck");
-    var isarInstance = Isar.getInstance();
-    await isarInstance?.writeTxn((isar) async {
-      isar.topics.clear();
-    });
-  }
-
-  void controlStreamOfReadTopicNewDataFromFirebaseToIsar()async {
-
-    streamSub=await readTopicNewDataFromFirebaseToIsar();
+    streamSub=await readTopicNewDataFromFirebaseToIsar( ref);
 
     if(controller.hasListener){
 
     }else{
       controller.stream.listen((value) async {
         if(value=="listen"){
-          streamSub=await readTopicNewDataFromFirebaseToIsar();
+          streamSub=await readTopicNewDataFromFirebaseToIsar( ref);
         }
 
         if(value=="cancel"){
@@ -61,9 +52,8 @@ class TopicDataNotifier extends ChangeNotifier {
 
   }
 
-  Future<StreamSubscription<QuerySnapshot>> readTopicNewDataFromFirebaseToIsar() async {
-    Setting? tmpSetting = await selectIsarSettingByCode("topicsUpdateCheck");
-    DateTime topicUpdatedTime = tmpSetting!.dateTimeValue1!;
+  Future<StreamSubscription<QuerySnapshot>> readTopicNewDataFromFirebaseToIsar(WidgetRef ref) async {
+    DateTime topicUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("topics");
 
     _callStream = FirebaseFirestore.instance
         .collection('topics')
@@ -120,16 +110,9 @@ class TopicDataNotifier extends ChangeNotifier {
                 deleteFlg: snapshot.docs[i].get("deleteFlg"),
 
             );
-
           }
-          if (snapshot.docs[i].get("updateTime").toDate().isAfter(topicUpdatedTime)) {
-            await insertOrUpdateIsarSettingBySettingCode(
-                settingCode: "topicsUpdateCheck",
-                dateTimeValue1: snapshot.docs[i].get("updateTime").toDate()
-            );
-          }
-
         }
+        ref.read(settingDataProvider).setSettingUpdateCheckData("topics", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
         controller.sink.add("listen");
         notifyListeners();
       }

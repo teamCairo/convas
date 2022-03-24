@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/common/provider/settingProvider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,8 +34,6 @@ class UserDataProviderNotifier extends ChangeNotifier {
 
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     String  messageTokenId=await _firebaseMessaging.getToken()??"";
-
-    log("XXXXXXmessageTokenId:"+messageTokenId);
 
     updateFirebaseUser(userDocId: tmpSetting!.stringValue2!,
         data:{'lastLoginTime': FieldValue.serverTimestamp(),
@@ -85,8 +84,6 @@ class UserDataProviderNotifier extends ChangeNotifier {
 
   void closeStream() async {
     streamSub!.cancel();
-    log("XXXXXX before controllerClose");
-    // controller.close();
   }
 
   void setUnitItem(String itemName, String value) {
@@ -143,16 +140,16 @@ class UserDataProviderNotifier extends ChangeNotifier {
     log("XXXXXX after read user");
   }
 
-  void controlStreamOfReadUserDataFirebaseToIsarAndMemory(String email,
+  void controlStreamOfReadUserDataFirebaseToIsarAndMemory(WidgetRef ref, String email,
       String userDocId) async {
     //最初は必ず呼び出し
-    streamSub = await readUserDataFirebaseToIsarAndMemory(email,userDocId);
+    streamSub = await readUserDataFirebaseToIsarAndMemory(ref, email,userDocId);
 
     if (controller.hasListener) {
     } else {
       controller.stream.listen((value) async {
         if(value=="listen"){
-          streamSub = await readUserDataFirebaseToIsarAndMemory(email,userDocId);
+          streamSub = await readUserDataFirebaseToIsarAndMemory(ref, email,userDocId);
         }
         if(value=="cancel"){
           streamSub!.cancel();
@@ -161,12 +158,10 @@ class UserDataProviderNotifier extends ChangeNotifier {
     }
   }
 
-  Future<StreamSubscription<QuerySnapshot>> readUserDataFirebaseToIsarAndMemory(
+  Future<StreamSubscription<QuerySnapshot>> readUserDataFirebaseToIsarAndMemory(WidgetRef ref,
       String email,String userDocId) async {
 
-    Setting? tmpSetting = await selectIsarSettingByCode("userUpdateCheck");
-
-    DateTime userUpdatedTime = tmpSetting!.dateTimeValue1!;
+    DateTime userUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("user");
 
     _callStream = FirebaseFirestore.instance
         .collection('users')
@@ -277,11 +272,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
             deleteFlg: snapshot.docs[0].get('deleteFlg'),
       );
 
-        await insertOrUpdateIsarSettingBySettingCode(
-            settingCode: "userUpdateCheck",
-            dateTimeValue1: snapshot.docs[0].get("informationModifiedTime").toDate()
-        );
-
+        ref.read(settingDataProvider).setSettingUpdateCheckData("user", snapshot.docs[0].get("informationModifiedTime").toDate());
         controller.sink.add("listen");
         notifyListeners();
       }

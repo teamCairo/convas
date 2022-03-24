@@ -1,16 +1,15 @@
 import 'dart:async';
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/common/provider/settingProvider.dart';
 import 'package:convas/entityIsar/chatDetailEntityIsar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar/isar.dart';
 
 import '../../daoIsar/chatDetailDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
-import '../../entityIsar/chatDetailEntityIsar.dart' as chatDetail;
 
 final chatDetailDataProvider = ChangeNotifierProvider(
       (ref) => ChatDetailDataNotifier(),
@@ -25,19 +24,9 @@ class ChatDetailDataNotifier extends ChangeNotifier {
     streamSub!.cancel();
   }
 
-  void clearIsar()async {
+  void controlStreamOfReadChatDetailNewDataFromFirebaseToIsar(WidgetRef ref,String userDocId)async {
 
-
-    deleteIsarSettingsByCode("chatDetailsUpdateCheck");
-    var isarInstance = Isar.getInstance();
-    await isarInstance?.writeTxn((isar) async {
-      isar.chatDetails.clear();
-    });
-  }
-
-  void controlStreamOfReadChatDetailNewDataFromFirebaseToIsar(String userDocId)async {
-
-    streamSub=await readChatDetailNewDataFromFirebaseToIsar(userDocId);
+    streamSub=await readChatDetailNewDataFromFirebaseToIsar(userDocId,ref);
 
     if(controller.hasListener){
 
@@ -45,7 +34,7 @@ class ChatDetailDataNotifier extends ChangeNotifier {
 
       controller.stream.listen((value) async {
         if(value=="listen"){
-          streamSub=await readChatDetailNewDataFromFirebaseToIsar(userDocId);
+          streamSub=await readChatDetailNewDataFromFirebaseToIsar(userDocId,ref);
         }
 
         if(value=="cancel"){
@@ -56,9 +45,9 @@ class ChatDetailDataNotifier extends ChangeNotifier {
     }
   }
 
-  Future<StreamSubscription<QuerySnapshot>> readChatDetailNewDataFromFirebaseToIsar(String userDocId) async {
-    Setting? tmpSetting = await selectIsarSettingByCode("chatDetailsUpdateCheck");
-    DateTime chatDetailUpdatedTime = tmpSetting!.dateTimeValue1!;
+  Future<StreamSubscription<QuerySnapshot>> readChatDetailNewDataFromFirebaseToIsar(String userDocId,WidgetRef ref) async {
+
+    DateTime chatDetailUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("chatDetails");
 
     _callStream = FirebaseFirestore.instance
         .collection('chatDetails')
@@ -105,17 +94,10 @@ class ChatDetailDataNotifier extends ChangeNotifier {
               )
 
             );
-
           }
-          if (snapshot.docs[i].get("updateTime").toDate().isAfter(chatDetailUpdatedTime)) {
-            await insertOrUpdateIsarSettingBySettingCode(
-                settingCode: "chatDetailsUpdateCheck",
-                dateTimeValue1: snapshot.docs[i].get("updateTime").toDate()
-            );
-          }
-
         }
 
+        ref.read(settingDataProvider).setSettingUpdateCheckData("chatDetails", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
         controller.sink.add("listen");
       }
 

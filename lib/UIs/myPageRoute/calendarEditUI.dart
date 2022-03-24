@@ -39,7 +39,6 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
   @override
   Widget build(BuildContext context) {
 
-
     var isarInstance = Isar.getInstance();
     Query<Event>? eventDataQuery = isarInstance?.events
         .filter()
@@ -90,7 +89,6 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
 
       },
     );
-
 
   }
 

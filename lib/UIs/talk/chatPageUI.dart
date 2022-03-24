@@ -18,7 +18,7 @@ import '../../daoFirebase/chatDetailsDaoFirebase.dart';
 import '../../entityIsar/chatDetailEntityIsar.dart';
 import '../../entityIsar/friendEntityIsar.dart';
 import '../findRoute/friendProfileUI.dart';
-import 'appointmentRequest.dart';
+import 'appointmentRequestUI.dart';
 
 class ChatPage extends ConsumerWidget {
   String friendUserDocId;

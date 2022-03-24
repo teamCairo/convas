@@ -8,6 +8,7 @@ import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/commonValues.dart';
 import '../../daoAlgolia/usersDaoAlgolia.dart';
+import 'friendProfileRootUI.dart';
 import 'friendProfileUI.dart';
 
 class SearchUsersMainPage extends ConsumerWidget {
@@ -108,7 +109,7 @@ class SearchUsersMainPage extends ConsumerWidget {
         onTap: () async {
           await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
-              return FriendProfile(
+              return FriendProfileRoot(
                 argumentFriendUserDocId:userData.objectID,
               );
             }),

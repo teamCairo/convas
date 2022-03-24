@@ -15,15 +15,9 @@ class FriendProfile extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
   final String argumentFriendUserDocId;
-  bool initialProcessFlg = true;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (initialProcessFlg) {
-      initialProcessFlg = false;
-      ref.read(friendProfileDataProvider.notifier).clearFriendProfileData();
-      ref.read(friendProfileDataProvider.notifier).readFriendProfileDataFromFirebase(ref, argumentFriendUserDocId);
-    }
 
     if (ref.watch(friendProfileDataProvider).processingFlg){
       return Scaffold(

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/common/provider/settingProvider.dart';
 import 'package:convas/entityIsar/friendEntityIsar.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -77,14 +78,6 @@ class FriendDataNotifier extends ChangeNotifier {
       _friendData[tmpFriendList[i].friendUserDocId]=tmpFriendList[i];
     }
   }
-
-  void clearIsarAndMemory()async {
-
-    _friendData = {};
-    deleteIsarSettingsByCode("friendsUpdateCheck");
-    deleteIsarFriends();
-  }
-
   void controlStreamOfReadFriendNewDataFromFirebaseToIsarAndMemory(
       WidgetRef ref,String userDocId) async {
     //最初は必ず呼び出し
@@ -108,8 +101,11 @@ class FriendDataNotifier extends ChangeNotifier {
   Future<StreamSubscription<QuerySnapshot>>
   readFriendFromFirebaseToIsarAndMemory(WidgetRef ref,String userDocId) async {
 
-    Setting? tmpSetting = await selectIsarSettingByCode("friendsUpdateCheck");
-    DateTime friendsUpdatedTime = tmpSetting!.dateTimeValue1!;
+    DateTime friendsUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("friends");
+
+
+    log("XXXXXXXXXXXXfriendupdateTimeDataをread");
+    log("XXXXXXXXXXXX："+friendsUpdatedTime.toString());
 
     _callStream = FirebaseFirestore.instance
         .collection('friends')
@@ -175,13 +171,13 @@ class FriendDataNotifier extends ChangeNotifier {
             );
           }
 
-          if (snapshot.docs[i].get("updateTime").toDate().isAfter(friendsUpdatedTime)) {
-            await insertOrUpdateIsarSettingBySettingCode(
-                settingCode: "friendsUpdateCheck",
-                dateTimeValue1: snapshot.docs[0].get("updateTime").toDate()
-            );
-          }
+          log("XXXXXXXXXXXXfriendupdateTimeDataの読み取りデータ：i="+i.toString()+":"+friendsUpdatedTime.toString());
         }
+        log("XXXXXXXXXXXXfriendupdateTimeDataをUpdate");
+        log("XXXXXXXXXXXX旧："+friendsUpdatedTime.toString());
+        log("XXXXXXXXXXXX新："+snapshot.docs[snapshot.size-1].get("updateTime").toDate().toString());
+
+        ref.read(settingDataProvider).setSettingUpdateCheckData("friends", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
         controller.sink.add("listen");
         notifyListeners();
       }

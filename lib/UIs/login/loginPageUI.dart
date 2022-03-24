@@ -1,4 +1,5 @@
 import 'package:convas/UIs/login/rootUI.dart';
+import 'package:convas/common/provider/settingProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
@@ -17,7 +18,7 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Providerから値を受け取る
+
     final infoText = ref.watch(infoTextProvider);
     final email = ref.watch(emailProvider);
     final password = ref.watch(passwordProvider);

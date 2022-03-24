@@ -19,6 +19,10 @@ List<String> fromTextToList(String txt) {
   return outputList;
 }
 
+String masterNameTextFromCodeText(String codeText,String masterGroupCode,WidgetRef ref){
+  return fromListToTextDot(masterNameListFromText(codeText,masterGroupCode, ref));
+}
+
 String fromListToTextDot(List<String> codeList){
   String result ="";
   for(int i=0;i<codeList.length;i++){

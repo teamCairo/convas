@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:convas/UIs/login/rootUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
+import 'package:convas/common/provider/settingProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,7 +41,7 @@ class LoginAutoPage extends ConsumerWidget  {
   Future<void> autoLoginProcess(BuildContext context, WidgetRef ref)async {
 
     await openIsarInstances();
-    Setting? tmpSetting = await selectIsarSettingByCode("localUserInfo");
+    Setting? tmpSetting = ref.watch(settingDataProvider).settingData["localUserInfo"];
 
     if (tmpSetting != null) {
       await initialProcessLogic(ref, tmpSetting.stringValue1!);
