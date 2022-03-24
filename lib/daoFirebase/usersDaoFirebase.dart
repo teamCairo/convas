@@ -191,7 +191,19 @@ Future<void> updateFirebaseUser({required String userDocId,
     'updateTime': FieldValue.serverTimestamp(),
   });
   FirebaseFirestore.instance.collection('users').doc(userDocId).update(data);
+}
 
+
+Future<void> updateFirebaseUserHidden({required String userDocId,
+  required Map<String, Object?> data,
+  required programId
+}) async {
+  data.addAll({
+    'updateUserDocId': userDocId,
+    'updateProgramId': programId,
+    'updateTime': FieldValue.serverTimestamp(),
+  });
+  FirebaseFirestore.instance.collection('users').doc(userDocId).update(data);
 }
 
 Future<void> updateFirebaseUserPhotoInfo(String userDocId,int profilePhotoUpdateCnt,String profilePhotoNameSuffix,String programId)async {

@@ -28,7 +28,8 @@ Future<List<Setting>?> selectIsarSettingAll() async {
     await isar.settings.filter().not().idEqualTo(-1).findAll();
 
   });
-  return resultSettingList;
+
+  return resultSettingList??[];
 }
 
 

@@ -112,7 +112,7 @@ class TopicDataNotifier extends ChangeNotifier {
             );
           }
         }
-        ref.read(settingDataProvider).setSettingUpdateCheckData("topics", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
+        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("topics", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
         controller.sink.add("listen");
         notifyListeners();
       }

@@ -41,7 +41,7 @@ class MasterDataNotifier extends ChangeNotifier {
           if (masterList[i].deleteFlg!) {
 
             _masterData[masterList[i].masterGroupCode]!.remove(masterList[i].code);
-            await deleteIsarMastersById(masterList[i].masterDocId);
+            deleteIsarMastersById(masterList[i].masterDocId);
 
           } else {
 
@@ -50,13 +50,12 @@ class MasterDataNotifier extends ChangeNotifier {
             }
             _masterData[masterList[i].masterGroupCode]![masterList[i].code]=masterList[i];
 
-            await insertOrUpdateIsarMasterByMasterDocId(
+            insertOrUpdateIsarMasterByMasterDocId(
                 masterList[i]
             );
           }
         }
-        ref.read(settingDataProvider).setSettingUpdateCheckData("masters", masterList[masterList.length-1].updateTime!);
-        notifyListeners();
+        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("masters", masterList[masterList.length-1].updateTime!);
       }
   }
 }

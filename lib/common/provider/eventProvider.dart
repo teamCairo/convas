@@ -96,7 +96,7 @@ class EventDataNotifier extends ChangeNotifier {
                 snapshot.docs[i].get('deleteFlg')));
           }
         }
-        ref.read(settingDataProvider).setSettingUpdateCheckData("events", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
+        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("events", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
         controller.sink.add("listen");
       }
     });

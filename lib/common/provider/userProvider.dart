@@ -29,13 +29,14 @@ class UserDataProviderNotifier extends ChangeNotifier {
   StreamSubscription<QuerySnapshot>? streamSub;
 
 
-  Future<void> updateUserWhenLogin() async {
-    Setting? tmpSetting=await selectIsarSettingByCode("localUserInfo");
+  Future<void> updateUserWhenLogin(WidgetRef ref) async {
+
+    Setting? tmpSetting=ref.watch(settingDataProvider).settingData["localUserInfo"];
 
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     String  messageTokenId=await _firebaseMessaging.getToken()??"";
 
-    updateFirebaseUser(userDocId: tmpSetting!.stringValue2!,
+    updateFirebaseUserHidden(userDocId: tmpSetting!.stringValue2!,
         data:{'lastLoginTime': FieldValue.serverTimestamp(),
           'messageTokenId':messageTokenId
         },
@@ -163,6 +164,8 @@ class UserDataProviderNotifier extends ChangeNotifier {
 
     DateTime userUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("user");
 
+    log("XXXXXXXXXXXXfriendupdateTimeDataをread");
+    log("XXXXXXXXXXXX："+userUpdatedTime.toString());
     _callStream = FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: email)
@@ -272,7 +275,10 @@ class UserDataProviderNotifier extends ChangeNotifier {
             deleteFlg: snapshot.docs[0].get('deleteFlg'),
       );
 
-        ref.read(settingDataProvider).setSettingUpdateCheckData("user", snapshot.docs[0].get("informationModifiedTime").toDate());
+        log("XXXXXXXXXXXXuserupdateTimeDataをUpdate");
+        log("XXXXXXXXXXXX旧："+userUpdatedTime.toString());
+        log("XXXXXXXXXXXX新："+snapshot.docs[0].get("informationModifiedTime").toDate().toString());
+        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("user", snapshot.docs[0].get("informationModifiedTime").toDate());
         controller.sink.add("listen");
         notifyListeners();
       }

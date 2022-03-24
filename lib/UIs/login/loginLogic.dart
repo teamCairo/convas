@@ -135,7 +135,7 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .read(topicDataProvider.notifier)
       .controlStreamOfReadTopicNewDataFromFirebaseToIsar(ref);
 
-  ref.read(userDataProvider.notifier).updateUserWhenLogin();
+  ref.read(userDataProvider.notifier).updateUserWhenLogin(ref);
 
   listenNotification();
   updateOnlineStatus(ref,tmpUserData.docs[0].id);

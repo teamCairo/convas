@@ -177,7 +177,7 @@ class FriendDataNotifier extends ChangeNotifier {
         log("XXXXXXXXXXXX旧："+friendsUpdatedTime.toString());
         log("XXXXXXXXXXXX新："+snapshot.docs[snapshot.size-1].get("updateTime").toDate().toString());
 
-        ref.read(settingDataProvider).setSettingUpdateCheckData("friends", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
+        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("friends", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
         controller.sink.add("listen");
         notifyListeners();
       }

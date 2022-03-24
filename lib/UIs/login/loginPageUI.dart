@@ -47,9 +47,9 @@ class LoginPage extends ConsumerWidget {
                       onChanged: (String value) {
                         ref.read(passwordProvider.state).update((state) => value);
                       }, passwordSecure: true),
+                  // Image.network("https://storage.cloud.google.com/convas-1618.appspot.com/categories/0Na0rYyZt3fSMU9cjnmp.jpg")
                 ],
               ),
-
               Column(
                 children: <Widget>[
                   Text(infoText),

@@ -97,7 +97,7 @@ class ChatDetailDataNotifier extends ChangeNotifier {
           }
         }
 
-        ref.read(settingDataProvider).setSettingUpdateCheckData("chatDetails", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
+        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("chatDetails", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
         controller.sink.add("listen");
       }
 
