@@ -39,6 +39,7 @@ class FriendDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
+  DateTime? updateCheckTime;
 
   Future<Uint8List?> readFriendPhotoFromFirebase(
       WidgetRef ref, String friendUserDocId, String profilePhotoNameSuffix) async {
@@ -101,16 +102,12 @@ class FriendDataNotifier extends ChangeNotifier {
   Future<StreamSubscription<QuerySnapshot>>
   readFriendFromFirebaseToIsarAndMemory(WidgetRef ref,String userDocId) async {
 
-    DateTime friendsUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("friends");
-
-
-    log("XXXXXXXXXXXXfriendupdateTimeDataをread");
-    log("XXXXXXXXXXXX："+friendsUpdatedTime.toString());
+    updateCheckTime ??= await selectIsarSettingUpdateCheckTimeByEntityName("friends");
 
     _callStream = FirebaseFirestore.instance
         .collection('friends')
         .where('updateTime',
-        isGreaterThan: Timestamp.fromDate(friendsUpdatedTime))
+        isGreaterThan: Timestamp.fromDate(updateCheckTime!))
         .where('readableFlg', isEqualTo: true)
         .where('userDocId',
         isEqualTo: userDocId)
@@ -171,13 +168,12 @@ class FriendDataNotifier extends ChangeNotifier {
             );
           }
 
-          log("XXXXXXXXXXXXfriendupdateTimeDataの読み取りデータ：i="+i.toString()+":"+friendsUpdatedTime.toString());
         }
-        log("XXXXXXXXXXXXfriendupdateTimeDataをUpdate");
-        log("XXXXXXXXXXXX旧："+friendsUpdatedTime.toString());
-        log("XXXXXXXXXXXX新："+snapshot.docs[snapshot.size-1].get("updateTime").toDate().toString());
-
-        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("friends", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
+        updateCheckTime=snapshot.docs[snapshot.size-1].get("updateTime").toDate();
+        insertOrUpdateIsarSettingUpdateCheckTime(
+            "friends",
+            snapshot.docs[snapshot.size-1].get("updateTime").toDate()
+        );
         controller.sink.add("listen");
         notifyListeners();
       }

@@ -27,11 +27,12 @@ class UserDataProviderNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
+  DateTime? updateCheckTime;
 
 
   Future<void> updateUserWhenLogin(WidgetRef ref) async {
 
-    Setting? tmpSetting=ref.watch(settingDataProvider).settingData["localUserInfo"];
+    Setting? tmpSetting=await selectIsarSettingByCode("localUserInfo");
 
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     String  messageTokenId=await _firebaseMessaging.getToken()??"";
@@ -86,12 +87,6 @@ class UserDataProviderNotifier extends ChangeNotifier {
   void closeStream() async {
     streamSub!.cancel();
   }
-
-  void setUnitItem(String itemName, String value) {
-    _userData[itemName] = value;
-    notifyListeners();
-  }
-
   Future<void> readUserDataFromIsarToMemory() async {
 
     User? tmpUser = await selectIsarUser();
@@ -162,14 +157,12 @@ class UserDataProviderNotifier extends ChangeNotifier {
   Future<StreamSubscription<QuerySnapshot>> readUserDataFirebaseToIsarAndMemory(WidgetRef ref,
       String email,String userDocId) async {
 
-    DateTime userUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("user");
+    updateCheckTime ??= await selectIsarSettingUpdateCheckTimeByEntityName("user");
 
-    log("XXXXXXXXXXXXfriendupdateTimeDataをread");
-    log("XXXXXXXXXXXX："+userUpdatedTime.toString());
     _callStream = FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: email)
-        .where('informationModifiedTime', isGreaterThan: Timestamp.fromDate(userUpdatedTime))
+        .where('informationModifiedTime', isGreaterThan: Timestamp.fromDate(updateCheckTime!))
         .where('readableFlg', isEqualTo: true)
         .snapshots();
 
@@ -275,10 +268,11 @@ class UserDataProviderNotifier extends ChangeNotifier {
             deleteFlg: snapshot.docs[0].get('deleteFlg'),
       );
 
-        log("XXXXXXXXXXXXuserupdateTimeDataをUpdate");
-        log("XXXXXXXXXXXX旧："+userUpdatedTime.toString());
-        log("XXXXXXXXXXXX新："+snapshot.docs[0].get("informationModifiedTime").toDate().toString());
-        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("user", snapshot.docs[0].get("informationModifiedTime").toDate());
+        updateCheckTime=snapshot.docs[snapshot.size-1].get("updateTime").toDate();
+        insertOrUpdateIsarSettingUpdateCheckTime(
+            "user",
+            snapshot.docs[snapshot.size-1].get("updateTime").toDate()
+        );
         controller.sink.add("listen");
         notifyListeners();
       }

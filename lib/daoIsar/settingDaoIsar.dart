@@ -1,9 +1,10 @@
 import 'package:isar/isar.dart';
+import '../UIs/login/loginLogic.dart';
 import '../entityIsar/settingEntityIsar.dart';
 
 Future<Setting?> selectIsarSettingByCode(String settingCode) async {
 
-  var isarInstance = Isar.getInstance();
+  var isarInstance = await openIsarInstances();
 
   Setting? resultSetting;
   await isarInstance?.writeTxn((isar) async {
@@ -19,10 +20,46 @@ Future<Setting?> selectIsarSettingByCode(String settingCode) async {
   return resultSetting;
 }
 
+Future<DateTime> selectIsarSettingUpdateCheckTimeByEntityName(String entityName) async {
+
+  Setting? resultSetting= await selectIsarSettingByCode(entityName+"UpdateCheck");
+
+  if(resultSetting==null){
+
+    return DateTime(2022, 1, 1, 0, 0);
+
+  }else{
+
+    return resultSetting.dateTimeValue1!;
+  }
+
+}
+
+Future<int> insertOrUpdateIsarSettingUpdateCheckTime(
+    String entityName,
+    DateTime updateTime
+    ) async {
+
+  return await insertOrUpdateIsarSetting(
+      Setting(
+        entityName + "UpdateCheck",
+        null,
+        null,
+        null,
+        null,
+        updateTime,
+        null,
+        null,
+        null,
+        null,
+        null,
+      ));
+}
+
 Future<List<Setting>?> selectIsarSettingAll() async {
 
   List<Setting>? resultSettingList;
-  var isarInstance = Isar.getInstance();
+  var isarInstance = await openIsarInstances();
   await isarInstance?.writeTxn((isar) async {
     resultSettingList =
     await isar.settings.filter().not().idEqualTo(-1).findAll();
@@ -31,7 +68,6 @@ Future<List<Setting>?> selectIsarSettingAll() async {
 
   return resultSettingList??[];
 }
-
 
 Future<int> insertOrUpdateIsarSetting(
     Setting setting
@@ -46,7 +82,7 @@ Future<int> insertIsarSetting(
     Setting setting
     ) async {
 
-  var isarInstance = Isar.getInstance();
+  var isarInstance = await openIsarInstances();
   int returnResult=0;
 
   await isarInstance?.writeTxn((isar) async {
@@ -60,9 +96,9 @@ Future<int> insertIsarSetting(
 Future<int> deleteIsarSettingsByCode(String settingCode) async {
 
   int returnInt=0;
-  var isarInstance = Isar.getInstance();
+  var isarInstance = await openIsarInstances();
   await isarInstance?.writeTxn((isar) async {
-    returnInt = await isar.settings.filter().not().idEqualTo(-1).deleteAll();
+    returnInt = await isar.settings.filter().settingCodeEqualTo(settingCode).deleteAll();
   });
 
   return returnInt;

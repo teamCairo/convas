@@ -56,8 +56,6 @@ class _LoginCheck extends ConsumerWidget {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? _currentUser = _auth.currentUser;
 
-    ref.read(settingDataProvider.notifier).readSettingDataFromIsarToMemory();
-
     if(_currentUser==null){
       return LoginPage(
       );

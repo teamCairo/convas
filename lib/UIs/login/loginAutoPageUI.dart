@@ -40,8 +40,7 @@ class LoginAutoPage extends ConsumerWidget  {
 
   Future<void> autoLoginProcess(BuildContext context, WidgetRef ref)async {
 
-    await openIsarInstances();
-    Setting? tmpSetting = ref.watch(settingDataProvider).settingData["localUserInfo"];
+    Setting? tmpSetting = await selectIsarSettingByCode("localUserInfo");
 
     if (tmpSetting != null) {
       await initialProcessLogic(ref, tmpSetting.stringValue1!);

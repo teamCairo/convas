@@ -1,10 +1,10 @@
 import 'dart:core';
-import 'package:convas/common/provider/settingProvider.dart';
 import 'package:convas/entityIsar/masterEntityIsar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../daoFirebase/mastersDaoFirebase.dart';
 import '../../daoIsar/masterDaoIsar.dart';
+import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/masterEntityIsar.dart';
 
 final masterDataProvider = ChangeNotifierProvider(
@@ -32,8 +32,8 @@ class MasterDataNotifier extends ChangeNotifier {
 
   Future<void> readMasterFromFirebaseToIsarAndMemory(WidgetRef ref) async {
 
-    DateTime mastersUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("masters");
-    List<Master> masterList = await selectFirebaseListMastersByUpdateDate(mastersUpdatedTime);
+    DateTime updateCheckTime = await selectIsarSettingUpdateCheckTimeByEntityName("masters");
+    List<Master> masterList = await selectFirebaseListMastersByUpdateDate(updateCheckTime);
 
       if (masterList.isNotEmpty) {
 
@@ -55,7 +55,10 @@ class MasterDataNotifier extends ChangeNotifier {
             );
           }
         }
-        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("masters", masterList[masterList.length-1].updateTime!);
+        insertOrUpdateIsarSettingUpdateCheckTime(
+            "masters",
+            masterList[masterList.length-1].updateTime!
+        );
       }
   }
 }

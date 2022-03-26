@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:convas/common/provider/settingProvider.dart';
 import 'package:convas/entityIsar/chatDetailEntityIsar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../daoIsar/chatDetailDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
-import '../../entityIsar/settingEntityIsar.dart';
 
 final chatDetailDataProvider = ChangeNotifierProvider(
       (ref) => ChatDetailDataNotifier(),
@@ -19,6 +17,7 @@ class ChatDetailDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
+  DateTime? updateCheckTime;
 
   void closeStream() async {
     streamSub!.cancel();
@@ -47,12 +46,12 @@ class ChatDetailDataNotifier extends ChangeNotifier {
 
   Future<StreamSubscription<QuerySnapshot>> readChatDetailNewDataFromFirebaseToIsar(String userDocId,WidgetRef ref) async {
 
-    DateTime chatDetailUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("chatDetails");
+    updateCheckTime ??= await selectIsarSettingUpdateCheckTimeByEntityName("chatDetails");
 
     _callStream = FirebaseFirestore.instance
         .collection('chatDetails')
         .where('updateTime',
-        isGreaterThan: Timestamp.fromDate(chatDetailUpdatedTime))
+        isGreaterThan: Timestamp.fromDate(updateCheckTime!))
         .where('userDocId', isEqualTo: userDocId)
         .where('readableFlg', isEqualTo: true)
         .orderBy('updateTime', descending: false)
@@ -97,7 +96,11 @@ class ChatDetailDataNotifier extends ChangeNotifier {
           }
         }
 
-        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("chatDetails", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
+        updateCheckTime=snapshot.docs[snapshot.size-1].get("updateTime").toDate();
+        insertOrUpdateIsarSettingUpdateCheckTime(
+            "chatDetails",
+            snapshot.docs[snapshot.size-1].get("updateTime").toDate()
+        );
         controller.sink.add("listen");
       }
 

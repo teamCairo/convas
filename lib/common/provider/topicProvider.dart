@@ -4,18 +4,13 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:convas/common/provider/settingProvider.dart';
-import 'package:convas/entityIsar/topicEntityIsar.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar/isar.dart';
 
-import '../../daoIsar/topicDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
-import '../../entityIsar/settingEntityIsar.dart';
-import '../../entityIsar/topicEntityIsar.dart' as topic;
+import '../../daoIsar/topicDaoIsar.dart';
 import '../logic/commonLogicFile.dart';
 
 final topicDataProvider = ChangeNotifierProvider(
@@ -26,6 +21,7 @@ class TopicDataNotifier extends ChangeNotifier {
   Stream<QuerySnapshot>? _callStream;
   final controller = StreamController<String>();
   StreamSubscription<QuerySnapshot>? streamSub;
+  DateTime? updateCheckTime;
 
   void closeStream() async {
     streamSub!.cancel();
@@ -53,12 +49,12 @@ class TopicDataNotifier extends ChangeNotifier {
   }
 
   Future<StreamSubscription<QuerySnapshot>> readTopicNewDataFromFirebaseToIsar(WidgetRef ref) async {
-    DateTime topicUpdatedTime = ref.watch(settingDataProvider).getSettingUpdateCheckData("topics");
+    updateCheckTime ??= await selectIsarSettingUpdateCheckTimeByEntityName("topics");
 
     _callStream = FirebaseFirestore.instance
         .collection('topics')
         .where('updateTime',
-        isGreaterThan: Timestamp.fromDate(topicUpdatedTime))
+        isGreaterThan: Timestamp.fromDate(updateCheckTime!))
         .where('readableFlg', isEqualTo: true)
         .orderBy('updateTime', descending: false)
         .snapshots();
@@ -112,7 +108,12 @@ class TopicDataNotifier extends ChangeNotifier {
             );
           }
         }
-        ref.read(settingDataProvider.notifier).setSettingUpdateCheckData("topics", snapshot.docs[snapshot.size-1].get("updateTime").toDate());
+
+        updateCheckTime=snapshot.docs[snapshot.size-1].get("updateTime").toDate();
+        insertOrUpdateIsarSettingUpdateCheckTime(
+            "topics",
+            snapshot.docs[snapshot.size-1].get("updateTime").toDate()
+        );
         controller.sink.add("listen");
         notifyListeners();
       }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/common/provider/chatDetailProvider.dart';
 import 'package:convas/common/provider/settingProvider.dart';
+import 'package:convas/daoIsar/settingDaoIsar.dart';
 import 'package:convas/entityIsar/chatDetailEntityIsar.dart';
 import 'package:convas/entityIsar/masterEntityIsar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -28,7 +29,7 @@ import 'loginLogicOnlieStatus.dart';
 Future<void> insertUserToFirebase(BuildContext context,WidgetRef ref, String email) async {
 
   await openIsarInstances();
-  Setting? tmpSetting = ref.watch(settingDataProvider).settingData["localUserInfo"];
+  Setting? tmpSetting = await selectIsarSettingByCode("localUserInfo");
   if(tmpSetting==null) {
 
     await insertUser(ref,email);
@@ -72,19 +73,25 @@ Future<void> insertUser(WidgetRef ref,String email)async {
       programId:"loginLogic"
   );
 
-  ref.read(settingDataProvider.notifier).setSettingData(
-    settingCode: "localUserInfo",
-    stringValue1:email,
-    stringValue2:userDocId
-    );
-
+  await insertOrUpdateIsarSetting(Setting(
+    "localUserInfo",
+    email,
+    userDocId,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ));
 
 }
 
 
 Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
-  await makeDir("chat");
   await makeDir("media");
 
   await openIsarInstances();
@@ -93,16 +100,23 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
   QuerySnapshot tmpUserData=await selectFirebaseUserByEmail(email);
 
-  ref.read(settingDataProvider.notifier).setSettingData(
-      settingCode: "localUserInfo",
-      stringValue1:tmpUserData.docs[0].get("email"),
-      stringValue2:tmpUserData.docs[0].id
-  );
+  await insertOrUpdateIsarSetting(Setting(
+    "localUserInfo",
+    email,
+    tmpUserData.docs[0].id,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ));
 
   ref
       .read(userDataProvider.notifier)
       .controlStreamOfReadUserDataFirebaseToIsarAndMemory(ref,email,tmpUserData.docs[0].id);
-
 
   await ref
       .read(masterDataProvider.notifier)
@@ -112,7 +126,6 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .read(friendDataProvider.notifier)
       .readFriendDataFromIsarToMemory();
 
-
   await ref
       .read(masterDataProvider.notifier)
       .readMasterFromFirebaseToIsarAndMemory(ref);
@@ -121,7 +134,6 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
       .read(friendDataProvider.notifier)
       .controlStreamOfReadFriendNewDataFromFirebaseToIsarAndMemory(ref,tmpUserData.docs[0].id);
 
-
   ref
       .read(chatDetailDataProvider.notifier)
       .controlStreamOfReadChatDetailNewDataFromFirebaseToIsar(ref,tmpUserData.docs[0].id);
@@ -129,7 +141,6 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
   ref
       .read(eventDataProvider.notifier)
       .controlStreamOfReadEventNewDataFromFirebaseToIsar(ref,tmpUserData.docs[0].id);
-  
 
   ref
       .read(topicDataProvider.notifier)
@@ -151,7 +162,7 @@ Future<void> makeDir(String dirName) async {
   }
 }
 
-Future<void> openIsarInstances() async {
+Future<Isar?> openIsarInstances() async {
 
   var isarInstance = Isar.getInstance();
   final dir = await getApplicationSupportDirectory();
@@ -161,6 +172,7 @@ Future<void> openIsarInstances() async {
       directory: dir.path,
       inspector: true,
     );
+    isarInstance = Isar.getInstance();
   } else {
     if (!isarInstance.isOpen) {
       await Isar.open(
@@ -170,4 +182,5 @@ Future<void> openIsarInstances() async {
       );
     }
   }
+  return isarInstance;
 }
