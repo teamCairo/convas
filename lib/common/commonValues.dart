@@ -42,3 +42,6 @@ const List<Color> calendarTimelineColors = [Color(0xFF0F8644),
 ];
 
 const Color calendarColorForMe = Colors.orangeAccent;
+
+
+const separatingCharacter5at = "@@@@@";

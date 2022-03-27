@@ -1,10 +1,14 @@
 import 'package:convas/UIs/now/nowPageProvider.dart';
+import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../common/UI/commonOthersUI.dart';
+import '../../common/UI/commonTextUI.dart';
 import '../../common/commonValues.dart';
+import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
+import '../talk/appointmentRequestUI.dart';
 
 class NowPage extends ConsumerWidget {
   NowPage({
@@ -40,7 +44,7 @@ class NowPage extends ConsumerWidget {
                   ref.read(nowPageProvider.notifier).setCalendarTapDetails(calendarTapDetails);
                 },
                 onViewChanged:(viewChangedDetails) async {
-                  ref.read(nowPageProvider.notifier).refleshEventShow(viewChangedDetails.visibleDates[0].add(const Duration(days:-1)), viewChangedDetails.visibleDates[0].add(const Duration(days:1)));
+                  ref.read(nowPageProvider.notifier).refleshEventShow(ref,viewChangedDetails.visibleDates[0].add(const Duration(days:-1)), viewChangedDetails.visibleDates[0].add(const Duration(days:1)));
                 })
           ),
           Padding(
@@ -58,21 +62,31 @@ Widget eventDetail(WidgetRef ref,BuildContext context){
   CalendarTapDetails? calendarTapDetails=ref.watch(nowPageProvider).selectedCalendarTapDetails;
   if(calendarTapDetails==null||calendarTapDetails.appointments==null){
 
-    return Container();
+    return Container(child:commonText20BlackCenter("Select schedule"));
 
   }else{
 
     double radius = 24;
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween
+        ,children:[Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children:[commonCircleAvatarUserImage(
             radius: radius,
             context: context,
-            name: ref.watch(nowPageProvider).userInfoMap[calendarTapDetails.appointments![0].userDocId]!.name,
-            image: ref.watch(nowPageProvider).userInfoMap[calendarTapDetails.appointments![0].userDocId]!.photo,
-            userDocId: calendarTapDetails.appointments![0].userDocId)
-
-    ]);
+            name: ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.name,
+            image: ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.photo,
+            userDocId: commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")),
+          commonText16BlackLeft(ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.name)
+    ]),
+          commonButtonOrangeRound(text: "Request Call", onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) {
+                return AppointmentRequest(commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId"),
+                );
+              }),
+            );
+          })
+        ]);
   }
 
 }

@@ -43,7 +43,8 @@ Future<String> insertFirebaseMaster(WidgetRef ref,
           .putFile(optionFile2);
     }
 
-    await FirebaseFirestore.instance.collection('masters').add(
+    await FirebaseFirestore.instance.collection('masters').
+    add(
       {'masterGroupCode': masterGroupCode,
         'code': code,
         'name': name,

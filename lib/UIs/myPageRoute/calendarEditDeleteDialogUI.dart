@@ -6,6 +6,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
+import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
 import '../../common/provider/userProvider.dart';
 import '../../daoFirebase/eventsDaoFirebase.dart';
 
@@ -63,7 +64,7 @@ class CalendarEditDeleteDialog extends ConsumerWidget {
 
                             commonButtonSmallOrangeRound(text: "Delete",
                                 onPressed: ()async{
-                                  await logicalDeleteEventData(details.appointments![0].eventDocId,ref.watch(userDataProvider).userData["userDocId"],"CalendarEditDeleteDialog");
+                                  await logicalDeleteEventData(commonGetAppointmentNotesItemString(details.appointments![0],"eventDocId"),ref.watch(userDataProvider).userData["userDocId"],"CalendarEditDeleteDialog");
                                   Navigator.pop(context);
                                 })
 

@@ -2,12 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import '../../../entityIsar/eventEntityIsar.dart';
-import 'commonClassCalendarEvent.dart';
 
 
 class EventDataSource extends CalendarDataSource {
-  EventDataSource(List<CalendarEvent> source) {
+  EventDataSource(List<Appointment> source) {
 
     appointments = source;
   }
@@ -24,7 +22,7 @@ class EventDataSource extends CalendarDataSource {
 
   @override
   String getSubject(int index) {
-    return appointments![index].eventName;
+    return appointments![index].subject;
   }
 
   @override
@@ -36,5 +34,15 @@ class EventDataSource extends CalendarDataSource {
   @override
   bool isAllDay(int index) {
     return appointments![index].isAllDay;
+  }
+
+  @override
+  String getRecurrenceRule(int index) {
+    return appointments![index].recurrenceRule;
+  }
+
+  @override
+  String getNotes(int index) {
+    return appointments![index].notes;
   }
 }

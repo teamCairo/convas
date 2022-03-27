@@ -17,13 +17,13 @@ class BottomNavigationBarItemsForFriendProfile extends ChangeNotifier {
   }
 
   static const _footerItemNames = [
-    'Now',
-    'Talk',
+    'Profile',
+    'Calendar',
   ];
 
   static const List _footerIcons = [
-    Icons.access_time,
-    Icons.message_outlined,
+    Icons.perm_contact_cal,
+    Icons.calendar_today_outlined,
   ];
 
   /// インデックスのアイテムをアクティベートする

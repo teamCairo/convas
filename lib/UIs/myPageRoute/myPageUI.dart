@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import '../../developerLogic/insertTestEventsData.dart';
+import '../../developerLogic/insertTestMastersData.dart';
 import '../../developerLogic/insertTestUsersData.dart';
+import '../../developerLogic/testDataMenuSpeedDial.dart';
 import 'calendarEditUI.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
@@ -230,37 +232,7 @@ class MyPage extends ConsumerWidget {
             )
           ]),
         )),
-        floatingActionButton: SpeedDial(
-          animatedIcon: AnimatedIcons.menu_close,
-          animatedIconTheme: const IconThemeData(size: 22.0),
-          curve: Curves.bounceIn,
-          children: [
-            SpeedDialChild(
-                child: const Icon(Icons.calendar_today_outlined),
-                backgroundColor: Colors.amberAccent,
-                label: "Create test event data",
-                onTap: () {
-                  insertTestEventsData(ref);
-                },
-                labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-            SpeedDialChild(
-                child: const Icon(Icons.perm_contact_cal),
-                backgroundColor: Colors.teal,
-                label: "Create test user data",
-                onTap: () {
-                  insertTestUserData(ref);
-                },
-                labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-            SpeedDialChild(
-                child: const Icon(Icons.code),
-                backgroundColor: Colors.blue,
-                label: "Create test master data",
-                onTap: () {
-                  insertTestUserData(ref);
-                },
-                labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-          ],
-        ),);
+        floatingActionButton: testDataMenuSpeedDial(ref));
   }
 
   Widget bigIconButton(

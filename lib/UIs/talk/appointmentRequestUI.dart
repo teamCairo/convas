@@ -9,7 +9,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/commonValues.dart';
 import '../../common/logic/commonLogicList.dart';
-import '../../common/otherClass/calendar/commonClassCalendarEvent.dart';
+import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
 import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../common/provider/userProvider.dart';
 import '../../entityIsar/eventEntityIsar.dart';
@@ -44,25 +44,6 @@ class AppointmentRequest extends ConsumerWidget {
           return const Text('Something went wrong');
         }
 
-        List<CalendarEvent> calendarEventList=[];
-        for(int i=0;i<eventsList.data!.length;i++){
-          calendarEventList.add(
-              CalendarEvent(eventsList.data![i].eventDocId,
-                  eventsList.data![i].userDocId,
-                  ref.watch(userDataProvider).userData["name"],
-                  eventsList.data![i].eventName,
-                  eventsList.data![i].eventType,
-                  eventsList.data![i].friendUserDocId,
-                  eventsList.data![i].callChannelId,
-                  eventsList.data![i].fromTime,
-                  eventsList.data![i].toTime,
-                  eventsList.data![i].isAllDay,
-                  Colors.orangeAccent
-              )
-
-          );
-        }
-
         return Scaffold(
           appBar: commonAppbarWhite("Request"),
           body: SafeArea(
@@ -74,7 +55,7 @@ class AppointmentRequest extends ConsumerWidget {
                       //自分と相手の空き時間を表示する
                         view: CalendarView.timelineDay,
                         monthViewSettings: const MonthViewSettings(showAgenda: true),
-                        dataSource: EventDataSource(calendarEventList),
+                        dataSource: EventDataSource(commonGetAppointmentListFromEventList(eventsList.data!,{})),
                         onTap: (calendarDetails) async{
                           // await selectCalendarTime(calendarDetails,
                           //     ref, context);
@@ -102,7 +83,6 @@ class AppointmentRequest extends ConsumerWidget {
                     ),),
                   commonButtonOrangeRound(text: "Request",
                       onPressed: (){
-
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) {
                             return CalendarEdit( argumentFriendUserDocId);

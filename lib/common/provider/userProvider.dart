@@ -268,7 +268,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
             deleteFlg: snapshot.docs[0].get('deleteFlg'),
       );
 
-        updateCheckTime=snapshot.docs[snapshot.size-1].get("updateTime").toDate();
+        updateCheckTime=snapshot.docs[snapshot.size-1].get("informationModifiedTime").toDate();
         insertOrUpdateIsarSettingUpdateCheckTime(
             "user",
             snapshot.docs[snapshot.size-1].get("updateTime").toDate()

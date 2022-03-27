@@ -17,28 +17,38 @@ extension GetEventCollection on Isar {
 final EventSchema = CollectionSchema(
   name: 'Event',
   schema:
-      '{"name":"Event","idName":"id","properties":[{"name":"callChannelId","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"eventDocId","type":"String"},{"name":"eventName","type":"String"},{"name":"eventType","type":"String"},{"name":"friendUserDocId","type":"String"},{"name":"fromTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"isAllDay","type":"Bool"},{"name":"readableFlg","type":"Bool"},{"name":"toTime","type":"Long"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"Event","idName":"id","properties":[{"name":"callChannelId","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"eventDocId","type":"String"},{"name":"eventName","type":"String"},{"name":"eventType","type":"String"},{"name":"friday","type":"Bool"},{"name":"friendUserDocId","type":"String"},{"name":"fromTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"isAllDay","type":"Bool"},{"name":"monday","type":"Bool"},{"name":"readableFlg","type":"Bool"},{"name":"recurrenceRule","type":"String"},{"name":"repeat","type":"Bool"},{"name":"saturday","type":"Bool"},{"name":"sunday","type":"Bool"},{"name":"thursday","type":"Bool"},{"name":"toTime","type":"Long"},{"name":"tuesday","type":"Bool"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"wednesday","type":"Bool"}],"indexes":[],"links":[]}',
   nativeAdapter: const _EventNativeAdapter(),
   webAdapter: const _EventWebAdapter(),
   idName: 'id',
   propertyIds: {
     'callChannelId': 0,
     'deleteFlg': 1,
-    'eventDocId': 2,
-    'eventName': 3,
-    'eventType': 4,
-    'friendUserDocId': 5,
-    'fromTime': 6,
-    'insertProgramId': 7,
-    'insertTime': 8,
-    'insertUserDocId': 9,
-    'isAllDay': 10,
-    'readableFlg': 11,
-    'toTime': 12,
-    'updateProgramId': 13,
-    'updateTime': 14,
-    'updateUserDocId': 15,
-    'userDocId': 16
+    'description': 2,
+    'eventDocId': 3,
+    'eventName': 4,
+    'eventType': 5,
+    'friday': 6,
+    'friendUserDocId': 7,
+    'fromTime': 8,
+    'insertProgramId': 9,
+    'insertTime': 10,
+    'insertUserDocId': 11,
+    'isAllDay': 12,
+    'monday': 13,
+    'readableFlg': 14,
+    'recurrenceRule': 15,
+    'repeat': 16,
+    'saturday': 17,
+    'sunday': 18,
+    'thursday': 19,
+    'toTime': 20,
+    'tuesday': 21,
+    'updateProgramId': 22,
+    'updateTime': 23,
+    'updateUserDocId': 24,
+    'userDocId': 25,
+    'wednesday': 26
   },
   listProperties: {},
   indexIds: {},
@@ -66,9 +76,11 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
     final jsObj = IsarNative.newJsObject();
     IsarNative.jsObjectSet(jsObj, 'callChannelId', object.callChannelId);
     IsarNative.jsObjectSet(jsObj, 'deleteFlg', object.deleteFlg);
+    IsarNative.jsObjectSet(jsObj, 'description', object.description);
     IsarNative.jsObjectSet(jsObj, 'eventDocId', object.eventDocId);
     IsarNative.jsObjectSet(jsObj, 'eventName', object.eventName);
     IsarNative.jsObjectSet(jsObj, 'eventType', object.eventType);
+    IsarNative.jsObjectSet(jsObj, 'friday', object.friday);
     IsarNative.jsObjectSet(jsObj, 'friendUserDocId', object.friendUserDocId);
     IsarNative.jsObjectSet(
         jsObj, 'fromTime', object.fromTime?.toUtc().millisecondsSinceEpoch);
@@ -78,14 +90,22 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
         jsObj, 'insertTime', object.insertTime.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'insertUserDocId', object.insertUserDocId);
     IsarNative.jsObjectSet(jsObj, 'isAllDay', object.isAllDay);
+    IsarNative.jsObjectSet(jsObj, 'monday', object.monday);
     IsarNative.jsObjectSet(jsObj, 'readableFlg', object.readableFlg);
+    IsarNative.jsObjectSet(jsObj, 'recurrenceRule', object.recurrenceRule);
+    IsarNative.jsObjectSet(jsObj, 'repeat', object.repeat);
+    IsarNative.jsObjectSet(jsObj, 'saturday', object.saturday);
+    IsarNative.jsObjectSet(jsObj, 'sunday', object.sunday);
+    IsarNative.jsObjectSet(jsObj, 'thursday', object.thursday);
     IsarNative.jsObjectSet(
         jsObj, 'toTime', object.toTime?.toUtc().millisecondsSinceEpoch);
+    IsarNative.jsObjectSet(jsObj, 'tuesday', object.tuesday);
     IsarNative.jsObjectSet(jsObj, 'updateProgramId', object.updateProgramId);
     IsarNative.jsObjectSet(
         jsObj, 'updateTime', object.updateTime.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'updateUserDocId', object.updateUserDocId);
     IsarNative.jsObjectSet(jsObj, 'userDocId', object.userDocId);
+    IsarNative.jsObjectSet(jsObj, 'wednesday', object.wednesday);
     return jsObj;
   }
 
@@ -111,6 +131,16 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
               .toLocal()
           : null,
       IsarNative.jsObjectGet(jsObj, 'isAllDay') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'repeat') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'monday') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'tuesday') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'wednesday') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'thursday') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'friday') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'saturday') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'sunday') ?? false,
+      IsarNative.jsObjectGet(jsObj, 'description') ?? '',
+      IsarNative.jsObjectGet(jsObj, 'recurrenceRule') ?? '',
       IsarNative.jsObjectGet(jsObj, 'insertUserDocId') ?? '',
       IsarNative.jsObjectGet(jsObj, 'insertProgramId') ?? '',
       IsarNative.jsObjectGet(jsObj, 'insertTime') != null
@@ -141,12 +171,16 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
         return (IsarNative.jsObjectGet(jsObj, 'callChannelId')) as P;
       case 'deleteFlg':
         return (IsarNative.jsObjectGet(jsObj, 'deleteFlg') ?? false) as P;
+      case 'description':
+        return (IsarNative.jsObjectGet(jsObj, 'description') ?? '') as P;
       case 'eventDocId':
         return (IsarNative.jsObjectGet(jsObj, 'eventDocId') ?? '') as P;
       case 'eventName':
         return (IsarNative.jsObjectGet(jsObj, 'eventName') ?? '') as P;
       case 'eventType':
         return (IsarNative.jsObjectGet(jsObj, 'eventType') ?? '') as P;
+      case 'friday':
+        return (IsarNative.jsObjectGet(jsObj, 'friday') ?? false) as P;
       case 'friendUserDocId':
         return (IsarNative.jsObjectGet(jsObj, 'friendUserDocId') ?? '') as P;
       case 'fromTime':
@@ -172,8 +206,20 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
         return (IsarNative.jsObjectGet(jsObj, 'insertUserDocId') ?? '') as P;
       case 'isAllDay':
         return (IsarNative.jsObjectGet(jsObj, 'isAllDay') ?? false) as P;
+      case 'monday':
+        return (IsarNative.jsObjectGet(jsObj, 'monday') ?? false) as P;
       case 'readableFlg':
         return (IsarNative.jsObjectGet(jsObj, 'readableFlg') ?? false) as P;
+      case 'recurrenceRule':
+        return (IsarNative.jsObjectGet(jsObj, 'recurrenceRule') ?? '') as P;
+      case 'repeat':
+        return (IsarNative.jsObjectGet(jsObj, 'repeat') ?? false) as P;
+      case 'saturday':
+        return (IsarNative.jsObjectGet(jsObj, 'saturday') ?? false) as P;
+      case 'sunday':
+        return (IsarNative.jsObjectGet(jsObj, 'sunday') ?? false) as P;
+      case 'thursday':
+        return (IsarNative.jsObjectGet(jsObj, 'thursday') ?? false) as P;
       case 'toTime':
         return (IsarNative.jsObjectGet(jsObj, 'toTime') != null
             ? DateTime.fromMillisecondsSinceEpoch(
@@ -181,6 +227,8 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
                     isUtc: true)
                 .toLocal()
             : null) as P;
+      case 'tuesday':
+        return (IsarNative.jsObjectGet(jsObj, 'tuesday') ?? false) as P;
       case 'updateProgramId':
         return (IsarNative.jsObjectGet(jsObj, 'updateProgramId') ?? '') as P;
       case 'updateTime':
@@ -194,6 +242,8 @@ class _EventWebAdapter extends IsarWebTypeAdapter<Event> {
         return (IsarNative.jsObjectGet(jsObj, 'updateUserDocId') ?? '') as P;
       case 'userDocId':
         return (IsarNative.jsObjectGet(jsObj, 'userDocId') ?? '') as P;
+      case 'wednesday':
+        return (IsarNative.jsObjectGet(jsObj, 'wednesday') ?? false) as P;
       default:
         throw 'Illegal propertyName';
     }
@@ -218,45 +268,67 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
     dynamicSize += (_callChannelId?.length ?? 0) as int;
     final value1 = object.deleteFlg;
     final _deleteFlg = value1;
-    final value2 = object.eventDocId;
-    final _eventDocId = IsarBinaryWriter.utf8Encoder.convert(value2);
+    final value2 = object.description;
+    final _description = IsarBinaryWriter.utf8Encoder.convert(value2);
+    dynamicSize += (_description.length) as int;
+    final value3 = object.eventDocId;
+    final _eventDocId = IsarBinaryWriter.utf8Encoder.convert(value3);
     dynamicSize += (_eventDocId.length) as int;
-    final value3 = object.eventName;
-    final _eventName = IsarBinaryWriter.utf8Encoder.convert(value3);
+    final value4 = object.eventName;
+    final _eventName = IsarBinaryWriter.utf8Encoder.convert(value4);
     dynamicSize += (_eventName.length) as int;
-    final value4 = object.eventType;
-    final _eventType = IsarBinaryWriter.utf8Encoder.convert(value4);
+    final value5 = object.eventType;
+    final _eventType = IsarBinaryWriter.utf8Encoder.convert(value5);
     dynamicSize += (_eventType.length) as int;
-    final value5 = object.friendUserDocId;
-    final _friendUserDocId = IsarBinaryWriter.utf8Encoder.convert(value5);
+    final value6 = object.friday;
+    final _friday = value6;
+    final value7 = object.friendUserDocId;
+    final _friendUserDocId = IsarBinaryWriter.utf8Encoder.convert(value7);
     dynamicSize += (_friendUserDocId.length) as int;
-    final value6 = object.fromTime;
-    final _fromTime = value6;
-    final value7 = object.insertProgramId;
-    final _insertProgramId = IsarBinaryWriter.utf8Encoder.convert(value7);
+    final value8 = object.fromTime;
+    final _fromTime = value8;
+    final value9 = object.insertProgramId;
+    final _insertProgramId = IsarBinaryWriter.utf8Encoder.convert(value9);
     dynamicSize += (_insertProgramId.length) as int;
-    final value8 = object.insertTime;
-    final _insertTime = value8;
-    final value9 = object.insertUserDocId;
-    final _insertUserDocId = IsarBinaryWriter.utf8Encoder.convert(value9);
+    final value10 = object.insertTime;
+    final _insertTime = value10;
+    final value11 = object.insertUserDocId;
+    final _insertUserDocId = IsarBinaryWriter.utf8Encoder.convert(value11);
     dynamicSize += (_insertUserDocId.length) as int;
-    final value10 = object.isAllDay;
-    final _isAllDay = value10;
-    final value11 = object.readableFlg;
-    final _readableFlg = value11;
-    final value12 = object.toTime;
-    final _toTime = value12;
-    final value13 = object.updateProgramId;
-    final _updateProgramId = IsarBinaryWriter.utf8Encoder.convert(value13);
+    final value12 = object.isAllDay;
+    final _isAllDay = value12;
+    final value13 = object.monday;
+    final _monday = value13;
+    final value14 = object.readableFlg;
+    final _readableFlg = value14;
+    final value15 = object.recurrenceRule;
+    final _recurrenceRule = IsarBinaryWriter.utf8Encoder.convert(value15);
+    dynamicSize += (_recurrenceRule.length) as int;
+    final value16 = object.repeat;
+    final _repeat = value16;
+    final value17 = object.saturday;
+    final _saturday = value17;
+    final value18 = object.sunday;
+    final _sunday = value18;
+    final value19 = object.thursday;
+    final _thursday = value19;
+    final value20 = object.toTime;
+    final _toTime = value20;
+    final value21 = object.tuesday;
+    final _tuesday = value21;
+    final value22 = object.updateProgramId;
+    final _updateProgramId = IsarBinaryWriter.utf8Encoder.convert(value22);
     dynamicSize += (_updateProgramId.length) as int;
-    final value14 = object.updateTime;
-    final _updateTime = value14;
-    final value15 = object.updateUserDocId;
-    final _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value15);
+    final value23 = object.updateTime;
+    final _updateTime = value23;
+    final value24 = object.updateUserDocId;
+    final _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value24);
     dynamicSize += (_updateUserDocId.length) as int;
-    final value16 = object.userDocId;
-    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value16);
+    final value25 = object.userDocId;
+    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value25);
     dynamicSize += (_userDocId.length) as int;
+    final value26 = object.wednesday;
+    final _wednesday = value26;
     final size = staticSize + dynamicSize;
 
     rawObj.buffer = alloc(size);
@@ -265,43 +337,63 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
     final writer = IsarBinaryWriter(buffer, staticSize);
     writer.writeBytes(offsets[0], _callChannelId);
     writer.writeBool(offsets[1], _deleteFlg);
-    writer.writeBytes(offsets[2], _eventDocId);
-    writer.writeBytes(offsets[3], _eventName);
-    writer.writeBytes(offsets[4], _eventType);
-    writer.writeBytes(offsets[5], _friendUserDocId);
-    writer.writeDateTime(offsets[6], _fromTime);
-    writer.writeBytes(offsets[7], _insertProgramId);
-    writer.writeDateTime(offsets[8], _insertTime);
-    writer.writeBytes(offsets[9], _insertUserDocId);
-    writer.writeBool(offsets[10], _isAllDay);
-    writer.writeBool(offsets[11], _readableFlg);
-    writer.writeDateTime(offsets[12], _toTime);
-    writer.writeBytes(offsets[13], _updateProgramId);
-    writer.writeDateTime(offsets[14], _updateTime);
-    writer.writeBytes(offsets[15], _updateUserDocId);
-    writer.writeBytes(offsets[16], _userDocId);
+    writer.writeBytes(offsets[2], _description);
+    writer.writeBytes(offsets[3], _eventDocId);
+    writer.writeBytes(offsets[4], _eventName);
+    writer.writeBytes(offsets[5], _eventType);
+    writer.writeBool(offsets[6], _friday);
+    writer.writeBytes(offsets[7], _friendUserDocId);
+    writer.writeDateTime(offsets[8], _fromTime);
+    writer.writeBytes(offsets[9], _insertProgramId);
+    writer.writeDateTime(offsets[10], _insertTime);
+    writer.writeBytes(offsets[11], _insertUserDocId);
+    writer.writeBool(offsets[12], _isAllDay);
+    writer.writeBool(offsets[13], _monday);
+    writer.writeBool(offsets[14], _readableFlg);
+    writer.writeBytes(offsets[15], _recurrenceRule);
+    writer.writeBool(offsets[16], _repeat);
+    writer.writeBool(offsets[17], _saturday);
+    writer.writeBool(offsets[18], _sunday);
+    writer.writeBool(offsets[19], _thursday);
+    writer.writeDateTime(offsets[20], _toTime);
+    writer.writeBool(offsets[21], _tuesday);
+    writer.writeBytes(offsets[22], _updateProgramId);
+    writer.writeDateTime(offsets[23], _updateTime);
+    writer.writeBytes(offsets[24], _updateUserDocId);
+    writer.writeBytes(offsets[25], _userDocId);
+    writer.writeBool(offsets[26], _wednesday);
   }
 
   @override
   Event deserialize(IsarCollection<Event> collection, int id,
       IsarBinaryReader reader, List<int> offsets) {
     final object = Event(
-      reader.readString(offsets[2]),
-      reader.readString(offsets[16]),
       reader.readString(offsets[3]),
+      reader.readString(offsets[25]),
       reader.readString(offsets[4]),
       reader.readString(offsets[5]),
-      reader.readStringOrNull(offsets[0]),
-      reader.readDateTimeOrNull(offsets[6]),
-      reader.readDateTimeOrNull(offsets[12]),
-      reader.readBool(offsets[10]),
-      reader.readString(offsets[9]),
       reader.readString(offsets[7]),
-      reader.readDateTime(offsets[8]),
+      reader.readStringOrNull(offsets[0]),
+      reader.readDateTimeOrNull(offsets[8]),
+      reader.readDateTimeOrNull(offsets[20]),
+      reader.readBool(offsets[12]),
+      reader.readBool(offsets[16]),
+      reader.readBool(offsets[13]),
+      reader.readBool(offsets[21]),
+      reader.readBool(offsets[26]),
+      reader.readBool(offsets[19]),
+      reader.readBool(offsets[6]),
+      reader.readBool(offsets[17]),
+      reader.readBool(offsets[18]),
+      reader.readString(offsets[2]),
       reader.readString(offsets[15]),
-      reader.readString(offsets[13]),
-      reader.readDateTime(offsets[14]),
-      reader.readBool(offsets[11]),
+      reader.readString(offsets[11]),
+      reader.readString(offsets[9]),
+      reader.readDateTime(offsets[10]),
+      reader.readString(offsets[24]),
+      reader.readString(offsets[22]),
+      reader.readDateTime(offsets[23]),
+      reader.readBool(offsets[14]),
       reader.readBool(offsets[1]),
     );
     object.id = id;
@@ -327,27 +419,47 @@ class _EventNativeAdapter extends IsarNativeTypeAdapter<Event> {
       case 5:
         return (reader.readString(offset)) as P;
       case 6:
-        return (reader.readDateTimeOrNull(offset)) as P;
+        return (reader.readBool(offset)) as P;
       case 7:
         return (reader.readString(offset)) as P;
       case 8:
-        return (reader.readDateTime(offset)) as P;
+        return (reader.readDateTimeOrNull(offset)) as P;
       case 9:
         return (reader.readString(offset)) as P;
       case 10:
-        return (reader.readBool(offset)) as P;
-      case 11:
-        return (reader.readBool(offset)) as P;
-      case 12:
-        return (reader.readDateTimeOrNull(offset)) as P;
-      case 13:
-        return (reader.readString(offset)) as P;
-      case 14:
         return (reader.readDateTime(offset)) as P;
+      case 11:
+        return (reader.readString(offset)) as P;
+      case 12:
+        return (reader.readBool(offset)) as P;
+      case 13:
+        return (reader.readBool(offset)) as P;
+      case 14:
+        return (reader.readBool(offset)) as P;
       case 15:
         return (reader.readString(offset)) as P;
       case 16:
+        return (reader.readBool(offset)) as P;
+      case 17:
+        return (reader.readBool(offset)) as P;
+      case 18:
+        return (reader.readBool(offset)) as P;
+      case 19:
+        return (reader.readBool(offset)) as P;
+      case 20:
+        return (reader.readDateTimeOrNull(offset)) as P;
+      case 21:
+        return (reader.readBool(offset)) as P;
+      case 22:
         return (reader.readString(offset)) as P;
+      case 23:
+        return (reader.readDateTime(offset)) as P;
+      case 24:
+        return (reader.readString(offset)) as P;
+      case 25:
+        return (reader.readString(offset)) as P;
+      case 26:
+        return (reader.readBool(offset)) as P;
       default:
         throw 'Illegal propertyIndex';
     }
@@ -554,6 +666,109 @@ extension EventQueryFilter on QueryBuilder<Event, Event, QFilterCondition> {
       type: ConditionType.eq,
       property: 'deleteFlg',
       value: value,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> descriptionEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'description',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> descriptionGreaterThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'description',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> descriptionLessThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'description',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> descriptionBetween(
+    String lower,
+    String upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'description',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> descriptionStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'description',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> descriptionEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'description',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> descriptionContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'description',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> descriptionMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'description',
+      value: pattern,
+      caseSensitive: caseSensitive,
     ));
   }
 
@@ -863,6 +1078,14 @@ extension EventQueryFilter on QueryBuilder<Event, Event, QFilterCondition> {
       property: 'eventType',
       value: pattern,
       caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> fridayEqualTo(bool value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'friday',
+      value: value,
     ));
   }
 
@@ -1335,11 +1558,156 @@ extension EventQueryFilter on QueryBuilder<Event, Event, QFilterCondition> {
     ));
   }
 
+  QueryBuilder<Event, Event, QAfterFilterCondition> mondayEqualTo(bool value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'monday',
+      value: value,
+    ));
+  }
+
   QueryBuilder<Event, Event, QAfterFilterCondition> readableFlgEqualTo(
       bool value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'readableFlg',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> recurrenceRuleEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'recurrenceRule',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> recurrenceRuleGreaterThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'recurrenceRule',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> recurrenceRuleLessThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'recurrenceRule',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> recurrenceRuleBetween(
+    String lower,
+    String upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'recurrenceRule',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> recurrenceRuleStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'recurrenceRule',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> recurrenceRuleEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'recurrenceRule',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> recurrenceRuleContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'recurrenceRule',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> recurrenceRuleMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'recurrenceRule',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> repeatEqualTo(bool value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'repeat',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> saturdayEqualTo(
+      bool value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'saturday',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> sundayEqualTo(bool value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'sunday',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> thursdayEqualTo(
+      bool value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'thursday',
       value: value,
     ));
   }
@@ -1397,6 +1765,14 @@ extension EventQueryFilter on QueryBuilder<Event, Event, QFilterCondition> {
       includeLower: includeLower,
       upper: upper,
       includeUpper: includeUpper,
+    ));
+  }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> tuesdayEqualTo(bool value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'tuesday',
+      value: value,
     ));
   }
 
@@ -1756,6 +2132,15 @@ extension EventQueryFilter on QueryBuilder<Event, Event, QFilterCondition> {
       caseSensitive: caseSensitive,
     ));
   }
+
+  QueryBuilder<Event, Event, QAfterFilterCondition> wednesdayEqualTo(
+      bool value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'wednesday',
+      value: value,
+    ));
+  }
 }
 
 extension EventQueryLinks on QueryBuilder<Event, Event, QFilterCondition> {}
@@ -1775,6 +2160,14 @@ extension EventQueryWhereSortBy on QueryBuilder<Event, Event, QSortBy> {
 
   QueryBuilder<Event, Event, QAfterSortBy> sortByDeleteFlgDesc() {
     return addSortByInternal('deleteFlg', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByDescription() {
+    return addSortByInternal('description', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByDescriptionDesc() {
+    return addSortByInternal('description', Sort.desc);
   }
 
   QueryBuilder<Event, Event, QAfterSortBy> sortByEventDocId() {
@@ -1799,6 +2192,14 @@ extension EventQueryWhereSortBy on QueryBuilder<Event, Event, QSortBy> {
 
   QueryBuilder<Event, Event, QAfterSortBy> sortByEventTypeDesc() {
     return addSortByInternal('eventType', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByFriday() {
+    return addSortByInternal('friday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByFridayDesc() {
+    return addSortByInternal('friday', Sort.desc);
   }
 
   QueryBuilder<Event, Event, QAfterSortBy> sortByFriendUserDocId() {
@@ -1857,6 +2258,14 @@ extension EventQueryWhereSortBy on QueryBuilder<Event, Event, QSortBy> {
     return addSortByInternal('isAllDay', Sort.desc);
   }
 
+  QueryBuilder<Event, Event, QAfterSortBy> sortByMonday() {
+    return addSortByInternal('monday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByMondayDesc() {
+    return addSortByInternal('monday', Sort.desc);
+  }
+
   QueryBuilder<Event, Event, QAfterSortBy> sortByReadableFlg() {
     return addSortByInternal('readableFlg', Sort.asc);
   }
@@ -1865,12 +2274,60 @@ extension EventQueryWhereSortBy on QueryBuilder<Event, Event, QSortBy> {
     return addSortByInternal('readableFlg', Sort.desc);
   }
 
+  QueryBuilder<Event, Event, QAfterSortBy> sortByRecurrenceRule() {
+    return addSortByInternal('recurrenceRule', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByRecurrenceRuleDesc() {
+    return addSortByInternal('recurrenceRule', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByRepeat() {
+    return addSortByInternal('repeat', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByRepeatDesc() {
+    return addSortByInternal('repeat', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortBySaturday() {
+    return addSortByInternal('saturday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortBySaturdayDesc() {
+    return addSortByInternal('saturday', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortBySunday() {
+    return addSortByInternal('sunday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortBySundayDesc() {
+    return addSortByInternal('sunday', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByThursday() {
+    return addSortByInternal('thursday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByThursdayDesc() {
+    return addSortByInternal('thursday', Sort.desc);
+  }
+
   QueryBuilder<Event, Event, QAfterSortBy> sortByToTime() {
     return addSortByInternal('toTime', Sort.asc);
   }
 
   QueryBuilder<Event, Event, QAfterSortBy> sortByToTimeDesc() {
     return addSortByInternal('toTime', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByTuesday() {
+    return addSortByInternal('tuesday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByTuesdayDesc() {
+    return addSortByInternal('tuesday', Sort.desc);
   }
 
   QueryBuilder<Event, Event, QAfterSortBy> sortByUpdateProgramId() {
@@ -1904,6 +2361,14 @@ extension EventQueryWhereSortBy on QueryBuilder<Event, Event, QSortBy> {
   QueryBuilder<Event, Event, QAfterSortBy> sortByUserDocIdDesc() {
     return addSortByInternal('userDocId', Sort.desc);
   }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByWednesday() {
+    return addSortByInternal('wednesday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> sortByWednesdayDesc() {
+    return addSortByInternal('wednesday', Sort.desc);
+  }
 }
 
 extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
@@ -1921,6 +2386,14 @@ extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
 
   QueryBuilder<Event, Event, QAfterSortBy> thenByDeleteFlgDesc() {
     return addSortByInternal('deleteFlg', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByDescription() {
+    return addSortByInternal('description', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByDescriptionDesc() {
+    return addSortByInternal('description', Sort.desc);
   }
 
   QueryBuilder<Event, Event, QAfterSortBy> thenByEventDocId() {
@@ -1945,6 +2418,14 @@ extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
 
   QueryBuilder<Event, Event, QAfterSortBy> thenByEventTypeDesc() {
     return addSortByInternal('eventType', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByFriday() {
+    return addSortByInternal('friday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByFridayDesc() {
+    return addSortByInternal('friday', Sort.desc);
   }
 
   QueryBuilder<Event, Event, QAfterSortBy> thenByFriendUserDocId() {
@@ -2003,6 +2484,14 @@ extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
     return addSortByInternal('isAllDay', Sort.desc);
   }
 
+  QueryBuilder<Event, Event, QAfterSortBy> thenByMonday() {
+    return addSortByInternal('monday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByMondayDesc() {
+    return addSortByInternal('monday', Sort.desc);
+  }
+
   QueryBuilder<Event, Event, QAfterSortBy> thenByReadableFlg() {
     return addSortByInternal('readableFlg', Sort.asc);
   }
@@ -2011,12 +2500,60 @@ extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
     return addSortByInternal('readableFlg', Sort.desc);
   }
 
+  QueryBuilder<Event, Event, QAfterSortBy> thenByRecurrenceRule() {
+    return addSortByInternal('recurrenceRule', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByRecurrenceRuleDesc() {
+    return addSortByInternal('recurrenceRule', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByRepeat() {
+    return addSortByInternal('repeat', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByRepeatDesc() {
+    return addSortByInternal('repeat', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenBySaturday() {
+    return addSortByInternal('saturday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenBySaturdayDesc() {
+    return addSortByInternal('saturday', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenBySunday() {
+    return addSortByInternal('sunday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenBySundayDesc() {
+    return addSortByInternal('sunday', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByThursday() {
+    return addSortByInternal('thursday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByThursdayDesc() {
+    return addSortByInternal('thursday', Sort.desc);
+  }
+
   QueryBuilder<Event, Event, QAfterSortBy> thenByToTime() {
     return addSortByInternal('toTime', Sort.asc);
   }
 
   QueryBuilder<Event, Event, QAfterSortBy> thenByToTimeDesc() {
     return addSortByInternal('toTime', Sort.desc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByTuesday() {
+    return addSortByInternal('tuesday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByTuesdayDesc() {
+    return addSortByInternal('tuesday', Sort.desc);
   }
 
   QueryBuilder<Event, Event, QAfterSortBy> thenByUpdateProgramId() {
@@ -2050,6 +2587,14 @@ extension EventQueryWhereSortThenBy on QueryBuilder<Event, Event, QSortThenBy> {
   QueryBuilder<Event, Event, QAfterSortBy> thenByUserDocIdDesc() {
     return addSortByInternal('userDocId', Sort.desc);
   }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByWednesday() {
+    return addSortByInternal('wednesday', Sort.asc);
+  }
+
+  QueryBuilder<Event, Event, QAfterSortBy> thenByWednesdayDesc() {
+    return addSortByInternal('wednesday', Sort.desc);
+  }
 }
 
 extension EventQueryWhereDistinct on QueryBuilder<Event, Event, QDistinct> {
@@ -2060,6 +2605,11 @@ extension EventQueryWhereDistinct on QueryBuilder<Event, Event, QDistinct> {
 
   QueryBuilder<Event, Event, QDistinct> distinctByDeleteFlg() {
     return addDistinctByInternal('deleteFlg');
+  }
+
+  QueryBuilder<Event, Event, QDistinct> distinctByDescription(
+      {bool caseSensitive = true}) {
+    return addDistinctByInternal('description', caseSensitive: caseSensitive);
   }
 
   QueryBuilder<Event, Event, QDistinct> distinctByEventDocId(
@@ -2075,6 +2625,10 @@ extension EventQueryWhereDistinct on QueryBuilder<Event, Event, QDistinct> {
   QueryBuilder<Event, Event, QDistinct> distinctByEventType(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('eventType', caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<Event, Event, QDistinct> distinctByFriday() {
+    return addDistinctByInternal('friday');
   }
 
   QueryBuilder<Event, Event, QDistinct> distinctByFriendUserDocId(
@@ -2111,12 +2665,42 @@ extension EventQueryWhereDistinct on QueryBuilder<Event, Event, QDistinct> {
     return addDistinctByInternal('isAllDay');
   }
 
+  QueryBuilder<Event, Event, QDistinct> distinctByMonday() {
+    return addDistinctByInternal('monday');
+  }
+
   QueryBuilder<Event, Event, QDistinct> distinctByReadableFlg() {
     return addDistinctByInternal('readableFlg');
   }
 
+  QueryBuilder<Event, Event, QDistinct> distinctByRecurrenceRule(
+      {bool caseSensitive = true}) {
+    return addDistinctByInternal('recurrenceRule',
+        caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<Event, Event, QDistinct> distinctByRepeat() {
+    return addDistinctByInternal('repeat');
+  }
+
+  QueryBuilder<Event, Event, QDistinct> distinctBySaturday() {
+    return addDistinctByInternal('saturday');
+  }
+
+  QueryBuilder<Event, Event, QDistinct> distinctBySunday() {
+    return addDistinctByInternal('sunday');
+  }
+
+  QueryBuilder<Event, Event, QDistinct> distinctByThursday() {
+    return addDistinctByInternal('thursday');
+  }
+
   QueryBuilder<Event, Event, QDistinct> distinctByToTime() {
     return addDistinctByInternal('toTime');
+  }
+
+  QueryBuilder<Event, Event, QDistinct> distinctByTuesday() {
+    return addDistinctByInternal('tuesday');
   }
 
   QueryBuilder<Event, Event, QDistinct> distinctByUpdateProgramId(
@@ -2139,6 +2723,10 @@ extension EventQueryWhereDistinct on QueryBuilder<Event, Event, QDistinct> {
       {bool caseSensitive = true}) {
     return addDistinctByInternal('userDocId', caseSensitive: caseSensitive);
   }
+
+  QueryBuilder<Event, Event, QDistinct> distinctByWednesday() {
+    return addDistinctByInternal('wednesday');
+  }
 }
 
 extension EventQueryProperty on QueryBuilder<Event, Event, QQueryProperty> {
@@ -2148,6 +2736,10 @@ extension EventQueryProperty on QueryBuilder<Event, Event, QQueryProperty> {
 
   QueryBuilder<Event, bool, QQueryOperations> deleteFlgProperty() {
     return addPropertyNameInternal('deleteFlg');
+  }
+
+  QueryBuilder<Event, String, QQueryOperations> descriptionProperty() {
+    return addPropertyNameInternal('description');
   }
 
   QueryBuilder<Event, String, QQueryOperations> eventDocIdProperty() {
@@ -2160,6 +2752,10 @@ extension EventQueryProperty on QueryBuilder<Event, Event, QQueryProperty> {
 
   QueryBuilder<Event, String, QQueryOperations> eventTypeProperty() {
     return addPropertyNameInternal('eventType');
+  }
+
+  QueryBuilder<Event, bool, QQueryOperations> fridayProperty() {
+    return addPropertyNameInternal('friday');
   }
 
   QueryBuilder<Event, String, QQueryOperations> friendUserDocIdProperty() {
@@ -2190,12 +2786,40 @@ extension EventQueryProperty on QueryBuilder<Event, Event, QQueryProperty> {
     return addPropertyNameInternal('isAllDay');
   }
 
+  QueryBuilder<Event, bool, QQueryOperations> mondayProperty() {
+    return addPropertyNameInternal('monday');
+  }
+
   QueryBuilder<Event, bool, QQueryOperations> readableFlgProperty() {
     return addPropertyNameInternal('readableFlg');
   }
 
+  QueryBuilder<Event, String, QQueryOperations> recurrenceRuleProperty() {
+    return addPropertyNameInternal('recurrenceRule');
+  }
+
+  QueryBuilder<Event, bool, QQueryOperations> repeatProperty() {
+    return addPropertyNameInternal('repeat');
+  }
+
+  QueryBuilder<Event, bool, QQueryOperations> saturdayProperty() {
+    return addPropertyNameInternal('saturday');
+  }
+
+  QueryBuilder<Event, bool, QQueryOperations> sundayProperty() {
+    return addPropertyNameInternal('sunday');
+  }
+
+  QueryBuilder<Event, bool, QQueryOperations> thursdayProperty() {
+    return addPropertyNameInternal('thursday');
+  }
+
   QueryBuilder<Event, DateTime?, QQueryOperations> toTimeProperty() {
     return addPropertyNameInternal('toTime');
+  }
+
+  QueryBuilder<Event, bool, QQueryOperations> tuesdayProperty() {
+    return addPropertyNameInternal('tuesday');
   }
 
   QueryBuilder<Event, String, QQueryOperations> updateProgramIdProperty() {
@@ -2212,5 +2836,9 @@ extension EventQueryProperty on QueryBuilder<Event, Event, QQueryProperty> {
 
   QueryBuilder<Event, String, QQueryOperations> userDocIdProperty() {
     return addPropertyNameInternal('userDocId');
+  }
+
+  QueryBuilder<Event, bool, QQueryOperations> wednesdayProperty() {
+    return addPropertyNameInternal('wednesday');
   }
 }

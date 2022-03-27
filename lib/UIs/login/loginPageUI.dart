@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
+import '../../developerLogic/testDataMenuSpeedDial.dart';
 import 'loginLogic.dart';
 import 'loginProvider.dart';
 
@@ -111,6 +112,7 @@ class LoginPage extends ConsumerWidget {
           ),
         ),
       ),
+        floatingActionButton: testDataMenuSpeedDial(ref)
     );
   }
 

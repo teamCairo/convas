@@ -18,7 +18,7 @@ Future<void> insertTestEventsData(WidgetRef ref) async {
 
     for(int j = 0;j<times; j++){
 
-      DateTime from = DateTime.now().add(Duration(hours:rng.nextInt(200)));
+      DateTime from = DateTime.now().add(Duration(hours:rng.nextInt(100)));
       DateTime to = from.add(Duration(hours:rng.nextInt(5)));
       insertEventUnitData(ref:ref,userDocId:snapshot.docs[i].id,fromTime:from,toTime:to);
 
@@ -43,6 +43,15 @@ Future<String> insertEventUnitData({
       fromTime:fromTime,
       toTime:toTime,
       isAllDay:false,
+      repeat:false,
+      monday:false,
+      tuesday:false,
+      wednesday:false,
+      thursday:false,
+      friday:false,
+      saturday:false,
+      sunday:false,
+      description:"",
       programId:"insertTestEventsData"
   );
 

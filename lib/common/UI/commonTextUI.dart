@@ -112,21 +112,7 @@ Padding commonText20BlackCenter(String text) {
   );
 }
 
-Padding commonText20BlackRight(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.topRight,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 20,
-            color: Colors.black54,
-          ),
-        )),
-  );
-}
+
 Padding commonText16BlackCenter(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),

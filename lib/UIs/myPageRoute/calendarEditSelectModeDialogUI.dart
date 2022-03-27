@@ -10,12 +10,9 @@ import '../../common/UI/commonTextUI.dart';
 
 class CalendarEditSelectModeDialog extends ConsumerWidget {
   CalendarEditSelectModeDialog({
-
     required this.details,
     Key? key}) : super(key: key);
   CalendarTapDetails details;
-
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

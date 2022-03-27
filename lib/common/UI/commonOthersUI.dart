@@ -2,6 +2,7 @@ import 'package:convas/common/provider/masterProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../UIs/findRoute/friendProfileRootUI.dart';
 import '../../UIs/findRoute/friendProfileUI.dart';
 import '../commonValues.dart';
 import '../logic/commonLogicOthers.dart';
@@ -79,7 +80,7 @@ required BuildContext context}
       onTap: () async {
     await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) {
-        return FriendProfile(
+        return FriendProfileRoot(
           argumentFriendUserDocId:userDocId,
         );
       }),
@@ -110,7 +111,7 @@ Widget commonCircleAvatarImage({Image? image, required double radius, required S
         color:Colors.amber,
         border: Border.all(
             style:BorderStyle.none),
-        borderRadius: BorderRadius.circular(radius*1.2),
+        borderRadius: BorderRadius.circular(radius*3.2),
       ),
       alignment: Alignment.center, //
     );
@@ -315,3 +316,13 @@ Widget commonImageCountry(String countryCode,double height, WidgetRef ref){
       child:Image.memory(getMasterData("country", countryCode, ref).optionFile1!));
 
 }
+
+Widget commonCheckBoxList(String displayItemName,bool value,{required void Function(bool?)  onChanged}){
+  return CheckboxListTile(
+    title: commonText16GrayLeft(displayItemName),
+    value: value,
+    onChanged:onChanged ,
+    controlAffinity: ListTileControlAffinity.trailing,
+  );
+}
+

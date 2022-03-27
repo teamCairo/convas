@@ -52,6 +52,13 @@ Future<void> insertTestMasterData(WidgetRef ref) async {
   insertMasterUnitData(ref:ref,masterGroupCode:"course",code:"1",name:"free talk",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"course",code:"2",name:"discussion",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"course",code:"3",name:"topic talk",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+
+  insertMasterUnitData(ref:ref,masterGroupCode:"eventType",code:"1",name:"Maybe available",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"eventType",code:"2",name:"Available",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"eventType",code:"3",name:"Reqested appointment(from me)",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"eventType",code:"4",name:"Reqested appointment(from friend)",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"eventType",code:"5",name:"Appointment(from me)",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"eventType",code:"6",name:"Appointment(from friend)",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
 }
 
 Future<String> insertMasterUnitData({
@@ -88,7 +95,7 @@ Future<String> insertMasterUnitData({
         null,
         null,
         programId,
-      ref.watch(userDataProvider).userData["userDocId"]
+      'testUser'
     );
 
   FirebaseStorage storage = FirebaseStorage.instance;
@@ -109,7 +116,7 @@ Future<String> insertMasterUnitData({
   }
     if(photoURL1!=""||photoURL2!=""){
       updateFirebaseMasterPhotoInfo(insertedDocId,
-          ref.watch(userDataProvider).userData["userDocId"],
+          'testUser',
         photoURL1==""?"":photoURL1.substring(photoURL1.lastIndexOf('.'),),
         photoURL2==""?"":photoURL2.substring(photoURL2.lastIndexOf('.'),),
         programId

@@ -1,28 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/common/provider/friendProvider.dart';
+import 'package:convas/entityIsar/friendEntityIsar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../common/commonValues.dart';
-import '../../common/otherClass/calendar/commonClassCalendarEvent.dart';
+import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
 import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../daoFirebase/eventsDaoFirebase.dart';
 import '../../daoFirebase/usersDaoFirebase.dart';
 import '../../entityIsar/eventEntityIsar.dart';
 import '../../faoFirebaseStorage/usersPhotoFaoFirebase.dart';
 
-class UserInfoForTimeline{
 
-  UserInfoForTimeline(
-    this.name,
-    this.photo
-  );
-
-  String name;
-  Image? photo;
-
-}
 
 final nowPageProvider = ChangeNotifierProvider(
       (ref) => NowPageNotifier(),
@@ -59,13 +51,13 @@ class NowPageNotifier extends ChangeNotifier {
   }
 
 
-  void refleshEventShow(DateTime from,DateTime to)async{
+  void refleshEventShow(WidgetRef ref, DateTime from,DateTime to)async{
 
     List<Event> _firebaseEventList=await selectFirebaseEventsByDateTimeOrderByFromLimitNum(from,to,calendarTimelineMaxPeople);
 
     _userDocIdForShowList=[];
     List<String> userDocIdForSearchList=[];
-    List<CalendarEvent> calendarEventList=[];
+    List<Appointment> appointmentList=[];
 
     //まずは表示するユーザを選定、データを整形
     for(int i=0;i<_firebaseEventList.length;i++){
@@ -82,7 +74,17 @@ class NowPageNotifier extends ChangeNotifier {
     if(userDocIdForSearchList.isNotEmpty){
       QuerySnapshot userDataSnapshot = await selectFirebaseByUserDocIdList(userDocIdForSearchList);
       for(int i=0;i<userDataSnapshot.size;i++){
-        Image? photo = await getUsersSmallPhoto(userDataSnapshot.docs[i].id, userDataSnapshot.docs[i].get("profilePhotoNameSuffix") );
+        Friend? tmpFriendData=await ref.watch(friendDataProvider).friendData[userDataSnapshot.docs[i].id];
+        Image? photo;
+        if(tmpFriendData==null){
+          photo = await getUsersSmallPhoto(userDataSnapshot.docs[i].id, userDataSnapshot.docs[i].get("profilePhotoNameSuffix") );
+        }else{
+          if(tmpFriendData.profilePhoto!=null){
+            photo = Image.memory(tmpFriendData.profilePhoto!);
+          }else{
+            photo =null;
+          }
+        }
         _userInfoMap[userDataSnapshot.docs[i].id]=UserInfoForTimeline(userDataSnapshot.docs[i].get("name"),photo);
       }
     }
@@ -94,23 +96,35 @@ class NowPageNotifier extends ChangeNotifier {
       //選定したユーザのデータなら追加
       userNo=_userDocIdForShowList.indexOf(_firebaseEventList[i].userDocId);
       if(userNo>-1){
-        calendarEventList.add(
-          CalendarEvent(_firebaseEventList[i].eventDocId,
+        appointmentList.add(
+          commonMakeAppointment(_firebaseEventList[i].eventDocId,
               _firebaseEventList[i].userDocId,
             _userInfoMap[_firebaseEventList[i].userDocId]!.name,
             _firebaseEventList[i].eventName,
             _firebaseEventList[i].eventType,
             _firebaseEventList[i].friendUserDocId,
-            _firebaseEventList[i].callChannelId,
-            _firebaseEventList[i].fromTime,
-            _firebaseEventList[i].toTime,
+            _firebaseEventList[i].callChannelId??"",
+            _firebaseEventList[i].fromTime!,
+            _firebaseEventList[i].toTime!,
             _firebaseEventList[i].isAllDay,
-              calendarTimelineColors[userNo]
+            _firebaseEventList[i].repeat,
+            _firebaseEventList[i].monday,
+            _firebaseEventList[i].tuesday,
+            _firebaseEventList[i].wednesday,
+            _firebaseEventList[i].thursday,
+            _firebaseEventList[i].friday,
+            _firebaseEventList[i].saturday,
+            _firebaseEventList[i].sunday,
+            _firebaseEventList[i].description,
+            _firebaseEventList[i].recurrenceRule,
+            null,
+            calendarTimelineColors[userNo],
+            ""
           )
         );
       }
     }
-    _eventDataSource=EventDataSource(calendarEventList);
+    _eventDataSource=EventDataSource(appointmentList);
 
     notifyListeners();
   }

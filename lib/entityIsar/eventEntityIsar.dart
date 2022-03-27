@@ -15,6 +15,16 @@ class Event {
       this.fromTime,
       this.toTime,
       this.isAllDay,
+      this.repeat,
+      this.monday,
+      this.tuesday,
+      this.wednesday,
+      this.thursday,
+      this.friday,
+      this.saturday,
+      this.sunday,
+      this.description,
+      this.recurrenceRule,
       this.insertUserDocId,
       this.insertProgramId,
       this.insertTime,
@@ -37,6 +47,16 @@ class Event {
   DateTime? fromTime;
   DateTime? toTime;
   late bool isAllDay;
+  late bool repeat;
+  late bool monday;
+  late bool tuesday;
+  late bool wednesday;
+  late bool thursday;
+  late bool friday;
+  late bool saturday;
+  late bool sunday;
+  late String description;
+  late String recurrenceRule;
   late String insertUserDocId;
   late String insertProgramId;
   late DateTime insertTime;
