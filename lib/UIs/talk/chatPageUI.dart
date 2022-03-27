@@ -80,8 +80,7 @@ class ChatPage extends ConsumerWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
-                  return AppointmentRequest(friendUserDocId,
-                  );
+                  return AppointmentRequest(friendUserDocId,friendUserName);
                 }),
               );
             },

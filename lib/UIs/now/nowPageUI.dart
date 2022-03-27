@@ -82,6 +82,7 @@ Widget eventDetail(WidgetRef ref,BuildContext context){
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) {
                 return AppointmentRequest(commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId"),
+                    ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.name
                 );
               }),
             );

@@ -1,3 +1,4 @@
+import 'package:convas/UIs/talk/appointmentSelectTypeProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/UIs/findRoute/searchUsersConditionEditTypeProvider.dart';
 import 'package:convas/UIs/findRoute/searchUsersProvider.dart';
@@ -7,13 +8,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/commonValues.dart';
+import 'appointmentRequestProvider.dart';
 
-class SearchConditionValueEditType extends ConsumerWidget {
+class AppointmentSelectType extends ConsumerWidget {
   String displayedItem;
   String databaseItem;
   String value;
 
-  SearchConditionValueEditType({Key? key,
+  AppointmentSelectType({Key? key,
     required this.displayedItem,
     required this.databaseItem,
     required this.value,
@@ -28,25 +30,26 @@ class SearchConditionValueEditType extends ConsumerWidget {
     checkList=[];
     if(initialProcessFlg){
       initialProcessFlg=false;
-      ref.read(searchUsersConditionEditTypeProvider.notifier).initialize(ref, databaseItem, value);
+      ref.read(appointmentSelectTypeProvider.notifier).initialize(ref, databaseItem, value);
     }
+
     checkList.add(
         CheckboxListTile(
-          title: commonText20GrayLeft(searchConditionAlmightyWord),
-          value: ref.watch(searchUsersConditionEditTypeProvider).doesntMatterCheck,
+          title: commonText20GrayLeft(appointmentSelectTypeAlmightyWord),
+          value: ref.watch(appointmentSelectTypeProvider.notifier).allCheck,
           onChanged: (bool? value) {
-            ref.read(searchUsersConditionEditTypeProvider.notifier).changeDoesntMatterCheck(value??false);
+            ref.read(appointmentSelectTypeProvider.notifier).changeAllCheck(value??false);
           },
           controlAffinity: ListTileControlAffinity.trailing,
         ));
 
-    ref.watch(searchUsersConditionEditTypeProvider).masterMap.forEach((key, value) {
+    ref.watch(appointmentSelectTypeProvider).masterMap.forEach((key, value) {
       checkList.add(
           CheckboxListTile(
             title: commonText20GrayLeft(value.name),
-            value: ref.watch(searchUsersConditionEditTypeProvider).masterBoolMap[key.toString()],
+            value: ref.watch(appointmentSelectTypeProvider).masterBoolMap[key.toString()],
             onChanged: (bool? value) {
-              ref.read(searchUsersConditionEditTypeProvider.notifier).setBool(key.toString(),!(value!));
+              ref.read(appointmentSelectTypeProvider.notifier).setBool(key.toString(),!(value!));
             },
             controlAffinity: ListTileControlAffinity.trailing,
           ));
@@ -61,12 +64,12 @@ class SearchConditionValueEditType extends ConsumerWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                children:checkList),
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:checkList),
               ),
             ),
             commonButtonOrangeRound(text: "OK", onPressed: (){
-              ref.read(searchUsersProvider.notifier).setConditionByMap(ref,databaseItem,ref.watch(searchUsersConditionEditTypeProvider).masterBoolMap);
+              ref.read(appointRequestProvider.notifier).setConditionByMap(ref,databaseItem,ref.watch(appointmentSelectTypeProvider).masterBoolMap);
               Navigator.pop(context);
             })
           ],

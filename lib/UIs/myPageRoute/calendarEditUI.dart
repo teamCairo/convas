@@ -1,10 +1,8 @@
-import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../common/commonValues.dart';
 import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
 import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../entityIsar/eventEntityIsar.dart';

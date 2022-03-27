@@ -59,6 +59,8 @@ class NowPageNotifier extends ChangeNotifier {
     List<String> userDocIdForSearchList=[];
     List<Appointment> appointmentList=[];
 
+    //TODO　繰り返しのデータは日付に関係なく取得する？
+    //TODO FROMの日付でみているため、過去1日分余裕を持ってとっている。そのため無駄なイベントも取得しているので、ユーザリストを作る処理の中でTOの時間で選別する
     //まずは表示するユーザを選定、データを整形
     for(int i=0;i<_firebaseEventList.length;i++){
       //過去のイベントもしくはもうすでにリストに加えたユーザなら何もしない

@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/provider/userProvider.dart';
 import 'chatHeadersDaoFirebase.dart';
 
-
 Future<String> insertFriendsData(WidgetRef ref,String friendUserDocId,String programId) async{
 
   DocumentSnapshot<Map<String, dynamic>>firebaseUserData = await FirebaseFirestore.instance

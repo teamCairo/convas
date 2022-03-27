@@ -2,12 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 Future<String> insertChatDetailsDataMessage(
     {required WidgetRef ref,
     required String chatHeaderDocId,
     required String friendUserDocId,
     required String message,
+    String? messageType,
+    String? referDocId,
     required String programId}) async{
 
   //相手側データ
@@ -16,9 +17,9 @@ Future<String> insertChatDetailsDataMessage(
       senderDocId:ref.watch(userDataProvider).userData["userDocId"],
       receiverDocId:friendUserDocId,
       ownerUserDocId:friendUserDocId,
-      messageType:"2",
+      messageType:messageType??"2",
       fileNameSuffix:"",
-      referDocId:"",
+      referDocId:referDocId??"",
       message:message,
       userDocId:ref.watch(userDataProvider).userData["userDocId"],
       programId:programId
@@ -30,9 +31,9 @@ Future<String> insertChatDetailsDataMessage(
       senderDocId:ref.watch(userDataProvider).userData["userDocId"],
       receiverDocId:friendUserDocId,
       ownerUserDocId:ref.watch(userDataProvider).userData["userDocId"],
-      messageType:"2",
+      messageType:messageType??"2",
       fileNameSuffix:"",
-      referDocId:"",
+      referDocId:referDocId??"",
       message:message,
       userDocId:ref.watch(userDataProvider).userData["userDocId"],
       programId:programId

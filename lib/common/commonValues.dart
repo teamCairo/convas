@@ -16,6 +16,9 @@ const searchConditionLastLoginInDays = 365;
 
 const searchConditionAlmightyWord="Doesn't matter";
 
+
+const appointmentSelectTypeAlmightyWord="Anything";
+
 const LinearGradient commonLinearGradientForChatBox = LinearGradient(
     begin: FractionalOffset.topLeft,
     end: FractionalOffset.bottomRight,

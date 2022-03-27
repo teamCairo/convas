@@ -10,9 +10,9 @@ Future<List<Event>> selectFirebaseEventsByDateTimeAndFriend(
     DateTime from, DateTime to, userDocId) async {
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('events')
-      .where('userDocId', isEqualTo: userDocId)
-      .where('toTime', isGreaterThan: from)
-      .where('fromTime', isLessThan: to)
+      .where('fromTime', isGreaterThan: Timestamp.fromDate(from))
+      .where('fromTime', isLessThan: Timestamp.fromDate(to))
+      .where('userDocId',isEqualTo: userDocId)
       .get();
 
   List<Event> returnList = setEventListFromSnapshot(snapshot);
