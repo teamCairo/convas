@@ -40,20 +40,32 @@ class SettingPage extends ConsumerWidget {
                     child: const Text('upload photo') //,
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 14.0,bottom: 8),
+                    padding: const EdgeInsets.only(left: 14.0,bottom: 0),
                     child: black16TextLeft("Greeting")),
                 Padding(
-                  padding: const EdgeInsets.only(left: 14.0),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(ref.watch(userDataProvider).userData["greeting"],
-                        overflow: TextOverflow.ellipsis,
-                        style:const TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16,
-                          color: Colors.black54,),
-
-                      )),),
+                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      commonText16GrayLeftEllipsis(ref.watch(userDataProvider).userData["greeting"]),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 14.0),
+                        child: commonButtonOrangeRoundSquareSmall(text:"Edit",
+                            onPressed:()async{
+                              await Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) {
+                                  return SettingEditTextPage(
+                                    displayedItem: "Greeting",
+                                    databaseItem: "greeting",
+                                    value:ref.watch(userDataProvider).userData["greeting"],
+                                  );
+                                }),
+                              );
+                            }),
+                      )
+                    ],
+                  ),
+                ),
                 Padding(
                     padding: const EdgeInsets.all( 14.0),
                     child: Container(
@@ -65,21 +77,7 @@ class SettingPage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      child: Align(
-                          alignment: Alignment.centerRight,
-                          child:commonButtonOrangeRoundSquareSmall(text:"Edit",
-                              onPressed:()async{
-                                await Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) {
-                                    return SettingEditTextPage(
-                                      displayedItem: "Greeting",
-                                      databaseItem: "greeting",
-                                      value:ref.watch(userDataProvider).userData["greeting"],
-                                    );
-                                  }),
-                                );
-                              })
-                      ),
+                      child: Container()
                     )),
                 Padding(
                     padding: const EdgeInsets.only(left: 14.0,bottom: 8),

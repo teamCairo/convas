@@ -24,7 +24,7 @@ class ChatPage extends ConsumerWidget {
   String friendUserDocId;
   String friendUserName;
   String chatHeaderDocId;
-  Uint8List? friendPhoto;
+  Image? friendPhoto;
 
   ChatPage({
     required this.friendUserDocId,
@@ -38,8 +38,26 @@ class ChatPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    Friend? friendData =
+    ref.watch(friendDataProvider).friendData[friendUserDocId];
+
+    Image? friendImage;
+    String friendNameTmp = "";
+    if (friendData != null) {
+      friendNameTmp = friendData.friendUserName;
+      if (friendData.profilePhoto == null) {
+        friendData.profilePhoto;
+      } else {
+        friendImage = Image.memory(friendData.profilePhoto!);
+      }
+    } else {
+      friendImage = friendPhoto;
+      friendNameTmp = friendUserName;
+    }
+
     return Scaffold(
-        appBar: appbarImageAndButtons(ref, context),
+        appBar: appbarImageAndButtons(ref, context,friendNameTmp,friendImage),
         body: SafeArea(
             child: Column(children: <Widget>[
           Expanded(
@@ -52,12 +70,12 @@ class ChatPage extends ConsumerWidget {
                   chatHeaderDocId),
             ),
           ),
-            textInputWidget(ref,context)
+            textInputWidget(ref,context,friendNameTmp,friendImage)
         ])));
   }
 
 
-  SpeedDial speedDialButton(WidgetRef ref,BuildContext context) {
+  SpeedDial speedDialButton(WidgetRef ref,BuildContext context,String friendUserDocId, String friendUserName, Image? friendImage) {
     return SpeedDial(
       elevation:6,
       buttonSize:const Size(45.0, 45.0),
@@ -80,7 +98,7 @@ class ChatPage extends ConsumerWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
-                  return AppointmentRequest(friendUserDocId,friendUserName);
+                  return AppointmentRequest(friendUserDocId,friendUserName,friendImage);
                 }),
               );
             },
@@ -107,25 +125,8 @@ class ChatPage extends ConsumerWidget {
     );
   }
 
-  AppBar appbarImageAndButtons(WidgetRef ref, BuildContext context) {
-    Friend? friendData =
-        ref.watch(friendDataProvider).friendData[friendUserDocId];
+  AppBar appbarImageAndButtons(WidgetRef ref, BuildContext context,String friendName, Image? friendImage) {
 
-    Image? friendImage;
-    String friendNameTmp = "";
-    if (friendData != null) {
-      friendNameTmp = friendData.friendUserName;
-      if (friendData.profilePhoto == null) {
-        friendData.profilePhoto;
-      } else {
-        friendImage = Image.memory(friendData.profilePhoto!);
-      }
-    } else if (friendPhoto != null) {
-      friendImage = Image.memory(friendPhoto!);
-      friendNameTmp = friendUserName;
-    } else {
-      friendImage = null;
-    }
 
     return AppBar(
       leading: IconButton(
@@ -142,23 +143,61 @@ class ChatPage extends ConsumerWidget {
         },
       ),
       elevation: 0.6,
-      title: commonText20BlackLeftBold(friendNameTmp),
+      title: commonText20BlackLeftBold(friendName),
       // iconTheme: IconThemeData(color: Colors.black87),
     );
   }
 
   Padding balloon(ChatDetail chatDetail, String rightLeft) {
     //rightLeft="right"or"left"
+
+    List<Widget> widgetList=[];
+    widgetList.add(
+        Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: commonText14Gray(chatDetail.message)));
+    if(chatDetail.messageType=="3"){
+
+      if(rightLeft=="right") {
+
+        widgetList.add(
+            commonText14Gray("You sent a request")
+        );
+        widgetList.add(
+          commonButtonSmallOrangeRound(
+              text: "View request",
+              onPressed: (){
+
+              })
+        );
+      }else{
+
+        widgetList.add(
+            commonText14Gray("Friend sent a request")
+        );
+        widgetList.add(
+            commonButtonSmallOrangeRound(
+                text: "View request",
+                onPressed: (){
+
+                })
+        );
+      }
+
+    }
+
+
     return Padding(
         padding: const EdgeInsets.only(bottom: 28.0),
         child: commonBalloon(
-            Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: commonText14Gray(chatDetail.message)),
-            rightLeft));
+            Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children:widgetList),
+                rightLeft)
+    );
   }
 
-  Widget textInputWidget(WidgetRef ref,BuildContext context) {
+  Widget textInputWidget(WidgetRef ref,BuildContext context,String friendName,Image? friendPhoto) {
     var _controller = TextEditingController();
 
     return Padding(
@@ -189,7 +228,7 @@ class ChatPage extends ConsumerWidget {
                 );
                 _controller.clear();
               }),
-          speedDialButton(ref,context)
+          speedDialButton(ref,context,friendUserDocId,friendName,friendPhoto)
         ]),
       ),
     );

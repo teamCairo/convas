@@ -25,7 +25,29 @@ class AppointRequestNotifier extends ChangeNotifier {
   List<Appointment> _appointmentList = [];
   List<Appointment> get appointmentList => _appointmentList;
 
-  Future<void> initialize(WidgetRef ref, DateTime from,DateTime to,String friendUserDocId,String friendUserName)async{
+  String _chatHeaderDocId = "";
+  String get chatHeaderDocId => _chatHeaderDocId;
+
+  void initializeRequest(){
+    _courseCodeListText = "";
+    _categoryCodeListText = "";
+    _requestMessage = "";
+    _chatHeaderDocId = "";
+  }
+
+  void setChatHeaderDocId(String inputId){
+    _chatHeaderDocId=inputId;
+
+  }
+
+  void setRequestMessage(String inputValue){
+    _requestMessage=inputValue;
+    notifyListeners();
+
+  }
+
+  //TODO 使っていないので使う必要あり
+  Future<void> initializeAppointment(WidgetRef ref, DateTime from,DateTime to,String friendUserDocId,String friendUserName)async{
 
     List<Event> _firebaseEventList=await selectFirebaseEventsByDateTimeAndFriend(from, to, friendUserDocId);
     _appointmentList=[];
@@ -64,12 +86,7 @@ class AppointRequestNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setRequestDescription(String inputValue){
-    _requestMessage=inputValue;
-
-  }
-
-  void setConditionByMap(WidgetRef ref,String databaseItem,Map<String,bool> values){
+  void setInfoByMap(WidgetRef ref,String databaseItem,Map<String,bool> values){
 
     List<String> tmpList =[];
     values.forEach((k, v){
@@ -79,11 +96,11 @@ class AppointRequestNotifier extends ChangeNotifier {
     });
 
     String value=fromListToTextDot(tmpList);
-    setCondition(ref, databaseItem, value);
+    setInfo(ref, databaseItem, value);
   }
 
 
-  void setCondition(WidgetRef ref,String databaseItem,String value){
+  void setInfo(WidgetRef ref,String databaseItem,String value){
     switch(databaseItem){
       case "course":
         _courseCodeListText=value;

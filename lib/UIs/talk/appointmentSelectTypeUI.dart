@@ -1,7 +1,5 @@
 import 'package:convas/UIs/talk/appointmentSelectTypeProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
-import 'package:convas/UIs/findRoute/searchUsersConditionEditTypeProvider.dart';
-import 'package:convas/UIs/findRoute/searchUsersProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -69,7 +67,7 @@ class AppointmentSelectType extends ConsumerWidget {
               ),
             ),
             commonButtonOrangeRound(text: "OK", onPressed: (){
-              ref.read(appointRequestProvider.notifier).setConditionByMap(ref,databaseItem,ref.watch(appointmentSelectTypeProvider).masterBoolMap);
+              ref.read(appointRequestProvider.notifier).setInfoByMap(ref,databaseItem,ref.watch(appointmentSelectTypeProvider).masterBoolMap);
               Navigator.pop(context);
             })
           ],

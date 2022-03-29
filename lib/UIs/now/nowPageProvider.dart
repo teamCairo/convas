@@ -43,7 +43,6 @@ class NowPageNotifier extends ChangeNotifier {
 
 
   void initializeEditedEvent()async{
-
     _eventDataSource=null;
     _selectedCalendarTapDetails=null;
     _userInfoMap={};
@@ -51,20 +50,23 @@ class NowPageNotifier extends ChangeNotifier {
   }
 
 
-  void refleshEventShow(WidgetRef ref, DateTime from,DateTime to)async{
+  void refreshEventShow(WidgetRef ref, DateTime from,DateTime to)async{
 
-    List<Event> _firebaseEventList=await selectFirebaseEventsByDateTimeOrderByFromLimitNum(from,to,calendarTimelineMaxPeople);
+    List<Event> _firebaseEventList=await selectFirebaseEventsByDateTimeOrderByFromLimitNum(from.add(const Duration(days:-1)),to,calendarTimelineMaxPeople);
 
     _userDocIdForShowList=[];
     List<String> userDocIdForSearchList=[];
     List<Appointment> appointmentList=[];
+
 
     //TODO　繰り返しのデータは日付に関係なく取得する？
     //TODO FROMの日付でみているため、過去1日分余裕を持ってとっている。そのため無駄なイベントも取得しているので、ユーザリストを作る処理の中でTOの時間で選別する
     //まずは表示するユーザを選定、データを整形
     for(int i=0;i<_firebaseEventList.length;i++){
       //過去のイベントもしくはもうすでにリストに加えたユーザなら何もしない
-      if(_firebaseEventList[i].toTime!.isAfter(DateTime.now())&&!_userDocIdForShowList.contains(_firebaseEventList[i].userDocId)){
+      if(_firebaseEventList[i].toTime!.isAfter(from)
+          &&!_userDocIdForShowList.contains(_firebaseEventList[i].userDocId)
+        ){
         _userDocIdForShowList.add(_firebaseEventList[i].userDocId);
 
         //_userInfoMapにある情報はわざわざ取得しない

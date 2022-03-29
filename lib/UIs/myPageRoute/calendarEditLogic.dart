@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../common/UI/commonOthersUI.dart';
 import 'calendarEditDeleteDialogUI.dart';
 import 'calendarEditProvider.dart';
 import 'calendarEditSelectModeDialogUI.dart';
@@ -45,4 +46,28 @@ Future<void> selectCalendarTime(CalendarTapDetails calendarDetails,
       calendarEditBottomSheet(context, calendarDetails, ref);
     }
   }
+}
+
+Future<bool> checkEventData(BuildContext context, WidgetRef ref) async{
+
+  Map<String,bool>checkBoolMap = ref.watch(calendarEditProvider).checkMap;
+  //画像NULLチェック
+  if(checkBoolMap["repeat"]!
+      &&!checkBoolMap["monday"]!
+      &&!checkBoolMap["tuesday"]!
+      &&!checkBoolMap["wednesday"]!
+      &&!checkBoolMap["thursday"]!
+      &&!checkBoolMap["friday"]!
+      &&!checkBoolMap["saturday"]!
+      &&!checkBoolMap["sunday"]!){
+    await showOkWarningDialog(context,"If it repeats, please choose day");
+    return false;
+
+  }else if(ref.watch(calendarEditProvider).editedDateTimeFrom!.isAfter(ref.watch(calendarEditProvider).editedDateTimeTo!)){
+    await showOkWarningDialog(context,"End time is earlier than start time");
+    return false;
+
+  }
+  return true;
+
 }

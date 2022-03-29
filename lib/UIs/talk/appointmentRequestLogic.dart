@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/UIs/talk/appointmentRequestProvider.dart';
 import 'package:convas/common/provider/userProvider.dart';
 import 'package:convas/daoIsar/friendDaoIsar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../daoFirebase/chatDetailsDaoFirebase.dart';
@@ -20,6 +18,8 @@ Future<void> createRequest(String friendUserDocId, WidgetRef ref)async {
   }else{
     chatHeaderDocId = checkFriend.chatHeaderId;
   }
+
+  ref.read(appointRequestProvider).setChatHeaderDocId(chatHeaderDocId);
 
   String requestDocId = await insertFirebaseRequests(
       userDocId:ref.watch(userDataProvider).userData["userDocId"],
@@ -39,4 +39,21 @@ Future<void> createRequest(String friendUserDocId, WidgetRef ref)async {
         referDocId: requestDocId,
         programId: "createRequest");
 
+  //
+  // Navigator.of(context).pushReplacement(
+  //   MaterialPageRoute(builder: (context) {
+  //     return Talk();
+  //   }),
+  // );
+  //
+  // Navigator.of(context).push(
+  //   MaterialPageRoute(builder: (context) {
+  //     return ChatPage(
+  //         chatHeaderDocId: chatHeaderDocId,
+  //         friendUserName: '',
+  //         friendUserDocId: '',
+  //         friendPhoto:llll
+  //     );
+  //   }),
+  // );
 }

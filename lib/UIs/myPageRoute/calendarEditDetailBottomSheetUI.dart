@@ -12,6 +12,7 @@ import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/logic/commonLogicDate.dart';
+import 'calendarEditLogic.dart';
 import 'calendarEditProvider.dart';
 
 void calendarEditBottomSheet(
@@ -68,6 +69,9 @@ void calendarEditBottomSheet(
                             ? "Create Event"
                             : "Update Event",
                         onPressed: () async {
+                          bool checkBool=await checkEventData( context,  ref);
+                          if(checkBool){
+
                           if (ref.watch(calendarEditProvider).editMode ==
                               "insert") {
                             await ref
@@ -79,6 +83,7 @@ void calendarEditBottomSheet(
                                 .updateEditedEvent(ref);
                           }
                           Navigator.of(context).pop();
+                          }
                         }),
                   )
                 ],

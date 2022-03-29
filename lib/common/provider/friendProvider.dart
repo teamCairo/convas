@@ -5,14 +5,12 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:convas/common/provider/settingProvider.dart';
 import 'package:convas/entityIsar/friendEntityIsar.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../daoIsar/friendDaoIsar.dart';
 import '../../daoIsar/settingDaoIsar.dart';
-import '../../entityIsar/settingEntityIsar.dart';
 import '../logic/commonLogicFile.dart';
 
 final friendDataProvider = ChangeNotifierProvider(

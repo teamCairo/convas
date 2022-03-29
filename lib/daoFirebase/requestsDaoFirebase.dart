@@ -11,7 +11,7 @@ Future<String> insertFirebaseRequests({
 }) async {
 
   String insertedDocId="";
-  await FirebaseFirestore.instance.collection('chatDetails').add(
+  await FirebaseFirestore.instance.collection('requests').add(
       {
         'senderDocId':userDocId,
         'receiverUserDocId':friendUserDocId,

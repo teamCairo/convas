@@ -1,5 +1,7 @@
-import 'package:convas/UIs/myPageRoute/calendarEditUI.dart';
+import 'dart:typed_data';
+
 import 'package:convas/UIs/talk/appointmentSelectTypeUI.dart';
+import 'package:convas/UIs/talk/talkUI.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:flutter/material.dart';
@@ -14,16 +16,21 @@ import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../entityIsar/eventEntityIsar.dart';
 import '../myPageRoute/calendarEditLogic.dart';
 import 'appointmentRequestLogic.dart';
+import 'appointmentRequestMessageEditUI.dart';
 import 'appointmentRequestProvider.dart';
+import 'chatPageUI.dart';
 
 class AppointmentRequest extends ConsumerStatefulWidget {
   AppointmentRequest(
     this.argumentFriendUserDocId,
-    this.argumentFriendUserName, {
+    this.argumentFriendUserName,
+    this.argumentFriendPhoto,{
     Key? key,
   }) : super(key: key);
   final String argumentFriendUserDocId;
   final String argumentFriendUserName;
+  final Image? argumentFriendPhoto;
+
 
   @override
   AppointmentRequestState createState() => AppointmentRequestState();
@@ -37,8 +44,18 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
     //必要に応じ初期処理追加
   }
 
+  bool initialProcessFlg=true;
+
   @override
   Widget build(BuildContext context) {
+
+    if (initialProcessFlg) {
+      initialProcessFlg = false;
+      ref.watch(appointRequestProvider.notifier).initializeRequest();
+    }
+
+    // ref.watch(appointRequestProvider.notifier).initializeAppointment();
+
     var isarInstance = Isar.getInstance();
     Query<Event>? eventDataQuery =
         isarInstance?.events.filter().deleteFlgEqualTo(false).build();
@@ -89,73 +106,107 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
         return Scaffold(
           appBar: commonAppbarWhite("Request"),
           body: SafeArea(
-              child: SingleChildScrollView(
-            child: Column(
-                mainAxisAlignment:MainAxisAlignment.start,
-                children: <Widget>[
-              SizedBox(
-                height: 190,
-                child: SfCalendar(
-                    //自分と相手の空き時間を表示する
-                    view: CalendarView.timelineDay,
-                    monthViewSettings:
-                        const MonthViewSettings(showAgenda: true),
-                    dataSource: EventDataSource(appointmentsList),
-                    onTap: (calendarDetails) async {
-                      await selectCalendarTime(calendarDetails, ref, context);
-                    }),
-              ),
-              linePadding(
-                  context,
-                  ref,
-                  "Course",
-                  "course",
-                      ref.watch(appointRequestProvider).courseCodeListText),
-              linePadding(
-                  context,
-                  ref,
-                  "Category",
-                  "category",
-                  ref.watch(appointRequestProvider).categoryCodeListText),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 26),
-                child: commonText16BlackLeft("Message"),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 26),
-                child: TextFormField(
-                  maxLines: null,
-                  minLines: 5,
-                  // テキスト入力のラベルを設定
-                  decoration: const InputDecoration(labelText: "input"),
-                  initialValue:
-                      ref.watch(appointRequestProvider).requestMessage,
-                  onChanged: (String value) {
-                    ref
-                        .read(appointRequestProvider.notifier)
-                        .setRequestDescription(value);
-                  },
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
+              child: Column(
+                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                Column(
+                  mainAxisAlignment:MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 190,
+                      child: SfCalendar(
+                          //自分と相手の空き時間を表示する
+                          view: CalendarView.timelineDay,
+                          monthViewSettings:
+                              const MonthViewSettings(showAgenda: true),
+                          dataSource: EventDataSource(appointmentsList),
+                          onTap: (calendarDetails) async {
+                            await selectCalendarTime(calendarDetails, ref, context);
+                          }),
+                    ),
+                    linePadding(
+                        context,
+                        ref,
+                        "Course",
+                        "course",
+                            ref.watch(appointRequestProvider).courseCodeListText),
+                    linePadding(
+                        context,
+                        ref,
+                        "Category",
+                        "category",
+                        ref.watch(appointRequestProvider).categoryCodeListText),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 14.0,vertical: 8),
+                            child: commonText16BlackLeft("Message")),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 26.0),
+                          child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(ref.watch(appointRequestProvider).requestMessage,
+                                overflow: TextOverflow.ellipsis,
+                                style:const TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 16,
+                                  color: Colors.black54,),
+
+                              )),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.black26,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                              child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child:commonButtonOrangeRoundSquareSmall(text:"Edit",
+                                      onPressed:()async{
+                                        await Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                            return const AppointmentRequestMessageEdit();
+                                          }),
+                                        );
+                                      })
+                              ),
+                            )),
+                  ],
                 ),
-              ),
-              commonButtonOrangeRound(
-                  text: "Request",
-                  onPressed: () async{
-                    await createRequest(widget.argumentFriendUserDocId, ref);
-                    Navigator.pop(context);
-                  }),
-            ]),
-          )),
+                commonButtonOrangeRound(
+                    text: "Request",
+                    onPressed: () async{
+                      await createRequest(widget.argumentFriendUserDocId, ref);
+                      // Navigator.pop(context);
+
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) {
+                          return Talk();
+                        }),
+                      );
+
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) {
+                          return ChatPage(
+                            chatHeaderDocId: ref.watch(appointRequestProvider).chatHeaderDocId,
+                            friendUserName: widget.argumentFriendUserName,
+                            friendUserDocId: widget.argumentFriendUserDocId,
+                            friendPhoto:widget.argumentFriendPhoto
+                          );
+                        }),
+                      );
+                    }),
+              ])),
         );
       },
     );
   }
 
-  Padding linePadding(
+  Widget linePadding(
       BuildContext context, WidgetRef ref,String displayedItem,String databaseItem, String value) {
 
     String displayedValue;
@@ -167,9 +218,7 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
       displayedValue = fromCodeListToTextDot(tmpList,databaseItem, ref);
     }
 
-    return Padding(
-        padding: const EdgeInsets.only(left: 14, right: 14, bottom: 0),
-        child: GestureDetector(
+    return GestureDetector(
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) {
@@ -179,7 +228,7 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
           },
           child: Container(
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(14.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -197,6 +246,6 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
               ),
             ),
           ),
-        ));
+        );
   }
 }

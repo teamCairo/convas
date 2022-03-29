@@ -21,16 +21,115 @@ Future<List<Event>> selectFirebaseEventsByDateTimeAndFriend(
 
 Future<List<Event>> selectFirebaseEventsByDateTimeOrderByFromLimitNum(
     DateTime from, DateTime to, int limitNum) async {
+
+  //単発のデータを取得（その日と1日前～のFROMのデータ）
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('events')
       .where('fromTime', isGreaterThan: Timestamp.fromDate(from))
       .where('fromTime', isLessThan: Timestamp.fromDate(to))
+      .where('repeat', isEqualTo: false)
       .orderBy('fromTime')
       .limit(limitNum)
       .get();
 
   List<Event> returnList = setEventListFromSnapshot(snapshot);
+
+  //Fromの日(前日の日付)の曜日の繰り返しデータ
+  returnList.addAll(changeRepeatingEventDate(await selectFirebaseEventsByADay(from.weekday,limitNum), from));
+
+  //Fromの日の翌日の曜日の繰り返しデータ
+  DateTime thisDay=from.add(const Duration(days:1));
+  int thisWeekDay=thisDay.weekday;
+  returnList.addAll(changeRepeatingEventDate(await selectFirebaseEventsByADay(thisWeekDay,limitNum), thisDay));
+//TODO ソートする
+  //TODO　重複なくす
+  //TODO　今の処理方式だと過去日の無駄なデータがいっぱい取れてしまう→TO日付でみたほうが良かったか違う★★過去イベントを表示するのはもうやめよう
+  returnList.sort((a,b) => a.fromTime!.compareTo(b.fromTime!));
+
+
   return returnList;
+}
+
+List<Event> changeRepeatingEventDate(List<Event> inputEventList,DateTime fromDate){
+
+  List<Event> outputList=[];
+
+  for(int i=0;i<inputEventList.length;i++){
+
+    DateTime newFromDate = DateTime(fromDate.year,fromDate.month,fromDate.day,inputEventList[i].fromTime!.hour,inputEventList[i].fromTime!.minute);
+    Duration dayDifferenceFromTo = inputEventList[i].toTime!.difference(inputEventList[i].fromTime!);
+
+    outputList.add(
+      Event( inputEventList[i].eventDocId,
+        inputEventList[i].userDocId,
+        inputEventList[i].eventName,
+        inputEventList[i].eventType,
+        inputEventList[i].friendUserDocId,
+        inputEventList[i].callChannelId,
+        newFromDate,
+        newFromDate.add(dayDifferenceFromTo),
+        inputEventList[i].isAllDay,
+        inputEventList[i].repeat,
+        inputEventList[i].monday,
+        inputEventList[i].tuesday,
+        inputEventList[i].wednesday,
+        inputEventList[i].thursday,
+        inputEventList[i].friday,
+        inputEventList[i].saturday,
+        inputEventList[i].sunday,
+        inputEventList[i].description,
+        inputEventList[i].recurrenceRule,
+        inputEventList[i].insertUserDocId,
+        inputEventList[i].insertProgramId,
+        inputEventList[i].insertTime,
+        inputEventList[i].updateUserDocId,
+        inputEventList[i].updateProgramId,
+        inputEventList[i].updateTime,
+        inputEventList[i].readableFlg,
+        inputEventList[i].deleteFlg,
+      )
+    );
+
+  }
+  return outputList;
+
+}
+
+Future<List<Event>> selectFirebaseEventsByADay(int day,int limitNum) async {
+  String dayStr="";
+  if(day==1){
+    dayStr="monday";
+
+  }else if(day==2){
+    dayStr="tuesday";
+
+  }else if(day==3){
+    dayStr="wednesday";
+
+  }else if(day==4){
+    dayStr="thursday";
+
+  }else if(day==5){
+    dayStr="friday";
+
+  }else if(day==6){
+    dayStr="saturday";
+
+  }else if(day==7){
+    dayStr="sunday";
+
+  }
+
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('events')
+        .where(dayStr, isEqualTo: true)
+        .orderBy('fromTime')
+        .limit(limitNum)
+        .get();
+
+    List<Event> returnList = setEventListFromSnapshot(snapshot);
+    return returnList;
+
 }
 
 List<Event> setEventListFromSnapshot(QuerySnapshot snapshot) {
@@ -162,10 +261,10 @@ String makeRRule(
   if (friday) {
     rRule = rRule + "FRI,";
   }
-  if (monday) {
+  if (saturday) {
     rRule = rRule + "SA,";
   }
-  if (monday) {
+  if (sunday) {
     rRule = rRule + "SU,";
   }
   return rRule.substring(0,rRule.length-1);

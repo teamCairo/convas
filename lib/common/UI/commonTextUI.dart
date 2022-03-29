@@ -63,6 +63,20 @@ Padding commonText16GrayRight(String text) {
   );
 }
 
+Widget commonText16GrayLeftEllipsis(String text) {
+  return Expanded(
+    child: Text(
+      text,
+      textAlign:TextAlign.start,
+      overflow: TextOverflow.ellipsis,
+      style: const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        color: Colors.black54,
+      ),
+    ),
+  );
+}
 
 Widget commonText16GrayRightEllipsis(String text) {
   return Expanded(

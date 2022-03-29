@@ -16,6 +16,7 @@ class NowPage extends ConsumerWidget {
   }) : super(key: key);
 
   bool initialProcessFlg = true;
+  DateTime todayInitialTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,0,0);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,6 +24,7 @@ class NowPage extends ConsumerWidget {
       initialProcessFlg = false;
       ref.watch(nowPageProvider.notifier).initializeEditedEvent();
     }
+
 
     return Scaffold(
         body: SafeArea(
@@ -35,6 +37,7 @@ class NowPage extends ConsumerWidget {
                   child: Row(children: userPhotosList(ref, context)))),
           Expanded(
             child: SfCalendar(
+                minDate:todayInitialTime,
                 timeSlotViewSettings: const TimeSlotViewSettings(
                     timeInterval: Duration(hours: 2)),
                 view: CalendarView.timelineDay,
@@ -44,7 +47,7 @@ class NowPage extends ConsumerWidget {
                   ref.read(nowPageProvider.notifier).setCalendarTapDetails(calendarTapDetails);
                 },
                 onViewChanged:(viewChangedDetails) async {
-                  ref.read(nowPageProvider.notifier).refleshEventShow(ref,viewChangedDetails.visibleDates[0].add(const Duration(days:-1)), viewChangedDetails.visibleDates[0].add(const Duration(days:1)));
+                  ref.read(nowPageProvider.notifier).refreshEventShow(ref,viewChangedDetails.visibleDates[0], viewChangedDetails.visibleDates[0].add(const Duration(days:1,minutes:-1)));
                 })
           ),
           Padding(
@@ -82,7 +85,8 @@ Widget eventDetail(WidgetRef ref,BuildContext context){
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) {
                 return AppointmentRequest(commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId"),
-                    ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.name
+                    ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.name,
+                    ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.photo
                 );
               }),
             );
