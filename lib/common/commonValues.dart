@@ -48,3 +48,5 @@ const Color calendarColorForMe = Colors.orangeAccent;
 
 
 const separatingCharacter5at = "@@@@@";
+
+const eventNameForAppointment = "call appointment";

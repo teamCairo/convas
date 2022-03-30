@@ -87,6 +87,9 @@ Widget eventDetail(WidgetRef ref,BuildContext context){
                 return AppointmentRequest(commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId"),
                     ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.name,
                     ref.watch(nowPageProvider).userInfoMap[commonGetAppointmentNotesItemString(calendarTapDetails.appointments![0],"userDocId")]!.photo
+                    ,""
+                    ,"1"
+                    ,"Now"
                 );
               }),
             );

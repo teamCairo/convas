@@ -54,6 +54,7 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
             body: SafeArea(
                 child: SfCalendar(
                     view: CalendarView.week,
+                    // showNavigationArrow: true,
                     monthViewSettings: const MonthViewSettings(showAgenda: true),
                     dataSource: EventDataSource(commonGetAppointmentListFromEventList(eventsList.data!,{})),
                     onTap: (calendarDetails) async{

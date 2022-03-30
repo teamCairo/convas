@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:convas/UIs/talk/appointmentSelectTypeUI.dart';
 import 'package:convas/UIs/talk/talkUI.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
@@ -15,6 +13,7 @@ import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
 import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../entityIsar/eventEntityIsar.dart';
 import '../myPageRoute/calendarEditLogic.dart';
+import 'appointmentAnswerBottomSheetUI.dart';
 import 'appointmentRequestLogic.dart';
 import 'appointmentRequestMessageEditUI.dart';
 import 'appointmentRequestProvider.dart';
@@ -24,13 +23,20 @@ class AppointmentRequest extends ConsumerStatefulWidget {
   AppointmentRequest(
     this.argumentFriendUserDocId,
     this.argumentFriendUserName,
-    this.argumentFriendPhoto,{
+    this.argumentFriendPhoto,
+    this.requestDocId,
+    this.mode,
+    this.fromPage, {
     Key? key,
   }) : super(key: key);
   final String argumentFriendUserDocId;
   final String argumentFriendUserName;
   final Image? argumentFriendPhoto;
+  final String requestDocId;
+  final String mode;
+  final String fromPage;
 
+  //mode "1":register,"2":edit/delete,"3":view
 
   @override
   AppointmentRequestState createState() => AppointmentRequestState();
@@ -44,17 +50,16 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
     //必要に応じ初期処理追加
   }
 
-  bool initialProcessFlg=true;
+  bool initialProcessFlg = true;
 
   @override
   Widget build(BuildContext context) {
-
     if (initialProcessFlg) {
       initialProcessFlg = false;
-      ref.watch(appointRequestProvider.notifier).initializeRequest();
+      ref
+          .watch(appointRequestProvider.notifier)
+          .initializeRequest(widget.mode, widget.requestDocId);
     }
-
-    // ref.watch(appointRequestProvider.notifier).initializeAppointment();
 
     var isarInstance = Isar.getInstance();
     Query<Event>? eventDataQuery =
@@ -103,14 +108,23 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
         appointmentsList
             .addAll(ref.watch(appointRequestProvider).appointmentList);
 
+        String buttonText = "";
+        if (widget.mode == "1") {
+          buttonText = "Request";
+        } else if (widget.mode == "2") {
+          buttonText = "Edit";
+        } else {
+          buttonText = "Choose calendar otherwise cancel";
+        }
+
         return Scaffold(
           appBar: commonAppbarWhite("Request"),
           body: SafeArea(
               child: Column(
-                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                 Column(
-                  mainAxisAlignment:MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: 190,
@@ -121,131 +135,148 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
                               const MonthViewSettings(showAgenda: true),
                           dataSource: EventDataSource(appointmentsList),
                           onTap: (calendarDetails) async {
-                            await selectCalendarTime(calendarDetails, ref, context);
+                            if (widget.mode == "3") {
+                              appointmentAnswerBottomSheet(context,calendarDetails, ref,"1",widget.argumentFriendUserDocId,widget.requestDocId,null);
+                            } else {
+                              await selectCalendarTime(
+                                  calendarDetails, ref, context);
+                            }
                           }),
                     ),
-                    linePadding(
-                        context,
-                        ref,
-                        "Course",
-                        "course",
-                            ref.watch(appointRequestProvider).courseCodeListText),
-                    linePadding(
-                        context,
-                        ref,
-                        "Category",
-                        "category",
+                    linePadding(context, ref, "Course", "course",
+                        ref.watch(appointRequestProvider).courseCodeListText),
+                    linePadding(context, ref, "Category", "category",
                         ref.watch(appointRequestProvider).categoryCodeListText),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 14.0,vertical: 8),
-                            child: commonText16BlackLeft("Message")),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 26.0),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14.0, vertical: 8),
+                        child: commonText16BlackLeft("Message")),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 26.0),
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            ref.watch(appointRequestProvider).message,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16,
+                                color: Colors.black54),
+                          )),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.black26,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
                           child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(ref.watch(appointRequestProvider).requestMessage,
-                                overflow: TextOverflow.ellipsis,
-                                style:const TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 16,
-                                  color: Colors.black54,),
-
-                              )),
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Colors.black26,
-                                    width: 0.5,
-                                  ),
-                                ),
-                              ),
-                              child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child:commonButtonOrangeRoundSquareSmall(text:"Edit",
-                                      onPressed:()async{
-                                        await Navigator.of(context).push(
-                                          MaterialPageRoute(builder: (context) {
-                                            return const AppointmentRequestMessageEdit();
-                                          }),
-                                        );
-                                      })
-                              ),
-                            )),
+                              alignment: Alignment.centerRight,
+                              child: commonButtonOrangeRoundSquareSmall(
+                                  text: "Edit",
+                                  onPressed: () async {
+                                    if (widget.mode != "3") {
+                                      await Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context) {
+                                          return const AppointmentRequestMessageEdit();
+                                        }),
+                                      );
+                                    } else {}
+                                  })),
+                        )),
                   ],
                 ),
-                commonButtonOrangeRound(
-                    text: "Request",
-                    onPressed: () async{
-                      await createRequest(widget.argumentFriendUserDocId, ref);
-                      // Navigator.pop(context);
-
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) {
-                          return Talk();
-                        }),
-                      );
-
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) {
-                          return ChatPage(
-                            chatHeaderDocId: ref.watch(appointRequestProvider).chatHeaderDocId,
-                            friendUserName: widget.argumentFriendUserName,
-                            friendUserDocId: widget.argumentFriendUserDocId,
-                            friendPhoto:widget.argumentFriendPhoto
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 14.0),
+                  child: commonButtonOrangeRound(
+                      text: buttonText,
+                      onPressed: () async {
+                        if (widget.mode == "1") {
+                          await createRequest(
+                              widget.argumentFriendUserDocId, ref);
+                        } else if (widget.mode == "2") {
+                          await editRequest(widget.argumentFriendUserDocId,
+                              widget.requestDocId, ref);
+                        } else {}
+                        if (widget.fromPage == "Chat") {
+                          Navigator.pop(context);
+                        } else {
+                          //TODO トーク画面から来たときとNow画面から来たときで処理を分ける
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) {
+                              return Talk();
+                            }),
                           );
-                        }),
-                      );
-                    }),
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) {
+                              return ChatPage(
+                                  chatHeaderDocId: ref
+                                      .watch(appointRequestProvider)
+                                      .chatHeaderDocId,
+                                  friendUserName: widget.argumentFriendUserName,
+                                  friendUserDocId:
+                                      widget.argumentFriendUserDocId,
+                                  friendPhoto: widget.argumentFriendPhoto);
+                            }),
+                          );
+                        }
+                      }),
+                ),
               ])),
         );
       },
     );
   }
 
-  Widget linePadding(
-      BuildContext context, WidgetRef ref,String displayedItem,String databaseItem, String value) {
-
+  Widget linePadding(BuildContext context, WidgetRef ref, String displayedItem,
+      String databaseItem, String value) {
     String displayedValue;
     List<String> tmpList = fromTextToList(value);
 
-    if(value==""){
-      displayedValue="Any "+databaseItem;
-    }else{
-      displayedValue = fromCodeListToTextDot(tmpList,databaseItem, ref);
+    if (value == "") {
+      displayedValue = "Any " + databaseItem;
+    } else {
+      displayedValue = fromCodeListToTextDot(tmpList, databaseItem, ref);
     }
 
     return GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) {
-                return  AppointmentSelectType(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
-              }),
-            );
-          },
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    black16TextLeft(displayedItem),
-                    commonText16GrayRightEllipsis(displayedValue)
-                    // gray16TextRightEllipsis(displayedValue,200)
-                  ]),
-            ),
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.black26,
-                  width: 0.5,
-                ),
-              ),
+      onTap: () {
+        if (widget.mode != "3") {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return AppointmentSelectType(
+                  displayedItem: displayedItem,
+                  databaseItem: databaseItem,
+                  value: value);
+            }),
+          );
+        }
+      },
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            black16TextLeft(displayedItem),
+            commonText16GrayRightEllipsis(displayedValue)
+            // gray16TextRightEllipsis(displayedValue,200)
+          ]),
+        ),
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.black26,
+              width: 0.5,
             ),
           ),
-        );
+        ),
+      ),
+    );
   }
 }

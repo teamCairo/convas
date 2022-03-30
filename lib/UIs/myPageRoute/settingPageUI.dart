@@ -26,18 +26,18 @@ class SettingPage extends ConsumerWidget {
         body: SingleChildScrollView(
           child: SafeArea(
               child: Column(children: <Widget>[
-                Center(
-                  child: commonCircleAvatarImage(
-                    radius: 80,
-                    image:ref.watch(userDataProvider).mainPhotoData,
-                    name:ref.watch(userDataProvider).userData["name"]
+                GestureDetector(
+                  child: Stack(
+                    alignment: const Alignment(0.9, 0.9),
+                    children: [commonCircleAvatarImage(
+                        radius: 80,
+                        image:ref.watch(userDataProvider).mainPhotoData,
+                        name:ref.watch(userDataProvider).userData["name"]
+                    ),
+                      const Icon(Icons.camera_alt),
+                    ],
                   ),
-                ),
-                MaterialButton(
-                    onPressed: () async{
-                      await ref.watch(userDataProvider).setImage(ref);
-                    },
-                    child: const Text('upload photo') //,
+                  onTap: () async=> await ref.watch(userDataProvider).setImage(ref),
                 ),
                 Padding(
                     padding: const EdgeInsets.only(left: 14.0,bottom: 0),

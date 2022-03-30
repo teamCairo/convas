@@ -29,7 +29,7 @@ class AppointmentRequestMessageEdit extends ConsumerWidget {
                   minLines: 7,
                   // テキスト入力のラベルを設定
                   decoration: const InputDecoration(labelText: "Message"),
-                  initialValue:ref.watch(appointRequestProvider).requestMessage,
+                  initialValue:ref.watch(appointRequestProvider).message,
                   onChanged: (String value) {
                     ref.read(appointRequestProvider).setRequestMessage(value);
                   },

@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/daoFirebase/eventsDaoFirebase.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,8 @@ class AppointRequestNotifier extends ChangeNotifier {
   String _categoryCodeListText = "";
   String get categoryCodeListText => _categoryCodeListText;
 
-  String _requestMessage = "";
-  String get requestMessage => _requestMessage;
+  String _message = "";
+  String get message => _message;
 
   List<Appointment> _appointmentList = [];
   List<Appointment> get appointmentList => _appointmentList;
@@ -28,11 +29,33 @@ class AppointRequestNotifier extends ChangeNotifier {
   String _chatHeaderDocId = "";
   String get chatHeaderDocId => _chatHeaderDocId;
 
-  void initializeRequest(){
-    _courseCodeListText = "";
-    _categoryCodeListText = "";
-    _requestMessage = "";
-    _chatHeaderDocId = "";
+  void initializeRequest(String mode,String requestDocId)async{
+    if(mode=="1"){
+      _courseCodeListText = "";
+      _categoryCodeListText = "";
+      _message = "";
+      _chatHeaderDocId = "";
+
+    }else{
+
+      DocumentSnapshot request = await selectFirebaseRequestById(requestDocId);
+
+      _courseCodeListText = request.get("courseCodeListText");
+      _categoryCodeListText =request.get("categoryCodeListText");
+      _message =request.get("message");
+      _chatHeaderDocId = "";
+
+      notifyListeners();
+    }
+  }
+
+  Future<DocumentSnapshot> selectFirebaseRequestById(String requestDocId)async{
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('requests')
+        .doc(requestDocId)
+        .get();
+
+    return snapshot;
   }
 
   void setChatHeaderDocId(String inputId){
@@ -41,7 +64,7 @@ class AppointRequestNotifier extends ChangeNotifier {
   }
 
   void setRequestMessage(String inputValue){
-    _requestMessage=inputValue;
+    _message=inputValue;
     notifyListeners();
 
   }

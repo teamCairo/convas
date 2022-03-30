@@ -40,6 +40,8 @@ Appointment commonMakeAppointment(String eventDocId,
           "description@@:" + description + separatingCharacter5at +
           "userName@@:" + userName + separatingCharacter5at +
           "userDocId@@:" + userDocId + separatingCharacter5at +
+          "callChannelId@@:" + callChannelId + separatingCharacter5at +
+          "friendUserDocId@@:" + friendUserDocId + separatingCharacter5at +
           "eventType@@:" + eventType + separatingCharacter5at;
 
   return Appointment(

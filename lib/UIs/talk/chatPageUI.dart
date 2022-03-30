@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:typed_data';
-
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
@@ -18,6 +15,8 @@ import '../../daoFirebase/chatDetailsDaoFirebase.dart';
 import '../../entityIsar/chatDetailEntityIsar.dart';
 import '../../entityIsar/friendEntityIsar.dart';
 import '../findRoute/friendProfileUI.dart';
+import '../myPageRoute/calendarEditUI.dart';
+import 'appointmentAnswerBottomSheetUI.dart';
 import 'appointmentRequestUI.dart';
 
 class ChatPage extends ConsumerWidget {
@@ -38,9 +37,8 @@ class ChatPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     Friend? friendData =
-    ref.watch(friendDataProvider).friendData[friendUserDocId];
+        ref.watch(friendDataProvider).friendData[friendUserDocId];
 
     Image? friendImage;
     String friendNameTmp = "";
@@ -57,7 +55,7 @@ class ChatPage extends ConsumerWidget {
     }
 
     return Scaffold(
-        appBar: appbarImageAndButtons(ref, context,friendNameTmp,friendImage),
+        appBar: appbarImageAndButtons(ref, context, friendNameTmp, friendImage),
         body: SafeArea(
             child: Column(children: <Widget>[
           Expanded(
@@ -67,19 +65,20 @@ class ChatPage extends ConsumerWidget {
               child: buildMessageList(
                   ref.watch(userDataProvider).userData["userDocId"]!,
                   friendUserDocId,
-                  chatHeaderDocId),
+                  chatHeaderDocId,
+                  ref),
             ),
           ),
-            textInputWidget(ref,context,friendNameTmp,friendImage)
+          textInputWidget(ref, context, friendNameTmp, friendImage)
         ])));
   }
 
-
-  SpeedDial speedDialButton(WidgetRef ref,BuildContext context,String friendUserDocId, String friendUserName, Image? friendImage) {
+  SpeedDial speedDialButton(WidgetRef ref, BuildContext context,
+      String friendUserDocId, String friendUserName, Image? friendImage) {
     return SpeedDial(
-      elevation:6,
-      buttonSize:const Size(45.0, 45.0),
-      childrenButtonSize:const Size(55.0, 55.0),
+      elevation: 6,
+      buttonSize: const Size(45.0, 45.0),
+      childrenButtonSize: const Size(55.0, 55.0),
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: const IconThemeData(size: 22.0),
       curve: Curves.bounceIn,
@@ -98,7 +97,8 @@ class ChatPage extends ConsumerWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
-                  return AppointmentRequest(friendUserDocId,friendUserName,friendImage);
+                  return AppointmentRequest(
+                      friendUserDocId, friendUserName, friendImage,"" , "1","Chat");
                 }),
               );
             },
@@ -125,9 +125,8 @@ class ChatPage extends ConsumerWidget {
     );
   }
 
-  AppBar appbarImageAndButtons(WidgetRef ref, BuildContext context,String friendName, Image? friendImage) {
-
-
+  AppBar appbarImageAndButtons(WidgetRef ref, BuildContext context,
+      String friendName, Image? friendImage) {
     return AppBar(
       leading: IconButton(
         icon: commonCircleAvatarImage(
@@ -144,64 +143,103 @@ class ChatPage extends ConsumerWidget {
       ),
       elevation: 0.6,
       title: commonText20BlackLeftBold(friendName),
-      // iconTheme: IconThemeData(color: Colors.black87),
     );
   }
 
-  Padding balloon(ChatDetail chatDetail, String rightLeft) {
+  Padding balloon(
+      ChatDetail chatDetail, String rightLeft, BuildContext context,WidgetRef ref) {
     //rightLeft="right"or"left"
 
-    List<Widget> widgetList=[];
-    widgetList.add(
-        Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: commonText14Gray(chatDetail.message)));
-    if(chatDetail.messageType=="3"){
-
-      if(rightLeft=="right") {
-
-        widgetList.add(
-            commonText14Gray("You sent a request")
-        );
-        widgetList.add(
-          commonButtonSmallOrangeRound(
-              text: "View request",
-              onPressed: (){
-
-              })
-        );
-      }else{
-
-        widgetList.add(
-            commonText14Gray("Friend sent a request")
-        );
-        widgetList.add(
-            commonButtonSmallOrangeRound(
-                text: "View request",
-                onPressed: (){
-
-                })
-        );
+    List<Widget> widgetList = [];
+    widgetList.add(Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: commonText14Gray(chatDetail.message)));
+    if (chatDetail.messageType == "3") {
+      if (rightLeft == "right") {
+        widgetList.add(commonText14Gray("You sent a request"));
+        widgetList.add(commonButtonSmallOrangeRound(
+            text: "View request", onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return AppointmentRequest(friendUserDocId,
+                  friendUserName, friendPhoto,chatDetail.referDocId ,"2","Chat");
+            }),
+          );
+        }));
+      } else {
+        widgetList.add(commonText14Gray("Friend sent a request"));
+        widgetList.add(commonButtonSmallOrangeRound(
+            text: "View request",
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) {
+                  return AppointmentRequest(friendUserDocId,
+                      friendUserName, friendPhoto,chatDetail.referDocId ,"3","Chat");
+                }),
+              );
+            }));
       }
-
     }
 
+    if (chatDetail.messageType == "4") {
+      if (rightLeft == "right") {
+        widgetList.add(commonText14Gray("You sent a appointment"));
+        widgetList.add(commonButtonSmallOrangeRound(
+            text: "View appointment", onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return CalendarEdit(friendUserDocId);
+            }),
+          );
+          appointmentAnswerBottomSheet(context,null, ref,"2",friendUserDocId,null,chatDetail.referDocId);
+        }));
+        widgetList.add(commonButtonSmallOrangeRound(
+            text: "Enter call room",
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) {
+                  return CalendarEdit(friendUserDocId);
+                }),
+              );
+            }));
+      } else {
+        widgetList.add(commonText14Gray("Friend sent a appointment"));
+        widgetList.add(commonButtonSmallOrangeRound(
+            text: "View appointment",
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) {
+                  return CalendarEdit(friendUserDocId);
+                }),
+              );
+            }));
+        widgetList.add(commonButtonSmallOrangeRound(
+            text: "Enter call room",
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) {
+                  return CalendarEdit(friendUserDocId);
+                }),
+              );
+            }));
+      }
+    }
 
     return Padding(
         padding: const EdgeInsets.only(bottom: 28.0),
         child: commonBalloon(
             Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children:widgetList),
-                rightLeft)
-    );
+                children: widgetList),
+            rightLeft));
   }
 
-  Widget textInputWidget(WidgetRef ref,BuildContext context,String friendName,Image? friendPhoto) {
+  Widget textInputWidget(WidgetRef ref, BuildContext context, String friendName,
+      Image? friendPhoto) {
     var _controller = TextEditingController();
 
     return Padding(
-      padding: const EdgeInsets.only(left:8,right:8),
+      padding: const EdgeInsets.only(left: 8, right: 8),
       child: SizedBox(
         height: 52,
         child: Row(children: [
@@ -209,12 +247,11 @@ class ChatPage extends ConsumerWidget {
               child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: commonTextBoxGray(
-              onChanged: (String value) {
-                message = value;
-              },
-              controller: _controller,
-                multiLine:true
-            ),
+                onChanged: (String value) {
+                  message = value;
+                },
+                controller: _controller,
+                multiLine: true),
           )),
           commonButtonGraySmallerIcon(
               icon: MyFlutterApp.send,
@@ -228,14 +265,15 @@ class ChatPage extends ConsumerWidget {
                 );
                 _controller.clear();
               }),
-          speedDialButton(ref,context,friendUserDocId,friendName,friendPhoto)
+          speedDialButton(
+              ref, context, friendUserDocId, friendName, friendPhoto)
         ]),
       ),
     );
   }
 
   Widget buildMessageList(
-      String userDocId, String friendUserDocId, String chatHeaderDocId) {
+      String userDocId, String friendUserDocId, String chatHeaderDocId,WidgetRef ref) {
     var isarInstance = Isar.getInstance();
     Query<ChatDetail>? chatDetailDataQuery = isarInstance?.chatDetails
         .filter()
@@ -259,9 +297,9 @@ class ChatPage extends ConsumerWidget {
           // controller: _scrollController,
           children: chatDetailsList.data!.map((ChatDetail chatDetail) {
             if (chatDetail.senderUserDocId == userDocId) {
-              return balloon(chatDetail, "right");
+              return balloon(chatDetail, "right", context,ref);
             } else {
-              return balloon(chatDetail, "left");
+              return balloon(chatDetail, "left", context,ref);
             }
           }).toList(),
         );

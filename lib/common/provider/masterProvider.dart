@@ -64,10 +64,24 @@ class MasterDataNotifier extends ChangeNotifier {
 }
 
 Master getMasterData(String masterGroupCode, String code, WidgetRef ref){
-  return ref.watch(masterDataProvider).masterData[masterGroupCode]![code];
+    return ref.watch(masterDataProvider).masterData[masterGroupCode]![code];
 }
 
 
 Map<String,Master> getMasterMap(String masterGroupCode, WidgetRef ref){
   return ref.watch(masterDataProvider).masterData[masterGroupCode]!;
+}
+
+String getMasterName(String masterGroupCode, String code, WidgetRef ref){
+  if(code==""){
+    return "";
+  }else{
+    Master? masterData = ref.watch(masterDataProvider).masterData[masterGroupCode]![code];
+
+    if(masterData==null){
+      return "";
+    }else{
+      return masterData.name;
+    }
+  }
 }

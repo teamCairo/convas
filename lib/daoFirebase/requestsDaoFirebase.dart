@@ -32,3 +32,29 @@ Future<String> insertFirebaseRequests({
 
   return insertedDocId;
 }
+
+Future<void> updateFirebaseRequests({
+  required String requestDocId,
+  required String userDocId,
+  required String friendUserDocId,
+  required String courseCodeListText,
+  required String categoryCodeListText,
+  required String message,
+  required String programId
+}) async {
+  await FirebaseFirestore.instance.collection('requests').
+  doc(requestDocId).
+  update({
+        'senderDocId':userDocId,
+        'receiverUserDocId':friendUserDocId,
+        'courseCodeListText':courseCodeListText,
+        'categoryCodeListText':categoryCodeListText,
+        'message':message,
+        'updateUserDocId':userDocId,
+        'updateProgramId': programId,
+        'updateTime': FieldValue.serverTimestamp(),
+        'readableFlg': true,
+        'deleteFlg': false,
+      });
+
+}

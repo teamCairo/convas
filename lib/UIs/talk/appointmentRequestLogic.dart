@@ -8,6 +8,20 @@ import '../../daoFirebase/friendsDaoFirebase.dart';
 import '../../daoFirebase/requestsDaoFirebase.dart';
 import '../../entityIsar/friendEntityIsar.dart';
 
+Future<void> editRequest(String friendUserDocId,String requestDocId, WidgetRef ref)async {
+
+  await updateFirebaseRequests(
+      requestDocId: requestDocId,
+      userDocId:ref.watch(userDataProvider).userData["userDocId"],
+      friendUserDocId:friendUserDocId,
+      courseCodeListText:ref.watch(appointRequestProvider).courseCodeListText,
+      categoryCodeListText:ref.watch(appointRequestProvider).categoryCodeListText,
+      message:ref.watch(appointRequestProvider).message,
+      programId:"createRequest"
+  );
+
+}
+
 Future<void> createRequest(String friendUserDocId, WidgetRef ref)async {
 
   String chatHeaderDocId="";
@@ -26,7 +40,7 @@ Future<void> createRequest(String friendUserDocId, WidgetRef ref)async {
       friendUserDocId:friendUserDocId,
       courseCodeListText:ref.watch(appointRequestProvider).courseCodeListText,
       categoryCodeListText:ref.watch(appointRequestProvider).categoryCodeListText,
-      message:ref.watch(appointRequestProvider).requestMessage,
+      message:ref.watch(appointRequestProvider).message,
       programId:"createRequest"
   );
 
@@ -34,7 +48,7 @@ Future<void> createRequest(String friendUserDocId, WidgetRef ref)async {
       ref:ref,
       chatHeaderDocId:chatHeaderDocId,
         friendUserDocId:friendUserDocId,
-        message:ref.watch(appointRequestProvider).requestMessage,
+        message:ref.watch(appointRequestProvider).message,
         messageType:"3",
         referDocId: requestDocId,
         programId: "createRequest");
