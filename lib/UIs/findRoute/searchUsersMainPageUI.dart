@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
+import '../../common/UI/commonPushUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/commonValues.dart';
 import '../../daoAlgolia/usersDaoAlgolia.dart';
@@ -42,10 +43,15 @@ class SearchUsersMainPage extends ConsumerWidget {
                           Expanded(
                             child: commonButtonIconTextGrayWide(
                                 onPressed: () async {
-                                  await Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) {
-                                      return const SearchUsersConditionPage();
-                                    }),
+                                  Navigator.of(context).push(
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation, secondaryAnimation) {
+                                        return const SearchUsersConditionPage();
+                                      },
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                        return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
+                                      },
+                                    ),
                                   );
                                 },
                                 icon: Icons.search,

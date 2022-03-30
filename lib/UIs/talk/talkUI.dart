@@ -3,6 +3,7 @@ import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/UI/commonPushUI.dart';
 import '../../common/logic/commonLogicDate.dart';
 import '../../common/provider/friendProvider.dart';
 import '../../common/provider/userProvider.dart';
@@ -88,11 +89,16 @@ class Talk extends ConsumerWidget {
                 ]),
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ChatPage(friendUserDocId:friendData.friendUserDocId
-                    ,friendUserName:friendData.friendUserName, chatHeaderDocId: friendData.chatHeaderId),
+
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) {
+                  return ChatPage(friendUserDocId:friendData.friendUserDocId
+                      ,friendUserName:friendData.friendUserName, chatHeaderDocId: friendData.chatHeaderId);
+                },
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
+                },
               ),
             );
           },

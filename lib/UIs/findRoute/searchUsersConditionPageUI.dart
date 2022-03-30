@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/UI/commonOthersUI.dart';
+import '../../common/UI/commonPushUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/logic/commonLogicList.dart';
 
@@ -163,17 +164,29 @@ class SearchUsersConditionPage extends ConsumerWidget {
               );
 
             }else if(databaseItem=="searchConditionLoginTime"){
+
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return  SearchConditionValueEditRadio(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
-                }),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return  SearchConditionValueEditRadio(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
+                  },
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
+                  },
+                ),
               );
 
           }else{
+
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return  SearchConditionValueEditType(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
-                }),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return  SearchConditionValueEditType(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
+                  },
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
+                  },
+                ),
               );
             }
             },
