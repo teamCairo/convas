@@ -1,7 +1,7 @@
 
-class commonAppointment{
+class CommonAppointment{
 
-  commonAppointment(
+  CommonAppointment(
       this.appointmentDocId,
       this.senderUserDocId,
       this.receiverUserDocId,

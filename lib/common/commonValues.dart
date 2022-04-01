@@ -19,6 +19,8 @@ const searchConditionAlmightyWord="Doesn't matter";
 
 const appointmentSelectTypeAlmightyWord="Anything";
 
+const enterRoomMessage="Entered the call room";
+
 const LinearGradient commonLinearGradientForChatBox = LinearGradient(
     begin: FractionalOffset.topLeft,
     end: FractionalOffset.bottomRight,

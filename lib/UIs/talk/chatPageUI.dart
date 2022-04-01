@@ -14,6 +14,7 @@ import '../../common/provider/userProvider.dart';
 import '../../daoFirebase/chatDetailsDaoFirebase.dart';
 import '../../entityIsar/chatDetailEntityIsar.dart';
 import '../../entityIsar/friendEntityIsar.dart';
+import '../call/callRoomUI.dart';
 import '../findRoute/friendProfileUI.dart';
 import '../myPageRoute/calendarEditUI.dart';
 import 'appointmentAnswerBottomSheetUI.dart';
@@ -198,7 +199,7 @@ class ChatPage extends ConsumerWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
-                  return CalendarEdit(friendUserDocId);
+                  return CallRoom( argumentFriendUserDocId: friendUserDocId, appointmentId: chatDetail.referDocId);
                 }),
               );
             }));
@@ -218,7 +219,7 @@ class ChatPage extends ConsumerWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
-                  return CalendarEdit(friendUserDocId);
+                  return CallRoom( argumentFriendUserDocId: friendUserDocId, appointmentId: chatDetail.referDocId);
                 }),
               );
             }));

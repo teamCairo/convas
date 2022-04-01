@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../common/otherClass/commonClassAppointment.dart';
 
-Future<commonAppointment> selectFirebaseAppointmentByAppointmentDocId(
+Future<CommonAppointment> selectFirebaseAppointmentByAppointmentDocId(
     String appointmentDocId) async {
   DocumentSnapshot snapshot = await FirebaseFirestore.instance
       .collection('appointments')
       .doc(appointmentDocId)
       .get();
 
-  return commonAppointment(
+  return CommonAppointment(
       snapshot.id,
       snapshot.get('senderUserDocId'),
       snapshot.get('receiverUserDocId'),

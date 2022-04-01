@@ -38,7 +38,7 @@ class AppointmentAnswerNotifier extends ChangeNotifier {
       _message="";
 
     }else{
-      commonAppointment appointment = await selectFirebaseAppointmentByAppointmentDocId(appointmentDocId!);
+      CommonAppointment appointment = await selectFirebaseAppointmentByAppointmentDocId(appointmentDocId!);
 
       _courseCode = appointment.courseCode;
       _categoryCode = appointment.categoryCode;
