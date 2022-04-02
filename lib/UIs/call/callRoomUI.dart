@@ -1,20 +1,10 @@
-import 'dart:developer';
-
-import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:convas/UIs/call/callRoomProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-import '../../common/commonValues.dart';
 import '../../common/provider/friendProvider.dart';
-import '../../config/agora_config.dart' as config;
-import '../../callerCloudFunctions/callTokenGenerator.dart';
-import '../../daoFirebase/chatDetailsDaoFirebase.dart';
 
 
 class CallRoom extends ConsumerWidget {
@@ -23,109 +13,16 @@ class CallRoom extends ConsumerWidget {
   CallRoom({Key? key,
     required this.appointmentId,
     required this.argumentFriendUserDocId
-  }) : super(key: key){
-    _initEngine();
-  }
+  }) : super(key: key);
 
-  late final RtcEngine _engine;
-
-  bool isJoined = false,
-      switchCamera = true,
-      switchRender = true;
-  List<int> remoteUid = [];
   bool initialProcessFlg=true;
-
-  void dispose() {
-    _engine.destroy();
-  }
-
-  Future<void> _initEngine() async {
-    _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));
-    _addListeners();
-    await _engine.enableVideo();
-    await _engine.startPreview();
-    await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
-    await _engine.setClientRole(ClientRole.Broadcaster);
-  }
-
-  void _addListeners() {
-    _engine.setEventHandler(RtcEngineEventHandler(
-      joinChannelSuccess: (channel, uid, elapsed) {
-        log('joinChannelSuccess $channel $uid $elapsed');
-        isJoined = true;
-      },
-      userJoined: (uid, elapsed) {
-        log('userJoined  ${uid} ${elapsed}');
-        remoteUid.add(uid);
-      },
-      userOffline: (uid, reason) {
-        log('userOffline  ${uid} ${reason}');
-        remoteUid.removeWhere((element) => element == uid);
-      },
-      leaveChannel: (stats) {
-        log('leaveChannel ${stats.toJson()}');
-        isJoined = false;
-        remoteUid.clear();
-      },
-    ));
-  }
-
-  Future<void> initializeProcess(WidgetRef ref, String friendUserDocId, String appointmentDocId) async {
-
-    ref.read(callRoomProvider.notifier).initialize(friendUserDocId, appointmentDocId, ref);
-
-    await insertChatDetailsDataMessage(
-        ref:ref,
-        chatHeaderDocId:ref.watch(callRoomProvider).friendData!.chatHeaderId,
-        friendUserDocId:friendUserDocId,
-        message:enterRoomMessage,
-        messageType:"1",
-        referDocId: appointmentDocId,
-        programId: "callRoom");
-
-    await _joinChannel();
-  }
-
-
-  Future<void> _joinChannel() async{
-
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      await  [Permission.microphone, Permission.camera].request();
-    }
-
-    String tokenAndChannelId = await callTokenGenerator(appointmentId);
-    log("■■■■■■■■■■■■■■■■token:"+tokenAndChannelId);
-    await _engine.joinChannel(tokenAndChannelId, appointmentId, null, 0);
-
-  }
-
-
-  Future<void> _leaveChannel(WidgetRef ref)async  {
-    await _engine.leaveChannel();
-  }
-
-
-  void _switchCamera() {
-    _engine.switchCamera().then((value) {
-      switchCamera = !switchCamera;
-    }).catchError((err) {
-      log('switchCamera $err');
-    });
-  }
-
-  void _switchRender() {
-    switchRender = !switchRender;
-    remoteUid = List.of(remoteUid.reversed);
-  }
-
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
     if (initialProcessFlg){
       initialProcessFlg=false;
-      initializeProcess(ref, argumentFriendUserDocId, appointmentId);
+      ref.read(callRoomProvider.notifier).initialize(argumentFriendUserDocId, appointmentId, ref);
     }
 
 
@@ -160,17 +57,17 @@ class CallRoom extends ConsumerWidget {
                     height: 40,
                     child: ElevatedButton(
                       onPressed:(){
-                        if(isJoined) {
-                          _leaveChannel(ref);
+                        if(ref.watch(callRoomProvider).isJoined) {
+                          ref.read(callRoomProvider.notifier).leaveChannel();
                         } else {
-                          _joinChannel();
+                          ref.read(callRoomProvider.notifier).joinChannel();
                         }
 
                       } ,
-                      child: Text('${isJoined ? 'Leave' : 'Join'} channel'),
+                      child: Text('${ref.watch(callRoomProvider).isJoined ? 'Leave' : 'Join'} channel'),
                     ),
                   ),
-                  Row(children: [_renderVideo()],)
+                  Row(children: [_renderVideo(ref)],)
                 ],
               ),
               Align(
@@ -179,8 +76,8 @@ class CallRoom extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ElevatedButton(
-                      onPressed: _switchCamera,
-                      child: Text('Camera ${switchCamera ? 'front' : 'rear'}'),
+                      onPressed: (){ref.read(callRoomProvider.notifier).changeSwitchCamera();},
+                      child: Text('Camera ${ref.watch(callRoomProvider).switchCamera ? 'front' : 'rear'}'),
                     ),
                   ],
                 ),
@@ -191,7 +88,7 @@ class CallRoom extends ConsumerWidget {
     );
   }
 
-  Widget _renderVideo() {
+  Widget _renderVideo(WidgetRef ref) {
     return SizedBox(
       height: 100,
       width: 120,
@@ -203,10 +100,10 @@ class CallRoom extends ConsumerWidget {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: List.of(remoteUid.map(
+                children: List.of(ref.watch(callRoomProvider).remoteUid.map(
                       (e) =>
                       GestureDetector(
-                        onTap: _switchRender,
+                        onTap:(){ ref.watch(callRoomProvider).switchRender;},
                         child: SizedBox(
                           width: 120,
                           height: 120,
