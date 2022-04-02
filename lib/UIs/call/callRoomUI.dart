@@ -3,15 +3,18 @@ import 'dart:developer';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
+import 'package:convas/UIs/call/callRoomProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../common/commonValues.dart';
 import '../../common/provider/friendProvider.dart';
 import '../../config/agora_config.dart' as config;
-import 'callRoomLogic.dart';
+import '../../callerCloudFunctions/callTokenGenerator.dart';
+import '../../daoFirebase/chatDetailsDaoFirebase.dart';
 
 
 class CallRoom extends ConsumerWidget {
@@ -25,12 +28,12 @@ class CallRoom extends ConsumerWidget {
   }
 
   late final RtcEngine _engine;
-  // String channelId = "";
+
   bool isJoined = false,
       switchCamera = true,
       switchRender = true;
   List<int> remoteUid = [];
-  // bool initialProcessFlg=true;
+  bool initialProcessFlg=true;
 
   void dispose() {
     _engine.destroy();
@@ -43,8 +46,6 @@ class CallRoom extends ConsumerWidget {
     await _engine.startPreview();
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
     await _engine.setClientRole(ClientRole.Broadcaster);
-    await initializeProcess(ref, argumentFriendUserDocId, appointmentId);
-    await _joinChannel();//TODO　トークンゲット処理を追加
   }
 
   void _addListeners() {
@@ -69,14 +70,35 @@ class CallRoom extends ConsumerWidget {
     ));
   }
 
+  Future<void> initializeProcess(WidgetRef ref, String friendUserDocId, String appointmentDocId) async {
+
+    ref.read(callRoomProvider.notifier).initialize(friendUserDocId, appointmentDocId, ref);
+
+    await insertChatDetailsDataMessage(
+        ref:ref,
+        chatHeaderDocId:ref.watch(callRoomProvider).friendData!.chatHeaderId,
+        friendUserDocId:friendUserDocId,
+        message:enterRoomMessage,
+        messageType:"1",
+        referDocId: appointmentDocId,
+        programId: "callRoom");
+
+    await _joinChannel();
+  }
+
+
   Future<void> _joinChannel() async{
 
     if (defaultTargetPlatform == TargetPlatform.android) {
       await  [Permission.microphone, Permission.camera].request();
     }
-    await _engine.joinChannel("006dc60d629dee640809f2bdc5e5a2b1697IADxPKbGTZAqT8z1VdGNsbw/ZrsK9mDQkoO7JJMVM7ALzV3TjE8AAAAAEABg4SwUzyJIYgEAAQDOIkhi", appointmentId, null, 0);
+
+    String tokenAndChannelId = await callTokenGenerator(appointmentId);
+    log("■■■■■■■■■■■■■■■■token:"+tokenAndChannelId);
+    await _engine.joinChannel(tokenAndChannelId, appointmentId, null, 0);
 
   }
+
 
   Future<void> _leaveChannel(WidgetRef ref)async  {
     await _engine.leaveChannel();
@@ -100,10 +122,11 @@ class CallRoom extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //
-    // if (initialProcessFlg){
-    //   initialProcessFlg=false;
-    // }
+
+    if (initialProcessFlg){
+      initialProcessFlg=false;
+      initializeProcess(ref, argumentFriendUserDocId, appointmentId);
+    }
 
 
     return Scaffold(
