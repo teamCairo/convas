@@ -37,8 +37,19 @@ class CallRoomNotifier extends ChangeNotifier {
   bool _switchRender = true;
   bool get switchRender => _switchRender;
 
-  List<int> _remoteUid = [];
-  List<int> get remoteUid => _remoteUid;
+  int? _myUserid;
+  int? get myUserid => _myUserid;
+
+
+  bool _localVideoStatus = true;
+  bool get localVideoStatus =>_localVideoStatus;
+
+  bool _localAvStatus = true;
+  bool get localAvStatus =>_localAvStatus;
+
+
+  int? _friendUserid;
+  int? get friendUserid => _friendUserid;
 
   Future<void> initialize(String friendUserDocId, String appointmentDocId, WidgetRef ref)async{
     _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));
@@ -47,6 +58,7 @@ class CallRoomNotifier extends ChangeNotifier {
     await _engine.startPreview();
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
     await _engine.setClientRole(ClientRole.Broadcaster);
+    _localVideoStatus = true;
 
     _friendData=  ref.watch(friendDataProvider).friendData[friendUserDocId]!;
     _appointmentData= await selectFirebaseAppointmentByAppointmentDocId(appointmentDocId);
@@ -60,8 +72,9 @@ class CallRoomNotifier extends ChangeNotifier {
         referDocId: appointmentDocId,
         programId: "callRoom");
 
-    await joinChannel();
-
+    if(_isJoined==false){
+      await joinChannel();
+    }
   }
 
   void _addListeners() {
@@ -73,18 +86,19 @@ class CallRoomNotifier extends ChangeNotifier {
       },
       userJoined: (uid, elapsed) {
         log('userJoined  $uid $elapsed');
-        _remoteUid.add(uid);
+        _friendUserid=uid;
         notifyListeners();
       },
       userOffline: (uid, reason) {
         log('userOffline  $uid $reason');
-        _remoteUid.removeWhere((element) => element == uid);
+        _friendUserid=null;
         notifyListeners();
       },
       leaveChannel: (stats) {
         log('leaveChannel ${stats.toJson()}');
         _isJoined = false;
-        _remoteUid.clear();
+        _myUserid=null;
+        _friendUserid=null;
         notifyListeners();
       },
 
@@ -110,6 +124,19 @@ class CallRoomNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> changeAvMuteMode() async {
+    _localAvStatus=!_localAvStatus;
+    await _engine.muteLocalAudioStream(_localAvStatus);
+    notifyListeners();
+  }
+
+
+  Future<void> changeVideoMuteMode() async {
+    _localVideoStatus=!_localVideoStatus;
+    await _engine.muteLocalVideoStream(_localVideoStatus);
+    notifyListeners();
+  }
+
 
   void changeSwitchCamera() {
     _engine.switchCamera().then((value) {
@@ -117,11 +144,6 @@ class CallRoomNotifier extends ChangeNotifier {
     }).catchError((err) {
       log('switchCamera $err');
     });
-  }
-
-  void changeSwitchRender() {
-    _switchRender = !_switchRender;
-    _remoteUid = List.of(_remoteUid.reversed);
   }
 
 

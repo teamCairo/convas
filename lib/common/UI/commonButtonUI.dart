@@ -158,6 +158,40 @@ Widget commonButtonWhiteBorderRound(
   );
 }
 
+
+Widget commonButtonIconCircle(
+    {required IconData icon,
+      required Color color,
+      required Color backcolor,
+      required double size,
+      required Function()? onPressed}) {
+  return ElevatedButton(
+    child: Icon(icon,
+        color:color,
+        size:size
+    ),
+    style: ElevatedButton.styleFrom(
+      primary: backcolor,
+      onPrimary: Colors.black,
+      shape: const CircleBorder(
+        side: BorderSide(
+          color: Colors.black,
+          width: 1,
+          style: BorderStyle.solid,
+        ),
+      ),
+    ),
+    onPressed: onPressed,
+  );
+  return IconButton(
+      icon: Icon(icon,
+          color:color,
+          size:size
+      ),
+      color:backcolor,
+      onPressed: onPressed );
+}
+
 Widget commonButtonIconTextGrayWide(
     {required IconData icon,
     required String text,

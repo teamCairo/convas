@@ -48,12 +48,36 @@ class CallRoom extends ConsumerWidget {
                          }
                        } ,
                      ),
+
                      commonButtonSmallOrangeRound(
                        onPressed: (){ref.read(callRoomProvider.notifier).changeSwitchCamera();},
                        text: 'Camera ${ref.watch(callRoomProvider).switchCamera ? 'front' : 'rear'}',
                      ),
                    ],
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                  commonButtonIconCircle(
+                      icon: ref.watch(callRoomProvider).localAvStatus?Icons.mic:Icons.mic_off,
+                      color: Colors.black,
+                      onPressed: (){
+                        ref.read(callRoomProvider.notifier).changeAvMuteMode();
+                      }, backcolor: Colors.white, size: 20),
+                  commonButtonIconCircle(
+                      icon: Icons.call_end,
+                      color: Colors.white,
+                      onPressed: (){
+                        ref.read(callRoomProvider.notifier).leaveChannel();
+                      },backcolor: Colors.red, size: 20),
+                  commonButtonIconCircle(
+                      icon: ref.watch(callRoomProvider).localVideoStatus?Icons.videocam:Icons.videocam_off,
+                      color: Colors.black,
+                      onPressed: (){
+                        ref.read(callRoomProvider.notifier).changeVideoMuteMode();
+                      },backcolor: Colors.white, size: 20),
+                ],
               ),
             ],
           ),
@@ -62,31 +86,39 @@ class CallRoom extends ConsumerWidget {
   }
 
   Widget _renderVideo(WidgetRef ref) {
+    Widget friendView;
+
+    if(ref.watch(callRoomProvider).friendUserid==null){
+      friendView=const SizedBox(
+        height: 300,
+        width: double.infinity
+      );
+    }else{
+      friendView = SizedBox(
+        height: 300,
+        width: double.infinity,
+        child: RtcRemoteView.SurfaceView(
+          channelId:appointmentId,
+          uid: ref.watch(callRoomProvider).friendUserid!,
+        ),
+      );
+    }
+
     return SizedBox(
       height: 300,
       width: double.infinity,
       child: Stack(
         children: [
-          const RtcLocalView.SurfaceView(),
           Align(
-            alignment: Alignment.topLeft,
-            child: Row(
-              children: List.of(ref.watch(callRoomProvider).remoteUid.map(
-                    (e) =>
-                    GestureDetector(
-                      onTap:(){ ref.watch(callRoomProvider).switchRender;},
-                      child: SizedBox(
-                        width: 120,
-                        height: 120,
-                        child: RtcRemoteView.SurfaceView(
-                          channelId:appointmentId,
-                          uid: e,
-                        ),
-                      ),
-                    ),
-              )),
-            ),
-          )
+              alignment: Alignment.topLeft,
+              child: friendView
+          ),
+        const Align(
+        alignment: Alignment.topLeft,
+        child:SizedBox(
+              width: 120,
+              height: 120,
+              child: RtcLocalView.SurfaceView()),),
         ],
       ),
     );
