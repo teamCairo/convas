@@ -1,6 +1,7 @@
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:convas/UIs/call/callRoomProvider.dart';
+import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter/material.dart';
@@ -27,32 +28,12 @@ class CallRoom extends ConsumerWidget {
 
 
     return Scaffold(
-        appBar:AppBar(title:Container(
-            child:Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:[
-                  Text(ref.watch(friendDataProvider).friendData[argumentFriendUserDocId]!.friendUserName,
-                    style: const TextStyle(color: Colors.black87),),
-                  Container(
-                      width: 40,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                              onTap: () async {
-
-                              },
-                              child: Icon(Icons.widgets_outlined,
-                                  color: Colors.black87, size: 26))))
-
-
-                ]
-            ))),
+        appBar:commonAppbarWhite(ref.watch(friendDataProvider).friendData[argumentFriendUserDocId]!.friendUserName),
         body: SafeArea(
           child: Stack(
             children: [
               Column(
                 children: [
-                  Text(appointmentId),
                   Container(
                     height: 40,
                     child: ElevatedButton(
