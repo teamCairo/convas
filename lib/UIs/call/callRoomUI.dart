@@ -1,6 +1,7 @@
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:convas/UIs/call/callRoomProvider.dart';
+import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,43 +27,34 @@ class CallRoom extends ConsumerWidget {
       ref.read(callRoomProvider.notifier).initialize(argumentFriendUserDocId, appointmentId, ref);
     }
 
-
     return Scaffold(
-        appBar:commonAppbarWhite(ref.watch(friendDataProvider).friendData[argumentFriendUserDocId]!.friendUserName),
+        appBar: commonAppbarTransparent(ref.watch(friendDataProvider).friendData[argumentFriendUserDocId]!.friendUserName),
         body: SafeArea(
-          child: Stack(
+          child: Column(
             children: [
-              Column(
-                children: [
-                  Container(
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed:(){
-                        if(ref.watch(callRoomProvider).isJoined) {
-                          ref.read(callRoomProvider.notifier).leaveChannel();
-                        } else {
-                          ref.read(callRoomProvider.notifier).joinChannel();
-                        }
-
-                      } ,
-                      child: Text('${ref.watch(callRoomProvider).isJoined ? 'Leave' : 'Join'} channel'),
-                    ),
-                  ),
-                  Row(children: [_renderVideo(ref)],)
-                ],
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ElevatedButton(
-                      onPressed: (){ref.read(callRoomProvider.notifier).changeSwitchCamera();},
-                      child: Text('Camera ${ref.watch(callRoomProvider).switchCamera ? 'front' : 'rear'}'),
-                    ),
-                  ],
+              _renderVideo(ref),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children:[
+                     commonButtonSmallOrangeRound(
+                       text: '${ref.watch(callRoomProvider).isJoined ? 'Leave' : 'Join'} channel',
+                       onPressed:(){
+                         if(ref.watch(callRoomProvider).isJoined) {
+                           ref.read(callRoomProvider.notifier).leaveChannel();
+                         } else {
+                           ref.read(callRoomProvider.notifier).joinChannel();
+                         }
+                       } ,
+                     ),
+                     commonButtonSmallOrangeRound(
+                       onPressed: (){ref.read(callRoomProvider.notifier).changeSwitchCamera();},
+                       text: 'Camera ${ref.watch(callRoomProvider).switchCamera ? 'front' : 'rear'}',
+                     ),
+                   ],
                 ),
-              )
+              ),
             ],
           ),
         )
@@ -71,31 +63,28 @@ class CallRoom extends ConsumerWidget {
 
   Widget _renderVideo(WidgetRef ref) {
     return SizedBox(
-      height: 100,
-      width: 120,
+      height: 300,
+      width: double.infinity,
       child: Stack(
         children: [
           const RtcLocalView.SurfaceView(),
           Align(
             alignment: Alignment.topLeft,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.of(ref.watch(callRoomProvider).remoteUid.map(
-                      (e) =>
-                      GestureDetector(
-                        onTap:(){ ref.watch(callRoomProvider).switchRender;},
-                        child: SizedBox(
-                          width: 120,
-                          height: 120,
-                          child: RtcRemoteView.SurfaceView(
-                            channelId:appointmentId,
-                            uid: e,
-                          ),
+            child: Row(
+              children: List.of(ref.watch(callRoomProvider).remoteUid.map(
+                    (e) =>
+                    GestureDetector(
+                      onTap:(){ ref.watch(callRoomProvider).switchRender;},
+                      child: SizedBox(
+                        width: 120,
+                        height: 120,
+                        child: RtcRemoteView.SurfaceView(
+                          channelId:appointmentId,
+                          uid: e,
                         ),
                       ),
-                )),
-              ),
+                    ),
+              )),
             ),
           )
         ],

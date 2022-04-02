@@ -23,6 +23,7 @@ AppBar commonAppbarWhite(String text) {
   );
 }
 
+
 Widget commonLogoMain(double size){
 
   return Container(

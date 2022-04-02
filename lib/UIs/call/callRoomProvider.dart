@@ -72,12 +72,12 @@ class CallRoomNotifier extends ChangeNotifier {
         notifyListeners();
       },
       userJoined: (uid, elapsed) {
-        log('userJoined  ${uid} ${elapsed}');
+        log('userJoined  $uid $elapsed');
         _remoteUid.add(uid);
         notifyListeners();
       },
       userOffline: (uid, reason) {
-        log('userOffline  ${uid} ${reason}');
+        log('userOffline  $uid $reason');
         _remoteUid.removeWhere((element) => element == uid);
         notifyListeners();
       },
