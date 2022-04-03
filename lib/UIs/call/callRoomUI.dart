@@ -6,99 +6,104 @@ import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter/material.dart';
+import '../../common/UI/commonTextFormUI.dart';
 import '../../common/provider/friendProvider.dart';
-
 
 class CallRoom extends ConsumerWidget {
   String appointmentId;
   String argumentFriendUserDocId;
-  CallRoom({Key? key,
-    required this.appointmentId,
-    required this.argumentFriendUserDocId
-  }) : super(key: key);
 
-  bool initialProcessFlg=true;
+  CallRoom(
+      {Key? key,
+      required this.appointmentId,
+      required this.argumentFriendUserDocId})
+      : super(key: key);
+
+  bool initialProcessFlg = true;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    if (initialProcessFlg){
-      initialProcessFlg=false;
-      ref.read(callRoomProvider.notifier).initialize(argumentFriendUserDocId, appointmentId, ref);
+    if (initialProcessFlg) {
+      initialProcessFlg = false;
+      ref
+          .read(callRoomProvider.notifier)
+          .initialize(argumentFriendUserDocId, appointmentId, ref);
     }
 
     return Scaffold(
-        appBar: commonAppbarTransparent(ref.watch(friendDataProvider).friendData[argumentFriendUserDocId]!.friendUserName),
+        appBar: commonAppbarTransparent(ref
+            .watch(friendDataProvider)
+            .friendData[argumentFriendUserDocId]!
+            .friendUserName),
         body: SafeArea(
           child: Column(
             children: [
               _renderVideo(ref),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   children:[
-                     commonButtonSmallOrangeRound(
-                       text: '${ref.watch(callRoomProvider).isJoined ? 'Leave' : 'Join'} channel',
-                       onPressed:(){
-                         if(ref.watch(callRoomProvider).isJoined) {
-                           ref.read(callRoomProvider.notifier).leaveChannel();
-                         } else {
-                           ref.read(callRoomProvider.notifier).joinChannel();
-                         }
-                       } ,
-                     ),
-
-                     commonButtonSmallOrangeRound(
-                       onPressed: (){ref.read(callRoomProvider.notifier).changeSwitchCamera();},
-                       text: 'Camera ${ref.watch(callRoomProvider).switchCamera ? 'front' : 'rear'}',
-                     ),
-                   ],
-                ),
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:[
+                children: [
                   commonButtonIconCircle(
-                      icon: ref.watch(callRoomProvider).localAvStatus?Icons.mic:Icons.mic_off,
+                      icon: ref.watch(callRoomProvider).localAvStatus
+                          ? Icons.mic
+                          : Icons.mic_off,
                       color: Colors.black,
-                      onPressed: (){
+                      onPressed: () {
                         ref.read(callRoomProvider.notifier).changeAvMuteMode();
-                      }, backcolor: Colors.white, size: 20),
+                      },
+                      backcolor: Colors.white,
+                      size: 20),
                   commonButtonIconCircle(
-                      icon: Icons.call_end,
+                      icon: ref.watch(callRoomProvider).isJoinedCall?Icons.call_end:Icons.arrow_forward_outlined,
                       color: Colors.white,
-                      onPressed: (){
-                        ref.read(callRoomProvider.notifier).leaveChannel();
-                      },backcolor: Colors.red, size: 20),
+                      onPressed: () {
+                        if (ref.watch(callRoomProvider).isJoinedCall) {
+                          ref.read(callRoomProvider.notifier).leaveChannel();
+                        } else {
+                          ref.read(callRoomProvider.notifier).joinChannel();
+                        }
+                      },
+                      backcolor: Colors.red,
+                      size: 20),
                   commonButtonIconCircle(
-                      icon: ref.watch(callRoomProvider).localVideoStatus?Icons.videocam:Icons.videocam_off,
+                      icon: ref.watch(callRoomProvider).localVideoStatus
+                          ? Icons.videocam
+                          : Icons.videocam_off,
                       color: Colors.black,
-                      onPressed: (){
-                        ref.read(callRoomProvider.notifier).changeVideoMuteMode();
-                      },backcolor: Colors.white, size: 20),
+                      onPressed: () {
+                        ref
+                            .read(callRoomProvider.notifier)
+                            .changeVideoMuteMode();
+                      },
+                      backcolor: Colors.white,
+                      size: 20),
+                  commonButtonIconCircle(
+                      icon:  Icons.switch_video,
+                      color: Colors.black,
+                      onPressed: () {
+                        ref.read(callRoomProvider.notifier)
+                            .changeSwitchCamera();
+                      },
+                      backcolor: Colors.white,
+                      size: 20),
                 ],
               ),
+              Expanded(child: chatArea(ref))
             ],
           ),
-        )
-    );
+        ));
   }
 
   Widget _renderVideo(WidgetRef ref) {
     Widget friendView;
 
-    if(ref.watch(callRoomProvider).friendUserid==null){
-      friendView=const SizedBox(
-        height: 300,
-        width: double.infinity
-      );
-    }else{
+    if (ref.watch(callRoomProvider).friendUserid == null) {
+      friendView = const SizedBox(height: 300, width: double.infinity);
+    } else {
       friendView = SizedBox(
         height: 300,
         width: double.infinity,
         child: RtcRemoteView.SurfaceView(
-          channelId:appointmentId,
+          channelId: appointmentId,
           uid: ref.watch(callRoomProvider).friendUserid!,
         ),
       );
@@ -109,18 +114,58 @@ class CallRoom extends ConsumerWidget {
       width: double.infinity,
       child: Stack(
         children: [
-          Align(
-              alignment: Alignment.topLeft,
-              child: friendView
+          Align(alignment: Alignment.topLeft, child: friendView),
+          const Align(
+            alignment: Alignment.topLeft,
+            child: SizedBox(
+                width: 120, height: 120, child: RtcLocalView.SurfaceView()),
           ),
-        const Align(
-        alignment: Alignment.topLeft,
-        child:SizedBox(
-              width: 120,
-              height: 120,
-              child: RtcLocalView.SurfaceView()),),
         ],
       ),
+    );
+  }
+
+  Widget chatArea(WidgetRef ref) {
+    var _peerMessageController = TextEditingController();
+
+    return Column(
+      children: [
+        SizedBox(
+          height:50,
+          child:Row(children: <Widget>[
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: commonTextBoxGray(
+                onChanged: (String value) {
+                },
+                controller: _peerMessageController,
+                multiLine: true),
+          )),
+          commonButtonIconCircle(
+            size: 20,
+            icon: Icons.send,
+            onPressed: () async{
+              await ref.read(callRoomProvider).sendMessage(_peerMessageController.text);
+              _peerMessageController.clear();
+              ref.read(callRoomProvider).rebuildUI();
+            },
+            color: Colors.white,
+            backcolor: Colors.orange,
+          )
+        ]),),
+        Expanded(
+            child: ListView.builder(
+          itemExtent: 24,
+          itemBuilder: (context, i) {
+            return ListTile(
+              contentPadding: const EdgeInsets.all(0.0),
+              title: Text(ref.watch(callRoomProvider).infoStrings[i]),
+            );
+          },
+          itemCount: ref.watch(callRoomProvider).infoStrings.length,
+        ))
+      ],
     );
   }
 }

@@ -207,8 +207,8 @@ class MyPage extends ConsumerWidget {
                       },
                     ),
                     bigIconButton(
-                      text: "",
-                      icon: Icons.attach_money,
+                      text: "How to Study",
+                      icon: Icons.book_rounded,
                       onPressed: () async {
                         await Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) {
