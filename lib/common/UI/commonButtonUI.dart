@@ -164,6 +164,7 @@ Widget commonButtonIconCircle(
       required Color color,
       required Color backcolor,
       required double size,
+      bool? showBorder,
       required Function()? onPressed}) {
   return ElevatedButton(
     child: Icon(icon,
@@ -173,11 +174,11 @@ Widget commonButtonIconCircle(
     style: ElevatedButton.styleFrom(
       primary: backcolor,
       onPrimary: Colors.black,
-      shape: const CircleBorder(
+      shape: CircleBorder(
         side: BorderSide(
           color: Colors.black,
           width: 1,
-          style: BorderStyle.solid,
+          style: (showBorder??true)?BorderStyle.solid:BorderStyle.none,
         ),
       ),
     ),

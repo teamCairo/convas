@@ -55,6 +55,7 @@ class CallRoom extends ConsumerWidget {
                   commonButtonIconCircle(
                       icon: ref.watch(callRoomProvider).isJoinedCall?Icons.call_end:Icons.arrow_forward_outlined,
                       color: Colors.white,
+                      showBorder: false,
                       onPressed: () {
                         if (ref.watch(callRoomProvider).isJoinedCall) {
                           ref.read(callRoomProvider.notifier).leaveChannel();
@@ -135,7 +136,7 @@ class CallRoom extends ConsumerWidget {
           child:Row(children: <Widget>[
           Expanded(
               child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.only(top: 8.0,bottom: 8.0,left: 14.0),
             child: commonTextBoxGray(
                 onChanged: (String value) {
                 },
@@ -152,6 +153,7 @@ class CallRoom extends ConsumerWidget {
             },
             color: Colors.white,
             backcolor: Colors.orange,
+            showBorder: false,
           )
         ]),),
         Expanded(
