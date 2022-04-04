@@ -31,8 +31,10 @@ class CallRoomNotifier extends ChangeNotifier {
   RtcEngine get engine => _engine;
   bool _isJoinedCall = false;
   bool get isJoinedCall => _isJoinedCall;
-  bool _isJoinedMessage = false;
-  bool get isJoinedMessage => _isJoinedMessage;
+  bool _isJoinedClientMessage = false;
+  bool get isJoinedMessage => _isJoinedClientMessage;
+  bool _isJoinedChannelMessage = false;
+  bool get isJoinedChannelMessage =>_isJoinedChannelMessage;
   bool _switchCamera = true;
   bool get switchCamera => _switchCamera;
   bool _switchRender = true;
@@ -47,6 +49,7 @@ class CallRoomNotifier extends ChangeNotifier {
   int? get friendUserid => _friendUserid;
   List<String> _infoStrings =[];
   List<String> get infoStrings => _infoStrings;
+  AgoraRtmChannel? _messageChannel;
 
   Future<void> initialize(
       String friendUserDocId, String appointmentDocId, WidgetRef ref) async {
@@ -57,6 +60,7 @@ class CallRoomNotifier extends ChangeNotifier {
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
     await _engine.setClientRole(ClientRole.Broadcaster);
     _localVideoStatus = true;
+    _localAvStatus = true;
 
 
     _friendData = ref.watch(friendDataProvider).friendData[friendUserDocId]!;
@@ -72,10 +76,18 @@ class CallRoomNotifier extends ChangeNotifier {
         referDocId: appointmentDocId,
         programId: "callRoom");
 
-    await createMessageClient(ref);
+
 
     if (_isJoinedCall == false) {
-      await joinChannel();
+      await joinCallChannel();
+    }
+
+    if (_isJoinedClientMessage == false) {
+      await joinClientMessage(ref);
+    }
+
+    if (_isJoinedChannelMessage == false) {
+      await joinMessageChannel();
     }
   }
 
@@ -106,7 +118,7 @@ class CallRoomNotifier extends ChangeNotifier {
     ));
   }
 
-  Future<void> joinChannel() async {
+  Future<void> joinCallChannel() async {
     if (defaultTargetPlatform == TargetPlatform.android) {
       await [Permission.microphone, Permission.camera].request();
     }
@@ -121,18 +133,31 @@ class CallRoomNotifier extends ChangeNotifier {
 
   Future<void> leaveChannel() async {
     await _engine.leaveChannel();
+    await leaveMessageChannel();
+    await leaveClientMessage();
     notifyListeners();
   }
 
   Future<void> changeAvMuteMode() async {
     _localAvStatus = !_localAvStatus;
-    await _engine.muteLocalAudioStream(_localAvStatus);
+    if(_localAvStatus){
+      await _engine.enableAudio();
+    }else{
+      await _engine.disableAudio();
+    }
+
     notifyListeners();
   }
 
   Future<void> changeVideoMuteMode() async {
     _localVideoStatus = !_localVideoStatus;
-    await _engine.muteLocalVideoStream(_localVideoStatus);
+    if(_localVideoStatus){
+      await _engine.enableVideo();
+
+    }else{
+      await _engine.disableVideo();
+
+    }
     notifyListeners();
   }
 
@@ -144,13 +169,14 @@ class CallRoomNotifier extends ChangeNotifier {
     });
   }
 
-  Future<void> createMessageClient(WidgetRef ref) async {
+  Future<void> joinClientMessage(WidgetRef ref) async {
 
     _infoStrings =[];
     _client = await AgoraRtmClient.createInstance(config.appId);
     _client?.onMessageReceived = (AgoraRtmMessage message, String peerId) {
       _log("Peer msg: " + peerId + ", msg: " + (message.text));
     };
+
     _client?.onConnectionStateChanged = (int state, int reason) {
       log('Connection state changed: ' +
           state.toString() +
@@ -159,7 +185,7 @@ class CallRoomNotifier extends ChangeNotifier {
       if (state == 5) {
         _client?.logout();
         log('Logout.');
-        _isJoinedMessage = false;
+        _isJoinedClientMessage = false;
       }
     };
     _client?.onLocalInvitationReceivedByPeer =
@@ -175,6 +201,8 @@ class CallRoomNotifier extends ChangeNotifier {
 
     await _client?.login(
         token, ref.watch(userDataProvider).userData["userDocId"]);
+
+    _isJoinedClientMessage = true;
   }
 
   void _log(String info) {
@@ -185,18 +213,74 @@ class CallRoomNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> leaveClientMessage() async {
+    try {
+      await _client?.logout();
+      _log('Logout success.');
+
+        _isJoinedClientMessage = false;
+    } catch (errorCode) {
+      _log('Logout error: ' + errorCode.toString());
+    }
+  }
+
   Future<void> sendMessage(String textMessage)async{
     String text=textMessage;
     if (text.isNotEmpty) {
       try {
-        AgoraRtmMessage message = AgoraRtmMessage.fromText(text);
-        _log(message.text);
-        await _client?.sendMessageToPeer(_friendData.friendUserDocId, message, false);
-        _log('Send peer message success.');
+        await _messageChannel?.sendMessage(AgoraRtmMessage.fromText(text));
+        _log('Send channel message success.');
       } catch (errorCode) {
-        _log('Send peer message error: ' + errorCode.toString());
+        _log('Send channel message error: ' + errorCode.toString());
       }
     }
+  }
+
+  Future<void> joinMessageChannel() async {
+      try {
+        _messageChannel = await _createMessageChannel(_appointmentData.appointmentDocId+"message");
+        await _messageChannel?.join();
+        _log('Join channel success.');
+
+        _isJoinedChannelMessage = true;
+      } catch (errorCode) {
+        _log('Join channel error: ' + errorCode.toString());
+      }
+  }
+
+  Future<void> leaveMessageChannel() async {
+      try {
+        await _messageChannel?.leave();
+        _log('Leave channel success.');
+        if (_messageChannel != null) {
+          _client?.releaseChannel(_messageChannel!.channelId!);
+        }
+
+        _isJoinedChannelMessage = false;
+      } catch (errorCode) {
+        _log('Leave channel error: ' + errorCode.toString());
+      }
+  }
+
+  Future<AgoraRtmChannel?> _createMessageChannel(String name) async {
+    AgoraRtmChannel? channel = await _client?.createChannel(name);
+    if (channel != null) {
+      channel.onMemberJoined = (AgoraRtmMember member) {
+        _log("Member joined: " +
+            member.userId +
+            ', channel: ' +
+            member.channelId);
+      };
+      channel.onMemberLeft = (AgoraRtmMember member) {
+        _log(
+            "Member left: " + member.userId + ', channel: ' + member.channelId);
+      };
+      channel.onMessageReceived =
+          (AgoraRtmMessage message, AgoraRtmMember member) {
+        _log("Channel msg: " + member.userId + ", msg: " + message.text);
+      };
+    }
+    return channel;
   }
 
 }

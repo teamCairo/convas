@@ -60,7 +60,7 @@ class CallRoom extends ConsumerWidget {
                         if (ref.watch(callRoomProvider).isJoinedCall) {
                           ref.read(callRoomProvider.notifier).leaveChannel();
                         } else {
-                          ref.read(callRoomProvider.notifier).joinChannel();
+                          ref.read(callRoomProvider.notifier).joinCallChannel();
                         }
                       },
                       backcolor: Colors.red,
