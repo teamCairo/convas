@@ -3,10 +3,13 @@ import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:convas/UIs/call/callRoomProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
+import 'package:convas/common/otherClass/commonRtmChatChannelMessage.dart';
+import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter/material.dart';
 import '../../common/UI/commonTextFormUI.dart';
+import '../../common/UI/commonTextUI.dart';
 import '../../common/provider/friendProvider.dart';
 
 class CallRoom extends ConsumerWidget {
@@ -58,7 +61,7 @@ class CallRoom extends ConsumerWidget {
                       showBorder: false,
                       onPressed: () {
                         if (ref.watch(callRoomProvider).isJoinedCall) {
-                          ref.read(callRoomProvider.notifier).leaveChannel();
+                          ref.read(callRoomProvider.notifier).leaveChannel(ref);
                         } else {
                           ref.read(callRoomProvider.notifier).joinCallChannel();
                         }
@@ -147,7 +150,7 @@ class CallRoom extends ConsumerWidget {
             size: 20,
             icon: Icons.send,
             onPressed: () async{
-              await ref.read(callRoomProvider).sendMessage(_peerMessageController.text);
+              await ref.read(callRoomProvider).sendMessage(_peerMessageController.text,ref);
               _peerMessageController.clear();
               ref.read(callRoomProvider).rebuildUI();
             },
@@ -156,18 +159,46 @@ class CallRoom extends ConsumerWidget {
             showBorder: false,
           )
         ]),),
-        Expanded(
-            child: ListView.builder(
-          itemExtent: 24,
-          itemBuilder: (context, i) {
-            return ListTile(
-              contentPadding: const EdgeInsets.all(0.0),
-              title: Text(ref.watch(callRoomProvider).infoStrings[i]),
-            );
-          },
-          itemCount: ref.watch(callRoomProvider).infoStrings.length,
-        ))
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal:14.0),
+          child: Expanded(
+              child: ListView.builder(
+            reverse: true,
+            // itemExtent: 24,
+            itemBuilder: (context, i) {
+
+              if (ref.watch(callRoomProvider).channelMessageList[i].userDocId == ref.watch(userDataProvider).userData["userDocId"]) {
+                return balloon(ref.watch(callRoomProvider).channelMessageList[i], "right", context,ref);
+              } else {
+                return balloon(ref.watch(callRoomProvider).channelMessageList[i], "left", context,ref);
+              }
+            },
+            itemCount: ref.watch(callRoomProvider).channelMessageList.length,
+          )),
+        )
       ],
     );
   }
+
+
+  Padding balloon(
+      CommonRtmChatChannelMessage chatMessage, String rightLeft, BuildContext context,WidgetRef ref) {
+    //rightLeft="right"or"left"
+
+    List<Widget> widgetList = [];
+    widgetList.add(Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: commonText14Gray(chatMessage.message)));
+
+
+    return Padding(
+        padding: const EdgeInsets.only(bottom: 28.0),
+        child: commonBalloon(
+            Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: widgetList),
+            rightLeft));
+  }
+
+
 }
