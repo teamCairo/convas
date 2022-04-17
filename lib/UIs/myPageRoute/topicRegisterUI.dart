@@ -131,7 +131,7 @@ class TopicRegister extends ConsumerWidget {
 
                       topicEditingController =  TextEditingController(text: '');
 
-                      await showOkInfoDialog(context,"data has been inserted");
+                      await commonShowOkInfoDialog(context,"data has been inserted");
                     }
                   },),
               )

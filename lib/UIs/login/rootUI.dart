@@ -46,17 +46,11 @@ class Root extends ConsumerWidget {
       int selectedIndex, WidgetRef ref) {
     switch (selectedIndex) {
       case 0:
-        return NowPage();
-      case 1:
-        return Talk();
-      case 2:
         return SearchUsersMainPage();
-      // case 3:
-      //   return TopicPage(
-      //   );
+      case 1:
+      return Talk();
       default:
         return MyPage();
-
     }
   }
 }

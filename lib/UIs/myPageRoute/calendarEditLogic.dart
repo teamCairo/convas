@@ -75,11 +75,11 @@ Future<bool> checkEventData(BuildContext context, WidgetRef ref) async{
       &&!checkBoolMap["friday"]!
       &&!checkBoolMap["saturday"]!
       &&!checkBoolMap["sunday"]!){
-    await showOkWarningDialog(context,"If it repeats, please choose day");
+    await commonShowOkWarningDialog(context,"If it repeats, please choose day");
     return false;
 
   }else if(ref.watch(calendarEditProvider).editedDateTimeFrom!.isAfter(ref.watch(calendarEditProvider).editedDateTimeTo!)){
-    await showOkWarningDialog(context,"End time is earlier than start time");
+    await commonShowOkWarningDialog(context,"End time is earlier than start time");
     return false;
 
   }

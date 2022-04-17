@@ -1,4 +1,5 @@
 import 'package:convas/UIs/login/rootUI.dart';
+import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
@@ -8,6 +9,8 @@ import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
 import '../../developerLogic/testDataMenuSpeedDial.dart';
+import '../register/optionGoalSettingUI.dart';
+import '../register/setUserTypeUI.dart';
 import 'loginLogic.dart';
 import 'loginProvider.dart';
 
@@ -71,8 +74,13 @@ class LoginPage extends ConsumerWidget {
                             .read(infoTextProvider.state)
                             .update((state) => "登録OK:" + ref.watch(emailProvider));
 
-                        await insertUserToFirebase(context,ref,email);
-                        loginCommonProcess(context, ref, email);
+                        // await insertUserToFirebase(context,ref,email);
+                        ref.read(registerProvider.notifier).initialize();
+                        await Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) {
+                            return const SetUserType();
+                          }),
+                        );
                       } catch (e) {
                         // 登録に失敗した場合
 

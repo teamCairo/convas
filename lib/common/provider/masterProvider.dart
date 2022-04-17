@@ -64,7 +64,38 @@ class MasterDataNotifier extends ChangeNotifier {
 }
 
 Master getMasterData(String masterGroupCode, String code, WidgetRef ref){
+  if(code==""){
+    return Master(
+      "",
+      "",
+      "",
+      "",
+      true,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      "",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    );
+  }else{
     return ref.watch(masterDataProvider).masterData[masterGroupCode]![code];
+
+  }
 }
 
 

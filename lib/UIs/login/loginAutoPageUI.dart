@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:convas/UIs/login/rootUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
-import 'package:convas/common/provider/settingProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

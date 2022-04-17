@@ -66,9 +66,9 @@ Future<int> deleteIsarChatDetailsById(String chatDetailDocId) async {
   await isarInstance?.writeTxn((isar) async {
     returnInt = await isar.chatDetails.filter().chatDetailDocIdEqualTo(chatDetailDocId).deleteAll();
   });
-
-  commonLogAddDBProcess(databaseName: 'Isar', entityName: 'chatDetail', crudType: 'delete', columnName1: 'chatDetailDocId',
-      columnValue1: chatDetailDocId,methodName: 'deleteIsarChatDetailsById');
+  //
+  // commonLogAddDBProcess(databaseName: 'Isar', entityName: 'chatDetail', crudType: 'delete', columnName1: 'chatDetailDocId',
+  //     columnValue1: chatDetailDocId,methodName: 'deleteIsarChatDetailsById');
 
   return returnInt;
 

@@ -17,51 +17,62 @@ extension GetUserCollection on Isar {
 final UserSchema = CollectionSchema(
   name: 'User',
   schema:
-      '{"name":"User","idName":"id","properties":[{"name":"birthDate","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourses","type":"String"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCategories","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionCourses","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionHomeCountry","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionLoginTime","type":"String"},{"name":"searchConditionMotherTongue","type":"String"},{"name":"searchConditionUserType","type":"String"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"User","idName":"id","properties":[{"name":"birthDate","type":"Long"},{"name":"continualUntilGoalDate","type":"Long"},{"name":"country","type":"String"},{"name":"deleteFlg","type":"Bool"},{"name":"description","type":"String"},{"name":"email","type":"String"},{"name":"gender","type":"String"},{"name":"goal","type":"String"},{"name":"goalDeadline","type":"Long"},{"name":"greeting","type":"String"},{"name":"homeCountry","type":"String"},{"name":"homeTown","type":"String"},{"name":"informationModifiedTime","type":"Long"},{"name":"insertProgramId","type":"String"},{"name":"insertTime","type":"Long"},{"name":"insertUserDocId","type":"String"},{"name":"interestingCategories","type":"String"},{"name":"interestingCourses","type":"String"},{"name":"lessonPlanFriday","type":"Bool"},{"name":"lessonPlanMonday","type":"Bool"},{"name":"lessonPlanSaturday","type":"Bool"},{"name":"lessonPlanSunday","type":"Bool"},{"name":"lessonPlanThursday","type":"Bool"},{"name":"lessonPlanTuesday","type":"Bool"},{"name":"lessonPlanWednesday","type":"Bool"},{"name":"level","type":"String"},{"name":"messageTokenId","type":"String"},{"name":"motherTongue","type":"String"},{"name":"name","type":"String"},{"name":"occupation","type":"String"},{"name":"placeWannaGo","type":"String"},{"name":"profilePhotoNameSuffix","type":"String"},{"name":"profilePhotoUpdateCnt","type":"Long"},{"name":"readableFlg","type":"Bool"},{"name":"searchConditionAge","type":"String"},{"name":"searchConditionCategories","type":"String"},{"name":"searchConditionCountry","type":"String"},{"name":"searchConditionCourses","type":"String"},{"name":"searchConditionGender","type":"String"},{"name":"searchConditionHomeCountry","type":"String"},{"name":"searchConditionLevel","type":"String"},{"name":"searchConditionLoginTime","type":"String"},{"name":"searchConditionMotherTongue","type":"String"},{"name":"searchConditionUserType","type":"String"},{"name":"timesAWeek","type":"Long"},{"name":"town","type":"String"},{"name":"updateProgramId","type":"String"},{"name":"updateTime","type":"Long"},{"name":"updateUserDocId","type":"String"},{"name":"userDocId","type":"String"},{"name":"userType","type":"String"}],"indexes":[],"links":[]}',
   nativeAdapter: const _UserNativeAdapter(),
   webAdapter: const _UserWebAdapter(),
   idName: 'id',
   propertyIds: {
     'birthDate': 0,
-    'country': 1,
-    'deleteFlg': 2,
-    'description': 3,
-    'email': 4,
-    'gender': 5,
-    'greeting': 6,
-    'homeCountry': 7,
-    'homeTown': 8,
-    'informationModifiedTime': 9,
-    'insertProgramId': 10,
-    'insertTime': 11,
-    'insertUserDocId': 12,
-    'interestingCategories': 13,
-    'interestingCourses': 14,
-    'level': 15,
-    'messageTokenId': 16,
-    'motherTongue': 17,
-    'name': 18,
-    'occupation': 19,
-    'placeWannaGo': 20,
-    'profilePhotoNameSuffix': 21,
-    'profilePhotoUpdateCnt': 22,
-    'readableFlg': 23,
-    'searchConditionAge': 24,
-    'searchConditionCategories': 25,
-    'searchConditionCountry': 26,
-    'searchConditionCourses': 27,
-    'searchConditionGender': 28,
-    'searchConditionHomeCountry': 29,
-    'searchConditionLevel': 30,
-    'searchConditionLoginTime': 31,
-    'searchConditionMotherTongue': 32,
-    'searchConditionUserType': 33,
-    'town': 34,
-    'updateProgramId': 35,
-    'updateTime': 36,
-    'updateUserDocId': 37,
-    'userDocId': 38,
-    'userType': 39
+    'continualUntilGoalDate': 1,
+    'country': 2,
+    'deleteFlg': 3,
+    'description': 4,
+    'email': 5,
+    'gender': 6,
+    'goal': 7,
+    'goalDeadline': 8,
+    'greeting': 9,
+    'homeCountry': 10,
+    'homeTown': 11,
+    'informationModifiedTime': 12,
+    'insertProgramId': 13,
+    'insertTime': 14,
+    'insertUserDocId': 15,
+    'interestingCategories': 16,
+    'interestingCourses': 17,
+    'lessonPlanFriday': 18,
+    'lessonPlanMonday': 19,
+    'lessonPlanSaturday': 20,
+    'lessonPlanSunday': 21,
+    'lessonPlanThursday': 22,
+    'lessonPlanTuesday': 23,
+    'lessonPlanWednesday': 24,
+    'level': 25,
+    'messageTokenId': 26,
+    'motherTongue': 27,
+    'name': 28,
+    'occupation': 29,
+    'placeWannaGo': 30,
+    'profilePhotoNameSuffix': 31,
+    'profilePhotoUpdateCnt': 32,
+    'readableFlg': 33,
+    'searchConditionAge': 34,
+    'searchConditionCategories': 35,
+    'searchConditionCountry': 36,
+    'searchConditionCourses': 37,
+    'searchConditionGender': 38,
+    'searchConditionHomeCountry': 39,
+    'searchConditionLevel': 40,
+    'searchConditionLoginTime': 41,
+    'searchConditionMotherTongue': 42,
+    'searchConditionUserType': 43,
+    'timesAWeek': 44,
+    'town': 45,
+    'updateProgramId': 46,
+    'updateTime': 47,
+    'updateUserDocId': 48,
+    'userDocId': 49,
+    'userType': 50
   },
   listProperties: {},
   indexIds: {},
@@ -89,11 +100,16 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
     final jsObj = IsarNative.newJsObject();
     IsarNative.jsObjectSet(
         jsObj, 'birthDate', object.birthDate?.toUtc().millisecondsSinceEpoch);
+    IsarNative.jsObjectSet(jsObj, 'continualUntilGoalDate',
+        object.continualUntilGoalDate?.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'country', object.country);
     IsarNative.jsObjectSet(jsObj, 'deleteFlg', object.deleteFlg);
     IsarNative.jsObjectSet(jsObj, 'description', object.description);
     IsarNative.jsObjectSet(jsObj, 'email', object.email);
     IsarNative.jsObjectSet(jsObj, 'gender', object.gender);
+    IsarNative.jsObjectSet(jsObj, 'goal', object.goal);
+    IsarNative.jsObjectSet(jsObj, 'goalDeadline',
+        object.goalDeadline?.toUtc().millisecondsSinceEpoch);
     IsarNative.jsObjectSet(jsObj, 'greeting', object.greeting);
     IsarNative.jsObjectSet(jsObj, 'homeCountry', object.homeCountry);
     IsarNative.jsObjectSet(jsObj, 'homeTown', object.homeTown);
@@ -108,6 +124,17 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         jsObj, 'interestingCategories', object.interestingCategories);
     IsarNative.jsObjectSet(
         jsObj, 'interestingCourses', object.interestingCourses);
+    IsarNative.jsObjectSet(jsObj, 'lessonPlanFriday', object.lessonPlanFriday);
+    IsarNative.jsObjectSet(jsObj, 'lessonPlanMonday', object.lessonPlanMonday);
+    IsarNative.jsObjectSet(
+        jsObj, 'lessonPlanSaturday', object.lessonPlanSaturday);
+    IsarNative.jsObjectSet(jsObj, 'lessonPlanSunday', object.lessonPlanSunday);
+    IsarNative.jsObjectSet(
+        jsObj, 'lessonPlanThursday', object.lessonPlanThursday);
+    IsarNative.jsObjectSet(
+        jsObj, 'lessonPlanTuesday', object.lessonPlanTuesday);
+    IsarNative.jsObjectSet(
+        jsObj, 'lessonPlanWednesday', object.lessonPlanWednesday);
     IsarNative.jsObjectSet(jsObj, 'level', object.level);
     IsarNative.jsObjectSet(jsObj, 'messageTokenId', object.messageTokenId);
     IsarNative.jsObjectSet(jsObj, 'motherTongue', object.motherTongue);
@@ -139,6 +166,7 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         object.searchConditionMotherTongue);
     IsarNative.jsObjectSet(
         jsObj, 'searchConditionUserType', object.searchConditionUserType);
+    IsarNative.jsObjectSet(jsObj, 'timesAWeek', object.timesAWeek);
     IsarNative.jsObjectSet(jsObj, 'town', object.town);
     IsarNative.jsObjectSet(jsObj, 'updateProgramId', object.updateProgramId);
     IsarNative.jsObjectSet(
@@ -194,6 +222,27 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
           : null,
       IsarNative.jsObjectGet(jsObj, 'interestingCategories'),
       IsarNative.jsObjectGet(jsObj, 'interestingCourses'),
+      IsarNative.jsObjectGet(jsObj, 'goal'),
+      IsarNative.jsObjectGet(jsObj, 'goalDeadline') != null
+          ? DateTime.fromMillisecondsSinceEpoch(
+                  IsarNative.jsObjectGet(jsObj, 'goalDeadline'),
+                  isUtc: true)
+              .toLocal()
+          : null,
+      IsarNative.jsObjectGet(jsObj, 'continualUntilGoalDate') != null
+          ? DateTime.fromMillisecondsSinceEpoch(
+                  IsarNative.jsObjectGet(jsObj, 'continualUntilGoalDate'),
+                  isUtc: true)
+              .toLocal()
+          : null,
+      IsarNative.jsObjectGet(jsObj, 'lessonPlanMonday'),
+      IsarNative.jsObjectGet(jsObj, 'lessonPlanTuesday'),
+      IsarNative.jsObjectGet(jsObj, 'lessonPlanWednesday'),
+      IsarNative.jsObjectGet(jsObj, 'lessonPlanThursday'),
+      IsarNative.jsObjectGet(jsObj, 'lessonPlanFriday'),
+      IsarNative.jsObjectGet(jsObj, 'lessonPlanSaturday'),
+      IsarNative.jsObjectGet(jsObj, 'lessonPlanSunday'),
+      IsarNative.jsObjectGet(jsObj, 'timesAWeek'),
       IsarNative.jsObjectGet(jsObj, 'insertUserDocId'),
       IsarNative.jsObjectGet(jsObj, 'insertProgramId'),
       IsarNative.jsObjectGet(jsObj, 'insertTime') != null
@@ -227,6 +276,13 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
                     isUtc: true)
                 .toLocal()
             : null) as P;
+      case 'continualUntilGoalDate':
+        return (IsarNative.jsObjectGet(jsObj, 'continualUntilGoalDate') != null
+            ? DateTime.fromMillisecondsSinceEpoch(
+                    IsarNative.jsObjectGet(jsObj, 'continualUntilGoalDate'),
+                    isUtc: true)
+                .toLocal()
+            : null) as P;
       case 'country':
         return (IsarNative.jsObjectGet(jsObj, 'country')) as P;
       case 'deleteFlg':
@@ -237,6 +293,15 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         return (IsarNative.jsObjectGet(jsObj, 'email')) as P;
       case 'gender':
         return (IsarNative.jsObjectGet(jsObj, 'gender')) as P;
+      case 'goal':
+        return (IsarNative.jsObjectGet(jsObj, 'goal')) as P;
+      case 'goalDeadline':
+        return (IsarNative.jsObjectGet(jsObj, 'goalDeadline') != null
+            ? DateTime.fromMillisecondsSinceEpoch(
+                    IsarNative.jsObjectGet(jsObj, 'goalDeadline'),
+                    isUtc: true)
+                .toLocal()
+            : null) as P;
       case 'greeting':
         return (IsarNative.jsObjectGet(jsObj, 'greeting')) as P;
       case 'homeCountry':
@@ -268,6 +333,20 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
         return (IsarNative.jsObjectGet(jsObj, 'interestingCategories')) as P;
       case 'interestingCourses':
         return (IsarNative.jsObjectGet(jsObj, 'interestingCourses')) as P;
+      case 'lessonPlanFriday':
+        return (IsarNative.jsObjectGet(jsObj, 'lessonPlanFriday')) as P;
+      case 'lessonPlanMonday':
+        return (IsarNative.jsObjectGet(jsObj, 'lessonPlanMonday')) as P;
+      case 'lessonPlanSaturday':
+        return (IsarNative.jsObjectGet(jsObj, 'lessonPlanSaturday')) as P;
+      case 'lessonPlanSunday':
+        return (IsarNative.jsObjectGet(jsObj, 'lessonPlanSunday')) as P;
+      case 'lessonPlanThursday':
+        return (IsarNative.jsObjectGet(jsObj, 'lessonPlanThursday')) as P;
+      case 'lessonPlanTuesday':
+        return (IsarNative.jsObjectGet(jsObj, 'lessonPlanTuesday')) as P;
+      case 'lessonPlanWednesday':
+        return (IsarNative.jsObjectGet(jsObj, 'lessonPlanWednesday')) as P;
       case 'level':
         return (IsarNative.jsObjectGet(jsObj, 'level')) as P;
       case 'messageTokenId':
@@ -309,6 +388,8 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
             as P;
       case 'searchConditionUserType':
         return (IsarNative.jsObjectGet(jsObj, 'searchConditionUserType')) as P;
+      case 'timesAWeek':
+        return (IsarNative.jsObjectGet(jsObj, 'timesAWeek')) as P;
       case 'town':
         return (IsarNative.jsObjectGet(jsObj, 'town')) as P;
       case 'updateProgramId':
@@ -344,214 +425,240 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
     var dynamicSize = 0;
     final value0 = object.birthDate;
     final _birthDate = value0;
-    final value1 = object.country;
+    final value1 = object.continualUntilGoalDate;
+    final _continualUntilGoalDate = value1;
+    final value2 = object.country;
     IsarUint8List? _country;
-    if (value1 != null) {
-      _country = IsarBinaryWriter.utf8Encoder.convert(value1);
+    if (value2 != null) {
+      _country = IsarBinaryWriter.utf8Encoder.convert(value2);
     }
     dynamicSize += (_country?.length ?? 0) as int;
-    final value2 = object.deleteFlg;
-    final _deleteFlg = value2;
-    final value3 = object.description;
+    final value3 = object.deleteFlg;
+    final _deleteFlg = value3;
+    final value4 = object.description;
     IsarUint8List? _description;
-    if (value3 != null) {
-      _description = IsarBinaryWriter.utf8Encoder.convert(value3);
+    if (value4 != null) {
+      _description = IsarBinaryWriter.utf8Encoder.convert(value4);
     }
     dynamicSize += (_description?.length ?? 0) as int;
-    final value4 = object.email;
+    final value5 = object.email;
     IsarUint8List? _email;
-    if (value4 != null) {
-      _email = IsarBinaryWriter.utf8Encoder.convert(value4);
+    if (value5 != null) {
+      _email = IsarBinaryWriter.utf8Encoder.convert(value5);
     }
     dynamicSize += (_email?.length ?? 0) as int;
-    final value5 = object.gender;
+    final value6 = object.gender;
     IsarUint8List? _gender;
-    if (value5 != null) {
-      _gender = IsarBinaryWriter.utf8Encoder.convert(value5);
+    if (value6 != null) {
+      _gender = IsarBinaryWriter.utf8Encoder.convert(value6);
     }
     dynamicSize += (_gender?.length ?? 0) as int;
-    final value6 = object.greeting;
+    final value7 = object.goal;
+    IsarUint8List? _goal;
+    if (value7 != null) {
+      _goal = IsarBinaryWriter.utf8Encoder.convert(value7);
+    }
+    dynamicSize += (_goal?.length ?? 0) as int;
+    final value8 = object.goalDeadline;
+    final _goalDeadline = value8;
+    final value9 = object.greeting;
     IsarUint8List? _greeting;
-    if (value6 != null) {
-      _greeting = IsarBinaryWriter.utf8Encoder.convert(value6);
+    if (value9 != null) {
+      _greeting = IsarBinaryWriter.utf8Encoder.convert(value9);
     }
     dynamicSize += (_greeting?.length ?? 0) as int;
-    final value7 = object.homeCountry;
+    final value10 = object.homeCountry;
     IsarUint8List? _homeCountry;
-    if (value7 != null) {
-      _homeCountry = IsarBinaryWriter.utf8Encoder.convert(value7);
+    if (value10 != null) {
+      _homeCountry = IsarBinaryWriter.utf8Encoder.convert(value10);
     }
     dynamicSize += (_homeCountry?.length ?? 0) as int;
-    final value8 = object.homeTown;
+    final value11 = object.homeTown;
     IsarUint8List? _homeTown;
-    if (value8 != null) {
-      _homeTown = IsarBinaryWriter.utf8Encoder.convert(value8);
+    if (value11 != null) {
+      _homeTown = IsarBinaryWriter.utf8Encoder.convert(value11);
     }
     dynamicSize += (_homeTown?.length ?? 0) as int;
-    final value9 = object.informationModifiedTime;
-    final _informationModifiedTime = value9;
-    final value10 = object.insertProgramId;
+    final value12 = object.informationModifiedTime;
+    final _informationModifiedTime = value12;
+    final value13 = object.insertProgramId;
     IsarUint8List? _insertProgramId;
-    if (value10 != null) {
-      _insertProgramId = IsarBinaryWriter.utf8Encoder.convert(value10);
+    if (value13 != null) {
+      _insertProgramId = IsarBinaryWriter.utf8Encoder.convert(value13);
     }
     dynamicSize += (_insertProgramId?.length ?? 0) as int;
-    final value11 = object.insertTime;
-    final _insertTime = value11;
-    final value12 = object.insertUserDocId;
+    final value14 = object.insertTime;
+    final _insertTime = value14;
+    final value15 = object.insertUserDocId;
     IsarUint8List? _insertUserDocId;
-    if (value12 != null) {
-      _insertUserDocId = IsarBinaryWriter.utf8Encoder.convert(value12);
+    if (value15 != null) {
+      _insertUserDocId = IsarBinaryWriter.utf8Encoder.convert(value15);
     }
     dynamicSize += (_insertUserDocId?.length ?? 0) as int;
-    final value13 = object.interestingCategories;
+    final value16 = object.interestingCategories;
     IsarUint8List? _interestingCategories;
-    if (value13 != null) {
-      _interestingCategories = IsarBinaryWriter.utf8Encoder.convert(value13);
+    if (value16 != null) {
+      _interestingCategories = IsarBinaryWriter.utf8Encoder.convert(value16);
     }
     dynamicSize += (_interestingCategories?.length ?? 0) as int;
-    final value14 = object.interestingCourses;
+    final value17 = object.interestingCourses;
     IsarUint8List? _interestingCourses;
-    if (value14 != null) {
-      _interestingCourses = IsarBinaryWriter.utf8Encoder.convert(value14);
+    if (value17 != null) {
+      _interestingCourses = IsarBinaryWriter.utf8Encoder.convert(value17);
     }
     dynamicSize += (_interestingCourses?.length ?? 0) as int;
-    final value15 = object.level;
+    final value18 = object.lessonPlanFriday;
+    final _lessonPlanFriday = value18;
+    final value19 = object.lessonPlanMonday;
+    final _lessonPlanMonday = value19;
+    final value20 = object.lessonPlanSaturday;
+    final _lessonPlanSaturday = value20;
+    final value21 = object.lessonPlanSunday;
+    final _lessonPlanSunday = value21;
+    final value22 = object.lessonPlanThursday;
+    final _lessonPlanThursday = value22;
+    final value23 = object.lessonPlanTuesday;
+    final _lessonPlanTuesday = value23;
+    final value24 = object.lessonPlanWednesday;
+    final _lessonPlanWednesday = value24;
+    final value25 = object.level;
     IsarUint8List? _level;
-    if (value15 != null) {
-      _level = IsarBinaryWriter.utf8Encoder.convert(value15);
+    if (value25 != null) {
+      _level = IsarBinaryWriter.utf8Encoder.convert(value25);
     }
     dynamicSize += (_level?.length ?? 0) as int;
-    final value16 = object.messageTokenId;
+    final value26 = object.messageTokenId;
     IsarUint8List? _messageTokenId;
-    if (value16 != null) {
-      _messageTokenId = IsarBinaryWriter.utf8Encoder.convert(value16);
+    if (value26 != null) {
+      _messageTokenId = IsarBinaryWriter.utf8Encoder.convert(value26);
     }
     dynamicSize += (_messageTokenId?.length ?? 0) as int;
-    final value17 = object.motherTongue;
+    final value27 = object.motherTongue;
     IsarUint8List? _motherTongue;
-    if (value17 != null) {
-      _motherTongue = IsarBinaryWriter.utf8Encoder.convert(value17);
+    if (value27 != null) {
+      _motherTongue = IsarBinaryWriter.utf8Encoder.convert(value27);
     }
     dynamicSize += (_motherTongue?.length ?? 0) as int;
-    final value18 = object.name;
+    final value28 = object.name;
     IsarUint8List? _name;
-    if (value18 != null) {
-      _name = IsarBinaryWriter.utf8Encoder.convert(value18);
+    if (value28 != null) {
+      _name = IsarBinaryWriter.utf8Encoder.convert(value28);
     }
     dynamicSize += (_name?.length ?? 0) as int;
-    final value19 = object.occupation;
+    final value29 = object.occupation;
     IsarUint8List? _occupation;
-    if (value19 != null) {
-      _occupation = IsarBinaryWriter.utf8Encoder.convert(value19);
+    if (value29 != null) {
+      _occupation = IsarBinaryWriter.utf8Encoder.convert(value29);
     }
     dynamicSize += (_occupation?.length ?? 0) as int;
-    final value20 = object.placeWannaGo;
+    final value30 = object.placeWannaGo;
     IsarUint8List? _placeWannaGo;
-    if (value20 != null) {
-      _placeWannaGo = IsarBinaryWriter.utf8Encoder.convert(value20);
+    if (value30 != null) {
+      _placeWannaGo = IsarBinaryWriter.utf8Encoder.convert(value30);
     }
     dynamicSize += (_placeWannaGo?.length ?? 0) as int;
-    final value21 = object.profilePhotoNameSuffix;
+    final value31 = object.profilePhotoNameSuffix;
     IsarUint8List? _profilePhotoNameSuffix;
-    if (value21 != null) {
-      _profilePhotoNameSuffix = IsarBinaryWriter.utf8Encoder.convert(value21);
+    if (value31 != null) {
+      _profilePhotoNameSuffix = IsarBinaryWriter.utf8Encoder.convert(value31);
     }
     dynamicSize += (_profilePhotoNameSuffix?.length ?? 0) as int;
-    final value22 = object.profilePhotoUpdateCnt;
-    final _profilePhotoUpdateCnt = value22;
-    final value23 = object.readableFlg;
-    final _readableFlg = value23;
-    final value24 = object.searchConditionAge;
+    final value32 = object.profilePhotoUpdateCnt;
+    final _profilePhotoUpdateCnt = value32;
+    final value33 = object.readableFlg;
+    final _readableFlg = value33;
+    final value34 = object.searchConditionAge;
     IsarUint8List? _searchConditionAge;
-    if (value24 != null) {
-      _searchConditionAge = IsarBinaryWriter.utf8Encoder.convert(value24);
+    if (value34 != null) {
+      _searchConditionAge = IsarBinaryWriter.utf8Encoder.convert(value34);
     }
     dynamicSize += (_searchConditionAge?.length ?? 0) as int;
-    final value25 = object.searchConditionCategories;
+    final value35 = object.searchConditionCategories;
     IsarUint8List? _searchConditionCategories;
-    if (value25 != null) {
+    if (value35 != null) {
       _searchConditionCategories =
-          IsarBinaryWriter.utf8Encoder.convert(value25);
+          IsarBinaryWriter.utf8Encoder.convert(value35);
     }
     dynamicSize += (_searchConditionCategories?.length ?? 0) as int;
-    final value26 = object.searchConditionCountry;
+    final value36 = object.searchConditionCountry;
     IsarUint8List? _searchConditionCountry;
-    if (value26 != null) {
-      _searchConditionCountry = IsarBinaryWriter.utf8Encoder.convert(value26);
+    if (value36 != null) {
+      _searchConditionCountry = IsarBinaryWriter.utf8Encoder.convert(value36);
     }
     dynamicSize += (_searchConditionCountry?.length ?? 0) as int;
-    final value27 = object.searchConditionCourses;
+    final value37 = object.searchConditionCourses;
     IsarUint8List? _searchConditionCourses;
-    if (value27 != null) {
-      _searchConditionCourses = IsarBinaryWriter.utf8Encoder.convert(value27);
+    if (value37 != null) {
+      _searchConditionCourses = IsarBinaryWriter.utf8Encoder.convert(value37);
     }
     dynamicSize += (_searchConditionCourses?.length ?? 0) as int;
-    final value28 = object.searchConditionGender;
+    final value38 = object.searchConditionGender;
     IsarUint8List? _searchConditionGender;
-    if (value28 != null) {
-      _searchConditionGender = IsarBinaryWriter.utf8Encoder.convert(value28);
+    if (value38 != null) {
+      _searchConditionGender = IsarBinaryWriter.utf8Encoder.convert(value38);
     }
     dynamicSize += (_searchConditionGender?.length ?? 0) as int;
-    final value29 = object.searchConditionHomeCountry;
+    final value39 = object.searchConditionHomeCountry;
     IsarUint8List? _searchConditionHomeCountry;
-    if (value29 != null) {
+    if (value39 != null) {
       _searchConditionHomeCountry =
-          IsarBinaryWriter.utf8Encoder.convert(value29);
+          IsarBinaryWriter.utf8Encoder.convert(value39);
     }
     dynamicSize += (_searchConditionHomeCountry?.length ?? 0) as int;
-    final value30 = object.searchConditionLevel;
+    final value40 = object.searchConditionLevel;
     IsarUint8List? _searchConditionLevel;
-    if (value30 != null) {
-      _searchConditionLevel = IsarBinaryWriter.utf8Encoder.convert(value30);
+    if (value40 != null) {
+      _searchConditionLevel = IsarBinaryWriter.utf8Encoder.convert(value40);
     }
     dynamicSize += (_searchConditionLevel?.length ?? 0) as int;
-    final value31 = object.searchConditionLoginTime;
+    final value41 = object.searchConditionLoginTime;
     IsarUint8List? _searchConditionLoginTime;
-    if (value31 != null) {
-      _searchConditionLoginTime = IsarBinaryWriter.utf8Encoder.convert(value31);
+    if (value41 != null) {
+      _searchConditionLoginTime = IsarBinaryWriter.utf8Encoder.convert(value41);
     }
     dynamicSize += (_searchConditionLoginTime?.length ?? 0) as int;
-    final value32 = object.searchConditionMotherTongue;
+    final value42 = object.searchConditionMotherTongue;
     IsarUint8List? _searchConditionMotherTongue;
-    if (value32 != null) {
+    if (value42 != null) {
       _searchConditionMotherTongue =
-          IsarBinaryWriter.utf8Encoder.convert(value32);
+          IsarBinaryWriter.utf8Encoder.convert(value42);
     }
     dynamicSize += (_searchConditionMotherTongue?.length ?? 0) as int;
-    final value33 = object.searchConditionUserType;
+    final value43 = object.searchConditionUserType;
     IsarUint8List? _searchConditionUserType;
-    if (value33 != null) {
-      _searchConditionUserType = IsarBinaryWriter.utf8Encoder.convert(value33);
+    if (value43 != null) {
+      _searchConditionUserType = IsarBinaryWriter.utf8Encoder.convert(value43);
     }
     dynamicSize += (_searchConditionUserType?.length ?? 0) as int;
-    final value34 = object.town;
+    final value44 = object.timesAWeek;
+    final _timesAWeek = value44;
+    final value45 = object.town;
     IsarUint8List? _town;
-    if (value34 != null) {
-      _town = IsarBinaryWriter.utf8Encoder.convert(value34);
+    if (value45 != null) {
+      _town = IsarBinaryWriter.utf8Encoder.convert(value45);
     }
     dynamicSize += (_town?.length ?? 0) as int;
-    final value35 = object.updateProgramId;
+    final value46 = object.updateProgramId;
     IsarUint8List? _updateProgramId;
-    if (value35 != null) {
-      _updateProgramId = IsarBinaryWriter.utf8Encoder.convert(value35);
+    if (value46 != null) {
+      _updateProgramId = IsarBinaryWriter.utf8Encoder.convert(value46);
     }
     dynamicSize += (_updateProgramId?.length ?? 0) as int;
-    final value36 = object.updateTime;
-    final _updateTime = value36;
-    final value37 = object.updateUserDocId;
+    final value47 = object.updateTime;
+    final _updateTime = value47;
+    final value48 = object.updateUserDocId;
     IsarUint8List? _updateUserDocId;
-    if (value37 != null) {
-      _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value37);
+    if (value48 != null) {
+      _updateUserDocId = IsarBinaryWriter.utf8Encoder.convert(value48);
     }
     dynamicSize += (_updateUserDocId?.length ?? 0) as int;
-    final value38 = object.userDocId;
-    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value38);
+    final value49 = object.userDocId;
+    final _userDocId = IsarBinaryWriter.utf8Encoder.convert(value49);
     dynamicSize += (_userDocId.length) as int;
-    final value39 = object.userType;
+    final value50 = object.userType;
     IsarUint8List? _userType;
-    if (value39 != null) {
-      _userType = IsarBinaryWriter.utf8Encoder.convert(value39);
+    if (value50 != null) {
+      _userType = IsarBinaryWriter.utf8Encoder.convert(value50);
     }
     dynamicSize += (_userType?.length ?? 0) as int;
     final size = staticSize + dynamicSize;
@@ -561,91 +668,113 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
     final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
     final writer = IsarBinaryWriter(buffer, staticSize);
     writer.writeDateTime(offsets[0], _birthDate);
-    writer.writeBytes(offsets[1], _country);
-    writer.writeBool(offsets[2], _deleteFlg);
-    writer.writeBytes(offsets[3], _description);
-    writer.writeBytes(offsets[4], _email);
-    writer.writeBytes(offsets[5], _gender);
-    writer.writeBytes(offsets[6], _greeting);
-    writer.writeBytes(offsets[7], _homeCountry);
-    writer.writeBytes(offsets[8], _homeTown);
-    writer.writeDateTime(offsets[9], _informationModifiedTime);
-    writer.writeBytes(offsets[10], _insertProgramId);
-    writer.writeDateTime(offsets[11], _insertTime);
-    writer.writeBytes(offsets[12], _insertUserDocId);
-    writer.writeBytes(offsets[13], _interestingCategories);
-    writer.writeBytes(offsets[14], _interestingCourses);
-    writer.writeBytes(offsets[15], _level);
-    writer.writeBytes(offsets[16], _messageTokenId);
-    writer.writeBytes(offsets[17], _motherTongue);
-    writer.writeBytes(offsets[18], _name);
-    writer.writeBytes(offsets[19], _occupation);
-    writer.writeBytes(offsets[20], _placeWannaGo);
-    writer.writeBytes(offsets[21], _profilePhotoNameSuffix);
-    writer.writeLong(offsets[22], _profilePhotoUpdateCnt);
-    writer.writeBool(offsets[23], _readableFlg);
-    writer.writeBytes(offsets[24], _searchConditionAge);
-    writer.writeBytes(offsets[25], _searchConditionCategories);
-    writer.writeBytes(offsets[26], _searchConditionCountry);
-    writer.writeBytes(offsets[27], _searchConditionCourses);
-    writer.writeBytes(offsets[28], _searchConditionGender);
-    writer.writeBytes(offsets[29], _searchConditionHomeCountry);
-    writer.writeBytes(offsets[30], _searchConditionLevel);
-    writer.writeBytes(offsets[31], _searchConditionLoginTime);
-    writer.writeBytes(offsets[32], _searchConditionMotherTongue);
-    writer.writeBytes(offsets[33], _searchConditionUserType);
-    writer.writeBytes(offsets[34], _town);
-    writer.writeBytes(offsets[35], _updateProgramId);
-    writer.writeDateTime(offsets[36], _updateTime);
-    writer.writeBytes(offsets[37], _updateUserDocId);
-    writer.writeBytes(offsets[38], _userDocId);
-    writer.writeBytes(offsets[39], _userType);
+    writer.writeDateTime(offsets[1], _continualUntilGoalDate);
+    writer.writeBytes(offsets[2], _country);
+    writer.writeBool(offsets[3], _deleteFlg);
+    writer.writeBytes(offsets[4], _description);
+    writer.writeBytes(offsets[5], _email);
+    writer.writeBytes(offsets[6], _gender);
+    writer.writeBytes(offsets[7], _goal);
+    writer.writeDateTime(offsets[8], _goalDeadline);
+    writer.writeBytes(offsets[9], _greeting);
+    writer.writeBytes(offsets[10], _homeCountry);
+    writer.writeBytes(offsets[11], _homeTown);
+    writer.writeDateTime(offsets[12], _informationModifiedTime);
+    writer.writeBytes(offsets[13], _insertProgramId);
+    writer.writeDateTime(offsets[14], _insertTime);
+    writer.writeBytes(offsets[15], _insertUserDocId);
+    writer.writeBytes(offsets[16], _interestingCategories);
+    writer.writeBytes(offsets[17], _interestingCourses);
+    writer.writeBool(offsets[18], _lessonPlanFriday);
+    writer.writeBool(offsets[19], _lessonPlanMonday);
+    writer.writeBool(offsets[20], _lessonPlanSaturday);
+    writer.writeBool(offsets[21], _lessonPlanSunday);
+    writer.writeBool(offsets[22], _lessonPlanThursday);
+    writer.writeBool(offsets[23], _lessonPlanTuesday);
+    writer.writeBool(offsets[24], _lessonPlanWednesday);
+    writer.writeBytes(offsets[25], _level);
+    writer.writeBytes(offsets[26], _messageTokenId);
+    writer.writeBytes(offsets[27], _motherTongue);
+    writer.writeBytes(offsets[28], _name);
+    writer.writeBytes(offsets[29], _occupation);
+    writer.writeBytes(offsets[30], _placeWannaGo);
+    writer.writeBytes(offsets[31], _profilePhotoNameSuffix);
+    writer.writeLong(offsets[32], _profilePhotoUpdateCnt);
+    writer.writeBool(offsets[33], _readableFlg);
+    writer.writeBytes(offsets[34], _searchConditionAge);
+    writer.writeBytes(offsets[35], _searchConditionCategories);
+    writer.writeBytes(offsets[36], _searchConditionCountry);
+    writer.writeBytes(offsets[37], _searchConditionCourses);
+    writer.writeBytes(offsets[38], _searchConditionGender);
+    writer.writeBytes(offsets[39], _searchConditionHomeCountry);
+    writer.writeBytes(offsets[40], _searchConditionLevel);
+    writer.writeBytes(offsets[41], _searchConditionLoginTime);
+    writer.writeBytes(offsets[42], _searchConditionMotherTongue);
+    writer.writeBytes(offsets[43], _searchConditionUserType);
+    writer.writeLong(offsets[44], _timesAWeek);
+    writer.writeBytes(offsets[45], _town);
+    writer.writeBytes(offsets[46], _updateProgramId);
+    writer.writeDateTime(offsets[47], _updateTime);
+    writer.writeBytes(offsets[48], _updateUserDocId);
+    writer.writeBytes(offsets[49], _userDocId);
+    writer.writeBytes(offsets[50], _userType);
   }
 
   @override
   User deserialize(IsarCollection<User> collection, int id,
       IsarBinaryReader reader, List<int> offsets) {
     final object = User(
-      reader.readString(offsets[38]),
-      reader.readStringOrNull(offsets[18]),
-      reader.readStringOrNull(offsets[4]),
-      reader.readDateTimeOrNull(offsets[0]),
-      reader.readStringOrNull(offsets[15]),
-      reader.readStringOrNull(offsets[19]),
-      reader.readStringOrNull(offsets[17]),
-      reader.readStringOrNull(offsets[1]),
-      reader.readStringOrNull(offsets[34]),
-      reader.readStringOrNull(offsets[7]),
-      reader.readStringOrNull(offsets[8]),
-      reader.readStringOrNull(offsets[5]),
-      reader.readStringOrNull(offsets[20]),
-      reader.readStringOrNull(offsets[6]),
-      reader.readStringOrNull(offsets[3]),
-      reader.readStringOrNull(offsets[39]),
-      reader.readStringOrNull(offsets[24]),
-      reader.readStringOrNull(offsets[30]),
-      reader.readStringOrNull(offsets[32]),
-      reader.readStringOrNull(offsets[26]),
+      reader.readString(offsets[49]),
       reader.readStringOrNull(offsets[28]),
-      reader.readStringOrNull(offsets[29]),
-      reader.readStringOrNull(offsets[31]),
+      reader.readStringOrNull(offsets[5]),
+      reader.readDateTimeOrNull(offsets[0]),
       reader.readStringOrNull(offsets[25]),
+      reader.readStringOrNull(offsets[29]),
       reader.readStringOrNull(offsets[27]),
-      reader.readStringOrNull(offsets[33]),
-      reader.readStringOrNull(offsets[21]),
-      reader.readLongOrNull(offsets[22]),
-      reader.readStringOrNull(offsets[16]),
-      reader.readDateTimeOrNull(offsets[9]),
-      reader.readStringOrNull(offsets[13]),
-      reader.readStringOrNull(offsets[14]),
-      reader.readStringOrNull(offsets[12]),
+      reader.readStringOrNull(offsets[2]),
+      reader.readStringOrNull(offsets[45]),
       reader.readStringOrNull(offsets[10]),
-      reader.readDateTimeOrNull(offsets[11]),
-      reader.readStringOrNull(offsets[37]),
+      reader.readStringOrNull(offsets[11]),
+      reader.readStringOrNull(offsets[6]),
+      reader.readStringOrNull(offsets[30]),
+      reader.readStringOrNull(offsets[9]),
+      reader.readStringOrNull(offsets[4]),
+      reader.readStringOrNull(offsets[50]),
+      reader.readStringOrNull(offsets[34]),
+      reader.readStringOrNull(offsets[40]),
+      reader.readStringOrNull(offsets[42]),
+      reader.readStringOrNull(offsets[36]),
+      reader.readStringOrNull(offsets[38]),
+      reader.readStringOrNull(offsets[39]),
+      reader.readStringOrNull(offsets[41]),
       reader.readStringOrNull(offsets[35]),
-      reader.readDateTimeOrNull(offsets[36]),
+      reader.readStringOrNull(offsets[37]),
+      reader.readStringOrNull(offsets[43]),
+      reader.readStringOrNull(offsets[31]),
+      reader.readLongOrNull(offsets[32]),
+      reader.readStringOrNull(offsets[26]),
+      reader.readDateTimeOrNull(offsets[12]),
+      reader.readStringOrNull(offsets[16]),
+      reader.readStringOrNull(offsets[17]),
+      reader.readStringOrNull(offsets[7]),
+      reader.readDateTimeOrNull(offsets[8]),
+      reader.readDateTimeOrNull(offsets[1]),
+      reader.readBoolOrNull(offsets[19]),
       reader.readBoolOrNull(offsets[23]),
-      reader.readBoolOrNull(offsets[2]),
+      reader.readBoolOrNull(offsets[24]),
+      reader.readBoolOrNull(offsets[22]),
+      reader.readBoolOrNull(offsets[18]),
+      reader.readBoolOrNull(offsets[20]),
+      reader.readBoolOrNull(offsets[21]),
+      reader.readLongOrNull(offsets[44]),
+      reader.readStringOrNull(offsets[15]),
+      reader.readStringOrNull(offsets[13]),
+      reader.readDateTimeOrNull(offsets[14]),
+      reader.readStringOrNull(offsets[48]),
+      reader.readStringOrNull(offsets[46]),
+      reader.readDateTimeOrNull(offsets[47]),
+      reader.readBoolOrNull(offsets[33]),
+      reader.readBoolOrNull(offsets[3]),
     );
     object.id = id;
     return object;
@@ -660,11 +789,11 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       case 0:
         return (reader.readDateTimeOrNull(offset)) as P;
       case 1:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readDateTimeOrNull(offset)) as P;
       case 2:
-        return (reader.readBoolOrNull(offset)) as P;
-      case 3:
         return (reader.readStringOrNull(offset)) as P;
+      case 3:
+        return (reader.readBoolOrNull(offset)) as P;
       case 4:
         return (reader.readStringOrNull(offset)) as P;
       case 5:
@@ -674,19 +803,19 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       case 7:
         return (reader.readStringOrNull(offset)) as P;
       case 8:
-        return (reader.readStringOrNull(offset)) as P;
-      case 9:
         return (reader.readDateTimeOrNull(offset)) as P;
+      case 9:
+        return (reader.readStringOrNull(offset)) as P;
       case 10:
         return (reader.readStringOrNull(offset)) as P;
       case 11:
-        return (reader.readDateTimeOrNull(offset)) as P;
-      case 12:
         return (reader.readStringOrNull(offset)) as P;
+      case 12:
+        return (reader.readDateTimeOrNull(offset)) as P;
       case 13:
         return (reader.readStringOrNull(offset)) as P;
       case 14:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readDateTimeOrNull(offset)) as P;
       case 15:
         return (reader.readStringOrNull(offset)) as P;
       case 16:
@@ -694,19 +823,19 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       case 17:
         return (reader.readStringOrNull(offset)) as P;
       case 18:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readBoolOrNull(offset)) as P;
       case 19:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readBoolOrNull(offset)) as P;
       case 20:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readBoolOrNull(offset)) as P;
       case 21:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readBoolOrNull(offset)) as P;
       case 22:
-        return (reader.readLongOrNull(offset)) as P;
+        return (reader.readBoolOrNull(offset)) as P;
       case 23:
         return (reader.readBoolOrNull(offset)) as P;
       case 24:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readBoolOrNull(offset)) as P;
       case 25:
         return (reader.readStringOrNull(offset)) as P;
       case 26:
@@ -722,20 +851,42 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
       case 31:
         return (reader.readStringOrNull(offset)) as P;
       case 32:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readLongOrNull(offset)) as P;
       case 33:
-        return (reader.readStringOrNull(offset)) as P;
+        return (reader.readBoolOrNull(offset)) as P;
       case 34:
         return (reader.readStringOrNull(offset)) as P;
       case 35:
         return (reader.readStringOrNull(offset)) as P;
       case 36:
-        return (reader.readDateTimeOrNull(offset)) as P;
+        return (reader.readStringOrNull(offset)) as P;
       case 37:
         return (reader.readStringOrNull(offset)) as P;
       case 38:
-        return (reader.readString(offset)) as P;
+        return (reader.readStringOrNull(offset)) as P;
       case 39:
+        return (reader.readStringOrNull(offset)) as P;
+      case 40:
+        return (reader.readStringOrNull(offset)) as P;
+      case 41:
+        return (reader.readStringOrNull(offset)) as P;
+      case 42:
+        return (reader.readStringOrNull(offset)) as P;
+      case 43:
+        return (reader.readStringOrNull(offset)) as P;
+      case 44:
+        return (reader.readLongOrNull(offset)) as P;
+      case 45:
+        return (reader.readStringOrNull(offset)) as P;
+      case 46:
+        return (reader.readStringOrNull(offset)) as P;
+      case 47:
+        return (reader.readDateTimeOrNull(offset)) as P;
+      case 48:
+        return (reader.readStringOrNull(offset)) as P;
+      case 49:
+        return (reader.readString(offset)) as P;
+      case 50:
         return (reader.readStringOrNull(offset)) as P;
       default:
         throw 'Illegal propertyIndex';
@@ -875,6 +1026,65 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
   }) {
     return addFilterConditionInternal(FilterCondition.between(
       property: 'birthDate',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      continualUntilGoalDateIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'continualUntilGoalDate',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> continualUntilGoalDateEqualTo(
+      DateTime? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'continualUntilGoalDate',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      continualUntilGoalDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'continualUntilGoalDate',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition>
+      continualUntilGoalDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'continualUntilGoalDate',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> continualUntilGoalDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'continualUntilGoalDate',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
@@ -1334,6 +1544,171 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
       property: 'gender',
       value: pattern,
       caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'goal',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'goal',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalGreaterThan(
+    String? value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'goal',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalLessThan(
+    String? value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'goal',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalBetween(
+    String? lower,
+    String? upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'goal',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'goal',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'goal',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalContains(String value,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'goal',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalMatches(String pattern,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'goal',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalDeadlineIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'goalDeadline',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalDeadlineEqualTo(
+      DateTime? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'goalDeadline',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalDeadlineGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'goalDeadline',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalDeadlineLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'goalDeadline',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> goalDeadlineBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'goalDeadline',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
     ));
   }
 
@@ -2275,6 +2650,125 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
       property: 'interestingCourses',
       value: pattern,
       caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanFridayIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'lessonPlanFriday',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanFridayEqualTo(
+      bool? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'lessonPlanFriday',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanMondayIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'lessonPlanMonday',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanMondayEqualTo(
+      bool? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'lessonPlanMonday',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanSaturdayIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'lessonPlanSaturday',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanSaturdayEqualTo(
+      bool? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'lessonPlanSaturday',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanSundayIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'lessonPlanSunday',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanSundayEqualTo(
+      bool? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'lessonPlanSunday',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanThursdayIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'lessonPlanThursday',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanThursdayEqualTo(
+      bool? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'lessonPlanThursday',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanTuesdayIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'lessonPlanTuesday',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanTuesdayEqualTo(
+      bool? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'lessonPlanTuesday',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanWednesdayIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'lessonPlanWednesday',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> lessonPlanWednesdayEqualTo(
+      bool? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'lessonPlanWednesday',
+      value: value,
     ));
   }
 
@@ -4291,6 +4785,62 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
+  QueryBuilder<User, User, QAfterFilterCondition> timesAWeekIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'timesAWeek',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> timesAWeekEqualTo(
+      int? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'timesAWeek',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> timesAWeekGreaterThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'timesAWeek',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> timesAWeekLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'timesAWeek',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> timesAWeekBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'timesAWeek',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+    ));
+  }
+
   QueryBuilder<User, User, QAfterFilterCondition> townIsNull() {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.isNull,
@@ -4903,6 +5453,14 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
     return addSortByInternal('birthDate', Sort.desc);
   }
 
+  QueryBuilder<User, User, QAfterSortBy> sortByContinualUntilGoalDate() {
+    return addSortByInternal('continualUntilGoalDate', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByContinualUntilGoalDateDesc() {
+    return addSortByInternal('continualUntilGoalDate', Sort.desc);
+  }
+
   QueryBuilder<User, User, QAfterSortBy> sortByCountry() {
     return addSortByInternal('country', Sort.asc);
   }
@@ -4941,6 +5499,22 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
 
   QueryBuilder<User, User, QAfterSortBy> sortByGenderDesc() {
     return addSortByInternal('gender', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByGoal() {
+    return addSortByInternal('goal', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByGoalDesc() {
+    return addSortByInternal('goal', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByGoalDeadline() {
+    return addSortByInternal('goalDeadline', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByGoalDeadlineDesc() {
+    return addSortByInternal('goalDeadline', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> sortByGreeting() {
@@ -5021,6 +5595,62 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
 
   QueryBuilder<User, User, QAfterSortBy> sortByInterestingCoursesDesc() {
     return addSortByInternal('interestingCourses', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanFriday() {
+    return addSortByInternal('lessonPlanFriday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanFridayDesc() {
+    return addSortByInternal('lessonPlanFriday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanMonday() {
+    return addSortByInternal('lessonPlanMonday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanMondayDesc() {
+    return addSortByInternal('lessonPlanMonday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanSaturday() {
+    return addSortByInternal('lessonPlanSaturday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanSaturdayDesc() {
+    return addSortByInternal('lessonPlanSaturday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanSunday() {
+    return addSortByInternal('lessonPlanSunday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanSundayDesc() {
+    return addSortByInternal('lessonPlanSunday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanThursday() {
+    return addSortByInternal('lessonPlanThursday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanThursdayDesc() {
+    return addSortByInternal('lessonPlanThursday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanTuesday() {
+    return addSortByInternal('lessonPlanTuesday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanTuesdayDesc() {
+    return addSortByInternal('lessonPlanTuesday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanWednesday() {
+    return addSortByInternal('lessonPlanWednesday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByLessonPlanWednesdayDesc() {
+    return addSortByInternal('lessonPlanWednesday', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> sortByLevel() {
@@ -5177,6 +5807,14 @@ extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
     return addSortByInternal('searchConditionUserType', Sort.desc);
   }
 
+  QueryBuilder<User, User, QAfterSortBy> sortByTimesAWeek() {
+    return addSortByInternal('timesAWeek', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByTimesAWeekDesc() {
+    return addSortByInternal('timesAWeek', Sort.desc);
+  }
+
   QueryBuilder<User, User, QAfterSortBy> sortByTown() {
     return addSortByInternal('town', Sort.asc);
   }
@@ -5235,6 +5873,14 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
     return addSortByInternal('birthDate', Sort.desc);
   }
 
+  QueryBuilder<User, User, QAfterSortBy> thenByContinualUntilGoalDate() {
+    return addSortByInternal('continualUntilGoalDate', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByContinualUntilGoalDateDesc() {
+    return addSortByInternal('continualUntilGoalDate', Sort.desc);
+  }
+
   QueryBuilder<User, User, QAfterSortBy> thenByCountry() {
     return addSortByInternal('country', Sort.asc);
   }
@@ -5273,6 +5919,22 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
 
   QueryBuilder<User, User, QAfterSortBy> thenByGenderDesc() {
     return addSortByInternal('gender', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByGoal() {
+    return addSortByInternal('goal', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByGoalDesc() {
+    return addSortByInternal('goal', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByGoalDeadline() {
+    return addSortByInternal('goalDeadline', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByGoalDeadlineDesc() {
+    return addSortByInternal('goalDeadline', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> thenByGreeting() {
@@ -5353,6 +6015,62 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
 
   QueryBuilder<User, User, QAfterSortBy> thenByInterestingCoursesDesc() {
     return addSortByInternal('interestingCourses', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanFriday() {
+    return addSortByInternal('lessonPlanFriday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanFridayDesc() {
+    return addSortByInternal('lessonPlanFriday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanMonday() {
+    return addSortByInternal('lessonPlanMonday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanMondayDesc() {
+    return addSortByInternal('lessonPlanMonday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanSaturday() {
+    return addSortByInternal('lessonPlanSaturday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanSaturdayDesc() {
+    return addSortByInternal('lessonPlanSaturday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanSunday() {
+    return addSortByInternal('lessonPlanSunday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanSundayDesc() {
+    return addSortByInternal('lessonPlanSunday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanThursday() {
+    return addSortByInternal('lessonPlanThursday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanThursdayDesc() {
+    return addSortByInternal('lessonPlanThursday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanTuesday() {
+    return addSortByInternal('lessonPlanTuesday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanTuesdayDesc() {
+    return addSortByInternal('lessonPlanTuesday', Sort.desc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanWednesday() {
+    return addSortByInternal('lessonPlanWednesday', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByLessonPlanWednesdayDesc() {
+    return addSortByInternal('lessonPlanWednesday', Sort.desc);
   }
 
   QueryBuilder<User, User, QAfterSortBy> thenByLevel() {
@@ -5509,6 +6227,14 @@ extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
     return addSortByInternal('searchConditionUserType', Sort.desc);
   }
 
+  QueryBuilder<User, User, QAfterSortBy> thenByTimesAWeek() {
+    return addSortByInternal('timesAWeek', Sort.asc);
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByTimesAWeekDesc() {
+    return addSortByInternal('timesAWeek', Sort.desc);
+  }
+
   QueryBuilder<User, User, QAfterSortBy> thenByTown() {
     return addSortByInternal('town', Sort.asc);
   }
@@ -5563,6 +6289,10 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
     return addDistinctByInternal('birthDate');
   }
 
+  QueryBuilder<User, User, QDistinct> distinctByContinualUntilGoalDate() {
+    return addDistinctByInternal('continualUntilGoalDate');
+  }
+
   QueryBuilder<User, User, QDistinct> distinctByCountry(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('country', caseSensitive: caseSensitive);
@@ -5585,6 +6315,15 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
   QueryBuilder<User, User, QDistinct> distinctByGender(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('gender', caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByGoal(
+      {bool caseSensitive = true}) {
+    return addDistinctByInternal('goal', caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByGoalDeadline() {
+    return addDistinctByInternal('goalDeadline');
   }
 
   QueryBuilder<User, User, QDistinct> distinctByGreeting(
@@ -5636,6 +6375,34 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
       {bool caseSensitive = true}) {
     return addDistinctByInternal('interestingCourses',
         caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByLessonPlanFriday() {
+    return addDistinctByInternal('lessonPlanFriday');
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByLessonPlanMonday() {
+    return addDistinctByInternal('lessonPlanMonday');
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByLessonPlanSaturday() {
+    return addDistinctByInternal('lessonPlanSaturday');
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByLessonPlanSunday() {
+    return addDistinctByInternal('lessonPlanSunday');
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByLessonPlanThursday() {
+    return addDistinctByInternal('lessonPlanThursday');
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByLessonPlanTuesday() {
+    return addDistinctByInternal('lessonPlanTuesday');
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByLessonPlanWednesday() {
+    return addDistinctByInternal('lessonPlanWednesday');
   }
 
   QueryBuilder<User, User, QDistinct> distinctByLevel(
@@ -5743,6 +6510,10 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
         caseSensitive: caseSensitive);
   }
 
+  QueryBuilder<User, User, QDistinct> distinctByTimesAWeek() {
+    return addDistinctByInternal('timesAWeek');
+  }
+
   QueryBuilder<User, User, QDistinct> distinctByTown(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('town', caseSensitive: caseSensitive);
@@ -5780,6 +6551,11 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
     return addPropertyNameInternal('birthDate');
   }
 
+  QueryBuilder<User, DateTime?, QQueryOperations>
+      continualUntilGoalDateProperty() {
+    return addPropertyNameInternal('continualUntilGoalDate');
+  }
+
   QueryBuilder<User, String?, QQueryOperations> countryProperty() {
     return addPropertyNameInternal('country');
   }
@@ -5798,6 +6574,14 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
 
   QueryBuilder<User, String?, QQueryOperations> genderProperty() {
     return addPropertyNameInternal('gender');
+  }
+
+  QueryBuilder<User, String?, QQueryOperations> goalProperty() {
+    return addPropertyNameInternal('goal');
+  }
+
+  QueryBuilder<User, DateTime?, QQueryOperations> goalDeadlineProperty() {
+    return addPropertyNameInternal('goalDeadline');
   }
 
   QueryBuilder<User, String?, QQueryOperations> greetingProperty() {
@@ -5840,6 +6624,34 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
 
   QueryBuilder<User, String?, QQueryOperations> interestingCoursesProperty() {
     return addPropertyNameInternal('interestingCourses');
+  }
+
+  QueryBuilder<User, bool?, QQueryOperations> lessonPlanFridayProperty() {
+    return addPropertyNameInternal('lessonPlanFriday');
+  }
+
+  QueryBuilder<User, bool?, QQueryOperations> lessonPlanMondayProperty() {
+    return addPropertyNameInternal('lessonPlanMonday');
+  }
+
+  QueryBuilder<User, bool?, QQueryOperations> lessonPlanSaturdayProperty() {
+    return addPropertyNameInternal('lessonPlanSaturday');
+  }
+
+  QueryBuilder<User, bool?, QQueryOperations> lessonPlanSundayProperty() {
+    return addPropertyNameInternal('lessonPlanSunday');
+  }
+
+  QueryBuilder<User, bool?, QQueryOperations> lessonPlanThursdayProperty() {
+    return addPropertyNameInternal('lessonPlanThursday');
+  }
+
+  QueryBuilder<User, bool?, QQueryOperations> lessonPlanTuesdayProperty() {
+    return addPropertyNameInternal('lessonPlanTuesday');
+  }
+
+  QueryBuilder<User, bool?, QQueryOperations> lessonPlanWednesdayProperty() {
+    return addPropertyNameInternal('lessonPlanWednesday');
   }
 
   QueryBuilder<User, String?, QQueryOperations> levelProperty() {
@@ -5925,6 +6737,10 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
   QueryBuilder<User, String?, QQueryOperations>
       searchConditionUserTypeProperty() {
     return addPropertyNameInternal('searchConditionUserType');
+  }
+
+  QueryBuilder<User, int?, QQueryOperations> timesAWeekProperty() {
+    return addPropertyNameInternal('timesAWeek');
   }
 
   QueryBuilder<User, String?, QQueryOperations> townProperty() {

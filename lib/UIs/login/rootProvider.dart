@@ -17,18 +17,14 @@ class BottomNavigationBarItems extends ChangeNotifier {
   }
 
   static const _footerItemNames = [
-    'Now',
+    'Find teacher',
     'Talk',
-    'Find',
-    'Topic',
     'MyPage',
   ];
 
   static const List _footerIcons = [
-    Icons.access_time,
-    Icons.message_outlined,
     Icons.search,
-    Icons.wallpaper_sharp,
+    Icons.message_outlined,
     Icons.work_outline,
   ];
 

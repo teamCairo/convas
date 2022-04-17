@@ -14,7 +14,7 @@ import '../../entityIsar/friendEntityIsar.dart';
 Future<bool> checkAppointmentData(BuildContext context, WidgetRef ref) async{
 
 if(ref.watch(appointmentAnswerProvider).editedDateTimeFrom!.isAfter(ref.watch(appointmentAnswerProvider).editedDateTimeTo!)) {
-  await showOkWarningDialog(context, "End time is earlier than start time");
+  await commonShowOkWarningDialog(context, "End time is earlier than start time");
   return false;
 }
   return true;

@@ -126,7 +126,7 @@ Widget commonCircleAvatarImage({Image? image, required double radius, required S
   }
 }
 
-Future<dynamic> showOkWarningDialog(BuildContext context,  String message)async{
+Future<dynamic> commonShowOkWarningDialog(BuildContext context,  String message)async{
   return await showDialog(
     context: context,
     barrierDismissible: false,
@@ -145,7 +145,7 @@ Future<dynamic> showOkWarningDialog(BuildContext context,  String message)async{
   );
 }
 
-Future<dynamic> showOkInfoDialog(BuildContext context,  String message)async{
+Future<dynamic> commonShowOkInfoDialog(BuildContext context,  String message)async{
   return await showDialog(
     context: context,
     barrierDismissible: false,
@@ -157,6 +157,29 @@ Future<dynamic> showOkInfoDialog(BuildContext context,  String message)async{
           TextButton(
             child: const Text("OK"),
             onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<dynamic> commonShowOkNgInfoDialog(BuildContext context,  String message, Function()? onPressed)async{
+  return await showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) {
+      return AlertDialog(
+        title:  const Text("Information"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            child: const Text("Cancel"),
+            onPressed: () => Navigator.pop(context),
+          ),
+          TextButton(
+            child: const Text("OK"),
+            onPressed: onPressed,
           ),
         ],
       );
@@ -312,9 +335,14 @@ Widget commonBalloon(Widget child,String rightLeft){
 
 Widget commonImageCountry(String countryCode,double height, WidgetRef ref){
 
-  return SizedBox(
-      height:height,
-      child:Image.memory(getMasterData("country", countryCode, ref).optionFile1!));
+  if(countryCode==""){
+    return SizedBox(
+        height:height);
+  }else{
+    return SizedBox(
+        height:height,
+        child:Image.memory(getMasterData("country", countryCode, ref).optionFile1!));
+  }
 
 }
 

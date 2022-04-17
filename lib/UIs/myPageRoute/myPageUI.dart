@@ -85,118 +85,7 @@ class MyPage extends ConsumerWidget {
                       },
                     ),
                     bigIconButton(
-                      text: "Edit Interest",
-                      icon: Icons.star,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return EditInterest();
-                          }),
-                        );
-                      },
-                    ),
-                    bigIconButton(
-                      text: "Register topic",
-                      icon: Icons.add_photo_alternate_outlined,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return TopicRegister();
-                          }),
-                        );
-                      },
-                    ),
-                  ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    bigIconButton(
-                      text: "Edit course",
-                      icon: Icons.widgets_outlined,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return EditInterestingCourse();
-                          }),
-                        );
-                      },
-                    ),
-                    bigIconButton(
-                      text: "Edit Calendar",
-                      icon: Icons.calendar_today,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return const CalendarEdit(null);
-                          }),
-                        );
-                      },
-                    ),
-                    bigIconButton(
-                      text: "Help",
-                      icon: Icons.question_mark,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return TopicRegister();
-                          }),
-                        );
-                      },
-                    ),
-                  ]),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    bigIconButton(
-                      text: "History",
-                      icon: Icons.timeline_rounded,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return EditInterestingCourse();
-                          }),
-                        );
-                      },
-                    ),
-                    bigIconButton(
-                      text: "Payment",
-                      icon: Icons.attach_money,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return const CalendarEdit( null);
-                          }),
-                        );
-                      },
-                    ),
-                    bigIconButton(
-                      text: "Concept",
-                      icon: Icons.vpn_key,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return Concept();
-                          }),
-                        );
-                      },
-                    ),
-                  ]),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    bigIconButton(
-                      text: "Contact",
+                      text: "Contact Us",
                       icon: Icons.mail_outline,
                       onPressed: () async {
                         await Navigator.of(context).push(
@@ -217,19 +106,8 @@ class MyPage extends ConsumerWidget {
                         );
                       },
                     ),
-                    bigIconButton(
-                      text: "",
-                      icon: Icons.vpn_key,
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return TopicRegister();
-                          }),
-                        );
-                      },
-                    ),
                   ]),
-            )
+            ),
           ]),
         )),
         floatingActionButton: testDataMenuSpeedDial(ref));

@@ -39,6 +39,17 @@ class User {
       this.informationModifiedTime,
       this.interestingCategories,
       this.interestingCourses,
+      this.goal,
+      this.goalDeadline,
+      this.continualUntilGoalDate,
+      this.lessonPlanMonday,
+      this.lessonPlanTuesday,
+      this.lessonPlanWednesday,
+      this.lessonPlanThursday,
+      this.lessonPlanFriday,
+      this.lessonPlanSaturday,
+      this.lessonPlanSunday,
+      this.timesAWeek,
       this.insertUserDocId,
       this.insertProgramId,
       this.insertTime,
@@ -83,6 +94,17 @@ class User {
   DateTime? informationModifiedTime;
   String? interestingCategories;
   String? interestingCourses;
+  String? goal;
+  DateTime? goalDeadline;
+  DateTime? continualUntilGoalDate;
+  bool? lessonPlanMonday;
+  bool? lessonPlanTuesday;
+  bool? lessonPlanWednesday;
+  bool? lessonPlanThursday;
+  bool? lessonPlanFriday;
+  bool? lessonPlanSaturday;
+  bool? lessonPlanSunday;
+  int? timesAWeek;
   String? insertUserDocId;
   String? insertProgramId;
   DateTime? insertTime;
@@ -91,6 +113,4 @@ class User {
   DateTime? updateTime;
   bool? readableFlg;
   bool? deleteFlg;
-
-
 }

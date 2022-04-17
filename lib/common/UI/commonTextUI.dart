@@ -236,6 +236,19 @@ Text commonText12DeepOrangeLeft(String text) {
   );
 }
 
+
+Text commonText14OrangeLeft(String text) {
+  return Text(
+    text,
+    textAlign: TextAlign.left,
+    style: const TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 14,
+      color: Colors.orange,
+    ),
+  );
+}
+
 Text commonText16DeepOrangeLeft(String text) {
   return Text(
     text,

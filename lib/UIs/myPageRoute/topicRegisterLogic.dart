@@ -27,11 +27,11 @@ Future<bool> checkTopicData(BuildContext context, WidgetRef ref,String topicName
 
   //画像NULLチェック
   if(ref.watch(topicRegisterProvider).topicImagePhotoFile == null){
-    await showOkWarningDialog(context,"Please select image");
+    await commonShowOkWarningDialog(context,"Please select image");
     return false;
 
   }else if(topicName==""){
-    await showOkWarningDialog(context,"Please input name");
+    await commonShowOkWarningDialog(context,"Please input name");
     return false;
 
   }else{

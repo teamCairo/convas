@@ -39,33 +39,33 @@ class SettingPage extends ConsumerWidget {
                   ),
                   onTap: () async=> await ref.watch(userDataProvider).setImage(ref),
                 ),
-                Padding(
-                    padding: const EdgeInsets.only(left: 14.0,bottom: 0),
-                    child: black16TextLeft("Greeting")),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      commonText16GrayLeftEllipsis(ref.watch(userDataProvider).userData["greeting"]),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 14.0),
-                        child: commonButtonOrangeRoundSquareSmall(text:"Edit",
-                            onPressed:()async{
-                              await Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) {
-                                  return SettingEditTextPage(
-                                    displayedItem: "Greeting",
-                                    databaseItem: "greeting",
-                                    value:ref.watch(userDataProvider).userData["greeting"],
-                                  );
-                                }),
-                              );
-                            }),
-                      )
-                    ],
-                  ),
-                ),
+                // Padding(
+                //     padding: const EdgeInsets.only(left: 14.0,bottom: 0),
+                //     child: black16TextLeft("Greeting")),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       commonText16GrayLeftEllipsis(ref.watch(userDataProvider).userData["greeting"]),
+                //       Padding(
+                //         padding: const EdgeInsets.only(left: 14.0),
+                //         child: commonButtonOrangeRoundSquareSmall(text:"Edit",
+                //             onPressed:()async{
+                //               await Navigator.of(context).push(
+                //                 MaterialPageRoute(builder: (context) {
+                //                   return SettingEditTextPage(
+                //                     displayedItem: "Greeting",
+                //                     databaseItem: "greeting",
+                //                     value:ref.watch(userDataProvider).userData["greeting"],
+                //                   );
+                //                 }),
+                //               );
+                //             }),
+                //       )
+                //     ],
+                //   ),
+                // ),
                 Padding(
                     padding: const EdgeInsets.all( 14.0),
                     child: Container(
@@ -128,14 +128,14 @@ class SettingPage extends ConsumerWidget {
                 // linePadding(context,ref,"E-mail","email", ref.watch(userDataProvider).userData["email"]!),
                 linePadding(context,ref,"Birth Date","birthDate", ref.watch(userDataProvider).userData["birthDate"]!),
                 linePadding(context,ref,"English Level","level", ref.watch(userDataProvider).userData["level"]!),
-                linePadding(context,ref,"Occupation","occupation", ref.watch(userDataProvider).userData["occupation"]!),
-                linePadding(context,ref,"mother Tongue","motherTongue", ref.watch(userDataProvider).userData["motherTongue"]!),
-                linePadding(context,ref,"Country","country", ref.watch(userDataProvider).userData["country"]!),
-                linePadding(context,ref,"Town","town", ref.watch(userDataProvider).userData["town"]!),
-                linePadding(context,ref,"Home Country","homeCountry", ref.watch(userDataProvider).userData["homeCountry"]!),
-                linePadding(context,ref,"Home Town","homeTown", ref.watch(userDataProvider).userData["homeTown"]!),
-                linePadding(context,ref,"gender","gender", ref.watch(userDataProvider).userData["gender"]!),
-                linePadding(context,ref,"Place I wanna go","placeWannaGo", ref.watch(userDataProvider).userData["placeWannaGo"]!),
+                // linePadding(context,ref,"Occupation","occupation", ref.watch(userDataProvider).userData["occupation"]!),
+                // linePadding(context,ref,"mother Tongue","motherTongue", ref.watch(userDataProvider).userData["motherTongue"]!),
+                // linePadding(context,ref,"Country","country", ref.watch(userDataProvider).userData["country"]!),
+                // linePadding(context,ref,"Town","town", ref.watch(userDataProvider).userData["town"]!),
+                // linePadding(context,ref,"Home Country","homeCountry", ref.watch(userDataProvider).userData["homeCountry"]!),
+                // linePadding(context,ref,"Home Town","homeTown", ref.watch(userDataProvider).userData["homeTown"]!),
+                // linePadding(context,ref,"gender","gender", ref.watch(userDataProvider).userData["gender"]!),
+                // linePadding(context,ref,"Place I wanna go","placeWannaGo", ref.watch(userDataProvider).userData["placeWannaGo"]!),
 
 
               ])),
