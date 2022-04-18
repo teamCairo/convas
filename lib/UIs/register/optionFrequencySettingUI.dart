@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/UI/commonPushUI.dart';
+import 'dataPrepareingUI.dart';
 import 'optionBeFoundByLearnerUI.dart';
 
 class OptionFrequencySetting extends ConsumerWidget {
@@ -59,17 +60,10 @@ class OptionFrequencySetting extends ConsumerWidget {
                           onPressed: () async {
                             await commonShowOkInfoDialog(context, "You can set later easily");
                             ref.read(registerProvider.notifier).setCanBeFound(false);
-                            registerLogic(ref,context);
-                            // Navigator.of(context).push(
-                            //   PageRouteBuilder(
-                            //     pageBuilder: (context, animation, secondaryAnimation) {
-                            //       return const OptionBeFoundLearner();
-                            //     },
-                            //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                            //       return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
-                            //     },
-                            //   ),
-                            // );
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => const DataPreparing()),
+                                    (_) => false);
                           },),)
                     ],
                   ),

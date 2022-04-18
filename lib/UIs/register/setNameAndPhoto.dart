@@ -1,0 +1,113 @@
+import 'package:convas/UIs/register/optionGoalSettingUI.dart';
+import 'package:convas/UIs/register/registerProvider.dart';
+import 'package:convas/UIs/register/setNameAndBirthdateLogic.dart';
+import 'package:convas/common/UI/commonButtonUI.dart';
+import 'package:convas/common/UI/commonOthersUI.dart';
+import 'package:convas/common/UI/commonTextUI.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+
+import '../../common/UI/commonPushUI.dart';
+import '../../common/UI/commonTextFormUI.dart';
+
+class SetNameAndPhoto extends ConsumerWidget {
+  const SetNameAndPhoto({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // DateFormat outputFormat = DateFormat('yyyy/MM/dd');
+    // String birthDate;
+    // if(ref.watch(registerProvider).birthDate==null){
+    //   birthDate ="          ";
+    // }else{
+    //   birthDate = outputFormat.format(ref.watch(registerProvider).birthDate!);
+    // }
+
+    return Scaffold(
+      appBar: commonAppbarWhite(""),
+      body: SafeArea(
+          child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                children: [
+                  commonText24BlackBoldCenter("Edit your photo and name"),
+                ],
+              ),
+              Column(
+                children: [
+                  GestureDetector(
+                    child: Stack(
+                      alignment: const Alignment(0.9, 0.9),
+                      children: [commonCircleAvatarImage(
+                          radius: 80,
+                          image:ref.watch(registerProvider).photo,
+                          name:""
+                      ),
+                        const Icon(Icons.camera_alt),
+                      ],
+                    ),
+                    onTap: () async=> await ref.watch(registerProvider).setPhoto(ref),
+                  ),
+                  const SizedBox(height:50),
+                  commonTextBoxBordered(
+                      text: "Name",
+                      onChanged: (String value) {
+                        ref.watch(registerProvider.notifier).setName(value);
+                      },
+                      passwordSecure:false
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top:8.0),
+                  //   child: Align(
+                  //       alignment: Alignment.topLeft,
+                  //       child: commonText14OrangeLeft("BirthDate")),
+                  // ),
+                  // Row(children: [
+                  //   Column(
+                  //     children: [
+                  //       commonText20BlackCenter(birthDate),
+                  //       Container(height:2,
+                  //           width:110,
+                  //           color:Colors.orange),
+                  //     ],
+                  //   ),
+                  //   const SizedBox(width: 6),
+                  //   commonButtonSmallOrangeRound(
+                  //       text: "Select",
+                  //       onPressed: () => selectDateForBirthDate(context, ref))
+                  // ]),
+                ],
+              ),
+              Column(
+                children: [
+                  commonButtonOrangeRound(
+                    text: "Next",
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) {
+                            return const OptionGoalSetting();
+                          },
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            return commonFunctionPushSlideHorizon(
+                                context, animation, secondaryAnimation, child);
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height:14)
+                ],
+              ),
+            ]),
+      )),
+    );
+  }
+}

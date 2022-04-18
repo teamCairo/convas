@@ -2,14 +2,12 @@ import 'package:convas/UIs/login/rootUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
 import '../../developerLogic/testDataMenuSpeedDial.dart';
-import '../register/optionGoalSettingUI.dart';
 import '../register/setUserTypeUI.dart';
 import 'loginLogic.dart';
 import 'loginProvider.dart';
@@ -30,7 +28,7 @@ class LoginPage extends ConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 children: <Widget>[
@@ -38,7 +36,7 @@ class LoginPage extends ConsumerWidget {
                   commonLogoMain(120),
                   const SizedBox(height: 45),
                   commonTextBoxBordered(
-                      text: "E-Mail",
+                      text: "example@convas.com",
                       onChanged: (String value) {
                         ref.read(emailProvider.state).update((state) => value);
                       },
@@ -46,7 +44,7 @@ class LoginPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 20),
                   commonTextBoxBordered(
-                      text: "Password(more than 6 letters)",
+                      text: "password",
                       onChanged: (String value) {
                         ref.read(passwordProvider.state).update((state) => value);
                       }, passwordSecure: true),
@@ -55,7 +53,9 @@ class LoginPage extends ConsumerWidget {
               Column(
                 children: <Widget>[
                   Text(infoText),
-                  commonButtonOrangeRound(
+
+                  const SizedBox(height: 20),
+                  commonIconButtonWhiteBorderRound(
                     text: "Sign Up",
                     onPressed: () async {
                       try {
@@ -76,11 +76,7 @@ class LoginPage extends ConsumerWidget {
 
                         // await insertUserToFirebase(context,ref,email);
                         ref.read(registerProvider.notifier).initialize();
-                        await Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
-                            return const SetUserType();
-                          }),
-                        );
+                        userLocalDataCheckForInsert( email,  ref,  context);
                       } catch (e) {
                         // 登録に失敗した場合
 
@@ -88,10 +84,10 @@ class LoginPage extends ConsumerWidget {
                             .read(infoTextProvider.state)
                             .update((state) => "登録NG:${e.toString()}");
                       }
-                    },
+                    }, iconData: Icons.account_box,
                   ),
                   const SizedBox(height: 8),
-                  commonButtonWhiteBorderRound(
+                  commonIconButtonOrangeRound(
                     text: "Log In",
                     onPressed: () async {
                       try {
@@ -112,7 +108,7 @@ class LoginPage extends ConsumerWidget {
                             .read(infoTextProvider.state)
                             .update((state) => "ログインに失敗しました:${e.toString()}");
                       }
-                    },
+                    }, iconData: Icons.input_sharp,
                   ),
                 ],
               ),

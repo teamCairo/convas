@@ -6,6 +6,8 @@ import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'dataPrepareingUI.dart';
+
 
 class OptionBeFoundLearner extends ConsumerWidget {
   const OptionBeFoundLearner({
@@ -43,7 +45,10 @@ class OptionBeFoundLearner extends ConsumerWidget {
                                 'Other learner can find you',
                                 (){
                                   ref.read(registerProvider.notifier).setCanBeFound(true);
-                                  registerLogic(ref,context);
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const DataPreparing()),
+                                          (_) => false);
                                 });
                           },),),
                       Padding(
@@ -52,7 +57,10 @@ class OptionBeFoundLearner extends ConsumerWidget {
                           text: "No, I don't",
                           onPressed: ()  {
                             ref.read(registerProvider.notifier).setCanBeFound(false);
-                            registerLogic(ref,context);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => const DataPreparing()),
+                                    (_) => false);
                           },),)
                     ],
                   ),

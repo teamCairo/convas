@@ -5,7 +5,7 @@ import 'package:convas/common/provider/chatDetailProvider.dart';
 import 'package:convas/daoIsar/settingDaoIsar.dart';
 import 'package:convas/entityIsar/chatDetailEntityIsar.dart';
 import 'package:convas/entityIsar/masterEntityIsar.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
@@ -22,8 +22,42 @@ import '../../entityIsar/friendEntityIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
 import '../../entityIsar/topicEntityIsar.dart';
 import '../../entityIsar/userEntityIsar.dart';
+import '../register/setUserTypeUI.dart';
+import '../register/welcomePageUI.dart';
+import 'clearLocalData.dart';
 import 'loginLogicMessage.dart';
 import 'loginLogicOnlieStatus.dart';
+
+
+Future<void> userLocalDataCheckForInsert(String email, WidgetRef ref, BuildContext context)async {
+
+  await openIsarInstances();
+  Setting? tmpSetting = await selectIsarSettingByCode("localUserInfo");
+  if(tmpSetting==null) {
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) {
+        return WelcomePage();
+      }),
+    );
+  }else{
+    if(tmpSetting.stringValue1==email){
+
+    }else{
+      await commonShowOkNgInfoDialog(
+          context,
+          "You have other user's data on local device.\nCan we delete them?",
+              ()async{
+            await clearLocalData();
+            await Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) {
+                return WelcomePage();
+              }),
+            );
+          });
+    }
+
+  }
+}
 
 Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/UI/commonPushUI.dart';
+import 'dataPrepareingUI.dart';
 import 'optionBeFoundByLearnerUI.dart';
 
 
@@ -137,7 +138,10 @@ class SetDayOfWeek extends ConsumerWidget {
                         // );
 
                         ref.read(registerProvider.notifier).setCanBeFound(false);
-                        registerLogic(ref,context);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => const DataPreparing()),
+                                (_) => false);
                       },),),
 
                 ]),

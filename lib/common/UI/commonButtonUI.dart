@@ -159,6 +159,67 @@ Widget commonButtonWhiteBorderRound(
 }
 
 
+Widget commonIconButtonOrangeRound(
+    {required IconData iconData,required String text, required Function()? onPressed}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+    child: SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton.icon(
+        label: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),
+        style: OutlinedButton.styleFrom(
+          primary: Colors.white10,
+          backgroundColor: Colors.orange,
+          shape: const StadiumBorder(),
+          side: const BorderSide(color: Colors.white, width: 0),
+            elevation:0
+        ),
+        onPressed: onPressed, icon: Icon(iconData,
+      color:Colors.white),
+      ),
+    ),
+  );
+}
+
+Widget commonIconButtonWhiteBorderRound(
+    {required IconData iconData, required String text, required Function()? onPressed}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+    child: SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton.icon(
+        label: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: Colors.orange,
+          ),
+        ),
+        style: OutlinedButton.styleFrom(
+          primary: Colors.white10,
+          backgroundColor: Colors.white,
+          shape: const StadiumBorder(),
+          side: const BorderSide(color: Colors.orange, width: 1),
+            elevation:0
+        ),
+        onPressed: onPressed, icon: Icon(iconData,
+      color:Colors.orange),
+      ),
+    ),
+  );
+}
+
+
 Widget commonButtonIconCircle(
     {required IconData icon,
       required Color color,

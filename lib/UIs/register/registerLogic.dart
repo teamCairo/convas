@@ -10,39 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/UI/commonOthersUI.dart';
-import '../../common/UI/commonPushUI.dart';
 import '../../daoFirebase/usersDaoFirebase.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
 import '../login/loginLogic.dart';
 import '../login/rootUI.dart';
-
-Future<void> registerLogic(WidgetRef ref, BuildContext context)async {
-
-  await openIsarInstances();
-  Setting? tmpSetting = await selectIsarSettingByCode("localUserInfo");
-  if(tmpSetting==null) {
-
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const DataPreparing()),
-            (_) => false);
-
-  }else {
-
-    await commonShowOkNgInfoDialog(
-        context,
-        "You have other user's data on local device.\nCan we delete them?",
-            ()async{
-          await clearLocalData();
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const DataPreparing()),
-                  (_) => false);
-        });
-
-  }
-}
 
 Future<void> commonRegisterLogic(WidgetRef ref, BuildContext context)async{
 

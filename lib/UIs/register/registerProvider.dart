@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 final registerProvider = ChangeNotifierProvider(
       (ref) => RegisterNotifier(),
@@ -11,6 +14,9 @@ class RegisterNotifier extends ChangeNotifier {
 
   DateTime? _continualUntil;
   DateTime? get continualUntil=>_continualUntil;
+
+  Image? _photo;
+  Image? get photo=>_photo;
 
   bool _monday=false;
   bool get monday =>_monday;
@@ -26,6 +32,10 @@ class RegisterNotifier extends ChangeNotifier {
   bool get saturday =>_saturday;
   bool _sunday=false;
   bool get sunday =>_sunday;
+
+  String _goalCategory="";
+  String get goalCategory=>_goalCategory;
+
 
   String _goal="";
   String get goal=>_goal;
@@ -60,6 +70,26 @@ class RegisterNotifier extends ChangeNotifier {
     _sunday=false;
     _birthDate=null;
     _timesAWeek=0;
+    _goalCategory="";
+  }
+
+  setPhoto(WidgetRef ref)async{
+
+    XFile? pickerFile = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 800,
+        maxHeight: 800,
+        imageQuality: 40);
+    if (pickerFile != null) {
+      _photo = Image.file(File(pickerFile.path));
+      //TODO 圧縮率などは調整
+    }
+    notifyListeners();
+  }
+
+
+  setGoalCategory(String value){
+    _goalCategory=value;
   }
 
   setName(String value){

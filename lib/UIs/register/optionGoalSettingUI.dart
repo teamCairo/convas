@@ -17,20 +17,25 @@ class OptionGoalSetting extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite("Register"),
+      appBar: commonAppbarWhite(""),
       body: SafeArea(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
             Column(
               children: [
-                const SizedBox(height: 20,),
-                commonText20BlackCenter("Will you set a goal?"),
+                commonText24BlackBoldCenter("Why don't you make a goal?"),
                 const SizedBox(height: 20,),
                 commonText16Gray("We recommend you"),
                 commonText16Gray("to set a goal to keep learning"),
               ],
             ),
+
+        Container(height:120,
+        width:150,
+        color:Colors.blue,
+        child:commonText16Gray("image"),
+        ),
         Column(
             children: [
               Padding(
@@ -57,7 +62,7 @@ class OptionGoalSetting extends ConsumerWidget {
                 padding: const EdgeInsets.all(8.0),
                 child:Builder(
                   builder: (context) {
-                    return commonButtonOrangeRound(
+                    return commonButtonWhiteBorderRound(
               text: "No, I won't",
               onPressed: () async {
                     await commonShowOkInfoDialog(context, "You can set later easily");

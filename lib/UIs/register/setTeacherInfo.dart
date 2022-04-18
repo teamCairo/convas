@@ -12,6 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../common/UI/commonPushUI.dart';
+import 'dataPrepareingUI.dart';
 
 class SetTeacherInfo extends ConsumerWidget {
   const SetTeacherInfo({
@@ -90,7 +91,10 @@ class SetTeacherInfo extends ConsumerWidget {
                 child: commonButtonOrangeRound(
                   text: "OK",
                   onPressed: () {
-                    registerLogic(ref,context);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => const DataPreparing()),
+                            (_) => false);
                   },
                 ),
               ),

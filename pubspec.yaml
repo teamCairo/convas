@@ -110,6 +110,7 @@ flutter:
     - family: MyFlutterApp #アイコンセットのタイトル
       fonts:
         - asset: assets/MyFlutterApp.ttf #設置したファイル
+        - asset: assets/MyFlutterAppPlusAccount.ttf #設置したファイル
 
   # To add assets to your application, add an assets section, like this:
   # assets:
