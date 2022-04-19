@@ -55,7 +55,6 @@ Future<void> insertUser(WidgetRef ref,String email)async {
       messageTokenId:messageTokenId,
       programId:"registerLogic",
       goal: ref.watch(registerProvider).goal,
-      goalDeadline: ref.watch(registerProvider).goalDeadline,
       continualUntilGoalDate: ref.watch(registerProvider).continualUntil,
       lessonPlanMonday: ref.watch(registerProvider).monday,
       lessonPlanTuesday: ref.watch(registerProvider).tuesday,

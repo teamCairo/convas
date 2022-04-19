@@ -40,7 +40,6 @@ class User {
       this.interestingCategories,
       this.interestingCourses,
       this.goal,
-      this.goalDeadline,
       this.continualUntilGoalDate,
       this.lessonPlanMonday,
       this.lessonPlanTuesday,
@@ -95,7 +94,6 @@ class User {
   String? interestingCategories;
   String? interestingCourses;
   String? goal;
-  DateTime? goalDeadline;
   DateTime? continualUntilGoalDate;
   bool? lessonPlanMonday;
   bool? lessonPlanTuesday;

@@ -20,7 +20,7 @@ class OptionFrequencySetting extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite("Register"),
+      appBar: commonAppbarWhite(""),
       body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal:14.0),
@@ -35,10 +35,16 @@ class OptionFrequencySetting extends ConsumerWidget {
                       commonText16Gray("We recommend you to set frequency to keep learning"),
                     ],
                   ),
+                  Container(height:120,
+                    width:150,
+                    color:Colors.blue,
+                    child:commonText16Gray("image"),
+                  ),
+
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(vertical:8.0),
                         child:commonButtonOrangeRound(
                           text: "Yes, I will",
                           onPressed: ()  {
@@ -54,7 +60,7 @@ class OptionFrequencySetting extends ConsumerWidget {
                             );
                           },),),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(vertical:8.0),
                         child:commonButtonOrangeRound(
                           text: "No, I won't",
                           onPressed: () async {

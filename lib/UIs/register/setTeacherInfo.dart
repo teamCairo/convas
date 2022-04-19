@@ -2,7 +2,7 @@ import 'package:convas/UIs/register/registerLogic.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/UIs/register/setDayOfWeek.dart';
 import 'package:convas/UIs/register/setFrequencyLogic.dart';
-import 'package:convas/UIs/register/setNameAndBirthdateLogic.dart';
+import 'package:convas/UIs/register/setNameAndPhotoLogic.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';

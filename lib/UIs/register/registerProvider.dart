@@ -9,9 +9,6 @@ final registerProvider = ChangeNotifierProvider(
 );
 class RegisterNotifier extends ChangeNotifier {
 
-  DateTime? _goalDeadline;
-  DateTime? get goalDeadline=>_goalDeadline;
-
   DateTime? _continualUntil;
   DateTime? get continualUntil=>_continualUntil;
 
@@ -57,7 +54,6 @@ class RegisterNotifier extends ChangeNotifier {
 
   void initialize() async {
     _continualUntil=DateTime.now().add(const Duration(days:40));
-    _goalDeadline=DateTime.now();
     _userType="";
     _goal="";
     _name="";
@@ -122,6 +118,12 @@ setContinualUntil(DateTime value){
     notifyListeners();
   }
 
+
+  setGoalHashTag(String item, String value){
+    _goal=_goal+" #"+item+":"+value+" ";
+    notifyListeners();
+  }
+
   setGoal(String value){
     _goal=value;
     notifyListeners();
@@ -164,11 +166,6 @@ setContinualUntil(DateTime value){
 
   setTimesAWeek(int value){
     _timesAWeek=value;
-    notifyListeners();
-  }
-
-  setGoalDeadline(DateTime value){
-    _goalDeadline=value;
     notifyListeners();
   }
 

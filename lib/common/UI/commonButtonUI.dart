@@ -130,6 +130,30 @@ Widget commonButtonSmallOrangeRound(
   );
 }
 
+
+Widget commonIconButtonSmallWhiteBorderRound(
+    {required IconData iconData, required String text, required Function()? onPressed}) {
+  return ElevatedButton.icon(
+    label: Text(
+      text,
+      style: const TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 16,
+        color: Colors.orange,
+      ),
+    ),
+    style: OutlinedButton.styleFrom(
+        primary: Colors.white10,
+        backgroundColor: Colors.white,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.orange, width: 1),
+        elevation:0
+    ),
+    onPressed: onPressed, icon: Icon(iconData,
+      color:Colors.orange),
+  );
+}
+
 Widget commonButtonWhiteBorderRound(
     {required String text, required Function()? onPressed}) {
   return Padding(
@@ -184,6 +208,39 @@ Widget commonIconButtonOrangeRound(
         ),
         onPressed: onPressed, icon: Icon(iconData,
       color:Colors.white),
+      ),
+    ),
+  );
+}
+
+
+Widget commonIconButtonAddHashTagInfo(
+    {required IconData iconData,required String text, required Function()? onPressed,required Color color}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+    child: SizedBox(
+      height: 34,
+      child: OutlinedButton.icon(
+        label: Text(
+          text,
+          style: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 12,
+            color: color,
+          ),
+        ),
+        style: OutlinedButton.styleFrom(
+            primary: color,
+            backgroundColor: Colors.white10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            side: const BorderSide(color: Colors.black12, width: 1),
+            elevation:0
+        ),
+        onPressed: onPressed, icon: Icon(iconData,
+          size:16,
+          color:color),
       ),
     ),
   );
