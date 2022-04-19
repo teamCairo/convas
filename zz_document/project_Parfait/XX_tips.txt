@@ -5,3 +5,16 @@ External packages の中の flutter_aundher_icons-0.9.2 android.dart の
       final String minSdk ="21";
 
 その後Pubgetしてからflutter pub run flutter_launcher_icons:main
+
+
+
+Firebase authentication 一括削除スクリプト
+const interval = setInterval(() => {
+  if ($('.edit-account-button').length === 0) {
+    clearInterval(interval)
+  } else {
+    $('.edit-account-button').first().click()
+    $('button:contains("Delete account")').click()
+    $('.confirm-button').click()
+  }
+}, 1000)

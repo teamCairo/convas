@@ -6,10 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/UI/commonPushUI.dart';
 import '../login/rootUI.dart';
+import 'dataPrepareingUI.dart';
 
 
-class RegisterFinished extends ConsumerWidget {
-  const RegisterFinished({
+class RegisterBirthDateAndGender extends ConsumerWidget {
+  const RegisterBirthDateAndGender({
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +18,7 @@ class RegisterFinished extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite("Register"),
+      appBar: commonAppbarWhite(""),
       body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal:14.0),
@@ -26,13 +27,38 @@ class RegisterFinished extends ConsumerWidget {
                 children: <Widget>[
                   Column(
                     children: [
-                      const SizedBox(height: 20,),
-                      commonText20BlackCenter("Setting has been done!!"),
-                      const SizedBox(height: 20,),
-                      commonText16Gray("Now, you can use our service"),
+                      commonText24BlackBoldCenter("Set your Info for other teachers or learners!!"),
+                      const SizedBox(height: 20),
                     ],
                   ),
-                  //
+
+                  Column(
+                    children: [
+                      commonText24BlackBoldCenter("Your gender"),
+                      const SizedBox(height: 8),
+                      Row(
+                        children:[commonIconButtonSmallWhiteBorderRound(
+                            onPressed: () {
+
+                            },
+                            text: 'Female',
+                            iconData: Icons.male),
+                          commonIconButtonSmallWhiteBorderRound(
+                              onPressed: () {
+
+                              },
+                              text: 'Male',
+                              iconData: Icons.female)
+                        ]
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      commonText24BlackBoldCenter("Your birthday"),
+                      const SizedBox(height: 8),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child:commonButtonOrangeRound(
@@ -41,7 +67,7 @@ class RegisterFinished extends ConsumerWidget {
                         Navigator.of(context).pushReplacement(
                           PageRouteBuilder(
                             pageBuilder: (context, animation, secondaryAnimation) {
-                              return const Root();
+                              return const DataPreparing();
                             },
                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
                               return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);

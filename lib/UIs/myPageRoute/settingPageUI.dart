@@ -124,10 +124,10 @@ class SettingPage extends ConsumerWidget {
                 Padding(
                     padding: const EdgeInsets.only(left: 14.0,bottom: 6),
                     child: commonText16BlackLeft("Personal Info")),
-                linePadding(context,ref,"Name","name", ref.watch(userDataProvider).userData["name"]!),
+                linePadding(context,ref,"Name","name", ref.watch(userDataProvider).userData["name"]),
                 // linePadding(context,ref,"E-mail","email", ref.watch(userDataProvider).userData["email"]!),
-                linePadding(context,ref,"Birth Date","birthDate", ref.watch(userDataProvider).userData["birthDate"]!),
-                linePadding(context,ref,"English Level","level", ref.watch(userDataProvider).userData["level"]!),
+                linePadding(context,ref,"Birth Date","birthDate", ref.watch(userDataProvider).userData["birthDate"]),
+                linePadding(context,ref,"English Level","level", ref.watch(userDataProvider).userData["level"]),
                 // linePadding(context,ref,"Occupation","occupation", ref.watch(userDataProvider).userData["occupation"]!),
                 // linePadding(context,ref,"mother Tongue","motherTongue", ref.watch(userDataProvider).userData["motherTongue"]!),
                 // linePadding(context,ref,"Country","country", ref.watch(userDataProvider).userData["country"]!),
@@ -146,24 +146,30 @@ class SettingPage extends ConsumerWidget {
   Padding linePadding (BuildContext context,WidgetRef ref,String displayedItem,String databaseItem, dynamic value) {
 
     String displayedValue;
-    if(databaseItem=="gender"){
-      displayedValue=getMasterData("gender",value,ref).name;
-
-    }else if(databaseItem=="level"){
-      displayedValue=getMasterData("level",value,ref).name;
-
-    }else if(databaseItem=="country"||databaseItem=="homeCountry"){
-      displayedValue=getMasterData("country",value,ref).name;
-
-    }else if(databaseItem=="motherTongue"){
-      displayedValue=getMasterData("language",value,ref).name;
-
-    }else if(databaseItem=="birthDate"){
-
-      DateTime birthDate = value;
-      displayedValue=birthDate.year.toString()+"/"+birthDate.month.toString()+"/"+birthDate.day.toString();
+    if(value==null){
+      displayedValue="";
     }else{
-      displayedValue=value;
+      if(databaseItem=="gender"){
+        displayedValue=getMasterData("gender",value,ref).name;
+
+      }else if(databaseItem=="level"){
+        displayedValue=getMasterData("level",value,ref).name;
+
+      }else if(databaseItem=="country"||databaseItem=="homeCountry"){
+        displayedValue=getMasterData("country",value,ref).name;
+
+      }else if(databaseItem=="motherTongue"){
+        displayedValue=getMasterData("language",value,ref).name;
+
+      }else if(databaseItem=="birthDate"){
+
+
+        DateTime birthDate = value;
+        displayedValue=birthDate.year.toString()+"/"+birthDate.month.toString()+"/"+birthDate.day.toString();
+
+      }else{
+        displayedValue=value;
+      }
     }
     return Padding(
         padding: const EdgeInsets.only(left:14,right:14,bottom:6),

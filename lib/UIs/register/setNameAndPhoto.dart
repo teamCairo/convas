@@ -37,7 +37,7 @@ class SetNameAndPhoto extends ConsumerWidget {
                       alignment: const Alignment(0.9, 0.9),
                       children: [commonCircleAvatarImage(
                           radius: 80,
-                          image:ref.watch(registerProvider).photo,
+                          image:ref.watch(registerProvider).photo==null?null:Image.file(ref.watch(registerProvider).photo!),
                           name:""
                       ),
                         const Icon(Icons.camera_alt),

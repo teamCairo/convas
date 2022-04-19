@@ -30,7 +30,7 @@ class OptionFrequencySetting extends ConsumerWidget {
                   Column(
                     children: [
                       const SizedBox(height: 20,),
-                      commonText20BlackCenter("Will you set how often you want to take a lesson?"),
+                      commonText24BlackBoldCenter("Will you set how often you want to take a lesson?"),
                       const SizedBox(height: 20,),
                       commonText16Gray("We recommend you to set frequency to keep learning"),
                     ],
@@ -43,6 +43,18 @@ class OptionFrequencySetting extends ConsumerWidget {
 
                   Column(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical:8.0),
+                        child:commonButtonWhiteBorderRound(
+                          text: "No, I won't",
+                          onPressed: () async {
+                            await commonShowOkInfoDialog(context, "You can set later easily");
+                            ref.read(registerProvider.notifier).setCanBeFound(false);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => const DataPreparing()),
+                                    (_) => false);
+                          },),),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical:8.0),
                         child:commonButtonOrangeRound(
@@ -59,18 +71,6 @@ class OptionFrequencySetting extends ConsumerWidget {
                               ),
                             );
                           },),),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical:8.0),
-                        child:commonButtonOrangeRound(
-                          text: "No, I won't",
-                          onPressed: () async {
-                            await commonShowOkInfoDialog(context, "You can set later easily");
-                            ref.read(registerProvider.notifier).setCanBeFound(false);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => const DataPreparing()),
-                                    (_) => false);
-                          },),)
                     ],
                   ),
 

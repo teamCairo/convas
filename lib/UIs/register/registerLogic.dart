@@ -13,6 +13,7 @@ import '../../common/UI/commonOthersUI.dart';
 import '../../daoFirebase/usersDaoFirebase.dart';
 import '../../daoIsar/settingDaoIsar.dart';
 import '../../entityIsar/settingEntityIsar.dart';
+import '../../faoFirebaseStorage/usersPhotoFaoFirebase.dart';
 import '../login/loginLogic.dart';
 import '../login/rootUI.dart';
 
@@ -51,6 +52,7 @@ Future<void> insertUser(WidgetRef ref,String email)async {
       placeWannaGo: "",
       greeting: "",
       description: "",
+      profilePhotoNameSuffix:ref.watch(registerProvider).profilePhotoNameSuffix,
       userType:  ref.watch(registerProvider).userType,
       messageTokenId:messageTokenId,
       programId:"registerLogic",
@@ -66,6 +68,8 @@ Future<void> insertUser(WidgetRef ref,String email)async {
       timesAWeek: ref.watch(registerProvider).timesAWeek,
 
   );
+
+  await uploadAndInsertPhotoWhenRegister( ref,userDocId);
 
   await insertOrUpdateIsarSetting(Setting(
     "localUserInfo",

@@ -186,7 +186,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
         _userData["userDocId"] = snapshot.docs[0].id;
         _userData['name'] = snapshot.docs[0].get('name');
         _userData['email'] = snapshot.docs[0].get('email');
-        _userData['birthDate'] = snapshot.docs[0].get('birthDate').toDate();
+        _userData['birthDate'] = snapshot.docs[0].get('birthDate')==null?null:snapshot.docs[0].get('birthDate').toDate();
         _userData['level'] = snapshot.docs[0].get('level');
         _userData['occupation'] = snapshot.docs[0].get('occupation');
         _userData['motherTongue'] = snapshot.docs[0].get('motherTongue');
@@ -228,7 +228,7 @@ class UserDataProviderNotifier extends ChangeNotifier {
             userDocId: snapshot.docs[0].id,
             name: snapshot.docs[0].get('name'),
             email: snapshot.docs[0].get('email'),
-            birthDate: snapshot.docs[0].get('birthDate').toDate(),
+            birthDate: snapshot.docs[0].get('birthDate')==null?null:snapshot.docs[0].get('birthDate').toDate(),
             level: snapshot.docs[0].get('level'),
             occupation: snapshot.docs[0].get('occupation'),
             motherTongue: snapshot.docs[0].get('motherTongue'),

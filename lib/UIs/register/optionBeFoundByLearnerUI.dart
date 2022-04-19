@@ -1,3 +1,4 @@
+import 'package:convas/UIs/register/registerBirthDateAndGenderUI.dart';
 import 'package:convas/UIs/register/registerLogic.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
@@ -30,38 +31,43 @@ class OptionBeFoundLearner extends ConsumerWidget {
                       const SizedBox(height: 20,),
                       commonText20BlackCenter("Do you want to learn with other learners?"),
                       const SizedBox(height: 20,),
-                      commonText16Gray("This helps you learn cheaply"),
+                      commonText16Gray("This helps you learn cheaply and help each other and..."),
                     ],
+                  ),
+                  Container(height:120,
+                    width:150,
+                    color:Colors.blue,
+                    child:commonText16Gray("image or slideshow"),
                   ),
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(vertical:8.0),
+                        child:commonButtonWhiteBorderRound(
+                          text: "No, I don't",
+                          onPressed: ()  {
+                            ref.read(registerProvider.notifier).setCanBeFound(false);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => const RegisterBirthDateAndGender()),
+                                    (_) => false);
+                          },),),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical:8.0),
                         child:commonButtonOrangeRound(
                           text: "Yes, I do",
                           onPressed: ()  {
                             commonShowOkNgInfoDialog(
                                 context,
                                 'Other learner can find you',
-                                (){
+                                    (){
                                   ref.read(registerProvider.notifier).setCanBeFound(true);
                                   Navigator.pushAndRemoveUntil(
                                       context,
-                                      MaterialPageRoute(builder: (context) => const DataPreparing()),
+                                      MaterialPageRoute(builder: (context) => const RegisterBirthDateAndGender()),
                                           (_) => false);
                                 });
                           },),),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child:commonButtonOrangeRound(
-                          text: "No, I don't",
-                          onPressed: ()  {
-                            ref.read(registerProvider.notifier).setCanBeFound(false);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => const DataPreparing()),
-                                    (_) => false);
-                          },),)
                     ],
                   ),
 

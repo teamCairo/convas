@@ -12,8 +12,8 @@ class RegisterNotifier extends ChangeNotifier {
   DateTime? _continualUntil;
   DateTime? get continualUntil=>_continualUntil;
 
-  Image? _photo;
-  Image? get photo=>_photo;
+  File? _photo;
+  File? get photo=>_photo;
 
   bool _monday=false;
   bool get monday =>_monday;
@@ -33,6 +33,9 @@ class RegisterNotifier extends ChangeNotifier {
   String _goalCategory="";
   String get goalCategory=>_goalCategory;
 
+  String _profilePhotoNameSuffix="";
+  String get profilePhotoNameSuffix=>_profilePhotoNameSuffix;
+
 
   String _goal="";
   String get goal=>_goal;
@@ -46,7 +49,7 @@ class RegisterNotifier extends ChangeNotifier {
   String _userType="";
   String get userType=>_userType;
 
-  int _timesAWeek=0;
+  int _timesAWeek=3;
   int get timesAWeek=>_timesAWeek;
 
   bool _canBeFound=false;
@@ -55,6 +58,7 @@ class RegisterNotifier extends ChangeNotifier {
   void initialize() async {
     _continualUntil=DateTime.now().add(const Duration(days:40));
     _userType="";
+    _profilePhotoNameSuffix="";
     _goal="";
     _name="";
     _monday=false;
@@ -65,8 +69,9 @@ class RegisterNotifier extends ChangeNotifier {
     _saturday=false;
     _sunday=false;
     _birthDate=null;
-    _timesAWeek=0;
+    _timesAWeek=3;
     _goalCategory="";
+    _photo=null;
   }
 
   setPhoto(WidgetRef ref)async{
@@ -77,8 +82,11 @@ class RegisterNotifier extends ChangeNotifier {
         maxHeight: 800,
         imageQuality: 40);
     if (pickerFile != null) {
-      _photo = Image.file(File(pickerFile.path));
+      _photo = File(pickerFile.path);
       //TODO 圧縮率などは調整
+      _profilePhotoNameSuffix=_photo!.path.substring(
+        _photo!.path.lastIndexOf('.'),
+      );
     }
     notifyListeners();
   }
