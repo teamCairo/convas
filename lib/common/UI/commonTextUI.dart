@@ -193,6 +193,22 @@ Padding commonText24BlackBoldCenter(String text) {
   );
 }
 
+Padding commonText24BlackBoldLeft(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 24,
+            color: Colors.black87,
+          ),
+        )),
+  );
+}
+
 
 Padding commonText16BlackCenter(String text) {
   return Padding(

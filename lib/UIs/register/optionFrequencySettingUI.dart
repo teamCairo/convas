@@ -52,7 +52,7 @@ class OptionFrequencySetting extends ConsumerWidget {
                             ref.read(registerProvider.notifier).setCanBeFound(false);
                             Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (context) => const DataPreparing()),
+                                MaterialPageRoute(builder: (context) => const OptionBeFoundLearner()),
                                     (_) => false);
                           },),),
                       Padding(

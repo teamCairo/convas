@@ -132,7 +132,7 @@ Widget commonButtonSmallOrangeRound(
 
 
 Widget commonIconButtonSmallWhiteBorderRound(
-    {required IconData iconData, required String text, required Function()? onPressed}) {
+    {Size? size,required IconData iconData, required String text, required Function()? onPressed}) {
   return ElevatedButton.icon(
     label: Text(
       text,
@@ -143,6 +143,7 @@ Widget commonIconButtonSmallWhiteBorderRound(
       ),
     ),
     style: OutlinedButton.styleFrom(
+        minimumSize:size,
         primary: Colors.white10,
         backgroundColor: Colors.white,
         shape: const StadiumBorder(),

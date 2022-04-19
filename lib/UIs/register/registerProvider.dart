@@ -91,7 +91,6 @@ class RegisterNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-
   setGoalCategory(String value){
     _goalCategory=value;
   }

@@ -58,6 +58,7 @@ class LoginPage extends ConsumerWidget {
                   commonIconButtonWhiteBorderRound(
                     text: "Sign Up",
                     onPressed: () async {
+                      FocusScope.of(context).requestFocus(FocusNode());
                       try {
                         // メール/パスワードでユーザー登録
                         final FirebaseAuth auth = FirebaseAuth.instance;

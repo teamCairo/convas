@@ -7,6 +7,7 @@ import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/UI/commonPushUI.dart';
 import 'dataPrepareingUI.dart';
 
 
@@ -19,7 +20,7 @@ class OptionBeFoundLearner extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite("Register"),
+      appBar: commonAppbarWhite(""),
       body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -30,7 +31,7 @@ class OptionBeFoundLearner extends ConsumerWidget {
                     children: [
                       const SizedBox(height: 20,),
                       commonText20BlackCenter("Do you want to learn with other learners?"),
-                      const SizedBox(height: 20,),
+                      const SizedBox(height: 20),
                       commonText16Gray("This helps you learn cheaply and help each other and..."),
                     ],
                   ),
@@ -47,10 +48,23 @@ class OptionBeFoundLearner extends ConsumerWidget {
                           text: "No, I don't",
                           onPressed: ()  {
                             ref.read(registerProvider.notifier).setCanBeFound(false);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => const RegisterBirthDateAndGender()),
-                                    (_) => false);
+                            Navigator.of(context).push(
+                              PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) {
+                                  return const RegisterBirthDateAndGender();
+                                },
+                                transitionsBuilder:
+                                    (context, animation, secondaryAnimation, child) {
+                                  return commonFunctionPushSlideHorizon(
+                                      context, animation, secondaryAnimation, child);
+                                },
+                              ),
+                            );
+                            // Navigator.pushAndRemoveUntil(
+                            //     context,
+                            //     MaterialPageRoute(builder: (context) => const RegisterBirthDateAndGender()),
+                            //         (_) => false);
                           },),),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical:8.0),
@@ -62,10 +76,23 @@ class OptionBeFoundLearner extends ConsumerWidget {
                                 'Other learner can find you',
                                     (){
                                   ref.read(registerProvider.notifier).setCanBeFound(true);
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => const RegisterBirthDateAndGender()),
-                                          (_) => false);
+                                  Navigator.of(context).push(
+                                    PageRouteBuilder(
+                                      pageBuilder:
+                                          (context, animation, secondaryAnimation) {
+                                        return const RegisterBirthDateAndGender();
+                                      },
+                                      transitionsBuilder:
+                                          (context, animation, secondaryAnimation, child) {
+                                        return commonFunctionPushSlideHorizon(
+                                            context, animation, secondaryAnimation, child);
+                                      },
+                                    ),
+                                  );
+                                  // Navigator.pushAndRemoveUntil(
+                                  //     context,
+                                  //     MaterialPageRoute(builder: (context) => const RegisterBirthDateAndGender()),
+                                  //         (_) => false);
                                 });
                           },),),
                     ],
