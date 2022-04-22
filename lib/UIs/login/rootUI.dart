@@ -1,10 +1,11 @@
 import 'package:convas/UIs/login/rootProvider.dart';
 import 'package:convas/UIs/findRoute/searchUsersMainPageUI.dart';
-import 'package:convas/UIs/now/nowPageUI.dart';
+import 'package:convas/UIs/recommendation/recommendedTeacher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
 
+import '../../text/textRoot.dart';
 import '../myPageRoute/myPageUI.dart';
 import '../talk/talkUI.dart';
 
@@ -46,9 +47,13 @@ class Root extends ConsumerWidget {
       int selectedIndex, WidgetRef ref) {
     switch (selectedIndex) {
       case 0:
-        return SearchUsersMainPage();
+        return RecommendedTeacher();
       case 1:
-      return Talk();
+        return SearchUsersMainPage();
+      case 2:
+        return Talk();
+      case 3:
+        return TextRoot();
       default:
         return MyPage();
     }
