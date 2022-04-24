@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'dataPrepareingUI.dart';
+import '../dataPrepareingUI.dart';
 
 class SetTeacherInfo extends ConsumerWidget {
   const SetTeacherInfo({
@@ -25,7 +25,7 @@ class SetTeacherInfo extends ConsumerWidget {
     }
 
     return Scaffold(
-      appBar: commonAppbarWhite("Register"),
+      appBar: commonAppbarWhite(""),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),

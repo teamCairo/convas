@@ -1,5 +1,6 @@
 import 'package:convas/UIs/register/learner/optionGoalSettingUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
+import 'package:convas/UIs/register/teacher/setTeacherInfo.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
@@ -80,18 +81,35 @@ class SetNameAndPhoto extends ConsumerWidget {
                   commonButtonOrangeRound(
                     text: "Next",
                     onPressed: () {
-                      Navigator.of(context).push(
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) {
-                            return const OptionGoalSetting();
-                          },
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            return commonFunctionPushSlideHorizon(
-                                context, animation, secondaryAnimation, child);
-                          },
-                        ),
-                      );
+                      if(ref.watch(registerProvider).userType=="1"){
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation, secondaryAnimation) {
+                              return const OptionGoalSetting();
+                            },
+                            transitionsBuilder:
+                                (context, animation, secondaryAnimation, child) {
+                              return commonFunctionPushSlideHorizon(
+                                  context, animation, secondaryAnimation, child);
+                            },
+                          ),
+                        );
+
+                      }else{
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation, secondaryAnimation) {
+                              return const SetTeacherInfo();
+                            },
+                            transitionsBuilder:
+                                (context, animation, secondaryAnimation, child) {
+                              return commonFunctionPushSlideHorizon(
+                                  context, animation, secondaryAnimation, child);
+                            },
+                          ),
+                        );
+
+                      }
                     },
                   ),
                   const SizedBox(height:14)
