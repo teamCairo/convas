@@ -1,6 +1,6 @@
 import 'package:convas/UIs/register/registerProvider.dart';
-import 'package:convas/UIs/register/setDayOfWeek.dart';
-import 'package:convas/UIs/register/setFrequencyLogic.dart';
+import 'package:convas/UIs/register/learner/setDayOfWeek.dart';
+import 'package:convas/UIs/register/learner/setFrequencyLogic.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../common/UI/commonPushUI.dart';
+import '../../../common/UI/commonPushUI.dart';
 
 class SetFrequency extends ConsumerWidget {
   const SetFrequency({

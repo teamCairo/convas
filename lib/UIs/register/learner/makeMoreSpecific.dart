@@ -1,5 +1,5 @@
 import 'package:convas/UIs/register/registerProvider.dart';
-import 'package:convas/UIs/register/setGoalDetailUI.dart';
+import 'package:convas/UIs/register/learner/setGoalDetailUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +9,8 @@ import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:intl/intl.dart';
 
 
-import '../../common/UI/commonButtonUI.dart';
-import '../../common/UI/commonPushUI.dart';
+import '../../../common/UI/commonButtonUI.dart';
+import '../../../common/UI/commonPushUI.dart';
 import 'optionFrequencySettingUI.dart';
 
 class MakeMoreSpecific extends ConsumerWidget {

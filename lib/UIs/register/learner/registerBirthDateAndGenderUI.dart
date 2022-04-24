@@ -1,5 +1,5 @@
 import 'package:convas/UIs/register/registerProvider.dart';
-import 'package:convas/UIs/register/selectBirthDateDialogUI.dart';
+import 'package:convas/UIs/register/learner/selectBirthDateDialogUI.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/UI/commonPushUI.dart';
-import 'dataPrepareingUI.dart';
+import '../../../common/UI/commonPushUI.dart';
+import '../dataPrepareingUI.dart';
 import 'package:intl/intl.dart';
 
 

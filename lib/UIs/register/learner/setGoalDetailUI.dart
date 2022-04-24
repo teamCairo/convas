@@ -6,7 +6,7 @@ import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/UI/commonPushUI.dart';
+import '../../../common/UI/commonPushUI.dart';
 import 'makeMoreSpecific.dart';
 
 class SetGoalDetail extends ConsumerWidget {

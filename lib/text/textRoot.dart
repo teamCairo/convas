@@ -1,8 +1,11 @@
 import 'package:convas/common/UI/commonOthersUI.dart';
+import 'package:convas/text/textDetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../common/UI/commonPushUI.dart';
 import '../common/UI/commonTextUI.dart';
 
 class TextRoot extends ConsumerWidget {
@@ -42,7 +45,6 @@ class TextRoot extends ConsumerWidget {
                 const SizedBox(width:8),
               ],
             ),
-
           ])),
     );
   }
@@ -55,7 +57,17 @@ Widget textCard(String url,String description,String goalCategoryName,WidgetRef 
     padding: const EdgeInsets.only(top: 8.0),
     child: GestureDetector(
       onTap:(){
-
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return const TextDetails();
+            },
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
+            },
+          ),
+        );
+        // launch('https://esldiscussions.com/');
       },
       child: SizedBox(
         height:250,
@@ -82,5 +94,4 @@ Widget textCard(String url,String description,String goalCategoryName,WidgetRef 
       ),
     ),
   );
-
 }

@@ -1,4 +1,4 @@
-import 'package:convas/UIs/register/optionGoalSettingUI.dart';
+import 'package:convas/UIs/register/learner/optionGoalSettingUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';

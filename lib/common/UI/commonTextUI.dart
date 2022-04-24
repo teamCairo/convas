@@ -242,6 +242,22 @@ Padding black16TextLeft(String text) {
   );
 }
 
+Padding commonText16BlueLeft(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 0.0),
+    child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: Colors.blueAccent,
+          ),
+        )),
+  );
+}
+
 Padding commonText16GrayLeft(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 0.0),

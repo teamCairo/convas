@@ -1,14 +1,14 @@
 import 'package:convas/UIs/register/registerLogic.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
-import 'package:convas/UIs/register/setFrequencyUI.dart';
+import 'package:convas/UIs/register/learner/setFrequencyUI.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/UI/commonPushUI.dart';
-import 'dataPrepareingUI.dart';
+import '../../../common/UI/commonPushUI.dart';
+import '../dataPrepareingUI.dart';
 import 'optionBeFoundByLearnerUI.dart';
 
 class OptionFrequencySetting extends ConsumerWidget {
