@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:convas/common/provider/userProvider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +14,8 @@ Future<void> insertTestMasterData(WidgetRef ref) async {
 
   insertMasterUnitData(ref:ref,masterGroupCode:"gender",code:"1",name:"Male",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"gender",code:"2",name:"Female",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
-  insertMasterUnitData(ref:ref,masterGroupCode:"gender",code:"3",name:"Other",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"gender",code:"3",name:"Others",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"gender",code:"4",name:"Secret",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
 
   insertMasterUnitData(ref:ref,masterGroupCode:"language",code:"ENG",name:"English",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"language",code:"JPN",name:"Japanese",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");

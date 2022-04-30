@@ -49,6 +49,11 @@ class RegisterNotifier extends ChangeNotifier {
   String _userType="";
   String get userType=>_userType;
 
+  String _gender="";
+  String get gender=>_gender;
+  String _level="";
+  String get level=>_level;
+
   int _timesAWeek=3;
   int get timesAWeek=>_timesAWeek;
 
@@ -58,6 +63,8 @@ class RegisterNotifier extends ChangeNotifier {
   void initialize() async {
     _continualUntil=DateTime.now().add(const Duration(days:40));
     _userType="";
+    _gender="";
+    _level="";
     _profilePhotoNameSuffix="";
     _goal="";
     _name="";
@@ -93,6 +100,16 @@ class RegisterNotifier extends ChangeNotifier {
 
   setGoalCategory(String value){
     _goalCategory=value;
+  }
+
+  setGender(String value){
+    _gender=value;
+    notifyListeners();
+  }
+
+  setLevel(String value){
+    _level=value;
+    notifyListeners();
   }
 
   setName(String value){

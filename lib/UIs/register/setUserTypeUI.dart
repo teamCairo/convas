@@ -1,7 +1,5 @@
 import 'package:convas/UIs/register/registerProvider.dart';
-import 'package:convas/UIs/register/setNameAndPhoto.dart';
-import 'package:convas/UIs/register/teacher/setTeacherInfo.dart';
-import 'package:convas/common/UI/commonButtonUI.dart';
+import 'package:convas/UIs/register/setNameAndPhotoUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';

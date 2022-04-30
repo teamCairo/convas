@@ -101,7 +101,7 @@ class SearchUsersNotifier extends ChangeNotifier {
         searchConditionLoginTime:_tmpSearchConditionLoginTime,
         searchConditionCategories:_tmpSearchConditionCategories,
         searchConditionCourses:_tmpSearchConditionCourses,
-        searchConditionUserType:_tmpSearchConditionUserType,
+        searchConditionUserType:"2",
         searchConditionAllKeyword:"",
         userDocId: ref.watch(userDataProvider).userData["userDocId"]);
     _searchProcessFlg=false;

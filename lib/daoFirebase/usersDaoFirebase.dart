@@ -139,7 +139,7 @@ Future<String> insertFirebaseUser({
           'placeWannaGo': placeWannaGo,
           'greeting': greeting,
           'description': description,
-          'userType':"1",
+          'userType':userType,
           'searchConditionAge': '18, 100',
           'searchConditionLevel': '',
           'searchConditionMotherTongue': '',

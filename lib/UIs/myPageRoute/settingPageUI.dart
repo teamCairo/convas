@@ -1,6 +1,7 @@
 import 'package:convas/UIs/myPageRoute/settingEditDescriptionPageUI.dart';
 import 'package:convas/UIs/myPageRoute/settingEditTextPageUI.dart';
 import 'package:convas/UIs/myPageRoute/settingEditRadioPageUI.dart';
+import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import '../../common/UI/commonButtonUI.dart';
@@ -121,27 +122,61 @@ class SettingPage extends ConsumerWidget {
                       ),
                     )),
 
-                Padding(
-                    padding: const EdgeInsets.only(left: 14.0,bottom: 6),
-                    child: commonText16BlackLeft("Personal Info")),
-                linePadding(context,ref,"Name","name", ref.watch(userDataProvider).userData["name"]),
-                // linePadding(context,ref,"E-mail","email", ref.watch(userDataProvider).userData["email"]!),
-                linePadding(context,ref,"Birth Date","birthDate", ref.watch(userDataProvider).userData["birthDate"]),
-                linePadding(context,ref,"English Level","level", ref.watch(userDataProvider).userData["level"]),
-                // linePadding(context,ref,"Occupation","occupation", ref.watch(userDataProvider).userData["occupation"]!),
-                // linePadding(context,ref,"mother Tongue","motherTongue", ref.watch(userDataProvider).userData["motherTongue"]!),
-                // linePadding(context,ref,"Country","country", ref.watch(userDataProvider).userData["country"]!),
-                // linePadding(context,ref,"Town","town", ref.watch(userDataProvider).userData["town"]!),
-                // linePadding(context,ref,"Home Country","homeCountry", ref.watch(userDataProvider).userData["homeCountry"]!),
-                // linePadding(context,ref,"Home Town","homeTown", ref.watch(userDataProvider).userData["homeTown"]!),
-                // linePadding(context,ref,"gender","gender", ref.watch(userDataProvider).userData["gender"]!),
-                // linePadding(context,ref,"Place I wanna go","placeWannaGo", ref.watch(userDataProvider).userData["placeWannaGo"]!),
-
-
+                mainArea( ref,  context)
               ])),
         ));
   }
 
+  Widget mainArea(WidgetRef ref, BuildContext context){
+
+    if(ref.watch(userDataProvider).userData["userType"]=="1"){
+      //learner
+      return
+        Column(
+            children:[
+              Padding(
+                  padding: const EdgeInsets.only(left: 14.0,bottom: 6),
+                  child: commonText16BlackLeft("Personal Info")),
+              linePadding(context,ref,"Name","name", ref.watch(userDataProvider).userData["name"]),
+              // linePadding(context,ref,"E-mail","email", ref.watch(userDataProvider).userData["email"]!),
+              linePadding(context,ref,"Birth Date","birthDate", ref.watch(userDataProvider).userData["birthDate"]),
+              linePadding(context,ref,"English Level","level", ref.watch(userDataProvider).userData["level"]),
+              // linePadding(context,ref,"Occupation","occupation", ref.watch(userDataProvider).userData["occupation"]!),
+              // linePadding(context,ref,"mother Tongue","motherTongue", ref.watch(userDataProvider).userData["motherTongue"]!),
+              // linePadding(context,ref,"Country","country", ref.watch(userDataProvider).userData["country"]!),
+              // linePadding(context,ref,"Town","town", ref.watch(userDataProvider).userData["town"]!),
+              // linePadding(context,ref,"Home Country","homeCountry", ref.watch(userDataProvider).userData["homeCountry"]!),
+              // linePadding(context,ref,"Home Town","homeTown", ref.watch(userDataProvider).userData["homeTown"]!),
+              linePadding(context,ref,"gender","gender", ref.watch(userDataProvider).userData["gender"]!),
+              // linePadding(context,ref,"Place I wanna go","placeWannaGo", ref.watch(userDataProvider).userData["placeWannaGo"]!),
+
+            ]
+        );
+    }else{
+      //teacher
+      return
+        Column(
+            children:[
+              Padding(
+                  padding: const EdgeInsets.only(left: 14.0,bottom: 6),
+                  child: commonText16BlackLeft("Personal Info")),
+              linePadding(context,ref,"Name","name", ref.watch(userDataProvider).userData["name"]),
+              // linePadding(context,ref,"E-mail","email", ref.watch(userDataProvider).userData["email"]!),
+              linePadding(context,ref,"Birth Date","birthDate", ref.watch(userDataProvider).userData["birthDate"]),
+              // linePadding(context,ref,"English Level","level", ref.watch(userDataProvider).userData["level"]),
+              linePadding(context,ref,"Occupation","occupation", ref.watch(userDataProvider).userData["occupation"]!),
+              linePadding(context,ref,"mother Tongue","motherTongue", ref.watch(userDataProvider).userData["motherTongue"]!),
+              linePadding(context,ref,"Country","country", ref.watch(userDataProvider).userData["country"]!),
+              linePadding(context,ref,"Town","town", ref.watch(userDataProvider).userData["town"]!),
+              linePadding(context,ref,"Home Country","homeCountry", ref.watch(userDataProvider).userData["homeCountry"]!),
+              linePadding(context,ref,"Home Town","homeTown", ref.watch(userDataProvider).userData["homeTown"]!),
+              linePadding(context,ref,"gender","gender", ref.watch(userDataProvider).userData["gender"]!),
+              // linePadding(context,ref,"Place I wanna go","placeWannaGo", ref.watch(userDataProvider).userData["placeWannaGo"]!),
+
+            ]
+        );
+    }
+  }
 
   Padding linePadding (BuildContext context,WidgetRef ref,String displayedItem,String databaseItem, dynamic value) {
 

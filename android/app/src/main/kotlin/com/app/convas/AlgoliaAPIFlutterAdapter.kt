@@ -39,8 +39,8 @@ class AlgoliaAPIFlutterAdapter(
         var searchConditionbirthDateMax =  args[3]
 
 
-        var searchConditionLevelList =  fromTextToList(args[4],"level")
-        var searchConditionMotherTongueList =  fromTextToList(args[5],"motherTongue")
+//        var searchConditionLevelList =  fromTextToList(args[4],"level")
+//        var searchConditionMotherTongueList =  fromTextToList(args[5],"motherTongue")
         var searchConditionCountryList =  fromTextToList(args[6],"country")
         var searchConditionGenderList =  fromTextToList(args[7],"gender")
 
@@ -54,8 +54,8 @@ class AlgoliaAPIFlutterAdapter(
 
         val query = Query(query=searchConditionAllKeyword,
             facetFilters= listOf(
-                searchConditionLevelList,
-                searchConditionMotherTongueList,
+//                searchConditionLevelList,
+//                searchConditionMotherTongueList,
                 searchConditionCountryList,
                 searchConditionGenderList,
                 searchConditionUserTypeList,
@@ -63,7 +63,7 @@ class AlgoliaAPIFlutterAdapter(
                 listOf("objectID:-$userDocId")),
             numericFilters = listOf(listOf("birthDate<$searchConditionbirthDateMax"),
                 listOf("birthDate>$searchConditionbirthDateMin"),
-                listOf("lastLoginTime>$searchConditionlastLogin"),
+//                listOf("lastLoginTime>$searchConditionlastLogin"),
             )
         )
 

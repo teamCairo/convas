@@ -1,6 +1,6 @@
 import 'package:convas/UIs/register/learner/optionGoalSettingUI.dart';
+import 'package:convas/UIs/register/registerBirthDateAndGenderUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
-import 'package:convas/UIs/register/teacher/setTeacherInfo.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
@@ -99,7 +99,7 @@ class SetNameAndPhoto extends ConsumerWidget {
                         Navigator.of(context).push(
                           PageRouteBuilder(
                             pageBuilder: (context, animation, secondaryAnimation) {
-                              return const SetTeacherInfo();
+                              return const RegisterBirthDateAndGender();
                             },
                             transitionsBuilder:
                                 (context, animation, secondaryAnimation, child) {

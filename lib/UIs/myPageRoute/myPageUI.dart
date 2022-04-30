@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import '../../developerLogic/insertTestEventsData.dart';
 import '../../developerLogic/insertTestMastersData.dart';
-import '../../developerLogic/insertTestUsersData.dart';
+import '../../developerLogic/insertTestTeachersData.dart';
 import '../../developerLogic/testDataMenuSpeedDial.dart';
 import 'calendarEditUI.dart';
 import '../../common/UI/commonButtonUI.dart';

@@ -1,4 +1,4 @@
-import 'package:convas/UIs/register/learner/registerBirthDateAndGenderUI.dart';
+import 'package:convas/UIs/register/registerBirthDateAndGenderUI.dart';
 import 'package:convas/UIs/register/registerLogic.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';

@@ -21,7 +21,7 @@ class BottomNavigationBarItems extends ChangeNotifier {
     'Find',
     'Talk',
     'Text',
-    'MyPage',
+    'My page',
   ];
 
   static const List _footerIcons = [

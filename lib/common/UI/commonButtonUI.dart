@@ -130,6 +130,29 @@ Widget commonButtonSmallOrangeRound(
   );
 }
 
+Widget commonIconButtonSmallOrangeRound(
+    {Size? size,required IconData iconData, required String text, required Function()? onPressed}) {
+  return ElevatedButton.icon(
+    label: Text(
+      text,
+      style: const TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 16,
+        color: Colors.white,
+      ),
+    ),
+    style: OutlinedButton.styleFrom(
+        minimumSize:size,
+        primary: Colors.white,
+        backgroundColor: Colors.orange,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.white, width: 1),
+        elevation:0
+    ),
+    onPressed: onPressed, icon: Icon(iconData,
+      color:Colors.white),
+  );
+}
 
 Widget commonIconButtonSmallWhiteBorderRound(
     {Size? size,required IconData iconData, required String text, required Function()? onPressed}) {
