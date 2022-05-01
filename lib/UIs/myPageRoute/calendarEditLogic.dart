@@ -78,8 +78,13 @@ Future<bool> checkEventData(BuildContext context, WidgetRef ref) async{
     await commonShowOkWarningDialog(context,"If it repeats, please choose day");
     return false;
 
+
   }else if(ref.watch(calendarEditProvider).editedDateTimeFrom!.isAfter(ref.watch(calendarEditProvider).editedDateTimeTo!)){
     await commonShowOkWarningDialog(context,"End time is earlier than start time");
+    return false;
+
+  }else if((ref.watch(calendarEditProvider).editedDateTimeTo!.difference(ref.watch(calendarEditProvider).editedDateTimeFrom!).inHours)>=24){
+    await commonShowOkWarningDialog(context,"Time should be shorter than 24 hours");
     return false;
 
   }

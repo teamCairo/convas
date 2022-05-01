@@ -1,5 +1,5 @@
+import 'package:convas/UIs/findRoute/friendProfileCalendarUI.dart';
 import 'package:convas/UIs/findRoute/friendProfileUI.dart';
-import 'package:convas/UIs/login/rootProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
@@ -14,9 +14,11 @@ final _selectedFriendProfileIndexProvider = StateProvider.autoDispose((ref) {
 class FriendProfileRoot extends ConsumerWidget {
   FriendProfileRoot({
     required this.argumentFriendUserDocId,
+    required this.argumentFriendUserName,
     Key? key,
   }) : super(key: key);
   final String argumentFriendUserDocId;
+  final String argumentFriendUserName;
   bool initialProcessFlg = true;
 
 
@@ -54,7 +56,7 @@ class FriendProfileRoot extends ConsumerWidget {
       case 0:
         return FriendProfile(argumentFriendUserDocId: argumentFriendUserDocId);
       default:
-        return FriendProfile(argumentFriendUserDocId: argumentFriendUserDocId,);
+        return FriendProfileCalendar(argumentFriendUserDocId: argumentFriendUserDocId,argumentFriendUserName: argumentFriendUserName,);
 
     }
   }

@@ -72,7 +72,7 @@ class AppointRequestNotifier extends ChangeNotifier {
   //TODO 使っていないので使う必要あり
   Future<void> initializeAppointment(WidgetRef ref, DateTime from,DateTime to,String friendUserDocId,String friendUserName)async{
 
-    List<Event> _firebaseEventList=await selectFirebaseEventsByDateTimeAndFriend(from, to, friendUserDocId);
+    List<Event> _firebaseEventList=await selectFirebaseEventsNotRepeatByDateTimeAndFriend(from, to, friendUserDocId);
     _appointmentList=[];
 
     for(int i=0;i<_firebaseEventList.length;i++){

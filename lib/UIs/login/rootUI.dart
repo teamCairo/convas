@@ -1,6 +1,8 @@
 import 'package:convas/UIs/login/rootProvider.dart';
 import 'package:convas/UIs/findRoute/searchUsersMainPageUI.dart';
+import 'package:convas/UIs/myPageRoute/calendarEditUI.dart';
 import 'package:convas/UIs/recommendation/recommendedTeacher.dart';
+import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
@@ -22,7 +24,7 @@ class Root extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    ref.read(bottomNavigationBarItemsProvider.notifier).initialize();
+    ref.read(bottomNavigationBarItemsProvider.notifier).initialize(ref);
     final _selectedIndex = ref.watch(_selectedIndexProvider);
 
     return Scaffold(
@@ -47,7 +49,7 @@ class Root extends ConsumerWidget {
       int selectedIndex, WidgetRef ref) {
     switch (selectedIndex) {
       case 0:
-        return RecommendedTeacher();
+        return ref.watch(userDataProvider).userData["userType"]=="1"? RecommendedTeacher():const CalendarEdit(null);
       case 1:
         return SearchUsersMainPage();
       case 2:

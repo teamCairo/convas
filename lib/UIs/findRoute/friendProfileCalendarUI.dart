@@ -1,15 +1,19 @@
-import 'package:convas/UIs/now/nowPageProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../common/UI/commonOthersUI.dart';
-import '../../common/commonValues.dart';
+import 'friendProfileCalendarDetailBottomSheetLogic.dart';
+import 'friendProfileCalendarProvider.dart';
+
 
 class FriendProfileCalendar extends ConsumerWidget {
   FriendProfileCalendar({
+    required this.argumentFriendUserDocId,
+    required this.argumentFriendUserName,
     Key? key,
   }) : super(key: key);
+  final String argumentFriendUserDocId;
+  final String argumentFriendUserName;
 
   bool initialProcessFlg = true;
 
@@ -17,7 +21,7 @@ class FriendProfileCalendar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     if (initialProcessFlg) {
       initialProcessFlg = false;
-      // ref.watch(nowPageProvider.notifier).initializeEditedEvent();
+      ref.read(friendProfileCalendarProvider.notifier).initialize();
     }
 
     return Scaffold(
@@ -28,14 +32,14 @@ class FriendProfileCalendar extends ConsumerWidget {
                   child: SfCalendar(
                       timeSlotViewSettings: const TimeSlotViewSettings(
                           timeInterval: Duration(hours: 2)),
-                      view: CalendarView.timelineDay,
+                      view: CalendarView.week,
                       monthViewSettings: const MonthViewSettings(showAgenda: true),
-                      dataSource: ref.watch(nowPageProvider).eventDataSource,
+                      dataSource: ref.watch(friendProfileCalendarProvider).eventDataSource,
                       onTap: (calendarTapDetails) async {
-                        // ref.read(nowPageProvider.notifier).setCalendarTapDetails(calendarTapDetails);
+                        await selectCalendarTimeOnFriendProfile(calendarTapDetails, ref, context, argumentFriendUserDocId);
                       },
                       onViewChanged:(viewChangedDetails) async {
-                        // ref.read(nowPageProvider.notifier).refleshEventShow(viewChangedDetails.visibleDates[0].add(const Duration(days:-1)), viewChangedDetails.visibleDates[0].add(const Duration(days:1)));
+                        ref.read(friendProfileCalendarProvider.notifier).calendarRefreshShow( ref,  viewChangedDetails.visibleDates.first, viewChangedDetails.visibleDates.last, argumentFriendUserDocId, argumentFriendUserName);
                       })
               ),
             ],

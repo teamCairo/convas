@@ -3,33 +3,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
 
+import '../../common/provider/userProvider.dart';
+
 class BottomNavigationBarItems extends ChangeNotifier {
   List<BottomNavigationBarItem> _bottomNavigationBarItems = [];
 
   get bottomNavigationBarItems => _bottomNavigationBarItems;
 
-  void initialize() {
+  void initialize(WidgetRef ref) {
+
+    _footerItemNames = [
+      ref.watch(userDataProvider).userData["userType"]=="1"? 'Top':'Calendar',
+      'Find',
+      'Talk',
+      'Text',
+      'My page',
+    ];
+
+    _footerIcons = [
+      ref.watch(userDataProvider).userData["userType"]=="1"? Icons.star:Icons.calendar_today_outlined,
+      Icons.search,
+      Icons.message_outlined,
+      Icons.book,
+      Icons.work_outline,
+    ];
+
     _bottomNavigationBarItems.clear();
     _bottomNavigationBarItems.add(updateActiveState(0));
     for (var i = 1; i < _footerItemNames.length; i++) {
       _bottomNavigationBarItems.add(updateDeactiveState(i));
     }
+
   }
 
-  static const _footerItemNames = [
-    'Top',
-    'Find',
-    'Talk',
-    'Text',
-    'My page',
+  List _footerItemNames = [
   ];
 
-  static const List _footerIcons = [
-    Icons.star,
-    Icons.search,
-    Icons.message_outlined,
-    Icons.book,
-    Icons.work_outline,
+  List  _footerIcons = [
   ];
 
   /// インデックスのアイテムをアクティベートする

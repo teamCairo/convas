@@ -61,10 +61,10 @@ class SearchUsersMainPage extends ConsumerWidget {
                               onPressed: () {
                                 ref
                                     .read(searchUsersProvider.notifier)
-                                    .searchUsers(ref);
+                                    .setSearchProcessingFlgTrue();
                                 ref
                                     .read(searchUsersProvider.notifier)
-                                    .setSearchProcessingFlgTrue();
+                                    .searchUsers(ref);
                               },
                               icon: const Icon(Icons.refresh),
                               iconSize: 26),
@@ -117,6 +117,7 @@ class SearchUsersMainPage extends ConsumerWidget {
             MaterialPageRoute(builder: (context) {
               return FriendProfileRoot(
                 argumentFriendUserDocId:userData.objectID,
+                argumentFriendUserName:userData.name,
               );
             }),
           );

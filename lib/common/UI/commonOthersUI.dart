@@ -83,6 +83,7 @@ required BuildContext context}
       MaterialPageRoute(builder: (context) {
         return FriendProfileRoot(
           argumentFriendUserDocId:userDocId,
+          argumentFriendUserName:name,
         );
       }),
     );

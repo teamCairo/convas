@@ -101,7 +101,7 @@ class SearchUsersNotifier extends ChangeNotifier {
         searchConditionLoginTime:_tmpSearchConditionLoginTime,
         searchConditionCategories:_tmpSearchConditionCategories,
         searchConditionCourses:_tmpSearchConditionCourses,
-        searchConditionUserType:"2",
+        searchConditionUserType:ref.watch(userDataProvider).userData["userType"]=="1"?"2":"1",
         searchConditionAllKeyword:"",
         userDocId: ref.watch(userDataProvider).userData["userDocId"]);
     _searchProcessFlg=false;
@@ -137,12 +137,12 @@ class SearchUsersNotifier extends ChangeNotifier {
     _tmpSearchConditionCategories=ref.watch(userDataProvider).userData["searchConditionCategories"]!;
     _tmpSearchConditionCourses=ref.watch(userDataProvider).userData["searchConditionCourses"]!;
     _tmpSearchConditionUserType=ref.watch(userDataProvider).userData["searchConditionUserType"]!;
-    notifyListeners();
+    // notifyListeners();
   }
 
   void setSearchProcessingFlgTrue(){
     _searchProcessFlg=true;
-    notifyListeners();
+    // notifyListeners();
   }
   
   void setConditionByMap(WidgetRef ref,String databaseItem,Map<String,bool> values){

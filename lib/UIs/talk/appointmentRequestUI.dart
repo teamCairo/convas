@@ -46,7 +46,6 @@ class AppointmentRequestState extends ConsumerState<AppointmentRequest> {
   @override
   void initState() {
     super.initState();
-
     //必要に応じ初期処理追加
   }
 

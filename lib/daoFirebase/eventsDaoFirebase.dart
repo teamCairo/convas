@@ -6,12 +6,25 @@ import '../common/logic/commonLogicLog.dart';
 import '../common/provider/userProvider.dart';
 import '../entityIsar/eventEntityIsar.dart';
 
-Future<List<Event>> selectFirebaseEventsByDateTimeAndFriend(
+Future<List<Event>> selectFirebaseEventsNotRepeatByDateTimeAndFriend(
     DateTime from, DateTime to, userDocId) async {
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('events')
-      .where('fromTime', isGreaterThan: Timestamp.fromDate(from))
+      .where('fromTime', isGreaterThan: Timestamp.fromDate(from.add(const Duration(days:-1))))
       .where('fromTime', isLessThan: Timestamp.fromDate(to))
+      .where('repeat', isEqualTo: false)
+      .where('userDocId',isEqualTo: userDocId)
+      .get();
+
+  List<Event> returnList = setEventListFromSnapshot(snapshot);
+  return returnList;
+}
+
+Future<List<Event>> selectRepeatingEventDateByDateTimeAndFriend(DateTime to, String userDocId) async {
+  QuerySnapshot snapshot = await FirebaseFirestore.instance
+      .collection('events')
+      .where('toTime', isLessThanOrEqualTo: Timestamp.fromDate(to))
+      .where('repeat', isEqualTo: true)
       .where('userDocId',isEqualTo: userDocId)
       .get();
 

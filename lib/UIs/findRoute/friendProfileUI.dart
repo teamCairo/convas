@@ -4,7 +4,6 @@ import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/logic/commonLogicDate.dart';
-import '../../common/logic/commonLogicList.dart';
 import '../../common/provider/masterProvider.dart';
 import 'friendProfileLogic.dart';
 import 'friendProfileProvider.dart';
@@ -21,12 +20,12 @@ class FriendProfile extends ConsumerWidget {
 
     if (ref.watch(friendProfileDataProvider).processingFlg){
       return Scaffold(
-          appBar: commonAppbarTransparent("Friend Profile"),
+          appBar: commonAppbarTransparent("Teacher Profile"),
           body: const Center(child: CircularProgressIndicator()));
 
     } else {
       return Scaffold(
-          appBar: commonAppbarTransparent("Friend Profile"),
+          appBar: commonAppbarTransparent("Teacher Profile"),
           body: Column(children: [
             Expanded(
               child: SingleChildScrollView(
@@ -99,18 +98,18 @@ class FriendProfile extends ConsumerWidget {
                                           color: Colors.black54,),
                                       )),
                                 commonLineHorizontalGrayThin(10,2),
-                                Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: black16TextLeft("Categories")),
-                                commonWrapMultiLineOrangeBorderRoundList(
-                                    masterNameListFromText(ref.watch(friendProfileDataProvider).friendProfileData["interestingCategories"],"category", ref)
-                                ),
-                                Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: black16TextLeft("Courses")),
-                                commonWrapMultiLineOrangeBorderRoundList(
-                                    masterNameListFromText(ref.watch(friendProfileDataProvider).friendProfileData["interestingCourses"], "course",ref)
-                                ),
+                                // Padding(
+                                //     padding: const EdgeInsets.only(bottom: 8),
+                                //     child: black16TextLeft("Categories")),
+                                // commonWrapMultiLineOrangeBorderRoundList(
+                                //     masterNameListFromText(ref.watch(friendProfileDataProvider).friendProfileData["interestingCategories"],"category", ref)
+                                // ),
+                                // Padding(
+                                //     padding: const EdgeInsets.only(bottom: 8),
+                                //     child: black16TextLeft("Courses")),
+                                // commonWrapMultiLineOrangeBorderRoundList(
+                                //     masterNameListFromText(ref.watch(friendProfileDataProvider).friendProfileData["interestingCourses"], "course",ref)
+                                // ),
                                 Padding(
                                     padding: const EdgeInsets.only(top:12,bottom: 8),
                                     child: commonText16BlackLeft("Self-Introduction")),
@@ -129,17 +128,17 @@ class FriendProfile extends ConsumerWidget {
                                     padding: const EdgeInsets.only(top:12,bottom: 8),
                                     child: commonText16BlackLeft("Personal Info")),
                                 linePadding(ref,"Name","name"),
-                                linePadding(ref, "E-mail", "email"),
+                                // linePadding(ref, "E-mail", "email"),
+                                linePadding(ref, "Gender", "gender"),
                                 linePadding(ref, "Age", "birthDate"),
-                                linePadding(ref, "English Level", "level"),
+                                // linePadding(ref, "English Level", "level"),
                                 linePadding(ref, "Occupation", "occupation"),
                                 linePadding(ref, "Mother Tongue", "motherTongue"),
                                 linePadding(ref, "Country", "country"),
                                 linePadding(ref, "Town", "town"),
                                 linePadding(ref, "Home Country", "homeCountry"),
                                 linePadding(ref, "Home Town", "homeTown"),
-                                linePadding(ref, "Gender", "gender"),
-                                linePadding(ref, "Place I wanna go", "placeWannaGo"),
+                                // linePadding(ref, "Place I wanna go", "placeWannaGo"),
                               ],
                             ),
                           ),
@@ -154,7 +153,7 @@ class FriendProfile extends ConsumerWidget {
 
                   },
                   text: ref.watch(friendProfileDataProvider).friendProfileData["friendFlg"]
-                      ? "Talk":"Add to Friends",
+                      ? "Talk":"Send message",
                 )
           ]));
     }
