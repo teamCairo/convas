@@ -9,10 +9,10 @@ import '../../daoIsar/friendDaoIsar.dart';
 import '../../entityIsar/friendEntityIsar.dart';
 import '../talk/appointmentRequestProvider.dart';
 
-final friendProfileCalendarDetailBottomSheetProvider = ChangeNotifierProvider(
-      (ref) => FriendProfileCalendarDetailBottomSheetNotifier(),
+final lessonRequestProvider = ChangeNotifierProvider(
+      (ref) => LessonRequestNotifier(),
 );
-class FriendProfileCalendarDetailBottomSheetNotifier extends ChangeNotifier {
+class LessonRequestNotifier extends ChangeNotifier {
 
 
   DateTime? _selectedDateTimeFrom ;
@@ -28,7 +28,8 @@ class FriendProfileCalendarDetailBottomSheetNotifier extends ChangeNotifier {
   }
 
   initialize(DateTime dateTime){
-    setSelectedDateTimeTo(dateTime);
+    _selectedDateTimeFrom=dateTime;
+    _selectedDateTimeTo=dateTime.add(const Duration(minutes:30));
   }
 
   setSelectedDateTimeTo(DateTime dateTime){

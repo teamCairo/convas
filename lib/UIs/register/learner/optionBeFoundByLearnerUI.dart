@@ -1,5 +1,4 @@
 import 'package:convas/UIs/register/registerBirthDateAndGenderUI.dart';
-import 'package:convas/UIs/register/registerLogic.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common/UI/commonPushUI.dart';
-import '../dataPrepareingUI.dart';
 
 
 class OptionBeFoundLearner extends ConsumerWidget {
