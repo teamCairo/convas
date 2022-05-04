@@ -93,20 +93,17 @@ Widget commonText16GrayRightEllipsis(String text) {
   );
 }
 
-Padding commonText20GrayLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 20,
-            color: Colors.black54,
-          ),
-        )),
-  );
+Widget commonText20GrayLeft(String text) {
+  return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 20,
+          color: Colors.black54,
+        ),
+      ));
 }
 
 
@@ -125,38 +122,32 @@ Padding commonText20BlackLeft(String text) {
         )),
   );
 }
-Padding commonText20BlackCenter(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 20,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText20BlackCenter(String text) {
+  return Align(
+      alignment: Alignment.center,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 20,
+          color: Colors.black87,
+        ),
+      ));
 }
 
 
 
-Padding commonText30BlackBoldLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 30,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText30BlackBoldLeft(String text) {
+  return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 30,
+          color: Colors.black87,
+        ),
+      ));
 }
 
 

@@ -99,12 +99,16 @@ class AppointmentRequestView extends ConsumerWidget {
   }
 
   Widget footerButtonArea(String mode, WidgetRef ref, BuildContext context) {
+
+    double widthHalfButton = (MediaQuery.of(context).size.width-56)/2;
+
     if (mode == "1") {
       return Row(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 14.0),
-            child: commonButtonRoundWhiteHalf(
+            child: commonButtonRoundWhiteSmall(
+              width:widthHalfButton,
               text: "Deny",
               onPressed: () async {
                 await ref
@@ -116,19 +120,17 @@ class AppointmentRequestView extends ConsumerWidget {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 14.0),
-            child: commonButtonRoundOrangeHalf(
-                text: "Accept",
-                onPressed: () async {
-                  await ref
-                      .read(appointRequestProvider.notifier)
-                      .acceptLessonRequest(ref);
-                  await commonShowOkInfoDialog(
-                      context, "You accepted this request");
-                  Navigator.of(context).pop();
-                }),
-          ),
+          commonButtonRoundOrangeSmall(
+              text: "Accept",
+              onPressed: () async {
+                await ref
+                    .read(appointRequestProvider.notifier)
+                    .acceptLessonRequest(ref);
+                await commonShowOkInfoDialog(
+                    context, "You accepted this request");
+                Navigator.of(context).pop();
+              },
+              width:widthHalfButton),
         ],
       );
     } else {
@@ -136,7 +138,8 @@ class AppointmentRequestView extends ConsumerWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 14.0),
-            child: commonButtonRoundWhiteHalf(
+            child: commonButtonRoundWhiteSmall(
+              width:widthHalfButton,
               text: "Cancel lesson",
               onPressed: () async {
                 commonShowOkNgInfoDialog(
@@ -149,7 +152,7 @@ class AppointmentRequestView extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 14.0),
-            child: commonButtonRoundOrangeHalf(
+            child: commonButtonRoundOrangeSmall(
                 text: "Enter room",
                 onPressed: () async {
                   Navigator.of(context).push(
@@ -163,7 +166,8 @@ class AppointmentRequestView extends ConsumerWidget {
                     ),
                   );
 
-                }),
+                },
+            width:widthHalfButton),
           ),
         ],
       );

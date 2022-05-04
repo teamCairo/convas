@@ -19,28 +19,25 @@ Widget commonButtonSingleFooter(
 
 Widget commonButtonOrangeRound(
     {required String text, required Function()? onPressed}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 30.0),
-    child: SizedBox(
-      width: double.infinity,
-      height: 50,
-      child: OutlinedButton(
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.white,
-          ),
+  return SizedBox(
+    width: double.infinity,
+    height: 50,
+    child: OutlinedButton(
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.white,
         ),
-        style: OutlinedButton.styleFrom(
-          primary: Colors.white10,
-          backgroundColor: Colors.orange,
-          shape: const StadiumBorder(),
-          side: const BorderSide(color: Colors.white, width: 0),
-        ),
-        onPressed: onPressed,
       ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.white,
+        backgroundColor: Colors.orange,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.white, width: 0),
+      ),
+      onPressed: onPressed,
     ),
   );
 }
@@ -75,86 +72,77 @@ Widget commonButtonRoundByWidthAndHeight(
   );
 }
 
-Widget commonButtonRoundHalf(
-    {required String text, required Function()? onPressed, required Color color}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-    child: SizedBox(
-      width: 150,
-      height: 50,
-      child: OutlinedButton(
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.white,
-          ),
+Widget commonButtonRoundSmall(
+    {required String text, required Function()? onPressed, required Color color,required double width}) {
+  return SizedBox(
+    width: width,
+    height: 50,
+    child: OutlinedButton(
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.white,
         ),
-        style: OutlinedButton.styleFrom(
-          primary: Colors.white10,
-          backgroundColor: color,
-          shape: const StadiumBorder(),
-          side: const BorderSide(color: Colors.white, width: 0),
-        ),
-        onPressed: onPressed,
       ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.white,
+        backgroundColor: color,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.white, width: 0),
+      ),
+      onPressed: onPressed,
     ),
   );
 }
 
-Widget commonButtonRoundOrangeHalf(
-    {required String text, required Function()? onPressed}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-    child: SizedBox(
-      width: 150,
-      height: 50,
-      child: OutlinedButton(
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.white,
-          ),
+Widget commonButtonRoundOrangeSmall(
+    {required String text, required Function()? onPressed,required double width }) {
+  return SizedBox(
+    width: width,
+    height: 50,
+    child: OutlinedButton(
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.white,
         ),
-        style: OutlinedButton.styleFrom(
-          primary: Colors.white10,
-          backgroundColor: Colors.orange,
-          shape: const StadiumBorder(),
-          side: const BorderSide(color: Colors.white, width: 0),
-        ),
-        onPressed: onPressed,
       ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.white,
+        backgroundColor: Colors.orange,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.white, width: 0),
+      ),
+      onPressed: onPressed,
     ),
   );
 }
 
-Widget commonButtonRoundWhiteHalf(
-    {required String text, required Function()? onPressed}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-    child: SizedBox(
-      width: 150,
-      height: 50,
-      child: OutlinedButton(
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.orange,
-          ),
+Widget commonButtonRoundWhiteSmall(
+    {required String text, required Function()? onPressed,required double width }) {
+  return SizedBox(
+    width: width,
+    height: 50,
+    child: OutlinedButton(
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.orange,
         ),
-        style: OutlinedButton.styleFrom(
-          primary: Colors.white10,
-          backgroundColor: Colors.white,
-          shape: const StadiumBorder(),
-          side: const BorderSide(color: Colors.orange, width: 0),
-        ),
-        onPressed: onPressed,
       ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.white,
+        backgroundColor: Colors.white,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.orange, width: 1),
+      ),
+      onPressed: onPressed,
     ),
   );
 }
@@ -185,6 +173,7 @@ Widget commonButtonSmallOrangeRound(
     ),
   );
 }
+
 
 Widget commonIconButtonSmallOrangeRound(
     {Size? size,required IconData iconData, required String text, required Function()? onPressed}) {
@@ -223,7 +212,7 @@ Widget commonIconButtonSmallWhiteBorderRound(
     ),
     style: OutlinedButton.styleFrom(
         minimumSize:size,
-        primary: Colors.white10,
+        primary: Colors.white,
         backgroundColor: Colors.white,
         shape: const StadiumBorder(),
         side: const BorderSide(color: Colors.orange, width: 1),
@@ -236,31 +225,29 @@ Widget commonIconButtonSmallWhiteBorderRound(
 
 Widget commonButtonWhiteBorderRound(
     {required String text, required Function()? onPressed}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 30.0),
-    child: SizedBox(
-      width: double.infinity,
-      height: 50,
-      child: OutlinedButton(
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.orange,
-          ),
+  return SizedBox(
+    width: double.infinity,
+    height: 50,
+    child: OutlinedButton(
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.orange,
         ),
-        style: OutlinedButton.styleFrom(
-          primary: Colors.white10,
-          backgroundColor: Colors.white,
-          shape: const StadiumBorder(),
-          side: const BorderSide(color: Colors.orange, width: 1),
-        ),
-        onPressed: onPressed,
       ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.white,
+        backgroundColor: Colors.white,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.orange, width: 1),
+      ),
+      onPressed: onPressed,
     ),
   );
 }
+
 
 
 Widget commonIconButtonOrangeRound(
@@ -355,6 +342,7 @@ Widget commonIconButtonWhiteBorderRound(
     ),
   );
 }
+
 
 
 Widget commonButtonIconCircle(

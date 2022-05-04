@@ -23,8 +23,8 @@ import '../../entityIsar/settingEntityIsar.dart';
 import '../../entityIsar/topicEntityIsar.dart';
 import '../../entityIsar/userEntityIsar.dart';
 import '../register/setUserTypeUI.dart';
-import '../register/welcomePageUI.dart';
-import 'clearLocalData.dart';
+import '../register/welcomeLeanerUI.dart';
+import 'clearLocalDataLogic.dart';
 import 'loginLogicMessage.dart';
 import 'loginLogicOnlieStatus.dart';
 
@@ -36,7 +36,7 @@ Future<void> userLocalDataCheckForInsert(String email, WidgetRef ref, BuildConte
   if(tmpSetting==null) {
     await Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
-        return WelcomePage();
+        return const SetUserType();
       }),
     );
   }else{
@@ -50,7 +50,7 @@ Future<void> userLocalDataCheckForInsert(String email, WidgetRef ref, BuildConte
             await clearLocalData();
             await Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) {
-                return WelcomePage();
+                return const SetUserType();
               }),
             );
           });

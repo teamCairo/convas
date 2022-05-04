@@ -17,106 +17,36 @@ class SetNameAndPhoto extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    return Scaffold(
-      appBar: commonAppbar(""),
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                children: [
-                  commonText24BlackBoldCenter("Edit your photo and name"),
-                ],
-              ),
-              Column(
-                children: [
-                  GestureDetector(
-                    child: Stack(
-                      alignment: const Alignment(0.9, 0.9),
-                      children: [commonCircleAvatarImage(
-                          radius: 80,
-                          image:ref.watch(registerProvider).photo==null?null:Image.file(ref.watch(registerProvider).photo!),
-                          name:""
-                      ),
-                        const Icon(Icons.camera_alt),
-                      ],
-                    ),
-                    onTap: () async=> await ref.watch(registerProvider).setPhoto(ref),
-                  ),
-                  const SizedBox(height:50),
-                  commonTextBoxBordered(
-                      text: "Name",
-                      onChanged: (String value) {
-                        ref.watch(registerProvider.notifier).setName(value);
-                      },
-                      passwordSecure:false
-                  ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top:8.0),
-                  //   child: Align(
-                  //       alignment: Alignment.topLeft,
-                  //       child: commonText14OrangeLeft("BirthDate")),
-                  // ),
-                  // Row(children: [
-                  //   Column(
-                  //     children: [
-                  //       commonText20BlackCenter(birthDate),
-                  //       Container(height:2,
-                  //           width:110,
-                  //           color:Colors.orange),
-                  //     ],
-                  //   ),
-                  //   const SizedBox(width: 6),
-                  //   commonButtonSmallOrangeRound(
-                  //       text: "Select",
-                  //       onPressed: () => selectDateForBirthDate(context, ref))
-                  // ]),
-                ],
-              ),
-              Column(
-                children: [
-                  commonButtonOrangeRound(
-                    text: "Next",
-                    onPressed: () {
-                      if(ref.watch(registerProvider).userType=="1"){
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation, secondaryAnimation) {
-                              return const OptionGoalSetting();
-                            },
-                            transitionsBuilder:
-                                (context, animation, secondaryAnimation, child) {
-                              return commonFunctionPushSlideHorizon(
-                                  context, animation, secondaryAnimation, child);
-                            },
-                          ),
-                        );
-
-                      }else{
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation, secondaryAnimation) {
-                              return const RegisterBirthDateAndGender();
-                            },
-                            transitionsBuilder:
-                                (context, animation, secondaryAnimation, child) {
-                              return commonFunctionPushSlideHorizon(
-                                  context, animation, secondaryAnimation, child);
-                            },
-                          ),
-                        );
-
-                      }
-                    },
-                  ),
-                  const SizedBox(height:14)
-                ],
-              ),
-            ]),
-      )),
-    );
+    return commonScaffold(context, ref, MainAxisAlignment.start, [
+      commonText24BlackBoldCenter("Edit your photo and name"),
+      const SizedBox(height: 30),
+      commonCircleAvatarUserImageUpload(
+          radius: 80,
+          image: ref.watch(registerProvider).photo == null
+              ? null
+              : Image.file(ref.watch(registerProvider).photo!),
+          name: "",
+          onTap: () async {
+            await ref.watch(registerProvider).setPhoto(ref);
+          }),
+      const SizedBox(height: 30),
+      commonTextBoxBordered(
+          text: "Name",
+          onChanged: (String value) {
+            ref.watch(registerProvider.notifier).setName(value);
+          },
+          passwordSecure: false),
+      commonVerticalGap(),
+      commonButtonOrangeRound(
+        text: "Next",
+        onPressed: () {
+          if (ref.watch(registerProvider).userType == "1") {
+            commonNavigatorPushPushSlideHorizon(context,  const OptionGoalSetting());
+          } else {
+            commonNavigatorPushPushSlideHorizon(context,  const RegisterBirthDateAndGender());
+          }
+        },
+      )
+    ]);
   }
 }

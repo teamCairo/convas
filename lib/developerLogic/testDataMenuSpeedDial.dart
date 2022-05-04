@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
+import '../UIs/register/setUserTypeUI.dart';
 import 'insertTestEventsData.dart';
 import 'insertTestMastersData.dart';
 import 'insertTestTeachersData.dart';
 
-SpeedDial testDataMenuSpeedDial(WidgetRef ref){
+SpeedDial testDataMenuSpeedDial(WidgetRef ref,BuildContext context){
   return SpeedDial(
     animatedIcon: AnimatedIcons.menu_close,
     animatedIconTheme: const IconThemeData(size: 22.0),
@@ -36,6 +37,18 @@ SpeedDial testDataMenuSpeedDial(WidgetRef ref){
           label: "Create test master data",
           onTap: () {
             insertTestMasterData(ref);
+          },
+          labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
+      SpeedDialChild(
+          child: const Icon(Icons.code),
+          backgroundColor: Colors.blue,
+          label: "user register",
+          onTap: () {
+             Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) {
+                return const SetUserType();
+              }),
+            );
           },
           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
     ],

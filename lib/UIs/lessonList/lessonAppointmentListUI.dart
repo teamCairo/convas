@@ -31,9 +31,9 @@ class LessonAppointmentList extends ConsumerWidget {
   }
 
   Widget buildTalkList(BuildContext context, WidgetRef ref, String userDocId) {
-    screenHeight = MediaQuery.of(context).size.height;
-    screenWidth = MediaQuery.of(context).size.width;
-    screenAdjustSizeH = MediaQuery.of(context).size.height * mediaQueryScreenHeightCoefficient;
+    // screenHeight = MediaQuery.of(context).size.height;
+    // screenWidth = MediaQuery.of(context).size.width;
+    // screenAdjustSizeH = MediaQuery.of(context).size.height * mediaQueryScreenHeightCoefficient;
 
     return FutureBuilder(
       future: selectFirebaseAppointmentByUserDocIdPlanAndCancel(

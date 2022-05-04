@@ -9,7 +9,7 @@ const platformForCallKotlin = MethodChannel('app.com.convas/app');
 
 const searchUsersImageLoadExtraNumber = 5;
 
-const mediaQueryScreenHeightCoefficient = 0.0011;
+// const mediaQueryScreenHeightCoefficient = 0.0012;
 
 const separatingCharacter = ", ";
 

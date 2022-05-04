@@ -40,7 +40,35 @@ AppBar commonAppTabBar({Color? color,PreferredSizeWidget? bottom}) {
       bottom:bottom
   );
 }
+Scaffold commonScaffold(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar}){
+  return Scaffold(
+    appBar:appBar,
+      body: SafeArea(
+      child: Padding(
+      padding: const EdgeInsets.all(20.0),
+  child:Column(
+    mainAxisAlignment:mainAxisAlignment ,
+    children:children
+  ))),
+      floatingActionButton:floatingActionButton
+  );
+}
 
+Scaffold commonScaffoldScroll(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar}){
+  return Scaffold(
+      appBar:appBar,
+      body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child:Column(
+                    mainAxisAlignment:mainAxisAlignment ,
+                    children:children
+                )),
+          )),
+      floatingActionButton:floatingActionButton
+  );
+}
 
 Widget commonLogoMain(double size){
 
@@ -86,6 +114,31 @@ AppBar commonAppbarTransparent(String text) {
         color: Colors.black87,
       ),
     ),
+  );
+}
+Widget commonVerticalGap(){
+  return const SizedBox(height: 16);
+}
+
+Widget commonHorizontalGap(){
+  return const SizedBox(width: 16);
+}
+Widget commonCircleAvatarUserImageUpload({Image? image,
+  required double radius,
+  required String name,
+ required Function() onTap}){
+  return GestureDetector(
+    child: Stack(
+      alignment: const Alignment(0.9, 0.9),
+      children: [commonCircleAvatarImage(
+          radius: radius,
+          image:image,
+          name:name
+      ),
+        const Icon(Icons.camera_alt),
+      ],
+    ),
+    onTap: onTap,
   );
 }
 

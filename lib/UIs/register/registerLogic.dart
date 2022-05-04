@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:convas/UIs/login/clearLocalData.dart';
-import 'package:convas/UIs/register/dataPrepareingUI.dart';
+import 'package:convas/UIs/login/clearLocalDataLogic.dart';
+import 'package:convas/UIs/register/dataPreparingUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

@@ -42,18 +42,19 @@ class SearchUsersConditionPage extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        commonButtonRoundHalf(text: "Reset",
+                        commonButtonRoundSmall(width:150,
+                            text: "Reset",
                             color:Colors.black38,
                             onPressed: (){
                               ref.read(searchUsersProvider.notifier).resetConditions(ref);
                             }),
-                        commonButtonRoundHalf(text: "Search",
-                            color:Colors.orange,
+                        commonButtonRoundOrangeSmall(text: "Search",
                             onPressed: (){
                               ref.read(searchUsersProvider.notifier).setSearchProcessingFlgTrue();
                               ref.read(searchUsersProvider.notifier).setConditionsToFirebaseAndSearchUsers(ref);
                               Navigator.pop(context);
-                            }),
+                            },
+                        width:150),
                       ],
                     ),
                   )
