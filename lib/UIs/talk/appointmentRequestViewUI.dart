@@ -7,7 +7,7 @@ import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonPushUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/provider/masterProvider.dart';
-import '../call/callRoomUI.dart';
+import '../call/callRoomRootUI.dart';
 import 'appointmentRequestProvider.dart';
 
 class AppointmentRequestView extends ConsumerWidget {
@@ -155,7 +155,7 @@ class AppointmentRequestView extends ConsumerWidget {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return CallRoom(appointmentId: ref.watch(appointRequestProvider).appointmentDocId, argumentFriendUserDocId: argumentFriendUserDocId);
+                        return CallRoomRoot(appointmentId: ref.watch(appointRequestProvider).appointmentDocId, argumentFriendUserDocId: argumentFriendUserDocId);
                       },
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);

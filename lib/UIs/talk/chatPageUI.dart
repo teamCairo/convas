@@ -14,7 +14,7 @@ import '../../common/provider/userProvider.dart';
 import '../../daoFirebase/chatDetailsDaoFirebase.dart';
 import '../../entityIsar/chatDetailEntityIsar.dart';
 import '../../entityIsar/friendEntityIsar.dart';
-import '../call/callRoomUI.dart';
+import '../call/callRoomRootUI.dart';
 import '../findRoute/friendProfileUI.dart';
 import '../myPageRoute/calendarEditUI.dart';
 import 'XXXXXappointmentAnswerBottomSheetUI.dart';

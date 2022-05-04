@@ -34,7 +34,6 @@ class CallRoomNotifier extends ChangeNotifier {
 
   RtcEngine get engine => _engine;
   bool _isJoinedCall = false;
-
   bool get isJoinedCall => _isJoinedCall;
   bool _isJoinedClientMessage = false;
 
@@ -66,11 +65,15 @@ class CallRoomNotifier extends ChangeNotifier {
       _channelMessageList;
   AgoraRtmChannel? _messageChannel;
 
+  int _screenMode = 1;
+  int get screenMode => _screenMode;
+
   Future<void> initialize(String friendUserDocId, String appointmentDocId,
       WidgetRef ref) async {
+    _screenMode = 1;
     _channelMessageList = [];
     _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));
-    _addListeners();
+    addListeners();
     await _engine.enableVideo();
     await _engine.startPreview();
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
@@ -111,7 +114,16 @@ class CallRoomNotifier extends ChangeNotifier {
     }
   }
 
-  void _addListeners() {
+  void changeScreenMode(){
+    if(_screenMode==1){
+      _screenMode=2;
+    }else{
+      _screenMode=1;
+    }
+    notifyListeners();
+  }
+
+  void addListeners() {
     _engine.setEventHandler(RtcEngineEventHandler(
       joinChannelSuccess: (channel, uid, elapsed) {
         log('joinChannelSuccess $channel $uid $elapsed');
@@ -232,11 +244,11 @@ class CallRoomNotifier extends ChangeNotifier {
           .watch(userDataProvider)
           .userData["userDocId"];
     } else {
-      userDocId = friendData.userDocId;
+      userDocId = friendData.friendUserDocId;
     }
 
     CommonRtmChatChannelMessage tmpMessage = commonRtmChatChannelMessageMakeFromInfo(userDocId, textInfo, ref);
-    _channelMessageList.add(tmpMessage);
+    _channelMessageList.insert(0,tmpMessage);
     notifyListeners();
   }
 
@@ -304,10 +316,11 @@ class CallRoomNotifier extends ChangeNotifier {
         };
         channel.onMessageReceived =
             (AgoraRtmMessage message, AgoraRtmMember member) {
-          addMessage("receive", 'message.text', ref);
+          addMessage("receive", message.text, ref);
         };
       };
       return channel;
     }
+    return null;
   }
 }
