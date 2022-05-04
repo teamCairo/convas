@@ -7,6 +7,15 @@ import '../daoFirebase/mastersDaoFirebase.dart';
 
 
 Future<void> insertTestMasterData(WidgetRef ref) async {
+  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"1",name:"yet",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"2",name:"already",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"3",name:"cancel",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+
+  insertMasterUnitData(ref:ref,masterGroupCode:"requestStatus",code:"1",name:"applying",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"requestStatus",code:"2",name:"accepted",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"requestStatus",code:"3",name:"denied",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"requestStatus",code:"4",name:"withdrawn",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+
   insertMasterUnitData(ref:ref,masterGroupCode:"level",code:"1",name:"Beginner",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"level",code:"2",name:"Intermediate",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"level",code:"3",name:"Advanced",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");

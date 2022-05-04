@@ -16,7 +16,7 @@ class RecommendedTeacher extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite("Recommend"),
+      appBar: commonAppbar("Recommend"),
       body: SafeArea(
           child: SingleChildScrollView(
             child: Column(children: <Widget>[

@@ -23,3 +23,4 @@ bool parseBool(String str) {
 
   throw '"$str" can not be parsed to boolean.';
 }
+

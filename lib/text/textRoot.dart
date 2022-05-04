@@ -19,7 +19,7 @@ class TextRoot extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite("Text"),
+      appBar: commonAppbar("Text"),
       body: SafeArea(
           child: Column(children: <Widget>[
 

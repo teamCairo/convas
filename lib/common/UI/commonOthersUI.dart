@@ -8,9 +8,13 @@ import '../commonValues.dart';
 import '../logic/commonLogicOthers.dart';
 import 'commonTextUI.dart';
 
-AppBar commonAppbarWhite(String text) {
+AppBar commonAppbar(String text,{Color? color}) {
+  Color backColor=Colors.white10;
+  if(color!=null) {
+    backColor=color;
+  }
   return AppBar(
-    backgroundColor: Colors.white10,
+    backgroundColor: backColor,
     elevation: 0.0,
     title: Text(
       text,
@@ -20,6 +24,20 @@ AppBar commonAppbarWhite(String text) {
         color: Colors.black87,
       ),
     ),
+  );
+}
+
+
+AppBar commonAppTabBar({Color? color,PreferredSizeWidget? bottom}) {
+  Color backColor=Colors.white10;
+  if(color!=null) {
+    backColor=color;
+  }
+  return AppBar(
+      toolbarHeight:0,
+      backgroundColor: backColor,
+      elevation: 0.0,
+      bottom:bottom
   );
 }
 

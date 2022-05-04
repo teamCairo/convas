@@ -27,7 +27,7 @@ class WelcomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: commonAppbarWhite("Concept"),
+      appBar: commonAppbar("Concept"),
       body: SafeArea(
           child: Center(
             child: Padding(

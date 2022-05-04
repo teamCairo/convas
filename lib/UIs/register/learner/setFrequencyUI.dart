@@ -22,7 +22,7 @@ class SetFrequency extends ConsumerWidget {
         outputFormat.format(ref.watch(registerProvider).continualUntil!);
 
     return Scaffold(
-      appBar: commonAppbarWhite(""),
+      appBar: commonAppbar(""),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -35,7 +35,7 @@ class SetFrequency extends ConsumerWidget {
                     height: 20,
                   ),
                   commonText24BlackBoldCenter(
-                      "How often do you want to take a lesson?"),
+                      "How often do you want to take a lessonList?"),
                   const SizedBox(
                     height: 20,
                   ),

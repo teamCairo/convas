@@ -14,7 +14,7 @@ class TextDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: commonAppbarWhite("Text"),
+      appBar: commonAppbar("Text"),
       body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(14.0),

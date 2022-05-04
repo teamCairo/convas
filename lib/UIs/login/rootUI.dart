@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
 
-import '../../text/textRoot.dart';
+import '../lessonList/lessonListRootUI.dart';
 import '../myPageRoute/myPageUI.dart';
 import '../talk/talkUI.dart';
 
@@ -55,7 +55,7 @@ class Root extends ConsumerWidget {
       case 2:
         return Talk();
       case 3:
-        return TextRoot();
+        return LessonListRoot();
       default:
         return MyPage();
     }

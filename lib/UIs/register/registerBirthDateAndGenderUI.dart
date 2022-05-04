@@ -27,7 +27,7 @@ class RegisterBirthDateAndGender extends ConsumerWidget {
     }
 
     return Scaffold(
-      appBar: commonAppbarWhite(""),
+      appBar: commonAppbar(""),
       body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal:14.0),

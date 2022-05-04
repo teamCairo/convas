@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
-import '../talk/appointmentAnswerBottomSheetUI.dart';
+import '../talk/XXXXXappointmentAnswerBottomSheetUI.dart';
 import 'calendarEditDeleteDialogUI.dart';
 import 'calendarEditProvider.dart';
 import 'calendarEditSelectModeDialogUI.dart';
@@ -27,9 +27,9 @@ Future<void> selectCalendarTime(CalendarTapDetails calendarDetails,
       String friendUserDocId = commonGetAppointmentNotesItemString(calendarDetails.appointments!.first,"friendUserDocId");
 
       if(eventType=="5"){//自分から登録したアポの場合
-        appointmentAnswerBottomSheet(context,null, ref,"2",friendUserDocId,null,callChannelId);
+        // appointmentAnswerBottomSheet(context,null, ref,"2",friendUserDocId,null,callChannelId);
       }else if(eventType=="6"){
-        appointmentAnswerBottomSheet(context,null, ref,"3",friendUserDocId,null,callChannelId);
+        // appointmentAnswerBottomSheet(context,null, ref,"3",friendUserDocId,null,callChannelId);
 
       }else{
         await showDialog<void>(

@@ -17,8 +17,8 @@ import '../../entityIsar/friendEntityIsar.dart';
 import '../call/callRoomUI.dart';
 import '../findRoute/friendProfileUI.dart';
 import '../myPageRoute/calendarEditUI.dart';
-import 'appointmentAnswerBottomSheetUI.dart';
-import 'appointmentRequestUI.dart';
+import 'XXXXXappointmentAnswerBottomSheetUI.dart';
+import 'appointmentRequestViewUI.dart';
 
 class ChatPage extends ConsumerWidget {
   String friendUserDocId;
@@ -91,19 +91,19 @@ class ChatPage extends ConsumerWidget {
             label: "call",
             onTap: () {},
             labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-        SpeedDialChild(
-            child: const Icon(Icons.calendar_today_outlined),
-            backgroundColor: Colors.blue,
-            label: "appointment",
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return AppointmentRequest(
-                      friendUserDocId, friendUserName, friendImage,"" , "1","Chat");
-                }),
-              );
-            },
-            labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
+        // SpeedDialChild(
+            // child: const Icon(Icons.calendar_today_outlined),
+            // backgroundColor: Colors.blue,
+            // label: "appointment",
+            // onTap: () {
+            //   Navigator.of(context).push(
+            //     MaterialPageRoute(builder: (context) {
+            //       return AppointmentRequestView(
+            //           friendUserDocId, friendUserName, friendImage,"" );
+            //     }),
+            //   );
+            // },
+            // labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
         SpeedDialChild(
             child: const Icon(Icons.mic),
             backgroundColor: Colors.teal,
@@ -162,8 +162,8 @@ class ChatPage extends ConsumerWidget {
             text: "View request", onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
-              return AppointmentRequest(friendUserDocId,
-                  friendUserName, friendPhoto,chatDetail.referDocId ,"2","Chat");
+              return AppointmentRequestView(friendUserDocId,
+                  friendUserName, friendPhoto,chatDetail.referDocId ,"","1");
             }),
           );
         }));
@@ -174,57 +174,57 @@ class ChatPage extends ConsumerWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
-                  return AppointmentRequest(friendUserDocId,
-                      friendUserName, friendPhoto,chatDetail.referDocId ,"3","Chat");
+                  return AppointmentRequestView(friendUserDocId,
+                      friendUserName, friendPhoto,chatDetail.referDocId,"","1" );
                 }),
               );
             }));
       }
     }
 
-    if (chatDetail.messageType == "4") {
-      if (rightLeft == "right") {
-        widgetList.add(commonText14Gray("You sent a appointment"));
-        widgetList.add(commonButtonSmallOrangeRound(
-            text: "View appointment", onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
-              return CalendarEdit(friendUserDocId);
-            }),
-          );
-          appointmentAnswerBottomSheet(context,null, ref,"2",friendUserDocId,null,chatDetail.referDocId);
-        }));
-        widgetList.add(commonButtonSmallOrangeRound(
-            text: "Enter call room",
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return CallRoom( argumentFriendUserDocId: friendUserDocId, appointmentId: chatDetail.referDocId);
-                }),
-              );
-            }));
-      } else {
-        widgetList.add(commonText14Gray("Friend sent a appointment"));
-        widgetList.add(commonButtonSmallOrangeRound(
-            text: "View appointment",
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return CalendarEdit(friendUserDocId);
-                }),
-              );
-            }));
-        widgetList.add(commonButtonSmallOrangeRound(
-            text: "Enter call room",
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return CallRoom( argumentFriendUserDocId: friendUserDocId, appointmentId: chatDetail.referDocId);
-                }),
-              );
-            }));
-      }
-    }
+    // if (chatDetail.messageType == "4") {
+    //   if (rightLeft == "right") {
+    //     widgetList.add(commonText14Gray("You sent a appointment"));
+    //     widgetList.add(commonButtonSmallOrangeRound(
+    //         text: "View appointment", onPressed: () {
+    //       Navigator.of(context).push(
+    //         MaterialPageRoute(builder: (context) {
+    //           return CalendarEdit(friendUserDocId);
+    //         }),
+    //       );
+    //       appointmentAnswerBottomSheet(context,null, ref,"2",friendUserDocId,null,chatDetail.referDocId);
+    //     }));
+    //     widgetList.add(commonButtonSmallOrangeRound(
+    //         text: "Enter call room",
+    //         onPressed: () {
+    //           Navigator.of(context).push(
+    //             MaterialPageRoute(builder: (context) {
+    //               return CallRoom( argumentFriendUserDocId: friendUserDocId, appointmentId: chatDetail.referDocId);
+    //             }),
+    //           );
+    //         }));
+    //   } else {
+    //     widgetList.add(commonText14Gray("Friend sent a appointment"));
+    //     widgetList.add(commonButtonSmallOrangeRound(
+    //         text: "View appointment",
+    //         onPressed: () {
+    //           Navigator.of(context).push(
+    //             MaterialPageRoute(builder: (context) {
+    //               return CalendarEdit(friendUserDocId);
+    //             }),
+    //           );
+    //         }));
+    //     widgetList.add(commonButtonSmallOrangeRound(
+    //         text: "Enter call room",
+    //         onPressed: () {
+    //           Navigator.of(context).push(
+    //             MaterialPageRoute(builder: (context) {
+    //               return CallRoom( argumentFriendUserDocId: friendUserDocId, appointmentId: chatDetail.referDocId);
+    //             }),
+    //           );
+    //         }));
+    //   }
+    // }
 
     return Padding(
         padding: const EdgeInsets.only(bottom: 28.0),

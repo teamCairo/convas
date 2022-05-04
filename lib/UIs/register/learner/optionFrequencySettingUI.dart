@@ -20,7 +20,7 @@ class OptionFrequencySetting extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite(""),
+      appBar: commonAppbar(""),
       body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal:14.0),
@@ -30,7 +30,7 @@ class OptionFrequencySetting extends ConsumerWidget {
                   Column(
                     children: [
                       const SizedBox(height: 20,),
-                      commonText24BlackBoldCenter("Will you set how often you want to take a lesson?"),
+                      commonText24BlackBoldCenter("Will you set how often you want to take a lessonList?"),
                       const SizedBox(height: 20,),
                       commonText16Gray("We recommend you to set frequency to keep learning"),
                     ],

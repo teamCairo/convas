@@ -27,9 +27,9 @@ class CallRoomNotifier extends ChangeNotifier {
   late final Friend _friendData;
 
   Friend get friendData => _friendData;
-  late final CommonAppointment _appointmentData;
+  late final CommonClassAppointment _appointmentData;
 
-  CommonAppointment get appointmentData => _appointmentData;
+  CommonClassAppointment get appointmentData => _appointmentData;
   late final RtcEngine _engine;
 
   RtcEngine get engine => _engine;

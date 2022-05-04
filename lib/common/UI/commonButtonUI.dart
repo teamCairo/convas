@@ -103,6 +103,62 @@ Widget commonButtonRoundHalf(
   );
 }
 
+Widget commonButtonRoundOrangeHalf(
+    {required String text, required Function()? onPressed}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    child: SizedBox(
+      width: 150,
+      height: 50,
+      child: OutlinedButton(
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),
+        style: OutlinedButton.styleFrom(
+          primary: Colors.white10,
+          backgroundColor: Colors.orange,
+          shape: const StadiumBorder(),
+          side: const BorderSide(color: Colors.white, width: 0),
+        ),
+        onPressed: onPressed,
+      ),
+    ),
+  );
+}
+
+Widget commonButtonRoundWhiteHalf(
+    {required String text, required Function()? onPressed}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    child: SizedBox(
+      width: 150,
+      height: 50,
+      child: OutlinedButton(
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: Colors.orange,
+          ),
+        ),
+        style: OutlinedButton.styleFrom(
+          primary: Colors.white10,
+          backgroundColor: Colors.white,
+          shape: const StadiumBorder(),
+          side: const BorderSide(color: Colors.orange, width: 0),
+        ),
+        onPressed: onPressed,
+      ),
+    ),
+  );
+}
+
 Widget commonButtonSmallOrangeRound(
     {required String text, required Function()? onPressed}) {
   return Padding(

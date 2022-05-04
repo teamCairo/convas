@@ -1,17 +1,15 @@
+class CommonClassRequest{
 
-class CommonClassAppointment{
-
-  CommonClassAppointment(
-      this.appointmentDocId,
+  CommonClassRequest(
+      this.requestDocId,
       this.senderUserDocId,
       this.receiverUserDocId,
-      this.courseCode,
-      this.categoryCode,
-      this.fromTime,
-      this.toTime,
-      this.requestMessage,
-      this.message,
+      this.courseCodeListText,
+      this.categoryCodeListText,
+      this.from,
+      this.to,
       this.status,
+      this.message,
       this.insertUserDocId,
       this.insertProgramId,
       this.insertTime,
@@ -22,16 +20,15 @@ class CommonClassAppointment{
       this.deleteFlg,
       );
 
-  late String appointmentDocId;
+  late String requestDocId;
   late String senderUserDocId;
   late String receiverUserDocId;
-  late String courseCode;
-  late String categoryCode;
-  late DateTime fromTime;
-  late DateTime toTime;
-  late String requestMessage;
-  late String message;
+  late String courseCodeListText;
+  late String categoryCodeListText;
+  late DateTime from;
+  late DateTime to;
   late String status;
+  late String message;
   late String insertUserDocId;
   late String insertProgramId;
   late DateTime insertTime;

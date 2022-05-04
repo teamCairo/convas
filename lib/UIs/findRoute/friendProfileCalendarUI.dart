@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../common/UI/commonPushUI.dart';
-import 'FriendProfileLessonRequest.dart';
+import 'FriendProfileLessonRequestUI.dart';
 import 'friendProfileCalendarProvider.dart';
 
 

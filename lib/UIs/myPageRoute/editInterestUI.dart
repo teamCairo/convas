@@ -39,7 +39,7 @@ class EditInterest extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: commonAppbarWhite("edit Interest"),
+      appBar: commonAppbar("edit Interest"),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

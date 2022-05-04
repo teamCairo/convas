@@ -7,14 +7,35 @@ import '../provider/chatDetailProvider.dart';
 import '../provider/eventProvider.dart';
 import '../provider/friendProvider.dart';
 import '../provider/userProvider.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> closeStreams(WidgetRef ref) async {
-  // ref.read(topicDataProvider.notifier).closeStream();
   ref.read(userDataProvider.notifier).closeStream();
   ref.read(friendDataProvider.notifier).closeStream();
   ref.read(eventDataProvider.notifier).closeStream();
   ref.read(chatDetailDataProvider.notifier).closeStream();
   //TODO 編集必要
+}
+
+String durationText(DateTime? from, DateTime? to){
+  String fromStr="";
+  String toStr="";
+  if (from == null||to==null) {
+    return "";
+  } else {
+
+    initializeDateFormatting("ja_JP");
+    fromStr= DateFormat('yyyy/MM/dd HH:mm', "ja_JP").format(from);
+
+    if(DateTime(from.year,from.month,from.day)==DateTime(to.year,to.month,to.day)){
+      toStr= DateFormat('HH:mm', "ja_JP").format(to);
+  }else{
+      toStr= DateFormat('MM/dd HH:mm', "ja_JP").format(to);
+    }
+
+    return fromStr+" ～ "+toStr;
+  }
+
 }
 
 int fromBirthMillisecondsToAge(int birthDateMilliSeconds){
@@ -61,6 +82,19 @@ String fromDateToMonthDayText(DateTime datetime){
         "/" +datetime.day.toString();
 
 }
+
+String fromDateToYearMonthDayHourMin(DateTime? time) {
+  if (time == null) {
+    return "";
+  } else {
+    initializeDateFormatting("ja_JP");
+
+    var formatter = DateFormat('yyyy/MM/dd HH:mm', "ja_JP");
+    var formatted = formatter.format(time); // DateからString
+    return formatted;
+  }
+}
+
 
 
 String fromDateToHourMinuteText(DateTime datetime){

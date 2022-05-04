@@ -18,7 +18,7 @@ class SetGoalDetail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite(ref.watch(registerProvider).goalCategory),
+      appBar: commonAppbar(ref.watch(registerProvider).goalCategory),
       body: SafeArea(
           child: Column(
             children:[

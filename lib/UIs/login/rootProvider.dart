@@ -16,7 +16,7 @@ class BottomNavigationBarItems extends ChangeNotifier {
       ref.watch(userDataProvider).userData["userType"]=="1"? 'Top':'Calendar',
       'Find',
       'Talk',
-      'Text',
+      'Lesson',
       'My page',
     ];
 
@@ -24,7 +24,7 @@ class BottomNavigationBarItems extends ChangeNotifier {
       ref.watch(userDataProvider).userData["userType"]=="1"? Icons.star:Icons.calendar_today_outlined,
       Icons.search,
       Icons.message_outlined,
-      Icons.book,
+      Icons.add_chart,
       Icons.work_outline,
     ];
 

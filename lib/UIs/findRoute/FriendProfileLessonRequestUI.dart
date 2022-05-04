@@ -30,26 +30,56 @@ class FriendProfileLessonRequest extends ConsumerWidget {
           .read(lessonRequestProvider.notifier)
           .initialize(calendarDetails.date!);
     }
+
     return Scaffold(
-        appBar: commonAppbarWhite("Lesson request"),
+        appBar: commonAppbar("Lesson request"),
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  commonCircleAvatarImage(
-                      radius: 70,
-                      image: ref
-                          .watch(friendProfileDataProvider)
-                          .friendProfilePhotoData,
-                      name:ref.watch(friendProfileDataProvider).friendProfileData["name"]),
-                  commonText24BlackBoldLeft(ref.watch(friendProfileDataProvider).friendProfileData["name"])
-                ],
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Row(
+                    mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                  children: [
+                    commonCircleAvatarImage(
+                        radius: 70,
+                        image: ref
+                            .watch(friendProfileDataProvider)
+                            .friendProfilePhotoData,
+                        name:argumentFriendUserName),
+                    commonText24BlackBoldLeft(argumentFriendUserName)
+                  ],
+                ),
               ),
               requestDateTimeRow(ref, context, "from"),
               requestDateTimeRow(ref, context, "to"),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child:commonText24BlackBoldLeft("Message"),
+              ),
+              Padding(
+                padding:const EdgeInsets.symmetric(vertical:30,horizontal:24.0),
+                child:TextFormField(
+                  maxLines: null,
+                  minLines: 7,
+                  // テキスト入力のラベルを設定
+                  decoration: const InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  initialValue:ref.watch(lessonRequestProvider).message,
+                  onChanged: (String value) {
+                    ref.read(lessonRequestProvider.notifier).setMessage(value);
+                  },
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
+                ),),
               Padding(
                 padding: const EdgeInsets.only(bottom: 14.0),
                 child: commonButtonOrangeRound(
@@ -58,9 +88,10 @@ class FriendProfileLessonRequest extends ConsumerWidget {
                       await ref
                           .read(lessonRequestProvider.notifier)
                           .sendRequest(argumentFriendUserDocId, ref);
+                      await commonShowOkInfoDialog(context, "Request has been sent!!");
+                      Navigator.of(context).pop();
                     }),
               ),
-              commonText24BlackBoldLeft("Message")
             ],
             // ),
           ),
@@ -93,45 +124,40 @@ Widget requestDateTimeRow(WidgetRef ref, BuildContext context, String fromTo) {
                   dateTime.add(const Duration(days: 30)).month,
                   dateTime.add(const Duration(days: 30)).day),
             );
-            // if (d != null) {
-            // setState(() {
-            //   if (fromTo == "from") {
-            //     ref.read(friendProfileCalendarDetailBottomSheetProvider.notifier).setSelectedDateTimeFrom(
-            //         DateTime(d.year, d.month, d.day, dateTime.hour,
-            //             dateTime.minute));
-            //   } else {
-            //     ref.read(friendProfileCalendarDetailBottomSheetProvider.notifier).setSelectedDateTimeTo(
-            //         DateTime(d.year, d.month, d.day, dateTime.hour,
-            //             dateTime.minute));
-            //   }
-            // });
-            // }
+            if (d != null) {
+              if (fromTo == "from") {
+                ref.read(lessonRequestProvider.notifier).setSelectedDateTimeFrom(
+                    DateTime(d.year, d.month, d.day, dateTime.hour,
+                        dateTime.minute));
+              } else {
+                ref.read(lessonRequestProvider.notifier).setSelectedDateTimeTo(
+                    DateTime(d.year, d.month, d.day, dateTime.hour,
+                        dateTime.minute));
+              }
+            }
           }),
       GestureDetector(
           child: commonText16GrayLeft(
             fromDateToHourMinuteText(dateTime),
           ),
           onTap: () async {
-            // log("XXXXXXXタップした　時間");
             final TimeOfDay? t = await showTimePicker(
               context: context,
               initialTime:
                   TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
             );
-            // if (t != null) {
-            // setState(() {
-            //   if (fromTo == "from") {
-            //     log("XXXXXXXFrom時間修正");
-            //     ref.read(friendProfileCalendarDetailBottomSheetProvider.notifier).setSelectedDateTimeFrom(
-            //         DateTime(dateTime.year, dateTime.month, dateTime.day,
-            //             t.hour, t.minute));
-            //   } else {
-            //     ref.read(friendProfileCalendarDetailBottomSheetProvider.notifier).setSelectedDateTimeTo(
-            //         DateTime(dateTime.year, dateTime.month, dateTime.day,
-            //             t.hour, t.minute));
-            //   }
-            // });
-            // }
+
+            if (t != null) {
+              if (fromTo == "from") {
+                ref.read(lessonRequestProvider.notifier).setSelectedDateTimeFrom(
+                            DateTime(dateTime.year, dateTime.month, dateTime.day,
+                                t.hour, t.minute));
+              } else {
+                ref.read(lessonRequestProvider.notifier).setSelectedDateTimeTo(
+                            DateTime(dateTime.year, dateTime.month, dateTime.day,
+                                t.hour, t.minute));
+              }
+            }
           }),
     ]),
   );

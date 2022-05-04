@@ -60,7 +60,7 @@ class SettingEditRadioPage extends ConsumerWidget {
 
     return Scaffold(
       appBar:
-      commonAppbarWhite(displayedItem),
+      commonAppbar(displayedItem),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

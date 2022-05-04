@@ -19,6 +19,9 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final adjustSizeH = MediaQuery.of(context).size.height * 0.0011;
 
     final infoText = ref.watch(infoTextProvider);
     final email = ref.watch(emailProvider);

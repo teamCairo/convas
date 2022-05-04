@@ -1,140 +1,165 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:convas/daoFirebase/eventsDaoFirebase.dart';
+import 'package:convas/common/otherClass/commonClassAppointment.dart';
+import 'package:convas/common/otherClass/commonClassRequest.dart';
+import 'package:convas/common/provider/friendProvider.dart';
+import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
-import '../../common/logic/commonLogicList.dart';
-import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
-import '../../entityIsar/eventEntityIsar.dart';
+import '../../common/logic/commonLogicDate.dart';
+import '../../daoFirebase/appointmentsDaoFirebase.dart';
+import '../../daoFirebase/chatDetailsDaoFirebase.dart';
+import '../../daoFirebase/requestsDaoFirebase.dart';
 
 final appointRequestProvider = ChangeNotifierProvider(
-      (ref) => AppointRequestNotifier(),
+  (ref) => AppointRequestNotifier(),
 );
+
 class AppointRequestNotifier extends ChangeNotifier {
-
-  String _courseCodeListText = "";
-  String get courseCodeListText => _courseCodeListText;
-
-  String _categoryCodeListText = "";
-  String get categoryCodeListText => _categoryCodeListText;
-
+  String _requestDocId = "";
+  String _requestMessage = "";
+  String _friendUserDocId = "";
+  String _appointmentDocId = "";
+  String _status = "";
+  DateTime? _from;
+  DateTime? _to;
   String _message = "";
+
+  String get requestDocId => _requestDocId;
+
+  String get appointmentDocId => _appointmentDocId;
+
+  String get requestMessage => _requestMessage;
+
+  String get status => _status;
+
+  DateTime? get from => _from;
+
+  DateTime? get to => _to;
+
   String get message => _message;
 
-  List<Appointment> _appointmentList = [];
-  List<Appointment> get appointmentList => _appointmentList;
+  String getStringFrom() {
+    return fromDateToYearMonthDayHourMin(_from);
+  }
 
-  String _chatHeaderDocId = "";
-  String get chatHeaderDocId => _chatHeaderDocId;
+  String getStringTo() {
+    return fromDateToYearMonthDayHourMin(_to);
+  }
 
-  void initializeRequest(String mode,String requestDocId)async{
-    if(mode=="1"){
-      _courseCodeListText = "";
-      _categoryCodeListText = "";
-      _message = "";
-      _chatHeaderDocId = "";
+  void setMessage(String message) async {
+    _message = message;
+    notifyListeners();
+  }
 
-    }else{
+  Future<void> initialize(String mode, String appointmentDocId,
+      String requestDocId, String friendUserDocId) async {
+    if (mode == "1") {
+      _requestDocId = requestDocId;
+      _friendUserDocId = friendUserDocId;
 
-      DocumentSnapshot request = await selectFirebaseRequestById(requestDocId);
+      CommonClassRequest request =
+      await selectFirebaseRequestById(_requestDocId);
 
-      _courseCodeListText = request.get("courseCodeListText");
-      _categoryCodeListText =request.get("categoryCodeListText");
-      _message =request.get("message");
-      _chatHeaderDocId = "";
+      _from = request.from;
+      _to = request.to;
+      _status = request.status;
+      _requestMessage = request.message;
+    } else {
+      {
+        _appointmentDocId = appointmentDocId;
+        _friendUserDocId = friendUserDocId;
 
+        CommonClassAppointment appointment =
+        await selectFirebaseAppointmentByAppointmentDocId(_appointmentDocId);
+
+        _from = appointment.fromTime;
+        _to = appointment.toTime;
+        _status = appointment.status;
+        _message = appointment.message;
+        _requestMessage = appointment.requestMessage;
+      }
       notifyListeners();
     }
   }
 
-  Future<DocumentSnapshot> selectFirebaseRequestById(String requestDocId)async{
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('requests')
-        .doc(requestDocId)
-        .get();
+    Future<String> acceptLessonRequest(WidgetRef ref) async {
+      await updateFirebaseRequestsStatus(
+          _requestDocId, "2", "appointmentRequestProvider");
+      String appointmentDocId = await insertFirebaseAppointmentsFromRequest(
+          requestDocId,
+          message,
+          ref
+              .watch(userDataProvider)
+              .userData["userDocId"],
+          "appointmentRequestProvider");
 
-    return snapshot;
-  }
+      await insertChatDetailsDataMessage(
+          ref: ref,
+          chatHeaderDocId: ref
+              .watch(friendDataProvider)
+              .friendData[_friendUserDocId]!.chatHeaderId,
+          friendUserDocId: _friendUserDocId,
+          message: message,
+          messageType: "4",
+          referDocId: appointmentDocId,
+          programId: "appointmentRequestProvider");
 
-  void setChatHeaderDocId(String inputId){
-    _chatHeaderDocId=inputId;
-
-  }
-
-  void setRequestMessage(String inputValue){
-    _message=inputValue;
-    notifyListeners();
-
-  }
-
-  //TODO 使っていないので使う必要あり
-  Future<void> initializeAppointment(WidgetRef ref, DateTime from,DateTime to,String friendUserDocId,String friendUserName)async{
-
-    List<Event> _firebaseEventList=await selectFirebaseEventsNotRepeatByDateTimeAndFriend(from, to, friendUserDocId);
-    _appointmentList=[];
-
-    for(int i=0;i<_firebaseEventList.length;i++){
-
-      //選定したユーザのデータなら追加
-        appointmentList.add(
-            commonMakeAppointment(_firebaseEventList[i].eventDocId,
-                _firebaseEventList[i].userDocId,
-                friendUserName,
-                _firebaseEventList[i].eventName,
-                _firebaseEventList[i].eventType,
-                _firebaseEventList[i].friendUserDocId,
-                _firebaseEventList[i].callChannelId??"",
-                _firebaseEventList[i].fromTime!,
-                _firebaseEventList[i].toTime!,
-                _firebaseEventList[i].isAllDay,
-                _firebaseEventList[i].repeat,
-                _firebaseEventList[i].monday,
-                _firebaseEventList[i].tuesday,
-                _firebaseEventList[i].wednesday,
-                _firebaseEventList[i].thursday,
-                _firebaseEventList[i].friday,
-                _firebaseEventList[i].saturday,
-                _firebaseEventList[i].sunday,
-                _firebaseEventList[i].description,
-                _firebaseEventList[i].recurrenceRule,
-                null,
-                Colors.orange,
-                ""
-            )
-        );
+      return appointmentDocId;
     }
 
-    notifyListeners();
-  }
+    Future<void> denyLessonRequest(WidgetRef ref) async {
+      await updateFirebaseRequestsStatus(
+          _requestDocId, "3", "appointmentRequestProvider");
 
-  void setInfoByMap(WidgetRef ref,String databaseItem,Map<String,bool> values){
-
-    List<String> tmpList =[];
-    values.forEach((k, v){
-      if(v){
-        tmpList.add(k);
-      }
-    });
-
-    String value=fromListToTextDot(tmpList);
-    setInfo(ref, databaseItem, value);
-  }
-
-
-  void setInfo(WidgetRef ref,String databaseItem,String value){
-    switch(databaseItem){
-      case "course":
-        _courseCodeListText=value;
-        break;
-
-      case "category":
-        _categoryCodeListText=value;
-        break;
+      await insertChatDetailsDataMessage(
+          ref: ref,
+          chatHeaderDocId: ref
+              .watch(friendDataProvider)
+              .friendData[_friendUserDocId]!.chatHeaderId,
+          friendUserDocId: _friendUserDocId,
+          message: message,
+          messageType: "2",
+          referDocId: "",
+          programId: "appointmentRequestProvider");
     }
-    notifyListeners();
-  }
 
+// void setChatHeaderDocId(String inputId){
+//   _chatHeaderDocId=inputId;
+//
+// }
+//
+// void setRequestMessage(String inputValue){
+//   _message=inputValue;
+//   notifyListeners();
+//
+// }
+
+// void setInfoByMap(WidgetRef ref,String databaseItem,Map<String,bool> values){
+//
+//   List<String> tmpList =[];
+//   values.forEach((k, v){
+//     if(v){
+//       tmpList.add(k);
+//     }
+//   });
+//
+//   String value=fromListToTextDot(tmpList);
+//   setInfo(ref, databaseItem, value);
+// }
+//
+//
+// void setInfo(WidgetRef ref,String databaseItem,String value){
+//   switch(databaseItem){
+//     case "course":
+//       _courseCodeListText=value;
+//       break;
+//
+//     case "category":
+//       _categoryCodeListText=value;
+//       break;
+//   }
+//   notifyListeners();
+// }
+//
 
 }

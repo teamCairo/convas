@@ -23,7 +23,7 @@ class SettingPage extends ConsumerWidget {
 
 
     return Scaffold(
-        appBar: commonAppbarWhite("Settings"),
+        appBar: commonAppbar("Settings"),
         body: SingleChildScrollView(
           child: SafeArea(
               child: Column(children: <Widget>[

@@ -25,7 +25,7 @@ class Talk extends ConsumerWidget {
 
 
     return Scaffold(
-      appBar: commonAppbarWhite('Talk'),
+      appBar: commonAppbar('Talk'),
       body: buildTalkList(context,ref,ref.watch(userDataProvider).userData["userDocId"]!),
     );
   }

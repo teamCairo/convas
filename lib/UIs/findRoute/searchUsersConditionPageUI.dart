@@ -19,7 +19,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-        appBar: commonAppbarWhite("Search conditions"),
+        appBar: commonAppbar("Search conditions"),
         body: SafeArea(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

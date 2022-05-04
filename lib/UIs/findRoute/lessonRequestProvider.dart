@@ -17,28 +17,36 @@ class LessonRequestNotifier extends ChangeNotifier {
 
   DateTime? _selectedDateTimeFrom ;
   DateTime? _selectedDateTimeTo ;
+  String _message="";
 
   DateTime? get selectedDateTimeFrom=> _selectedDateTimeFrom;
   DateTime? get selectedDateTimeTo=> _selectedDateTimeTo;
+  String? get message=> _message;
 
   setSelectedDateTimeFrom(DateTime dateTime){
     _selectedDateTimeTo =_selectedDateTimeTo!.add(dateTime.difference(_selectedDateTimeFrom!));
     _selectedDateTimeFrom=dateTime;
-
+    notifyListeners();
   }
 
   initialize(DateTime dateTime){
     _selectedDateTimeFrom=dateTime;
     _selectedDateTimeTo=dateTime.add(const Duration(minutes:30));
+    _message="";
+  }
+
+  setMessage(String message){
+    _message=message;
+    notifyListeners();
   }
 
   setSelectedDateTimeTo(DateTime dateTime){
     _selectedDateTimeTo=dateTime;
+    notifyListeners();
   }
 
 
   Future<void> sendRequest(String friendUserDocId,WidgetRef ref)async {
-
 
     String chatHeaderDocId="";
     //Friendかどうかをチェック
@@ -49,14 +57,16 @@ class LessonRequestNotifier extends ChangeNotifier {
       chatHeaderDocId = checkFriend.chatHeaderId;
     }
 
-    ref.read(appointRequestProvider).setChatHeaderDocId(chatHeaderDocId);
+    // ref.read(appointRequestProvider).setChatHeaderDocId(chatHeaderDocId);
 
     String requestDocId = await insertFirebaseRequests(
         userDocId:ref.watch(userDataProvider).userData["userDocId"],
         friendUserDocId:friendUserDocId,
-        courseCodeListText:ref.watch(appointRequestProvider).courseCodeListText,
-        categoryCodeListText:ref.watch(appointRequestProvider).categoryCodeListText,
-        message:ref.watch(appointRequestProvider).message,
+        courseCodeListText:"",
+        categoryCodeListText:"",
+        from:_selectedDateTimeFrom!,
+        to:_selectedDateTimeTo!,
+        message:_message,
         programId:"createRequest"
     );
 
@@ -64,7 +74,7 @@ class LessonRequestNotifier extends ChangeNotifier {
         ref:ref,
         chatHeaderDocId:chatHeaderDocId,
         friendUserDocId:friendUserDocId,
-        message:ref.watch(appointRequestProvider).message,
+        message:_message,
         messageType:"3",
         referDocId: requestDocId,
         programId: "createRequest");

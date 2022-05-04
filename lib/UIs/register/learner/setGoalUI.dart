@@ -16,7 +16,7 @@ class SetGoal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Scaffold(
-      appBar: commonAppbarWhite(""),
+      appBar: commonAppbar(""),
       body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
