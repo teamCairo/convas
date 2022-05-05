@@ -30,7 +30,7 @@ class LoginAutoPage extends ConsumerWidget  {
                 commonLogoMain(100),
                 const SizedBox(height: 30),
                 Center(
-                  child: commonText16Gray("logging in...")
+                  child: commonText16GrayCenter("logging in...")
                 ),
               ])
       ),

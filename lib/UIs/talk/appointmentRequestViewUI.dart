@@ -60,9 +60,9 @@ class AppointmentRequestView extends ConsumerWidget {
                     ],
                   ),
                 ),
-                commonText16Gray(
+                commonText16GrayCenter(
                     ref.watch(appointRequestProvider).getStringFrom()),
-                commonText16Gray(
+                commonText16GrayCenter(
                     ref.watch(appointRequestProvider).getStringTo()),
                 commonText16GrayLeft(getMasterData("requestStatus",
                         ref.watch(appointRequestProvider).status, ref)

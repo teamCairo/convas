@@ -1,3 +1,4 @@
+import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 
 Widget commonButtonCloseForModal(BuildContext context) {
@@ -42,7 +43,29 @@ Widget commonButtonOrangeRound(
   );
 }
 
-
+commonButtonTitleAndTextWhite(String title, String text, double height, Function() onTap){
+  return GestureDetector(
+      onTap:onTap,
+      child: Container(
+        width:double.infinity,
+        height:height,
+        decoration: BoxDecoration(
+        color:Colors.white,
+        border: Border.all(color: Colors.orange),
+        borderRadius: BorderRadius.circular(10),
+      ),
+        child:Padding(
+          padding: const EdgeInsets.symmetric(horizontal:8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children:[
+              commonText20BlackLeft(title),
+              commonText16GrayLeft(text)
+            ]
+          ),
+        )
+      ));
+}
 
 Widget commonButtonRoundByWidthAndHeight(
     {required String text, required Function()? onPressed, required Color color,required double width,required double height}) {

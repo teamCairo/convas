@@ -14,47 +14,21 @@ class SetUserType extends ConsumerWidget {
     return commonScaffoldScroll(context, ref, MainAxisAlignment.spaceBetween, [
       Column(
         children: [
-          commonText30BlackBoldLeft("Hi there,\nWelcome to Convas!!"),
+          commonText30BlackBoldCenter("Hi there,\nWelcome to Convas!!"),
           commonVerticalGap(),
           commonText20GrayLeft("Convas helps you keep learning English"),
           commonVerticalGap(),
           commonText20BlackCenter("Are you a learner or teacher?"),
           const SizedBox(height: 40),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    selectTeacher(ref, context);
-                  },
-                  child: Column(
-                    children: [
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width/2-30,
-                          child:
-                          Image.asset('assets/teacher.png')
-                      ),
-                      commonText20BlackCenter("Teacher"),
-                    ],
-                  ),
-                ),
-                commonVerticalGap(),
-                GestureDetector(
-                  onTap: () {
-                    selectLearner(ref, context);
-                  },
-                  child: Column(
-                    children: [
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width/2-60,
-                          child:
-                          Image.asset('assets/learner.png')
-                      ),
-                      commonText20BlackCenter("Learner")
-                    ],
-                  ),
-                )
-              ])
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            commonImageButton('assets/teacher.png', "Teacher", () {
+              selectTeacher(ref, context);
+            }, MediaQuery.of(context).size.width / 2 - 30),
+            commonVerticalGap(),
+            commonImageButton('assets/learner.png', "Learner", () {
+              selectLearner(ref, context);
+            }, MediaQuery.of(context).size.width / 2 - 60),
+          ])
         ],
       )
     ]);

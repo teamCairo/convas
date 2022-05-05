@@ -40,6 +40,40 @@ AppBar commonAppTabBar({Color? color,PreferredSizeWidget? bottom}) {
       bottom:bottom
   );
 }
+
+commonDialog(BuildContext context, WidgetRef ref, String title, Widget child){
+  final _dialogWidth = MediaQuery.of(context).size.width * 3 / 4;
+
+  return Dialog(
+    // insetPadding: const EdgeInsets.all(MediaQuery.of(context).size.width/8),
+    elevation: 0,
+    backgroundColor: Colors.transparent,
+    child: SizedBox(
+      width: _dialogWidth,
+      height: _dialogWidth,
+      child: Container(
+        decoration: BoxDecoration(
+          color:Colors.white,
+          border:Border.all(style:BorderStyle.none),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children:[
+              commonText24BlackBoldCenter(title),
+              Expanded(
+                child: child,
+              ),
+            ],
+
+          ),
+        ),
+      ),
+    ),
+  );
+}
 Scaffold commonScaffold(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar}){
   return Scaffold(
     appBar:appBar,
@@ -53,6 +87,7 @@ Scaffold commonScaffold(BuildContext context, WidgetRef ref,MainAxisAlignment ma
       floatingActionButton:floatingActionButton
   );
 }
+
 
 Scaffold commonScaffoldScroll(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar}){
   return Scaffold(
@@ -101,6 +136,23 @@ Widget commonLogoMain(double size){
 //           )
 //       ));
 // }
+
+Widget commonImageButton(String imagePath, String imageText, Function() onTap,double width){
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      children: [
+        Container(
+            width: width,
+            child:
+            Image.asset(imagePath),
+            color:Colors.white
+        ),
+        commonText20BlackCenter(imageText),
+      ],
+    ),
+  );
+}
 
 AppBar commonAppbarTransparent(String text) {
   return AppBar(

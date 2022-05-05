@@ -18,8 +18,8 @@ class SetFrequency extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     DateFormat outputFormat = DateFormat('yyyy/MM/dd');
-    String continueUntilDate =
-        outputFormat.format(ref.watch(registerProvider).continualUntil!);
+    // String continueUntilDate =
+    //     outputFormat.format(ref.watch(registerProvider).continualUntil!);
 
     return Scaffold(
       appBar: commonAppbar(""),
@@ -39,7 +39,7 @@ class SetFrequency extends ConsumerWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  commonText16Gray(
+                  commonText16GrayCenter(
                       "We recommend 3 or more times per week to keep learning"),
                   // timesAWeekRadio(ref, 1,"Once"),
                   timesAWeekRadio(ref, 2,"Easy      : Twice"),

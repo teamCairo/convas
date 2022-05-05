@@ -25,7 +25,7 @@ class DataPreparing extends ConsumerWidget {
                 commonLogoMain(100),
                 const SizedBox(height: 30),
                 Center(
-                    child: commonText16Gray(
+                    child: commonText16GrayCenter(
                         "We are preparing your data...\ntakes a bit of time")
                 ),
               ])

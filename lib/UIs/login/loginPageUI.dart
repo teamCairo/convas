@@ -54,6 +54,7 @@ class LoginPage extends ConsumerWidget {
                 commonButtonOrangeRound(
                     text: "Log In",
                     onPressed: () async {
+                      FocusScope.of(context).requestFocus(FocusNode());
                       try {
                         // メール/パスワードでログイン
                         final FirebaseAuth auth = FirebaseAuth.instance;

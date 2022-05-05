@@ -30,9 +30,6 @@ class RegisterNotifier extends ChangeNotifier {
   bool _sunday=false;
   bool get sunday =>_sunday;
 
-  String _goalCategory="";
-  String get goalCategory=>_goalCategory;
-
   String _profilePhotoNameSuffix="";
   String get profilePhotoNameSuffix=>_profilePhotoNameSuffix;
 
@@ -51,6 +48,7 @@ class RegisterNotifier extends ChangeNotifier {
 
   String _gender="";
   String get gender=>_gender;
+
   String _level="";
   String get level=>_level;
 
@@ -77,7 +75,6 @@ class RegisterNotifier extends ChangeNotifier {
     _sunday=false;
     _birthDate=null;
     _timesAWeek=3;
-    _goalCategory="";
     _photo=null;
   }
 
@@ -96,10 +93,6 @@ class RegisterNotifier extends ChangeNotifier {
       );
     }
     notifyListeners();
-  }
-
-  setGoalCategory(String value){
-    _goalCategory=value;
   }
 
   setGender(String value){

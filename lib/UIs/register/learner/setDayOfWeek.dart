@@ -1,4 +1,3 @@
-import 'package:convas/UIs/register/registerLogic.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common/UI/commonPushUI.dart';
 import '../dataPreparingUI.dart';
-import 'optionBeFoundByLearnerUI.dart';
 
 
 class SetDayOfWeek extends ConsumerWidget {
@@ -32,7 +30,7 @@ class SetDayOfWeek extends ConsumerWidget {
                       const SizedBox(height: 20,),
                       commonText24BlackBoldCenter("Why don't you decide days of week?"),
                       const SizedBox(height: 20,),
-                      commonText16Gray("This helps you keep learning"),
+                      commonText16GrayCenter("This helps you keep learning"),
                     ],
                   ),
 
@@ -138,7 +136,7 @@ class SetDayOfWeek extends ConsumerWidget {
                         Navigator.of(context).push(
                           PageRouteBuilder(
                             pageBuilder: (context, animation, secondaryAnimation) {
-                              return const OptionBeFoundLearner();
+                              return const DataPreparing();
                             },
                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
                               return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);

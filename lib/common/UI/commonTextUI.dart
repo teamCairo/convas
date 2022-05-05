@@ -265,7 +265,7 @@ Padding commonText16GrayLeft(String text) {
   );
 }
 
-Padding commonText16Gray(String text) {
+Padding commonText16GrayCenter(String text) {
   return Padding(
     padding: const EdgeInsets.only(top: 0.0),
     child: Align(

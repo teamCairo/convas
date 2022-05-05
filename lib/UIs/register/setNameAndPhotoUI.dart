@@ -1,4 +1,5 @@
-import 'package:convas/UIs/register/learner/optionGoalSettingUI.dart';
+import 'package:convas/UIs/register/learner/XXXXXoptionGoalSettingUI.dart';
+import 'package:convas/UIs/register/learner/setGoalUI.dart';
 import 'package:convas/UIs/register/registerBirthDateAndGenderUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
@@ -40,8 +41,9 @@ class SetNameAndPhoto extends ConsumerWidget {
       commonButtonOrangeRound(
         text: "Next",
         onPressed: () {
+          FocusScope.of(context).requestFocus(FocusNode());
           if (ref.watch(registerProvider).userType == "1") {
-            commonNavigatorPushPushSlideHorizon(context,  const OptionGoalSetting());
+            commonNavigatorPushPushSlideHorizon(context,  const SetGoal());
           } else {
             commonNavigatorPushPushSlideHorizon(context,  const RegisterBirthDateAndGender());
           }
