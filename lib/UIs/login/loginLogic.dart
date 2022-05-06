@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convas/UIs/login/rootUI.dart';
 import 'package:convas/common/provider/chatDetailProvider.dart';
 import 'package:convas/daoIsar/settingDaoIsar.dart';
 import 'package:convas/entityIsar/chatDetailEntityIsar.dart';
@@ -57,6 +58,42 @@ Future<void> userLocalDataCheckForInsert(String email, WidgetRef ref, BuildConte
     }
 
   }
+}
+
+Future<void> userLocalDataCheckForLogin(String email, WidgetRef ref, BuildContext context)async {
+
+  await openIsarInstances();
+  Setting? tmpSetting = await selectIsarSettingByCode("localUserInfo");
+  if(tmpSetting==null) {
+    await loginCommonProcess(context, ref, email);
+  }else{
+    if(tmpSetting.stringValue1==email){
+      await loginCommonProcess(context, ref, email);
+    }else{
+      await commonShowOkNgInfoDialog(
+          context,
+          "You have other user's data on local device.\nCan we delete them?",
+              ()async{
+            await clearLocalData();
+            await loginCommonProcess(context, ref, email);
+          });
+    }
+
+  }
+}
+
+
+Future<void> loginCommonProcess(
+    BuildContext context, WidgetRef ref, String email) async {
+  await initialProcessLogic(ref, email);
+
+  // ログインに成功した場合
+  // チャット画面に遷移＋ログイン画面を破棄
+  await Navigator.of(context).pushReplacement(
+    MaterialPageRoute(builder: (context) {
+      return const Root();
+    }),
+  );
 }
 
 Future<void> initialProcessLogic(WidgetRef ref, String email) async {

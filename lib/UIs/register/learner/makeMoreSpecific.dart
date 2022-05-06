@@ -44,7 +44,7 @@ class MakeMoreSpecific extends ConsumerWidget {
                 TextEditingController(text: ref.watch(registerProvider).goal),
             decoration: const InputDecoration(labelText: "Goal"),
             onChanged: (String value) {
-              ref.read(registerProvider.notifier).setGoal(value);
+              ref.read(registerProvider.notifier).setGoalWithoutRebuild(value);
             },
             style: const TextStyle(
               fontSize: 20,
@@ -60,16 +60,18 @@ class MakeMoreSpecific extends ConsumerWidget {
           children: [
             commonButtonOrangeRound(
                 onPressed: () {
-                  ref.read(registerProvider.notifier).setGoal("");
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  ref.read(registerProvider.notifier).setGoalWithoutRebuild("");
                   commonNavigatorPushPushSlideHorizon(
-                      context, const SetFrequency());
+                      context, SetFrequency());
                 },
                 text: 'OK'),
             commonVerticalGap(),
             commonButtonWhiteBorderRound(
                 onPressed: () {
+                  FocusScope.of(context).requestFocus(FocusNode());
                   commonNavigatorPushPushSlideHorizon(
-                      context, const SetFrequency());
+                      context, SetFrequency());
                 },
                 text: 'Skip'),
           ],

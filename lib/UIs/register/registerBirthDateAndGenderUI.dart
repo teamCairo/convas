@@ -1,3 +1,4 @@
+import 'package:convas/UIs/register/learner/setGoalUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
@@ -67,7 +68,13 @@ class RegisterBirthDateAndGender extends ConsumerWidget {
       commonButtonOrangeRound(
         text: "OK",
         onPressed: () {
-          commonNavigatorPushPushSlideHorizonReplacement(context,  const DataPreparing());
+    if (ref.watch(registerProvider).userType == "1") {
+      commonNavigatorPushPushSlideHorizonReplacement(context,  const SetGoal());
+
+    }else{
+      commonNavigatorPushPushSlideHorizonReplacement(context,  const DataPreparing());
+
+    }
         },
       ),
     ]);
@@ -110,7 +117,8 @@ Widget levelArea(WidgetRef ref, double width) {
           levelButton("3", 'Advanced', ref,width),
           commonHorizontalGap(),
           levelButton("4", 'Native', ref,width),
-        ])
+        ]),
+        const SizedBox(height:30),
       ],
     );
   } else {

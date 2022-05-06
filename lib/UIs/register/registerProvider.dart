@@ -135,7 +135,6 @@ setContinualUntil(DateTime value){
     notifyListeners();
   }
 
-
   setGoalHashTag(String item, String value){
     _goal=_goal+" #"+item+":"+value+" ";
     notifyListeners();
@@ -144,6 +143,9 @@ setContinualUntil(DateTime value){
   setGoal(String value){
     _goal=value;
     notifyListeners();
+  }
+  setGoalWithoutRebuild(String value){
+    _goal=value;
   }
 
   setTuesday(bool value){
