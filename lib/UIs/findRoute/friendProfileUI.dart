@@ -20,12 +20,15 @@ class FriendProfile extends ConsumerWidget {
 
     if (ref.watch(friendProfileDataProvider).processingFlg){
       return Scaffold(
-          appBar: commonAppbarTransparent("Teacher Profile"),
+          // appBar: commonAppbarTransparent("Teacher Profile"),
+
+          appBar: commonAppbar("Teacher Profile"),
           body: const Center(child: CircularProgressIndicator()));
 
     } else {
       return Scaffold(
-          appBar: commonAppbarTransparent("Teacher Profile"),
+          // appBar: commonAppbarTransparent("Teacher Profile"),
+          appBar: commonAppbar("Teacher Profile"),
           body: Column(children: [
             Expanded(
               child: SingleChildScrollView(

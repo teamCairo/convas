@@ -25,10 +25,8 @@ void calendarEditBottomSheet(
     builder: (context) {
       return StatefulBuilder(
         builder: (context, StateSetter setState) {
+
           return
-            // SizedBox(
-            // height: 300,
-            // child:
             SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

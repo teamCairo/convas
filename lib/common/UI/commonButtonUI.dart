@@ -197,6 +197,17 @@ Widget commonButtonSmallOrangeRound(
   );
 }
 
+Widget commonIconButtonQuestion(
+    {required Function()? onTap}) {
+  return GestureDetector(
+    onTap:onTap,
+    child: const Icon(
+        Icons.info_outline,
+        size:30,
+    color:Colors.orange),
+  );
+}
+
 
 Widget commonIconButtonSmallOrangeRound(
     {Size? size,required IconData iconData, required String text, required Function()? onPressed}) {

@@ -8,7 +8,7 @@ import '../commonValues.dart';
 import '../logic/commonLogicOthers.dart';
 import 'commonTextUI.dart';
 
-AppBar commonAppbar(String text,{Color? color}) {
+AppBar commonAppbar(String text,{Color? color,Widget? leadingWidget, List<Widget>? tailWidgetList}) {
   Color backColor=Colors.white10;
   if(color!=null) {
     backColor=color;
@@ -16,14 +16,21 @@ AppBar commonAppbar(String text,{Color? color}) {
   return AppBar(
     backgroundColor: backColor,
     elevation: 0.0,
-    title: Text(
-      text,
-      style: const TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 20,
-        color: Colors.black87,
-      ),
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+            color: Colors.black87,
+          ),
+        ),
+        leadingWidget ?? Container()
+      ],
     ),
+    actions:tailWidgetList,
   );
 }
 
@@ -41,8 +48,10 @@ AppBar commonAppTabBar({Color? color,PreferredSizeWidget? bottom}) {
   );
 }
 
-commonDialog(BuildContext context, WidgetRef ref, String title, Widget child){
-  final _dialogWidth = MediaQuery.of(context).size.width * 3 / 4;
+Dialog commonDialog(BuildContext context, WidgetRef ref, String title, Widget child,{double? height,double? width}){
+  double _dialogWidth = width??MediaQuery.of(context).size.width * 3 / 4;
+  double _dialogHeight = height??MediaQuery.of(context).size.width * 3 / 4;
+
 
   return Dialog(
     // insetPadding: const EdgeInsets.all(MediaQuery.of(context).size.width/8),
@@ -50,7 +59,7 @@ commonDialog(BuildContext context, WidgetRef ref, String title, Widget child){
     backgroundColor: Colors.transparent,
     child: SizedBox(
       width: _dialogWidth,
-      height: _dialogWidth,
+      height: _dialogHeight,
       child: Container(
         decoration: BoxDecoration(
           color:Colors.white,
@@ -122,21 +131,6 @@ Widget commonLogoMain(double size){
 
 }
 
-//丸角の写真を表示する元ネタ
-// Widget _userIconImage() {
-//   return new Container(
-//       width: 150.0,
-//       height: 150.0,
-//       decoration: new BoxDecoration(
-//           shape: BoxShape.circle,
-//           image: new DecorationImage(
-//               fit: BoxFit.fill,
-//               image: new NetworkImage(
-//                   "画像URL")
-//           )
-//       ));
-// }
-
 Widget commonImageButton(String imagePath, String imageText, Function() onTap,double width){
   return GestureDetector(
     onTap: onTap,
@@ -154,20 +148,6 @@ Widget commonImageButton(String imagePath, String imageText, Function() onTap,do
   );
 }
 
-AppBar commonAppbarTransparent(String text) {
-  return AppBar(
-    backgroundColor: Colors.transparent,
-    elevation: 0.0,
-    title: Text(
-      text,
-      style: const TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 20,
-        color: Colors.black87,
-      ),
-    ),
-  );
-}
 Widget commonVerticalGap(){
   return const SizedBox(height: 16);
 }
@@ -269,13 +249,13 @@ Future<dynamic> commonShowOkWarningDialog(BuildContext context,  String message)
   );
 }
 
-Future<dynamic> commonShowOkInfoDialog(BuildContext context,  String message)async{
+Future<dynamic> commonShowOkInfoDialog(BuildContext context, String title, String message)async{
   return await showDialog(
     context: context,
     barrierDismissible: false,
     builder: (_) {
       return AlertDialog(
-        title:  const Text("Information"),
+        title:  Text(title),
         content: Text(message),
         actions: [
           TextButton(

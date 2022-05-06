@@ -75,7 +75,7 @@ class CalendarEditNotifier extends ChangeNotifier {
 
     _editedDateTimeFrom =selectedDateTime;
     _editedDateTimeTo =selectedDateTime.add(const Duration(hours: 1));
-    _editedEventName = "Available time";
+    _editedEventName = "Available";
     _editedEventDocId="";
     _checkMap = {
       'repeat':false,

@@ -115,7 +115,7 @@ class AppointmentRequestView extends ConsumerWidget {
                     .read(appointRequestProvider.notifier)
                     .denyLessonRequest(ref);
                 await commonShowOkInfoDialog(
-                    context, "You denied this request");
+                    context, "XXXXX","You denied this request");
                 Navigator.of(context).pop();
               },
             ),
@@ -127,7 +127,7 @@ class AppointmentRequestView extends ConsumerWidget {
                     .read(appointRequestProvider.notifier)
                     .acceptLessonRequest(ref);
                 await commonShowOkInfoDialog(
-                    context, "You accepted this request");
+                    context,"XXXXX", "You accepted this request");
                 Navigator.of(context).pop();
               },
               width:widthHalfButton),

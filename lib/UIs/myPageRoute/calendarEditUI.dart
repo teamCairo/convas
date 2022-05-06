@@ -1,8 +1,11 @@
+import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../common/UI/commonButtonUI.dart';
+import '../../common/UI/commonOthersUI.dart';
 import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
 import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../entityIsar/eventEntityIsar.dart';
@@ -52,15 +55,24 @@ class CalendarEditState extends ConsumerState<CalendarEdit> {
 
         return Scaffold(
             body: SafeArea(
-                child: SfCalendar(
-                    view: CalendarView.week,
-                    // showNavigationArrow: true,
-                    monthViewSettings: const MonthViewSettings(showAgenda: true),
-                    dataSource: EventDataSource(commonGetAppointmentListFromEventList(eventsList.data!,{})),
-                    onTap: (calendarDetails) async{
-                      await selectCalendarTime(calendarDetails,
-                          ref, context);
-                    })));
+                child: Column(
+                  children: [
+                    commonAppbar("Calendar",leadingWidget:commonIconButtonQuestion(onTap:(){
+                      commonShowOkInfoDialog(context, "Tap the calendar","You can set available time then learners find you");
+                    }) ),
+                    Expanded(
+                      child: SfCalendar(
+                          view: CalendarView.week,
+                          // showNavigationArrow: true,
+                          monthViewSettings: const MonthViewSettings(showAgenda: true),
+                          dataSource: EventDataSource(commonGetAppointmentListFromEventList(eventsList.data!,{})),
+                          onTap: (calendarDetails) async{
+                            await selectCalendarTime(calendarDetails,
+                                ref, context);
+                          }),
+                    ),
+                  ],
+                )));
 
       },
     );

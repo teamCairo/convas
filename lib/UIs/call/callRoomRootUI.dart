@@ -30,7 +30,8 @@ class CallRoomRoot extends ConsumerWidget {
 
     if(ref.watch(callRoomProvider).screenMode==1){
       return Scaffold(
-          appBar: commonAppbarTransparent(ref
+          appBar: commonAppbar(ref
+          // appBar: commonAppbarTransparent(ref
               .watch(friendDataProvider)
               .friendData[argumentFriendUserDocId]!
               .friendUserName),
@@ -40,7 +41,9 @@ class CallRoomRoot extends ConsumerWidget {
 
     }else{
       return Scaffold(
-          appBar: commonAppbarTransparent(ref
+
+          appBar: commonAppbar(ref
+          // appBar: commonAppbarTransparent(ref
               .watch(friendDataProvider)
               .friendData[argumentFriendUserDocId]!
               .friendUserName),

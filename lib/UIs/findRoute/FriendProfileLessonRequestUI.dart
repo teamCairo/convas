@@ -88,7 +88,7 @@ class FriendProfileLessonRequest extends ConsumerWidget {
                       await ref
                           .read(lessonRequestProvider.notifier)
                           .sendRequest(argumentFriendUserDocId, ref);
-                      await commonShowOkInfoDialog(context, "Request has been sent!!");
+                      await commonShowOkInfoDialog(context, "XXXX","Request has been sent!!");
                       Navigator.of(context).pop();
                     }),
               ),
