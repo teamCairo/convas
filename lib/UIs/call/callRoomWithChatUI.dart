@@ -62,7 +62,7 @@ Widget chatInputArea(WidgetRef ref) {
       Expanded(
           child: Padding(
         padding: const EdgeInsets.only(top: 8.0,bottom: 8.0,left: 14.0),
-        child: commonTextBoxGray(
+        child: commonTextBoxGrayForChat(
             onChanged: (String value) {
             },
             controller: _peerMessageController,

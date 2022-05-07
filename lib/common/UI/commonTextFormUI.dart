@@ -18,7 +18,7 @@ Widget commonTextBoxBordered(
 }
 
 
-Widget commonTextBoxGray(
+Widget commonTextBoxGrayForChat(
     {Function(String)? onChanged,
       TextEditingController? controller,
     bool? multiLine}){

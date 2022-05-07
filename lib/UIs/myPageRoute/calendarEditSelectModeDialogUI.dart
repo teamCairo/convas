@@ -1,4 +1,5 @@
 
+import 'package:convas/UIs/myPageRoute/calendarEditDetailUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,34 +19,24 @@ class CalendarEditSelectModeDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    return commonDialog( context,  ref,  "Select action", Container(
-      decoration: BoxDecoration(
-        color:Colors.white,
-        border:Border.all(style:BorderStyle.none),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:[
-              Column(
-                children: [
-                  commonText16BlackCenter("What do you want to do?"),
+    return commonDialog( context,  ref,  "Select action", Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children:[
+          Column(
+            children: [
+              commonText16BlackCenter("What do you want to do?"),
 
-                ],
-              ),
-              Column(
-                children: [
-                  footerButton("Edit","update",ref,context),
-                  footerButton("Delete","delete",ref,context),
-                  footerButton("Add","insert",ref,context),
-                ],
-              ),
-            ]
+            ],
+          ),
+          Column(
+            children: [
+              footerButton("Edit","update",ref,context),
+              footerButton("Delete","delete",ref,context),
+              footerButton("Add","insert",ref,context),
+            ],
+          ),
+        ]
 
-        ),
-      ),
     ),
     height:MediaQuery.of(context).size.width);
   }

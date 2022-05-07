@@ -1,4 +1,3 @@
-import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
@@ -11,28 +10,15 @@ import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../entityIsar/eventEntityIsar.dart';
 import 'calendarEditLogic.dart';
 
-class CalendarEdit extends ConsumerStatefulWidget  {
-  const CalendarEdit(this.argumentFriendUserDocId, {
-    Key? key,
-    //argumentFriendUserDocIdがNULLかどうかでモードを判断
+class CalendarEdit extends ConsumerWidget {
+  const CalendarEdit(
+      this.argumentFriendUserDocId, {
+  Key? key,
   }) : super(key: key);
   final String? argumentFriendUserDocId;
 
   @override
-  CalendarEditState createState() => CalendarEditState();
-}
-
-class CalendarEditState extends ConsumerState<CalendarEdit> {
-
-  @override
-  void initState() {
-    super.initState();
-
-    //必要に応じ初期処理追加
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
     var isarInstance = Isar.getInstance();
     Query<Event>? eventDataQuery = isarInstance?.events

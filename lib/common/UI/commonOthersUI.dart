@@ -52,7 +52,6 @@ Dialog commonDialog(BuildContext context, WidgetRef ref, String title, Widget ch
   double _dialogWidth = width??MediaQuery.of(context).size.width * 3 / 4;
   double _dialogHeight = height??MediaQuery.of(context).size.width * 3 / 4;
 
-
   return Dialog(
     // insetPadding: const EdgeInsets.all(MediaQuery.of(context).size.width/8),
     elevation: 0,
@@ -72,6 +71,7 @@ Dialog commonDialog(BuildContext context, WidgetRef ref, String title, Widget ch
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:[
               commonText24BlackBoldCenter(title),
+              commonVerticalGap(),
               Expanded(
                 child: child,
               ),
@@ -83,12 +83,12 @@ Dialog commonDialog(BuildContext context, WidgetRef ref, String title, Widget ch
     ),
   );
 }
-Scaffold commonScaffold(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar}){
+Scaffold commonScaffold(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar,bool? withoutPadding}){
   return Scaffold(
     appBar:appBar,
       body: SafeArea(
       child: Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: EdgeInsets.all((withoutPadding??false)?0:20.0),
   child:Column(
     mainAxisAlignment:mainAxisAlignment ,
     children:children
@@ -259,8 +259,12 @@ Future<dynamic> commonShowOkInfoDialog(BuildContext context, String title, Strin
         content: Text(message),
         actions: [
           TextButton(
-            child: const Text("OK"),
+            child: const Text("OK",
+            style:TextStyle(color:Colors.white)),
             onPressed: () => Navigator.pop(context),
+            style:ElevatedButton.styleFrom(
+              primary: Colors.orange,
+            )
           ),
         ],
       );
@@ -452,7 +456,7 @@ Widget commonImageCountry(String countryCode,double height, WidgetRef ref){
 
 Widget commonCheckBoxList(String displayItemName,bool value,{required void Function(bool?)  onChanged}){
   return CheckboxListTile(
-    title: commonText16GrayLeft(displayItemName),
+    title: commonText16BlackLeft(displayItemName),
     value: value,
     onChanged:onChanged ,
     controlAffinity: ListTileControlAffinity.trailing,

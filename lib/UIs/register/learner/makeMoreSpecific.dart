@@ -62,7 +62,7 @@ class MakeMoreSpecific extends ConsumerWidget {
                 onPressed: () {
                   FocusScope.of(context).requestFocus(FocusNode());
                   ref.read(registerProvider.notifier).setGoalWithoutRebuild("");
-                  commonNavigatorPushPushSlideHorizon(
+                  commonNavigatorPushSlideHorizon(
                       context, SetFrequency());
                 },
                 text: 'OK'),
@@ -70,7 +70,7 @@ class MakeMoreSpecific extends ConsumerWidget {
             commonButtonWhiteBorderRound(
                 onPressed: () {
                   FocusScope.of(context).requestFocus(FocusNode());
-                  commonNavigatorPushPushSlideHorizon(
+                  commonNavigatorPushSlideHorizon(
                       context, SetFrequency());
                 },
                 text: 'Skip'),

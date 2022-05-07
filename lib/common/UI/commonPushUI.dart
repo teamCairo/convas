@@ -58,8 +58,23 @@ Widget commonFunctionPushSlideBottomToTop(BuildContext context, Animation<double
 
 }
 
-void commonNavigatorPushPushSlideHorizonReplacement(BuildContext context, Widget  widget){
-  Navigator.of(context).pushReplacement(
+Future<void>  commonNavigatorPushPushSlideHorizonReplacement(BuildContext context, Widget  widget)async{
+  await Navigator.of(context).pushReplacement(
+    PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return widget;
+        // return const SetUserType();
+      },
+      transitionsBuilder:
+          (context, animation, secondaryAnimation, child) {
+        return commonFunctionPushSlideHorizon(
+            context, animation, secondaryAnimation, child);
+      },
+    ),
+  );
+}
+Future<void>  commonNavigatorPushSlideHorizon(BuildContext context, Widget  widget)async{
+  await Navigator.of(context).push(
     PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) {
         return widget;
@@ -74,20 +89,14 @@ void commonNavigatorPushPushSlideHorizonReplacement(BuildContext context, Widget
   );
 }
 
-void commonNavigatorPushPushSlideHorizon(BuildContext context, Widget  widget){
-  Navigator.of(context).push(
-    PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return widget;
-        // return const SetUserType();
-      },
-      transitionsBuilder:
-          (context, animation, secondaryAnimation, child) {
-        return commonFunctionPushSlideHorizon(
-            context, animation, secondaryAnimation, child);
-      },
-    ),
+
+Future<void> commonNavigatorPush(BuildContext context, Widget  widget)async{
+  await Navigator.of(context).push(
+    MaterialPageRoute(builder: (context) {
+      return widget;
+    }),
   );
+
 }
 
 Widget buildImageForSlide(path, index) => Container(

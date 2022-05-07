@@ -16,8 +16,6 @@ class SelectPointsDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    MediaQuery.of(context).size.width * 3 / 4;
-
     return commonDialog(
         context,
         ref,

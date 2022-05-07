@@ -42,7 +42,7 @@ class SetNameAndPhoto extends ConsumerWidget {
         text: "Next",
         onPressed: () {
           FocusScope.of(context).requestFocus(FocusNode());
-            commonNavigatorPushPushSlideHorizon(context,  const RegisterBirthDateAndGender());
+            commonNavigatorPushSlideHorizon(context,  const RegisterBirthDateAndGender());
         },
       )
     ]);

@@ -1,66 +1,54 @@
 
 import 'package:flutter/material.dart';
 
-Padding commonText12GrayRight(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 4.0),
-    child: Align(
-        alignment: Alignment.topRight,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 12,
-            color: Colors.black54,
-          ),
-        )),
-  );
+Widget commonText12GrayRight(String text) {
+  return Align(
+      alignment: Alignment.topRight,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
+          color: Colors.black54,
+        ),
+      ));
 }
 
-Padding commonText14GrayLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 4.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-            color: Colors.black54,
-          ),
-        )),
-  );
+Widget commonText14GrayLeft(String text) {
+  return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 14,
+          color: Colors.black54,
+        ),
+      ));
 }
 
-Padding commonText14Gray(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 4.0),
-    child: Text(
-      text,
-      style: const TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-        color: Colors.black54,
-      ),
+Widget commonText14Gray(String text) {
+  return Text(
+    text,
+    style: const TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 14,
+      color: Colors.black54,
     ),
   );
 }
 
-Padding commonText16GrayRight(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.topRight,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-            color: Colors.black54,
-          ),
-        )),
-  );
+Widget commonText16GrayRight(String text) {
+  return Align(
+      alignment: Alignment.topRight,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16,
+          color: Colors.black54,
+        ),
+      ));
 }
 
 Widget commonText16GrayLeftEllipsis(String text) {
@@ -107,20 +95,17 @@ Widget commonText20GrayLeft(String text) {
 }
 
 
-Padding commonText20BlackLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 20,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText20BlackLeft(String text) {
+  return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 20,
+          color: Colors.black87,
+        ),
+      ));
 }
 Widget commonText20BlackCenter(String text) {
   return Align(
@@ -151,166 +136,136 @@ Widget commonText30BlackBoldLeft(String text) {
 }
 
 
-Padding commonText30BlackBoldCenter(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 30,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText30BlackBoldCenter(String text) {
+  return Align(
+      alignment: Alignment.center,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 30,
+          color: Colors.black87,
+        ),
+      ));
 }
 
 
-Padding commonText24BlackBoldCenter(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 24,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText24BlackBoldCenter(String text) {
+  return Align(
+      alignment: Alignment.center,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 24,
+          color: Colors.black87,
+        ),
+      ));
 }
 
-Padding commonText24BlackBoldLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 24,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText24BlackBoldLeft(String text) {
+  return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 24,
+          color: Colors.black87,
+        ),
+      ));
 }
 
 
-Padding commonText16BlackCenter(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.topCenter,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText16BlackCenter(String text) {
+  return Align(
+      alignment: Alignment.topCenter,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16,
+          color: Colors.black87,
+        ),
+      ));
 }
 
-Padding black16TextLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget black16TextLeft(String text) {
+  return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.black87,
+        ),
+      ));
 }
 
-Padding commonText16BlueLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 0.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.blueAccent,
-          ),
-        )),
-  );
+Widget commonText16BlueLeft(String text) {
+  return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.blueAccent,
+        ),
+      ));
 }
 
-Padding commonText16GrayLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 0.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.black54,
-          ),
-        )),
-  );
+Widget commonText16GrayLeft(String text) {
+  return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.black54,
+        ),
+      ));
 }
 
-Padding commonText16GrayCenter(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 0.0),
-    child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.black54,
-          ),
-        )),
-  );
+Widget commonText16GrayCenter(String text) {
+  return Align(
+      alignment: Alignment.center,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.black54,
+        ),
+      ));
 }
 
-Padding commonText16BlackLeft(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 0.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText16BlackLeft(String text) {
+  return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16,
+          color: Colors.black87,
+        ),
+      ));
 }
 
-Padding commonText20BlackLeftBold(String text) {
-  return Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Colors.black87,
-          ),
-        )),
-  );
+Widget commonText20BlackLeftBold(String text) {
+  return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: Colors.black87,
+        ),
+      ));
 }
 
 

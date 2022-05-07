@@ -31,7 +31,7 @@ class SetGoalDetail extends ConsumerWidget {
       buttonList.add(commonButtonTitleAndTextWhite(
           goalList[i].title, goalList[i].text, 90, () {
         ref.read(registerProvider.notifier).setGoal(goalList[i].text);
-        commonNavigatorPushPushSlideHorizon(context, MakeMoreSpecific(goalData:goalList[i]));
+        commonNavigatorPushSlideHorizon(context, MakeMoreSpecific(goalData:goalList[i]));
       }));
       buttonList.add(commonVerticalGap());
     }
@@ -45,14 +45,14 @@ class SetGoalDetail extends ConsumerWidget {
             children: [
               commonButtonWhiteBorderRound(
                   onPressed: () {
-                    commonNavigatorPushPushSlideHorizon(
+                    commonNavigatorPushSlideHorizon(
                         context, MakeMoreSpecific(goalData: null));
                   },
                   text: 'Other'),
               commonVerticalGap(),
               commonButtonWhiteBorderRound(
                   onPressed: () {
-                    commonNavigatorPushPushSlideHorizon(
+                    commonNavigatorPushSlideHorizon(
                         context, const DataPreparing());
                   },
                   text: 'Skip'),

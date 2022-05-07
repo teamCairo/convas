@@ -23,33 +23,33 @@ class SetGoal extends ConsumerWidget {
       const SizedBox(height: 40),
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         commonImageButton('assets/goalTravel.JPG', "Travel", () {
-          commonNavigatorPushPushSlideHorizon(context,  const SetGoalDetail(category: "travel"));
+          commonNavigatorPushSlideHorizon(context,  const SetGoalDetail(category: "travel"));
         }, (MediaQuery.of(context).size.width - 56) / 2),
         commonVerticalGap(),
         commonImageButton('assets/goalExam.JPG', "Exam", () {
-          commonNavigatorPushPushSlideHorizon(context,  const SetGoalDetail(category: "exam"));
+          commonNavigatorPushSlideHorizon(context,  const SetGoalDetail(category: "exam"));
         }, (MediaQuery.of(context).size.width - 56) / 2),
       ]),
       commonVerticalGap(),
       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         commonImageButton('assets/goalWork.JPG', "Work", () {
-          commonNavigatorPushPushSlideHorizon(context,  const SetGoalDetail(category: "work"));
+          commonNavigatorPushSlideHorizon(context,  const SetGoalDetail(category: "work"));
         }, (MediaQuery.of(context).size.width - 56) / 2),
         commonVerticalGap(),
         commonImageButton('assets/goalFriends.JPG', "Make friends", () {
-          commonNavigatorPushPushSlideHorizon(context,  const SetGoalDetail(category: "friends"));
+          commonNavigatorPushSlideHorizon(context,  const SetGoalDetail(category: "friends"));
         }, (MediaQuery.of(context).size.width - 56) / 2),
       ]),
       const SizedBox(height: 40),
       commonButtonWhiteBorderRound(
           onPressed: () {
-            commonNavigatorPushPushSlideHorizon(context,  MakeMoreSpecific(goalData:null));
+            commonNavigatorPushSlideHorizon(context,  MakeMoreSpecific(goalData:null));
           },
           text: 'Other'),
       commonVerticalGap(),
       commonButtonWhiteBorderRound(
           onPressed: () {
-            commonNavigatorPushPushSlideHorizon(context,  const DataPreparing());
+            commonNavigatorPushSlideHorizon(context,  const DataPreparing());
           },
           text: 'Skip')
     ]);

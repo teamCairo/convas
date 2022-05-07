@@ -244,7 +244,7 @@ class ChatPage extends ConsumerWidget {
           Expanded(
               child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: commonTextBoxGray(
+            child: commonTextBoxGrayForChat(
                 onChanged: (String value) {
                   message = value;
                 },

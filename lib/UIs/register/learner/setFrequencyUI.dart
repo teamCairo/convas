@@ -52,7 +52,7 @@ class SetFrequency extends ConsumerWidget {
         onPressed: () {
           bool checkResult = checkFrequency(ref);
           if (checkResult) {
-            commonNavigatorPushPushSlideHorizon(context, const DataPreparing());
+            commonNavigatorPushSlideHorizon(context, const DataPreparing());
           } else {
             // commonShowOkInfoDialog(
             //     context, "You can set 1～7 as times per week");

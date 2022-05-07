@@ -6,6 +6,7 @@ import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonPushUI.dart';
 import '../../common/UI/commonTextUI.dart';
+import '../../common/logic/commonLogicOthers.dart';
 import '../../common/provider/masterProvider.dart';
 import '../call/callRoomRootUI.dart';
 import 'appointmentRequestProvider.dart';
@@ -100,7 +101,6 @@ class AppointmentRequestView extends ConsumerWidget {
 
   Widget footerButtonArea(String mode, WidgetRef ref, BuildContext context) {
 
-    double widthHalfButton = (MediaQuery.of(context).size.width-56)/2;
 
     if (mode == "1") {
       return Row(
@@ -108,7 +108,7 @@ class AppointmentRequestView extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(top: 14.0),
             child: commonButtonRoundWhiteSmall(
-              width:widthHalfButton,
+              width:commonWidthHalfButton(context),
               text: "Deny",
               onPressed: () async {
                 await ref
@@ -130,7 +130,7 @@ class AppointmentRequestView extends ConsumerWidget {
                     context,"XXXXX", "You accepted this request");
                 Navigator.of(context).pop();
               },
-              width:widthHalfButton),
+              width:commonWidthHalfButton(context)),
         ],
       );
     } else {
@@ -139,7 +139,7 @@ class AppointmentRequestView extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(top: 14.0),
             child: commonButtonRoundWhiteSmall(
-              width:widthHalfButton,
+              width:commonWidthHalfButton(context),
               text: "Cancel lesson",
               onPressed: () async {
                 commonShowOkNgInfoDialog(
@@ -167,7 +167,7 @@ class AppointmentRequestView extends ConsumerWidget {
                   );
 
                 },
-            width:widthHalfButton),
+            width:commonWidthHalfButton(context)),
           ),
         ],
       );

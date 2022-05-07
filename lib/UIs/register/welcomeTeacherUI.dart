@@ -43,7 +43,7 @@ class WelcomeTeacher extends ConsumerWidget {
           commonButtonOrangeRound(
             text: "Next",
             onPressed: () async {
-              commonNavigatorPushPushSlideHorizon(context, const SetNameAndPhoto());
+              commonNavigatorPushSlideHorizon(context, const SetNameAndPhoto());
             },
           )
         ],);

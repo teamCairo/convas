@@ -21,63 +21,35 @@ class CalendarEditDeleteDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return commonDialog(
+      context,
+      ref,
+      "Delete available time",
+      Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          commonText16GrayCenter("Are you sure you wanna delete?"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              commonButtonWhiteBorderRound(text: "Cancel",
+                  width:(MediaQuery.of(context).size.width * 3 / 8)-18,
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }),
 
-    final _dialogWidth = MediaQuery.of(context).size.width * 3 / 4; // 画面サイズから相対的に大きさを決めている。
-    return Dialog(
-      insetPadding: const EdgeInsets.all(0),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      // SizedBoxでダイアログそのものの大きさをまずは決めています。
-      child: SizedBox(
-          width: _dialogWidth,
-          height: _dialogWidth*0.6,
-            child: Container(
-              decoration: BoxDecoration(
-                color:Colors.white,
-                border:Border.all(style:BorderStyle.none),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:[
-                      Column(
-                        children: [
-                          commonButtonCloseForModal(context),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                            child: commonText16BlackLeft("Are you sure you wanna delete?"),
-                          ),
+              commonButtonOrangeRound(text: "Delete",
+                  width:(MediaQuery.of(context).size.width * 3 / 8)-18,
+                  onPressed: ()async{
+                    await logicalDeleteEventData(commonGetAppointmentNotesItemString(details.appointments![0],"eventDocId"),ref.watch(userDataProvider).userData["userDocId"],"CalendarEditDeleteDialog");
+                    Navigator.pop(context);
+                  })
 
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 14.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            commonButtonSmallOrangeRound(text: "Cancel",
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                }),
-
-                            commonButtonSmallOrangeRound(text: "Delete",
-                                onPressed: ()async{
-                                  await logicalDeleteEventData(commonGetAppointmentNotesItemString(details.appointments![0],"eventDocId"),ref.watch(userDataProvider).userData["userDocId"],"CalendarEditDeleteDialog");
-                                  Navigator.pop(context);
-                                })
-
-                          ],
-                        ),
-                      )
-
-                    ]
-
-                ),
-              ),
-            ),
+            ],
+          ),
+        ],
       ),
+      height:MediaQuery.of(context).size.width * 1 / 2
     );
   }
 }

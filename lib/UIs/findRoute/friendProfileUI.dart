@@ -150,7 +150,7 @@ class FriendProfile extends ConsumerWidget {
                     )),
               ),
             ),
-            commonButtonSingleFooter(
+            commonButtonOrangeRound(
                   onPressed: () async {
                     await insertFriendAndMoveToChatPage(ref,context, argumentFriendUserDocId);
 

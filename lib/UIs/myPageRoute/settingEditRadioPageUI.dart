@@ -74,7 +74,7 @@ class SettingEditRadioPage extends ConsumerWidget {
                     ),
               ),
             ),
-            commonButtonSingleFooter(text:"OK", onPressed: () async{
+            commonButtonOrangeRound(text:"OK", onPressed: () async{
 
                 await updateUserSelectedItem(ref,databaseItem,ref.watch(settingEditRadioPageProvider).onRadioGroupValue,"settingEditTextPage");
                 ref.read(userDataProvider.notifier).setUserDataOneItem(databaseItem,ref.watch(settingEditRadioPageProvider).onRadioGroupValue);

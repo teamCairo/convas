@@ -1,27 +1,27 @@
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
+//
+// Widget commonButtonCloseForModal(BuildContext context) {
+//   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+//     commonButtonGraySmallerIcon(
+//         icon: Icons.clear,
+//         onPressed: () {
+//           Navigator.of(context).pop();
+//         }),
+//   ]);
+// }
 
-Widget commonButtonCloseForModal(BuildContext context) {
-  return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-    commonButtonGraySmallerIcon(
-        icon: Icons.clear,
-        onPressed: () {
-          Navigator.of(context).pop();
-        }),
-  ]);
-}
-
-Widget commonButtonSingleFooter(
-    {required String text, required Function()? onPressed}) {
-  return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-  child:commonButtonOrangeRound(text:text,onPressed:onPressed));
-    }
+// Widget commonButtonSingleFooter(
+//     {required String text, required Function()? onPressed}) {
+//   return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 10.0),
+//   child:commonButtonOrangeRound(text:text,onPressed:onPressed));
+//     }
 
 Widget commonButtonOrangeRound(
-    {required String text, required Function()? onPressed}) {
+    {required String text, required Function()? onPressed,double? width}) {
   return SizedBox(
-    width: double.infinity,
+    width: width??double.infinity,
     height: 50,
     child: OutlinedButton(
       child: Text(
@@ -258,9 +258,9 @@ Widget commonIconButtonSmallWhiteBorderRound(
 }
 
 Widget commonButtonWhiteBorderRound(
-    {required String text, required Function()? onPressed}) {
+    {required String text, required Function()? onPressed,double? width}) {
   return SizedBox(
-    width: double.infinity,
+    width: width??double.infinity,
     height: 50,
     child: OutlinedButton(
       child: Text(

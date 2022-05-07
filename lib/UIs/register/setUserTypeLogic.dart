@@ -8,11 +8,11 @@ import '../../common/UI/commonPushUI.dart';
 
 void selectLearner(WidgetRef ref,BuildContext context){
   ref.read(registerProvider.notifier).setUserType("1");
-  commonNavigatorPushPushSlideHorizon(context,  WelcomeLearner());
+  commonNavigatorPushSlideHorizon(context,  WelcomeLearner());
 }
 
 
 void selectTeacher(WidgetRef ref,BuildContext context){
   ref.read(registerProvider.notifier).setUserType("2");
-  commonNavigatorPushPushSlideHorizon(context,  WelcomeTeacher());
+  commonNavigatorPushSlideHorizon(context,  WelcomeTeacher());
 }
