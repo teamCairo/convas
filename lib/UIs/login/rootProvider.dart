@@ -12,21 +12,36 @@ class BottomNavigationBarItems extends ChangeNotifier {
 
   void initialize(WidgetRef ref) {
 
-    _footerItemNames = [
-      ref.watch(userDataProvider).userData["userType"]=="1"? 'Top':'Calendar',
-      'Find',
-      'Talk',
-      'Lesson',
-      'My page',
-    ];
+    if(ref.watch(userDataProvider).userData["userType"]=="1"){
+      _footerItemNames = [
+        'Find',
+        'Talk',
+        'Lesson',
+        'My page',
+      ];
+      _footerIcons = [
+        Icons.search,
+        Icons.message_outlined,
+        Icons.add_chart,
+        Icons.work_outline,
+      ];
+    }else{
+      _footerItemNames = ['Calendar',
+        'Find',
+        'Talk',
+        'Lesson',
+        'My page',
+      ];
+      _footerIcons = [Icons.calendar_today_outlined,
+        Icons.search,
+        Icons.message_outlined,
+        Icons.add_chart,
+        Icons.work_outline,
+      ];
 
-    _footerIcons = [
-      ref.watch(userDataProvider).userData["userType"]=="1"? Icons.star:Icons.calendar_today_outlined,
-      Icons.search,
-      Icons.message_outlined,
-      Icons.add_chart,
-      Icons.work_outline,
-    ];
+    }
+
+
 
     _bottomNavigationBarItems.clear();
     _bottomNavigationBarItems.add(updateActiveState(0));

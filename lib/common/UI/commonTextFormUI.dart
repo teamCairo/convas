@@ -4,16 +4,23 @@ Widget commonTextBoxBordered(
     {required String text,
       Function(String)? onChanged,
       String? initialValue,
-      required bool passwordSecure}) {
+      bool? passwordSecure,
+      int? maxLines,
+      int? minLines,
+    }) {
   return Column(children: [
     TextFormField(
         initialValue:initialValue,
         decoration: InputDecoration(
           labelText: text,
           border: const OutlineInputBorder(),
+          alignLabelWithHint: true,
         ),
-        obscureText: passwordSecure,
-        onChanged: onChanged)
+        obscureText: passwordSecure??false,
+        onChanged: onChanged,
+      maxLines: maxLines??1,
+      minLines: minLines,
+    )
   ]);
 }
 

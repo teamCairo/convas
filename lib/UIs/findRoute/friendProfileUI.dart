@@ -9,7 +9,7 @@ import 'friendProfileLogic.dart';
 import 'friendProfileProvider.dart';
 
 class FriendProfile extends ConsumerWidget {
-  FriendProfile({
+  const FriendProfile({
     required this.argumentFriendUserDocId,
     Key? key,
   }) : super(key: key);
@@ -22,13 +22,14 @@ class FriendProfile extends ConsumerWidget {
       return Scaffold(
           // appBar: commonAppbarTransparent("Teacher Profile"),
 
-          appBar: commonAppbar("Teacher Profile"),
+          appBar: commonAppbar("Profile"),
           body: const Center(child: CircularProgressIndicator()));
 
     } else {
+
+
       return Scaffold(
-          // appBar: commonAppbarTransparent("Teacher Profile"),
-          appBar: commonAppbar("Teacher Profile"),
+          appBar: commonAppbar("Profile",color:Colors.orange,),
           body: Column(children: [
             Expanded(
               child: SingleChildScrollView(

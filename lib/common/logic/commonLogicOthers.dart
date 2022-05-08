@@ -50,3 +50,16 @@ Color commonGetAvailabilityColor(String code) {
     return Colors.black;
   }
 }
+IconData commonGenderIcon(String genderCode){
+  switch(genderCode){
+    case "1":
+      return Icons.male;
+    case "2":
+      return Icons.female;
+    case "3":
+      return Icons.circle;
+    default:
+      return Icons.lock;
+  }
+
+}

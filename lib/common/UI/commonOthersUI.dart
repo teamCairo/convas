@@ -8,10 +8,14 @@ import '../commonValues.dart';
 import '../logic/commonLogicOthers.dart';
 import 'commonTextUI.dart';
 
-AppBar commonAppbar(String text,{Color? color,Widget? leadingWidget, List<Widget>? tailWidgetList}) {
-  Color backColor=Colors.white10;
+AppBar commonAppbar(String text,{Color? color,Color? textColor,Widget? leadingWidget, List<Widget>? tailWidgetList}) {
+  Color backColor=Colors.white;
   if(color!=null) {
     backColor=color;
+  }
+  Color txColor=Colors.black87;
+  if(textColor!=null) {
+    txColor=textColor;
   }
   return AppBar(
     backgroundColor: backColor,
@@ -21,10 +25,10 @@ AppBar commonAppbar(String text,{Color? color,Widget? leadingWidget, List<Widget
       children: [
         Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 20,
-            color: Colors.black87,
+            color: txColor,
           ),
         ),
         leadingWidget ?? Container()
@@ -83,34 +87,48 @@ Dialog commonDialog(BuildContext context, WidgetRef ref, String title, Widget ch
     ),
   );
 }
-Scaffold commonScaffold(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar,bool? withoutPadding}){
-  return Scaffold(
-    appBar:appBar,
-      body: SafeArea(
-      child: Padding(
-      padding: EdgeInsets.all((withoutPadding??false)?0:20.0),
-  child:Column(
-    mainAxisAlignment:mainAxisAlignment ,
-    children:children
-  ))),
-      floatingActionButton:floatingActionButton
+Widget commonScaffold(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar,bool? withoutPadding}){
+  return WillPopScope(
+    onWillPop: () async {
+      FocusScope.of(context).requestFocus(FocusNode());
+      Navigator.pop(context);
+      return false;
+    },
+    child: Scaffold(
+      appBar:appBar,
+        body: SafeArea(
+        child: Padding(
+        padding: EdgeInsets.all((withoutPadding??false)?0:20.0),
+    child:Column(
+      mainAxisAlignment:mainAxisAlignment ,
+      children:children
+    ))),
+        floatingActionButton:floatingActionButton
+    ),
   );
 }
 
 
-Scaffold commonScaffoldScroll(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar}){
-  return Scaffold(
-      appBar:appBar,
-      body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child:Column(
-                    mainAxisAlignment:mainAxisAlignment ,
-                    children:children
-                )),
-          )),
-      floatingActionButton:floatingActionButton
+Widget commonScaffoldScroll(BuildContext context, WidgetRef ref,MainAxisAlignment mainAxisAlignment, List<Widget> children,{Widget? floatingActionButton,PreferredSizeWidget? appBar,bool? withoutPadding}){
+  return WillPopScope(
+    onWillPop: () async {
+      FocusScope.of(context).requestFocus(FocusNode());
+      Navigator.pop(context);
+      return false;
+    },
+    child: Scaffold(
+        appBar:appBar,
+        body: SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                  padding: EdgeInsets.all((withoutPadding??false)?0:20.0),
+                  child:Column(
+                      mainAxisAlignment:mainAxisAlignment ,
+                      children:children
+                  )),
+            )),
+        floatingActionButton:floatingActionButton
+    ),
   );
 }
 
@@ -371,7 +389,7 @@ Widget loginLamp(DateTime lastLoginTime,bool onlineStatus,double size,bool textS
           padding: const EdgeInsets.only(top:4,right: 4.0),
           child: lampIcon,
         ),
-        commonText12GrayRight(lastLoginStr),
+        commonText16GrayRight(lastLoginStr),
       ],
     );
   }else{

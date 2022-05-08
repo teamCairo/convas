@@ -8,6 +8,8 @@ import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonPushUI.dart';
 import '../../common/UI/commonTextUI.dart';
 import '../../common/commonValues.dart';
+import '../../common/logic/commonLogicDate.dart';
+import '../../common/logic/commonLogicOthers.dart';
 import '../../daoAlgolia/usersDaoAlgolia.dart';
 import 'friendProfileRootUI.dart';
 import 'friendProfileUI.dart';
@@ -43,19 +45,11 @@ class SearchUsersMainPage extends ConsumerWidget {
                           Expanded(
                             child: commonButtonIconTextGrayWide(
                                 onPressed: () async {
-                                  Navigator.of(context).push(
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, animation, secondaryAnimation) {
-                                        return const SearchUsersConditionPage();
-                                      },
-                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                        return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
-                                      },
-                                    ),
-                                  );
+                                  commonNavigatorPushSlideHorizon(context,  const SearchUsersConditionPage());
+
                                 },
                                 icon: Icons.search,
-                                text: 'Set search conditions'),
+                                text: 'Search conditions'),
                           ),
                           IconButton(
                               onPressed: () {
@@ -68,10 +62,10 @@ class SearchUsersMainPage extends ConsumerWidget {
                               },
                               icon: const Icon(Icons.refresh),
                               iconSize: 26),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.upgrade),
-                              iconSize: 26),
+                          // IconButton(
+                          //     onPressed: () {},
+                          //     icon: const Icon(Icons.upgrade),
+                          //     iconSize: 26),
                         ])),
                   ),
                   resultBody(ref)
@@ -113,23 +107,19 @@ class SearchUsersMainPage extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
         onTap: () async {
-          await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
-              return FriendProfileRoot(
-                argumentFriendUserDocId:userData.objectID,
-                argumentFriendUserName:userData.name,
-              );
-            }),
-          );
+          commonNavigatorPushSlideHorizon(context,  FriendProfileRoot(
+            argumentFriendUserDocId:userData.objectID,
+            argumentFriendUserName:userData.name,
+          ));
         },
         child: Container(
-            color: Colors.white10,
-            height: 100,
+            color: Colors.white,
+            height: 150,
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8.0, top: 8),
                 child: commonCircleAvatarImage(
-                    radius: 32,
+                    radius: 45,
                     image: ref
                         .watch(searchUsersProvider)
                         .userImages[userData.objectID],
@@ -147,23 +137,30 @@ class SearchUsersMainPage extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              commonText16BlackCenter(userData.name),
-                              Padding(
-                                padding: const EdgeInsets.only(left:4,top:7),
-                                child: commonImageCountry(userData.country,13, ref),
-                              ),
+                              commonText20BlackLeft(userData.name),
+                              const SizedBox(width:8),
+                              commonText20BlackLeft(fromBirthMillisecondsToAge(userData.birthDate).toString()),
+                              const SizedBox(width:8),
+                              Icon(commonGenderIcon(userData.gender),size:20)
+                              // Padding(
+                              //   padding: const EdgeInsets.only(left:4,top:7),
+                              //   child: commonImageCountry(userData.country,13, ref),
+                              // ),
                             ],
                           ),
+
                           loginLampFromSecondsSmall(userData.lastLoginTime,userData.onlineStatus,true)
                     ]),
-                    commonText14GrayLeft(userData.greeting),
-                    Padding(
-                        padding: const EdgeInsets.only(top:3.0),
-                        child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                                children: featureList
-                            )))
+                    const SizedBox(height:10),
+                    commonText16GrayLeft(userData.description,maxLines: 5),
+                    // Padding(
+                    //     padding: const EdgeInsets.only(top:3.0),
+                    //     child: SingleChildScrollView(
+                    //         scrollDirection: Axis.horizontal,
+                    //         child: Row(
+                    //             children: featureList
+                    //         ))
+                    // )
                 ],
               ),
                   )),

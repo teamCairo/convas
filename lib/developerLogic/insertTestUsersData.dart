@@ -46,8 +46,8 @@ Future<void> insertUnitData(WidgetRef ref, String name,int varForTypes,DateTime 
       gender: ((varForTypes % 3) + 1).toString(),
       placeWannaGo: "none",
       greeting: "good morning I'm " + name,
-      description: "hello nice to meet you I'm " + name,
-      userType: "2",
+      description: "hello nice to meet you I'm " + name+"1234567890223456789032345678904234567890523456789062345678907234567890823456789092345678900234567890",
+      userType: ((varForTypes % 2) + 1).toString(),
       messageTokenId: "",
       readableFlg: false,
       programId: 'insertTestUsersData');

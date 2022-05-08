@@ -216,7 +216,7 @@ Widget commonText16BlueLeft(String text) {
       ));
 }
 
-Widget commonText16GrayLeft(String text) {
+Widget commonText16GrayLeft(String text,{int? maxLines}) {
   return Align(
       alignment: Alignment.topLeft,
       child: Text(
@@ -226,6 +226,7 @@ Widget commonText16GrayLeft(String text) {
           fontSize: 16,
           color: Colors.black54,
         ),
+        maxLines: maxLines,
       ));
 }
 

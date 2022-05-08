@@ -54,46 +54,46 @@ class SettingPage extends ConsumerWidget {
       return
         Column(
             children:[
-              Padding(
-                  padding: const EdgeInsets.only(left: 14.0,bottom: 0),
-                  child: black16TextLeft("Greeting")),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    commonText16GrayLeftEllipsis(ref.watch(userDataProvider).userData["greeting"]),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 14.0),
-                      child: commonButtonOrangeRoundSquareSmall(text:"Edit",
-                          onPressed:()async{
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) {
-                                return SettingEditTextPage(
-                                  displayedItem: "Greeting",
-                                  databaseItem: "greeting",
-                                  value:ref.watch(userDataProvider).userData["greeting"],
-                                );
-                              }),
-                            );
-                          }),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.all( 14.0),
-                  child: Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.black26,
-                            width: 0.5,
-                          ),
-                        ),
-                      ),
-                      child: Container()
-                  )),
+              // Padding(
+              //     padding: const EdgeInsets.only(left: 14.0,bottom: 0),
+              //     child: black16TextLeft("Greeting")),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       commonText16GrayLeftEllipsis(ref.watch(userDataProvider).userData["greeting"]),
+              //       Padding(
+              //         padding: const EdgeInsets.only(left: 14.0),
+              //         child: commonButtonOrangeRoundSquareSmall(text:"Edit",
+              //             onPressed:()async{
+              //               await Navigator.of(context).push(
+              //                 MaterialPageRoute(builder: (context) {
+              //                   return SettingEditTextPage(
+              //                     displayedItem: "Greeting",
+              //                     databaseItem: "greeting",
+              //                     value:ref.watch(userDataProvider).userData["greeting"],
+              //                   );
+              //                 }),
+              //               );
+              //             }),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // Padding(
+              //     padding: const EdgeInsets.all( 14.0),
+              //     child: Container(
+              //         decoration: const BoxDecoration(
+              //           border: Border(
+              //             bottom: BorderSide(
+              //               color: Colors.black26,
+              //               width: 0.5,
+              //             ),
+              //           ),
+              //         ),
+              //         child: Container()
+              //     )),
               Padding(
                   padding: const EdgeInsets.only(left: 14.0,bottom: 8),
                   child: commonText16BlackLeft("Self-Introduction")),
@@ -158,6 +158,47 @@ class SettingPage extends ConsumerWidget {
       return
         Column(
             children:[
+              Padding(
+                  padding: const EdgeInsets.only(left: 14.0,bottom: 8),
+                  child: commonText16BlackLeft("Self-Introduction")),
+              Padding(
+                padding: const EdgeInsets.only(left: 14.0),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(ref.watch(userDataProvider).userData["description"],
+                      overflow: TextOverflow.ellipsis,
+                      style:const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16,
+                        color: Colors.black54,),
+
+                    )),
+              ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.black26,
+                          width: 0.5,
+                        ),
+                      ),
+                    ),
+                    child: Align(
+                        alignment: Alignment.centerRight,
+                        child:commonButtonOrangeRoundSquareSmall(text:"Edit",
+                            onPressed:()async{
+                              await Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) {
+                                  return SettingEditDescriptionPage(
+                                    value:ref.watch(userDataProvider).userData["description"],
+                                  );
+                                }),
+                              );
+                            })
+                    ),
+                  )),
               Padding(
 
                   padding: const EdgeInsets.only(left: 14.0,bottom: 6),

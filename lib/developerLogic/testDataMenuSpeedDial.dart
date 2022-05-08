@@ -7,7 +7,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import '../UIs/register/setUserTypeUI.dart';
 import 'insertTestEventsData.dart';
 import 'insertTestMastersData.dart';
-import 'insertTestTeachersData.dart';
+import 'insertTestUsersData.dart';
 
 SpeedDial testDataMenuSpeedDial(WidgetRef ref,BuildContext context){
   return SpeedDial(

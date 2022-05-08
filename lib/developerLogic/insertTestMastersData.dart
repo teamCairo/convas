@@ -7,6 +7,21 @@ import '../daoFirebase/mastersDaoFirebase.dart';
 
 
 Future<void> insertTestMasterData(WidgetRef ref) async {
+
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryCategoryForBug",code:"1",name:"User search",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryCategoryForBug",code:"2",name:"Calendar",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryCategoryForBug",code:"3",name:"Lesson request",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryCategoryForBug",code:"4",name:"Chat",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryCategoryForBug",code:"5",name:"Call room",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryCategoryForBug",code:"6",name:"Profile page",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryCategoryForBug",code:"7",name:"Others",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryType",code:"1",name:"System Bug",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryType",code:"2",name:"Inappropriate teacher",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryType",code:"3",name:"Inappropriate user",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryType",code:"4",name:"Improvement request",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"inquiryType",code:"5",name:"Others",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+
   insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"1",name:"yet",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"2",name:"already",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"3",name:"cancel",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");

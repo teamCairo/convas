@@ -14,6 +14,7 @@ class SearchHitUsers {
   final String country;
   final String gender;
   final String greeting;
+  final String description;
   final String homeCountry;
   final String interestingCategories;
   final String interestingCourses;
@@ -31,6 +32,7 @@ class SearchHitUsers {
       this.country,
       this.gender,
       this.greeting,
+      this.description,
       this.homeCountry,
       this.interestingCategories,
       this.interestingCourses,
@@ -49,6 +51,7 @@ class SearchHitUsers {
         json['country'],
         json['gender'],
         json['greeting'],
+        json['description'],
         json['homeCountry'],
         json['interestingCategories'],
         json['interestingCourses'],

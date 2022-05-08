@@ -4,9 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import '../../common/UI/commonPushUI.dart';
 import '../../developerLogic/insertTestEventsData.dart';
 import '../../developerLogic/insertTestMastersData.dart';
-import '../../developerLogic/insertTestTeachersData.dart';
+import '../../developerLogic/insertTestUsersData.dart';
 import '../../developerLogic/testDataMenuSpeedDial.dart';
 import 'calendarEditUI.dart';
 import '../../common/UI/commonButtonUI.dart';
@@ -18,6 +19,7 @@ import 'XXXXXXconceptUI.dart';
 import 'editInterestUI.dart';
 import 'editInterestingCourseUI.dart';
 import '../login/loginPageUI.dart';
+import 'inquiryRootUI.dart';
 
 class MyPage extends ConsumerWidget {
   MyPage({
@@ -85,18 +87,14 @@ class MyPage extends ConsumerWidget {
                       },
                     ),
                     bigIconButton(
-                      text: "Contact Us",
+                      text: "Contact us",
                       icon: Icons.mail_outline,
                       onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return EditInterestingCourse();
-                          }),
-                        );
+                        commonNavigatorPushSlideHorizon(context, const InquiryRoot());
                       },
                     ),
                     bigIconButton(
-                      text: "How to Study",
+                      text: "How to study",
                       icon: Icons.book_rounded,
                       onPressed: () async {
                         await Navigator.of(context).push(
