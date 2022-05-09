@@ -20,8 +20,6 @@ class FriendProfile extends ConsumerWidget {
 
     if (ref.watch(friendProfileDataProvider).processingFlg){
       return Scaffold(
-          // appBar: commonAppbarTransparent("Teacher Profile"),
-
           appBar: commonAppbar("Profile"),
           body: const Center(child: CircularProgressIndicator()));
 
@@ -29,7 +27,7 @@ class FriendProfile extends ConsumerWidget {
 
 
       return Scaffold(
-          appBar: commonAppbar("Profile",color:Colors.orange,),
+          appBar: commonAppbar("Profile",color:Theme.of(context).primaryColor,textColor: Colors.black87),
           body: Column(children: [
             Expanded(
               child: SingleChildScrollView(
@@ -151,13 +149,13 @@ class FriendProfile extends ConsumerWidget {
                     )),
               ),
             ),
-            commonButtonOrangeRound(
+            commonButtonOrangeRoundForColorTest(
                   onPressed: () async {
                     await insertFriendAndMoveToChatPage(ref,context, argumentFriendUserDocId);
 
                   },
                   text: ref.watch(friendProfileDataProvider).friendProfileData["friendFlg"]
-                      ? "Talk":"Send message",
+                      ? "Talk":"Send message", context: context,
                 )
           ]));
     }

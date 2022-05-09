@@ -32,7 +32,7 @@ class FriendProfileLessonRequest extends ConsumerWidget {
     }
 
     return Scaffold(
-        appBar: commonAppbar("Lesson request"),
+        appBar: commonAppbar("Lesson request",color:Theme.of(context).primaryColor,textColor: Colors.black87),
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
@@ -82,7 +82,7 @@ class FriendProfileLessonRequest extends ConsumerWidget {
                 ),),
               Padding(
                 padding: const EdgeInsets.only(bottom: 14.0),
-                child: commonButtonOrangeRound(
+                child: commonButtonOrangeRoundForColorTest(
                     text: "Send Request",
                     onPressed: () async {
                       await ref
@@ -90,7 +90,8 @@ class FriendProfileLessonRequest extends ConsumerWidget {
                           .sendRequest(argumentFriendUserDocId, ref);
                       await commonShowOkInfoDialog(context, "XXXX","Request has been sent!!");
                       Navigator.of(context).pop();
-                    }),
+                    },
+                    context:context),
               ),
             ],
             // ),

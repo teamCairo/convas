@@ -43,6 +43,31 @@ Widget commonButtonOrangeRound(
   );
 }
 
+Widget commonButtonOrangeRoundForColorTest(
+    {required String text, required Function()? onPressed,double? width,required BuildContext context}) {
+  return SizedBox(
+    width: width??double.infinity,
+    height: 50,
+    child: OutlinedButton(
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.black87,
+        ),
+      ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.white, width: 0),
+      ),
+      onPressed: onPressed,
+    ),
+  );
+}
+
 commonButtonTitleAndTextWhite(String title, String text, double height, Function() onTap){
   return GestureDetector(
       onTap:onTap,

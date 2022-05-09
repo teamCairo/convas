@@ -37,22 +37,9 @@ class FriendProfileCalendar extends ConsumerWidget {
                       monthViewSettings: const MonthViewSettings(showAgenda: true),
                       dataSource: ref.watch(friendProfileCalendarProvider).eventDataSource,
                       onTap: (calendarTapDetails) async {
-                        // await selectCalendarTimeOnFriendProfile(calendarTapDetails, ref, context, argumentFriendUserDocId);
-                        Navigator.of(context).push(
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) {
-                                return
-                                  FriendProfileLessonRequest(argumentFriendUserDocId: argumentFriendUserDocId,
-                                  argumentFriendUserName:argumentFriendUserName ,
-                                  calendarDetails: calendarTapDetails,);
-                              },
-                              transitionsBuilder:
-                                  (context, animation, secondaryAnimation, child) {
-                                return commonFunctionPushSlideBottomToTop(
-                                    context, animation, secondaryAnimation, child);
-                              },
-                            ));
+                        commonNavigatorPushSlideHorizon(context, FriendProfileLessonRequest(argumentFriendUserDocId: argumentFriendUserDocId,
+                          argumentFriendUserName:argumentFriendUserName ,
+                          calendarDetails: calendarTapDetails,));
                       },
                       onViewChanged:(viewChangedDetails) async {
                         ref.read(friendProfileCalendarProvider.notifier).calendarRefreshShow( ref,  viewChangedDetails.visibleDates.first, viewChangedDetails.visibleDates.last, argumentFriendUserDocId, argumentFriendUserName);

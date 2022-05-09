@@ -8,7 +8,6 @@ import 'package:intl/date_symbol_data_local.dart';
 
 import 'UIs/login/loginAutoPageUI.dart';
 import 'UIs/login/loginLogicBadge.dart';
-import 'common/provider/settingProvider.dart';
 import 'config/firebase_config.dart';
 import 'UIs/login/loginPageUI.dart';
 
@@ -48,6 +47,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.orange,
+            primaryColor: Colors.cyan[100],
             scaffoldBackgroundColor:Colors.white
         ),
         // navigatorObservers: <NavigatorObserver>[observer],
