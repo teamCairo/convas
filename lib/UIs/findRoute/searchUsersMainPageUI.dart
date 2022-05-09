@@ -137,11 +137,11 @@ class SearchUsersMainPage extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              commonText20BlackLeft(userData.name),
+                              commonText16BlackLeft(userData.name),
                               const SizedBox(width:8),
-                              commonText20BlackLeft(fromBirthMillisecondsToAge(userData.birthDate).toString()),
+                              commonText16GrayLeft(fromBirthMillisecondsToAge(userData.birthDate).toString()),
                               const SizedBox(width:8),
-                              Icon(commonGenderIcon(userData.gender),size:20)
+                              Icon(commonGenderIcon(userData.gender),size:18)
                               // Padding(
                               //   padding: const EdgeInsets.only(left:4,top:7),
                               //   child: commonImageCountry(userData.country,13, ref),

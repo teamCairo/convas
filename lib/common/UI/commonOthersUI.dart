@@ -9,11 +9,11 @@ import '../logic/commonLogicOthers.dart';
 import 'commonTextUI.dart';
 
 AppBar commonAppbar(String text,{Color? color,Color? textColor,Widget? leadingWidget, List<Widget>? tailWidgetList}) {
-  Color backColor=Colors.white;
+  Color backColor=commonColorPrimary;
   if(color!=null) {
     backColor=color;
   }
-  Color txColor=Colors.black87;
+  Color txColor=Colors.white;
   if(textColor!=null) {
     txColor=textColor;
   }

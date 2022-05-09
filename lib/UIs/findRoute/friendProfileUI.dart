@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextUI.dart';
+import '../../common/commonValues.dart';
 import '../../common/logic/commonLogicDate.dart';
 import '../../common/provider/masterProvider.dart';
 import 'friendProfileLogic.dart';
@@ -27,7 +28,7 @@ class FriendProfile extends ConsumerWidget {
 
 
       return Scaffold(
-          appBar: commonAppbar("Profile",color:Theme.of(context).primaryColor,textColor: Colors.black87),
+          appBar: commonAppbar("Profile"),
           body: Column(children: [
             Expanded(
               child: SingleChildScrollView(
@@ -149,13 +150,13 @@ class FriendProfile extends ConsumerWidget {
                     )),
               ),
             ),
-            commonButtonOrangeRoundForColorTest(
+            commonButtonOrangeRound(
                   onPressed: () async {
                     await insertFriendAndMoveToChatPage(ref,context, argumentFriendUserDocId);
 
                   },
                   text: ref.watch(friendProfileDataProvider).friendProfileData["friendFlg"]
-                      ? "Talk":"Send message", context: context,
+                      ? "Talk":"Send message",
                 )
           ]));
     }

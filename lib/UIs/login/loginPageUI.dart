@@ -1,14 +1,11 @@
-import 'package:convas/UIs/login/rootUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
 import '../../developerLogic/testDataMenuSpeedDial.dart';
-import '../register/setUserTypeUI.dart';
 import 'loginLogic.dart';
 import 'loginProvider.dart';
 

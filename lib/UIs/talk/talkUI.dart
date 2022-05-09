@@ -1,5 +1,6 @@
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
+import 'package:convas/common/commonValues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,7 +26,7 @@ class Talk extends ConsumerWidget {
 
 
     return Scaffold(
-      appBar: commonAppbar('Talk'),
+      appBar: commonAppbar('Talk',textColor: Colors.white),
       body: buildTalkList(context,ref,ref.watch(userDataProvider).userData["userDocId"]!),
     );
   }

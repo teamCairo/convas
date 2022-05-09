@@ -1,22 +1,7 @@
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
-//
-// Widget commonButtonCloseForModal(BuildContext context) {
-//   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-//     commonButtonGraySmallerIcon(
-//         icon: Icons.clear,
-//         onPressed: () {
-//           Navigator.of(context).pop();
-//         }),
-//   ]);
-// }
 
-// Widget commonButtonSingleFooter(
-//     {required String text, required Function()? onPressed}) {
-//   return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 10.0),
-//   child:commonButtonOrangeRound(text:text,onPressed:onPressed));
-//     }
+import '../commonValues.dart';
 
 Widget commonButtonOrangeRound(
     {required String text, required Function()? onPressed,double? width}) {
@@ -33,8 +18,7 @@ Widget commonButtonOrangeRound(
         ),
       ),
       style: OutlinedButton.styleFrom(
-        primary: Colors.white,
-        backgroundColor: Colors.orange,
+        backgroundColor: commonColorPrimary,
         shape: const StadiumBorder(),
         side: const BorderSide(color: Colors.white, width: 0),
       ),
@@ -43,30 +27,6 @@ Widget commonButtonOrangeRound(
   );
 }
 
-Widget commonButtonOrangeRoundForColorTest(
-    {required String text, required Function()? onPressed,double? width,required BuildContext context}) {
-  return SizedBox(
-    width: width??double.infinity,
-    height: 50,
-    child: OutlinedButton(
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.normal,
-          fontSize: 16,
-          color: Colors.black87,
-        ),
-      ),
-      style: OutlinedButton.styleFrom(
-        primary: Colors.white,
-        backgroundColor: Theme.of(context).primaryColor,
-        shape: const StadiumBorder(),
-        side: const BorderSide(color: Colors.white, width: 0),
-      ),
-      onPressed: onPressed,
-    ),
-  );
-}
 
 commonButtonTitleAndTextWhite(String title, String text, double height, Function() onTap){
   return GestureDetector(
@@ -290,17 +250,17 @@ Widget commonButtonWhiteBorderRound(
     child: OutlinedButton(
       child: Text(
         text,
-        style: const TextStyle(
+        style:   TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 16,
-          color: Colors.orange,
+          color: commonColorPrimary
         ),
       ),
       style: OutlinedButton.styleFrom(
         primary: Colors.white,
         backgroundColor: Colors.white,
         shape: const StadiumBorder(),
-        side: const BorderSide(color: Colors.orange, width: 1),
+        side: BorderSide(color: commonColorPrimary, width: 2),
       ),
       onPressed: onPressed,
     ),

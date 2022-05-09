@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
+import 'otherClass/commonHexColor.dart';
+
 const int searchConditionAgeMin = 18;
 const int searchConditionAgeMax = 100;
 const Color themeColorDeep = Colors.orangeAccent;
@@ -53,3 +55,8 @@ const Color calendarColorForMe = Colors.orangeAccent;
 const separatingCharacter5at = "@@@@@";
 
 const eventNameForAppointment = "call appointment";
+
+Color commonColorPrimary = CommonHexColor("#c9171e");
+
+
+Color commonColorSecondary = Colors.deepOrange;
