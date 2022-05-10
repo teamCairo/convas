@@ -1,5 +1,6 @@
 import 'package:convas/UIs/findRoute/friendProfileCalendarUI.dart';
 import 'package:convas/UIs/findRoute/friendProfileUI.dart';
+import 'package:convas/common/commonValues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
@@ -38,7 +39,8 @@ class FriendProfileRoot extends ConsumerWidget {
           _selectedIndex,
           ref),
       bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed, // これを書かないと3つまでしか表示されない
+          selectedItemColor:commonColorSecondary,
+          type: BottomNavigationBarType.fixed,
           items: ref.watch(bottomNavigationBarItemsForFriendProfileProvider.notifier)
               .bottomNavigationBarItems,
           currentIndex: _selectedIndex,

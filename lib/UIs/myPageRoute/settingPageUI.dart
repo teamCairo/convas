@@ -1,7 +1,6 @@
 import 'package:convas/UIs/myPageRoute/settingEditDescriptionPageUI.dart';
 import 'package:convas/UIs/myPageRoute/settingEditTextPageUI.dart';
 import 'package:convas/UIs/myPageRoute/settingEditRadioPageUI.dart';
-import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import '../../common/UI/commonButtonUI.dart';
@@ -258,7 +257,7 @@ class SettingPage extends ConsumerWidget {
               padding: const EdgeInsets.only(bottom: 4.0),
               child: SizedBox(
                 width: double.infinity,
-                child: commonText12DeepOrangeLeft(displayedItem)
+                child: commonText12SecondaryColorLeft(displayedItem)
               ),
             ),
               Row(

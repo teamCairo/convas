@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../commonValues.dart';
+
 Widget commonText12GrayRight(String text) {
   return Align(
       alignment: Alignment.topRight,
@@ -270,14 +272,14 @@ Widget commonText20BlackLeftBold(String text) {
 }
 
 
-Text commonText12DeepOrangeLeft(String text) {
+Text commonText12SecondaryColorLeft(String text) {
   return Text(
     text,
     textAlign: TextAlign.left,
-    style: const TextStyle(
+    style:  TextStyle(
       fontWeight: FontWeight.normal,
       fontSize: 12,
-      color: Colors.deepOrange,
+      color: commonColorSecondary,
     ),
   );
 }
@@ -307,25 +309,25 @@ Text commonText16DeepOrangeLeft(String text) {
   );
 }
 
-Text commonText16DeepOrangeRight(String text) {
+Text commonText16SecondaryColorRight(String text) {
   return Text(
     text,
     textAlign: TextAlign.right,
-    style: const TextStyle(
+    style:  TextStyle(
       fontWeight: FontWeight.normal,
       fontSize: 16,
-      color: Colors.deepOrange,
+      color: commonColorSecondary,
     ),
   );
 }
-Text commonText22DeepOrangeLeftBold(String text) {
+Text commonText22SecondaryColorLeftBold(String text) {
   return Text(
     text,
     textAlign: TextAlign.left,
-    style: const TextStyle(
-      fontWeight: FontWeight.w400,
+    style:  TextStyle(
+      fontWeight: FontWeight.w500,
       fontSize: 22,
-      color: Colors.deepOrange,
+      color: commonColorSecondary,
     ),
   );
 }

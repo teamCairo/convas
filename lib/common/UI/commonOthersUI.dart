@@ -228,10 +228,10 @@ Widget commonCircleAvatarImage({Image? image, required double radius, required S
           style: TextStyle(
             fontWeight: FontWeight.normal,
             fontSize: radius,
-            color: Colors.white70,
+            color: Colors.white,
           ),),
       decoration: BoxDecoration(
-        color:Colors.amber,
+        color:commonColorSecondary,
         border: Border.all(
             style:BorderStyle.none),
         borderRadius: BorderRadius.circular(radius*3.2),

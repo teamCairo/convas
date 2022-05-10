@@ -17,12 +17,11 @@ const separatingCharacter = ", ";
 
 const searchConditionLastLoginInDays = 365;
 
-const searchConditionAlmightyWord="Doesn't matter";
+const searchConditionAlmightyWord = "Doesn't matter";
 
+const appointmentSelectTypeAlmightyWord = "Anything";
 
-const appointmentSelectTypeAlmightyWord="Anything";
-
-const enterRoomMessage="Entered the call room";
+const enterRoomMessage = "Entered the call room";
 
 const LinearGradient commonLinearGradientForChatBox = LinearGradient(
     begin: FractionalOffset.topLeft,
@@ -35,9 +34,10 @@ const LinearGradient commonLinearGradientForChatBox = LinearGradient(
       0.0,
       1.0,
     ]);
-const calendarTimelineMaxPeople =10;
+const calendarTimelineMaxPeople = 10;
 
-const List<Color> calendarTimelineColors = [Color(0xFF0F8644),
+const List<Color> calendarTimelineColors = [
+  Color(0xFF0F8644),
   Color(0xFFF0F000),
   Color(0xF22040D0),
   Color(0xF540F000),
@@ -51,12 +51,40 @@ const List<Color> calendarTimelineColors = [Color(0xFF0F8644),
 
 const Color calendarColorForMe = Colors.orangeAccent;
 
-
 const separatingCharacter5at = "@@@@@";
 
 const eventNameForAppointment = "call appointment";
 
 Color commonColorPrimary = CommonHexColor("#c9171e");
 
+Color commonColorSecondary = CommonHexColor("#c95155");
 
-Color commonColorSecondary = Colors.deepOrange;
+LinearGradient commonLinearGradientTeacher = LinearGradient(
+  begin: FractionalOffset.topLeft,
+  end: FractionalOffset.bottomRight,
+  colors: [
+    const Color(0xff9dd7ff).withOpacity(0.6),
+    const Color(0xff9941d8).withOpacity(0.6),
+  ],
+  stops: const [
+    0.0,
+    1.0,
+  ],
+);
+LinearGradient commonLinearGradientLearner = LinearGradient(
+  begin: FractionalOffset.topLeft,
+  end: FractionalOffset.bottomRight,
+  colors: [
+     Colors.teal[100]!,
+    const Color(0xff5cafff).withOpacity(0.6),
+  ],
+  stops: const [
+    0.0,
+    1.0,
+  ],
+);
+
+
+LinearGradient commonGetLinearGradientTeacher(String userType) {
+  return userType=="1"?commonLinearGradientLearner:commonLinearGradientTeacher;
+}

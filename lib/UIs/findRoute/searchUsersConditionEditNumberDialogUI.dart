@@ -75,7 +75,7 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       commonText16DeepOrangeLeft(ref.watch(searchUsersConditionEditNumberDialogProvider).start.toString()),
-                                      commonText16DeepOrangeRight(ref.watch(searchUsersConditionEditNumberDialogProvider).end.toString())
+                                      commonText16SecondaryColorRight(ref.watch(searchUsersConditionEditNumberDialogProvider).end.toString())
                                     ],
                                   ),
                                 ),

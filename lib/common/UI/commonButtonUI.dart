@@ -18,7 +18,7 @@ Widget commonButtonOrangeRound(
         ),
       ),
       style: OutlinedButton.styleFrom(
-        backgroundColor: commonColorPrimary,
+        backgroundColor: commonColorSecondary,
         shape: const StadiumBorder(),
         side: const BorderSide(color: Colors.white, width: 0),
       ),

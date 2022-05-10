@@ -12,7 +12,6 @@ import '../../common/logic/commonLogicDate.dart';
 import '../../common/logic/commonLogicOthers.dart';
 import '../../daoAlgolia/usersDaoAlgolia.dart';
 import 'friendProfileRootUI.dart';
-import 'friendProfileUI.dart';
 
 class SearchUsersMainPage extends ConsumerWidget {
   SearchUsersMainPage({
@@ -142,10 +141,6 @@ class SearchUsersMainPage extends ConsumerWidget {
                               commonText16GrayLeft(fromBirthMillisecondsToAge(userData.birthDate).toString()),
                               const SizedBox(width:8),
                               Icon(commonGenderIcon(userData.gender),size:18)
-                              // Padding(
-                              //   padding: const EdgeInsets.only(left:4,top:7),
-                              //   child: commonImageCountry(userData.country,13, ref),
-                              // ),
                             ],
                           ),
 
@@ -153,14 +148,6 @@ class SearchUsersMainPage extends ConsumerWidget {
                     ]),
                     const SizedBox(height:10),
                     commonText16GrayLeft(userData.description,maxLines: 5),
-                    // Padding(
-                    //     padding: const EdgeInsets.only(top:3.0),
-                    //     child: SingleChildScrollView(
-                    //         scrollDirection: Axis.horizontal,
-                    //         child: Row(
-                    //             children: featureList
-                    //         ))
-                    // )
                 ],
               ),
                   )),
