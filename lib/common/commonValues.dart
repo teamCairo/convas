@@ -49,7 +49,6 @@ const List<Color> calendarTimelineColors = [
   Color(0xF540F000),
 ];
 
-const Color calendarColorForMe = Colors.orangeAccent;
 
 const separatingCharacter5at = "@@@@@";
 
@@ -58,6 +57,9 @@ const eventNameForAppointment = "call appointment";
 Color commonColorPrimary = CommonHexColor("#c9171e");
 
 Color commonColorSecondary = CommonHexColor("#c95155");
+
+
+Color commonColorTertiary = CommonHexColor("#c9a1a3");
 
 LinearGradient commonLinearGradientTeacher = LinearGradient(
   begin: FractionalOffset.topLeft,
@@ -75,7 +77,7 @@ LinearGradient commonLinearGradientLearner = LinearGradient(
   begin: FractionalOffset.topLeft,
   end: FractionalOffset.bottomRight,
   colors: [
-     Colors.teal[100]!,
+     Colors.teal[200]!,
     const Color(0xff5cafff).withOpacity(0.6),
   ],
   stops: const [

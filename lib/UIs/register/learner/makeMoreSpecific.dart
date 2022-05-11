@@ -58,7 +58,7 @@ class MakeMoreSpecific extends ConsumerWidget {
         ]),
         Column(
           children: [
-            commonButtonOrangeRound(
+            commonButtonSecondaryColorRound(
                 onPressed: () {
                   FocusScope.of(context).requestFocus(FocusNode());
                   ref.read(registerProvider.notifier).setGoalWithoutRebuild("");

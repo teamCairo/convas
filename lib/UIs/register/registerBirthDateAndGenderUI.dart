@@ -65,7 +65,7 @@ class RegisterBirthDateAndGender extends ConsumerWidget {
           ),
         ],
       ),
-      commonButtonOrangeRound(
+      commonButtonSecondaryColorRound(
         text: "OK",
         onPressed: () {
     if (ref.watch(registerProvider).userType == "1") {
@@ -84,7 +84,7 @@ class RegisterBirthDateAndGender extends ConsumerWidget {
 Widget genderButton(
     String genderCode, String genderName, WidgetRef ref,double width) {
   if (ref.watch(registerProvider).gender == genderCode) {
-    return commonButtonRoundOrangeSmall(
+    return commonButtonSecondaryColorRound(
         onPressed: () {
           ref.read(registerProvider.notifier).setGender(genderCode);
         },
@@ -129,7 +129,7 @@ Widget levelArea(WidgetRef ref, double width) {
 Widget levelButton(
     String levelCode, String levelName, WidgetRef ref,double width) {
   if (ref.watch(registerProvider).level == levelCode) {
-    return commonButtonRoundOrangeSmall(
+    return commonButtonSecondaryColorRound(
         width:width,
         onPressed: () {
           ref.read(registerProvider.notifier).setLevel(levelCode);

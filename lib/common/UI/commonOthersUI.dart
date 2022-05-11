@@ -1,4 +1,5 @@
 import 'package:convas/common/provider/masterProvider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,9 +7,20 @@ import '../../UIs/findRoute/friendProfileRootUI.dart';
 import '../../UIs/findRoute/friendProfileUI.dart';
 import '../commonValues.dart';
 import '../logic/commonLogicOthers.dart';
+import 'commonButtonUI.dart';
 import 'commonTextUI.dart';
 
-AppBar commonAppbar(String text,{Color? color,Color? textColor,Widget? leadingWidget, List<Widget>? tailWidgetList}) {
+AppBar commonAppbar(String text,{Color? color,Color? textColor,String? helpTitle,String? helpText,  BuildContext? contextForHelp}) {
+  List<Widget> tailWidgetList =[];
+  if(helpText!=null||contextForHelp!=null||helpTitle!=null){
+    tailWidgetList.add(Padding(
+      padding: const EdgeInsets.only(right:6.0),
+      child: commonIconButtonQuestion(onTap:(){
+        commonShowOkInfoDialog(contextForHelp!, helpTitle!,helpText!);
+      }),
+    ));
+  }
+
   Color backColor=commonColorPrimary;
   if(color!=null) {
     backColor=color;
@@ -31,7 +43,6 @@ AppBar commonAppbar(String text,{Color? color,Color? textColor,Widget? leadingWi
             color: txColor,
           ),
         ),
-        leadingWidget ?? Container()
       ],
     ),
     actions:tailWidgetList,
@@ -39,14 +50,14 @@ AppBar commonAppbar(String text,{Color? color,Color? textColor,Widget? leadingWi
 }
 
 
-AppBar commonAppTabBar({Color? color,PreferredSizeWidget? bottom}) {
-  Color backColor=Colors.white10;
-  if(color!=null) {
-    backColor=color;
-  }
+AppBar commonAppTabBar({PreferredSizeWidget? bottom}) {
+  // Color backColor=Colors.white10;
+  // if(color!=null) {
+  //   backColor=color;
+  // }
   return AppBar(
       toolbarHeight:0,
-      backgroundColor: backColor,
+      backgroundColor: Colors.white,
       elevation: 0.0,
       bottom:bottom
   );
@@ -281,7 +292,7 @@ Future<dynamic> commonShowOkInfoDialog(BuildContext context, String title, Strin
             style:TextStyle(color:Colors.white)),
             onPressed: () => Navigator.pop(context),
             style:ElevatedButton.styleFrom(
-              primary: Colors.orange,
+              primary: commonColorSecondary,
             )
           ),
         ],
@@ -352,11 +363,11 @@ Widget commonWrapMultiLineOrangeBorderRoundList(List<String> textList){
 }
 
 Widget loginLampFromSecondsSmall(int epochTimeMilliSeconds,bool onlineStatus,bool textShow){
-  return loginLampFromSeconds(epochTimeMilliSeconds,onlineStatus,8, textShow);
+  return loginLampFromSeconds(epochTimeMilliSeconds,onlineStatus,10, textShow);
 }
 
 Widget loginLampSmall(DateTime lastLoginTime,bool onlineStatus,bool textShow){
-  return loginLamp(lastLoginTime,onlineStatus,8, textShow);
+  return loginLamp(lastLoginTime,onlineStatus,10, textShow);
 }
 
 Widget loginLamp(DateTime lastLoginTime,bool onlineStatus,double size,bool textShow){
@@ -389,7 +400,7 @@ Widget loginLamp(DateTime lastLoginTime,bool onlineStatus,double size,bool textS
           padding: const EdgeInsets.only(top:4,right: 4.0),
           child: lampIcon,
         ),
-        commonText16GrayRight(lastLoginStr),
+        commonText14Gray(lastLoginStr),
       ],
     );
   }else{

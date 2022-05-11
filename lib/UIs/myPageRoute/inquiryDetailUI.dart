@@ -42,7 +42,7 @@ class InquiryDetail extends ConsumerWidget {
             commonVerticalGap(),
             freeText(ref),
             commonVerticalGap(),
-            commonButtonOrangeRound(
+            commonButtonSecondaryColorRound(
               text: "OK",
               onPressed: ()async {
                 FocusScope.of(context).requestFocus(FocusNode());

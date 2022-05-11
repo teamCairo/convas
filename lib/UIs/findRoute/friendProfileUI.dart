@@ -90,7 +90,7 @@ class FriendProfile extends ConsumerWidget {
                                   .watch(friendProfileDataProvider)
                                   .friendProfileData["name"]),
                               const SizedBox(width: 8),
-                              commonText16GrayLeft(fromBirthToAge(ref
+                              commonText16GrayLeft(commonLogicFromBirthToAge(ref
                                       .watch(friendProfileDataProvider)
                                       .friendProfileData["birthDate"])
                                   .toString()),
@@ -181,7 +181,7 @@ class FriendProfile extends ConsumerWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: commonButtonOrangeRound(
+              child: commonButtonSecondaryColorRound(
                 onPressed: () async {
                   await insertFriendAndMoveToChatPage(
                       ref, context, argumentFriendUserDocId);
@@ -208,7 +208,7 @@ class FriendProfile extends ConsumerWidget {
     } else if (databaseItem == "country" || databaseItem == "homeCountry") {
       displayedValue = getMasterData("country", value, ref).name;
     } else if (databaseItem == "birthDate") {
-      displayedValue = fromBirthToAge(value).toString();
+      displayedValue = commonLogicFromBirthToAge(value).toString();
     } else {
       displayedValue = value;
     }

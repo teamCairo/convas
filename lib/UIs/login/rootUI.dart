@@ -2,6 +2,7 @@ import 'package:convas/UIs/login/rootProvider.dart';
 import 'package:convas/UIs/findRoute/searchUsersMainPageUI.dart';
 import 'package:convas/UIs/myPageRoute/calendarEditUI.dart';
 import 'package:convas/UIs/recommendation/XXXXXXrecommendedTeacher.dart';
+import 'package:convas/common/commonValues.dart';
 import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,6 +33,7 @@ class Root extends ConsumerWidget {
           _selectedIndex,
           ref),
       bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor:commonColorSecondary,
           type: BottomNavigationBarType.fixed, // これを書かないと3つまでしか表示されない
           items: ref.watch(bottomNavigationBarItemsProvider.notifier)
               .bottomNavigationBarItems,

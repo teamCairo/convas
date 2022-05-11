@@ -50,7 +50,7 @@ class EditInterest extends ConsumerWidget {
                       right: 14.0, left: 14.0, bottom: 20),
                   child: Column(children: checkList),
                 ),
-                commonButtonOrangeRound(
+                commonButtonSecondaryColorRound(
                     onPressed: () async{
                       String interestingCategories = "";
                       ref

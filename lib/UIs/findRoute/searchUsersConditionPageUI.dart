@@ -38,23 +38,23 @@ class SearchUsersConditionPage extends ConsumerWidget {
 
                   ]),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        commonButtonRoundSmall(width:150,
+                        commonButtonGrayRound(width:(MediaQuery.of(context).size.width - 56) / 2,
                             text: "Reset",
-                            color:Colors.black38,
                             onPressed: (){
                               ref.read(searchUsersProvider.notifier).resetConditions(ref);
                             }),
-                        commonButtonRoundOrangeSmall(text: "Search",
+                        commonHorizontalGap(),
+                        commonButtonSecondaryColorRound(text: "Search",
                             onPressed: (){
                               ref.read(searchUsersProvider.notifier).setSearchProcessingFlgTrue();
                               ref.read(searchUsersProvider.notifier).setConditionsToFirebaseAndSearchUsers(ref);
                               Navigator.pop(context);
                             },
-                        width:150),
+                        width:(MediaQuery.of(context).size.width - 56) / 2),
                       ],
                     ),
                   )
@@ -62,7 +62,7 @@ class SearchUsersConditionPage extends ConsumerWidget {
               )),);
   }
 
-  Padding linePadding (BuildContext context,WidgetRef ref,String displayedItem,String databaseItem, String value) {
+  Widget linePadding (BuildContext context,WidgetRef ref,String displayedItem,String databaseItem, String value) {
 
     String displayedValue;
     List<String> tmpList = fromTextToList(value);
@@ -150,50 +150,49 @@ class SearchUsersConditionPage extends ConsumerWidget {
         break;
     }
 
-    return Padding(
-        padding: const EdgeInsets.only(left:14,right:14,bottom:0),
-        child: GestureDetector(
-          onTap:(){
+    return Column(
+      children: [
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal:20,vertical:16),
+            child: GestureDetector(
+              onTap:(){
 
-            if(databaseItem=="searchConditionAge"){
+                if(databaseItem=="searchConditionAge"){
 
-              showDialog<void>(
-                context: context,
-                builder: (_) {
-                  return SearchUsersConditionEditNumberDialog(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
+                  showDialog<void>(
+                    context: context,
+                    builder: (_) {
+                      return SearchUsersConditionEditNumberDialog(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
+                    },
+                  );
+
+                }else if(databaseItem=="searchConditionLoginTime"){
+
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return  SearchConditionValueEditRadio(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
+                      },
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
+                      },
+                    ),
+                  );
+
+              }else{
+
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return  SearchConditionValueEditType(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
+                      },
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
+                      },
+                    ),
+                  );
+                }
                 },
-              );
-
-            }else if(databaseItem=="searchConditionLoginTime"){
-
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return  SearchConditionValueEditRadio(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
-                  },
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
-                  },
-                ),
-              );
-
-          }else{
-
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return  SearchConditionValueEditType(displayedItem: displayedItem, databaseItem: databaseItem, value: value);
-                  },
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
-                  },
-                ),
-              );
-            }
-            },
-          child: Container(
-            child:Padding(
-              padding: const EdgeInsets.all(12.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:[
@@ -201,16 +200,9 @@ class SearchUsersConditionPage extends ConsumerWidget {
                     commonText16GrayRightEllipsis(displayedValue)
                     // gray16TextRightEllipsis(displayedValue,200)
               ]),
-            ),
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.black26,
-                  width: 0.5,
-                ),
-              ),
-            ),
-          ),
-        ));
+            )),
+        commonLineHorizontalGrayThin(0,0)
+      ],
+    );
   }
 }

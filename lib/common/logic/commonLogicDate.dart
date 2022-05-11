@@ -17,7 +17,7 @@ Future<void> closeStreams(WidgetRef ref) async {
   //TODO 編集必要
 }
 
-String durationText(DateTime? from, DateTime? to){
+String commonLogicDurationText(DateTime? from, DateTime? to){
   String fromStr="";
   String toStr="";
   if (from == null||to==null) {
@@ -38,13 +38,13 @@ String durationText(DateTime? from, DateTime? to){
 
 }
 
-int fromBirthMillisecondsToAge(int birthDateMilliSeconds){
+int commonLogicFromBirthMillisecondsToAge(int birthDateMilliSeconds){
 
-  return fromBirthToAge(DateTime.fromMillisecondsSinceEpoch(birthDateMilliSeconds));
+  return commonLogicFromBirthToAge(DateTime.fromMillisecondsSinceEpoch(birthDateMilliSeconds));
 
 }
 
-int fromBirthToAge(DateTime birthDate){
+int commonLogicFromBirthToAge(DateTime birthDate){
 
   if(DateTime(DateTime.now().year,birthDate.month,birthDate.day).isAfter(DateTime.now())){
     return DateTime.now().year-birthDate.year-1;

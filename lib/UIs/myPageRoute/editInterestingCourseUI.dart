@@ -51,7 +51,7 @@ class EditInterestingCourse extends ConsumerWidget {
                   child: Column(children: checkList),
                 ),
 
-                commonButtonOrangeRound(onPressed: () async{
+                commonButtonSecondaryColorRound(onPressed: () async{
                   String interestingCourses="";
                   ref.watch(editInterestingCourseProvider).courseCdBoolMap.forEach((key, value) {
                     if(value){

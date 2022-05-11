@@ -45,7 +45,7 @@ class SelectPointsDialog extends ConsumerWidget {
               },
             ),
             commonHorizontalGap(),
-            commonButtonRoundOrangeSmall(
+                    commonButtonSecondaryColorRound(
               text: 'OK',
               width: (MediaQuery.of(context).size.width * 3 / 4 - 36) / 2,
               onPressed: (

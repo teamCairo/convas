@@ -54,7 +54,7 @@ class LessonRequestList extends ConsumerWidget {
   }
 
   Widget requestListUnit(BuildContext context, WidgetRef ref, CommonClassRequest request) {
-    String durationTimeStr = durationText(request.from,request.to);
+    String durationTimeStr = commonLogicDurationText(request.from,request.to);
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0 * screenAdjustSizeH),

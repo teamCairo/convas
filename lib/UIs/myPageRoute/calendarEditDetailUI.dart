@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../common/commonValues.dart';
 import '../../common/logic/commonLogicDate.dart';
 import '../../common/logic/commonLogicOthers.dart';
 import '../../common/provider/masterProvider.dart';
@@ -29,7 +30,7 @@ class CalendarEditDetail extends ConsumerWidget {
         [
           Column(
             children: [
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               listRow(
                   Icons.access_time_outlined,
                   Column(
@@ -64,7 +65,7 @@ class CalendarEditDetail extends ConsumerWidget {
                         commonShowClassDialog(context,
                             const CalendarEditSelectAvailableTypeDialog());
                       }),
-                  color: commonGetAvailabilityColor(
+                  color: commonLogicGetAvailabilityColor(
                       ref.watch(calendarEditProvider).editedEventType)),
               commonLineHorizontalGrayThin(16, 16),
               listRow(
@@ -105,7 +106,7 @@ class CalendarEditDetail extends ConsumerWidget {
                       ;
                     }),
                 commonHorizontalGap(),
-                commonButtonOrangeRound(
+                commonButtonSecondaryColorRound(
                     width: commonWidthHalfButton(context),
                     text: "OK",
                     onPressed: () async {
@@ -140,7 +141,7 @@ Widget daysOfWeekButton(String dayName, String dayDisplay, WidgetRef ref) {
   Color bkColor = Colors.black;
   Color stringColor = Colors.black;
   if (repeatOnOff) {
-    bkColor = Colors.orange;
+    bkColor = commonColorSecondary;
     stringColor = Colors.white;
   } else {
     bkColor = Colors.white;
@@ -160,7 +161,7 @@ Widget daysOfWeekButton(String dayName, String dayDisplay, WidgetRef ref) {
               width: 30,
               decoration: BoxDecoration(
                 color: bkColor,
-                border: Border.all(color: Colors.orange),
+                border: Border.all(color: commonColorSecondary),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Align(

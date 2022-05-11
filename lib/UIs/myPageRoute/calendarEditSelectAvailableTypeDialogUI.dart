@@ -26,7 +26,7 @@ class CalendarEditSelectAvailableTypeDialog extends ConsumerWidget {
           commonText16GrayCenter("Choose availability"),
           Column(
             children: [
-              commonButtonOrangeRound(
+              commonButtonSecondaryColorRound(
                   text: getMasterData("eventType", "2", ref).name,
                   onPressed: () {
                     ref.read(calendarEditProvider.notifier).setEventType("2");

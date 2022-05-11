@@ -120,7 +120,7 @@ class AppointmentRequestView extends ConsumerWidget {
               },
             ),
           ),
-          commonButtonRoundOrangeSmall(
+          commonButtonSecondaryColorRound(
               text: "Accept",
               onPressed: () async {
                 await ref
@@ -152,7 +152,7 @@ class AppointmentRequestView extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 14.0),
-            child: commonButtonRoundOrangeSmall(
+            child: commonButtonSecondaryColorRound(
                 text: "Enter room",
                 onPressed: () async {
                   Navigator.of(context).push(

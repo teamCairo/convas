@@ -3,6 +3,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../../entityIsar/eventEntityIsar.dart';
 import '../../commonValues.dart';
+import '../../logic/commonLogicOthers.dart';
 
 Appointment commonMakeAppointment(String eventDocId,
     String userDocId,
@@ -89,7 +90,7 @@ List<Appointment> commonGetAppointmentListFromEventList(
             eventsList[i].description,
             eventsList[i].recurrenceRule,
             null,
-            Colors.orangeAccent,
+            commonLogicGetAvailabilityColor(eventsList[i].eventType),
             ""
         )
 

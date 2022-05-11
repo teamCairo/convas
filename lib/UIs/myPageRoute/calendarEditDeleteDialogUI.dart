@@ -38,7 +38,7 @@ class CalendarEditDeleteDialog extends ConsumerWidget {
                     Navigator.pop(context);
                   }),
 
-              commonButtonOrangeRound(text: "Delete",
+              commonButtonSecondaryColorRound(text: "Delete",
                   width:(MediaQuery.of(context).size.width * 3 / 8)-18,
                   onPressed: ()async{
                     await logicalDeleteEventData(commonGetAppointmentNotesItemString(details.appointments![0],"eventDocId"),ref.watch(userDataProvider).userData["userDocId"],"CalendarEditDeleteDialog");

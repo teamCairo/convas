@@ -47,7 +47,7 @@ class SetFrequency extends ConsumerWidget {
           levelAreaVer2(ref, context)
         ],
       ),
-      commonButtonOrangeRound(
+      commonButtonSecondaryColorRound(
         text: "OK",
         onPressed: () {
           bool checkResult = checkFrequency(ref);

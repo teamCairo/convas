@@ -1,3 +1,4 @@
+import 'package:convas/common/commonValues.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -41,11 +42,11 @@ Future<void> commonShowClassDialog(BuildContext context, Widget widget) async {
       context: context);
 }
 
-Color commonGetAvailabilityColor(String code) {
+Color commonLogicGetAvailabilityColor(String code) {
   if (code == "1") {
-    return CommonHexColor("#F0D099");
+    return commonColorTertiary;
   } else if (code == "2") {
-    return Colors.orange;
+    return commonColorSecondary;
   } else {
     return Colors.black;
   }

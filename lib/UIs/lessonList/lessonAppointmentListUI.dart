@@ -57,7 +57,7 @@ class LessonAppointmentList extends ConsumerWidget {
   }
 
   Widget requestListUnit(BuildContext context, WidgetRef ref, CommonClassAppointment appoint) {
-    String durationTimeStr = durationText(appoint.fromTime,appoint.toTime);
+    String durationTimeStr = commonLogicDurationText(appoint.fromTime,appoint.toTime);
 
     String friendDocId = "";
     if(appoint.senderUserDocId==ref.watch(userDataProvider).userData["userDocId"]){

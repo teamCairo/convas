@@ -1,3 +1,4 @@
+import 'package:convas/common/commonValues.dart';
 import 'package:flutter/material.dart';
 
 Widget commonTextBoxBordered(
@@ -12,8 +13,20 @@ Widget commonTextBoxBordered(
     TextFormField(
         initialValue:initialValue,
         decoration: InputDecoration(
+          focusColor: Colors.black,
+          fillColor: Colors.black,
           labelText: text,
-          border: const OutlineInputBorder(),
+          labelStyle: TextStyle(color: commonColorSecondary),
+          // enabledBorder: OutlineInputBorder(
+          //   borderSide: BorderSide(
+          //     color: commonColorSecondary,
+          //   ),
+          // ),
+          border:   OutlineInputBorder(
+            borderSide: BorderSide(
+              color: commonColorSecondary,
+            ),
+          ),
           alignLabelWithHint: true,
         ),
         obscureText: passwordSecure??false,

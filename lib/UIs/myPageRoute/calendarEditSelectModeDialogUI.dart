@@ -46,7 +46,7 @@ Widget footerButton(String text,String mode,WidgetRef ref,BuildContext context){
   return Column(
     children:[
       commonVerticalGap(),
-      commonButtonOrangeRound(text: text, onPressed: (){
+      commonButtonSecondaryColorRound(text: text, onPressed: (){
         ref.read(calendarEditProvider.notifier).setEditMode(mode);
         Navigator.pop(context);
       })]

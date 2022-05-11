@@ -30,7 +30,9 @@ class SettingEditDescriptionPage extends ConsumerWidget {
 
               Padding(
                 padding:const EdgeInsets.symmetric(vertical:30,horizontal:10),
-                child:TextFormField(
+                child:
+
+                TextFormField(
                   maxLines: null,
                   minLines: 7,
                   // テキスト入力のラベルを設定
@@ -42,10 +44,11 @@ class SettingEditDescriptionPage extends ConsumerWidget {
                   style: const TextStyle(
                     fontSize: 20,
                   ),
-                ),),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical:30,horizontal: 10),
-                child: commonButtonOrangeRound(text:"OK", onPressed: () async{
+                child: commonButtonSecondaryColorRound(text:"OK", onPressed: () async{
                   await updateUserSelectedItem(ref,"description",inputValue,"settingEditDescriptionPage");
                   ref.read(userDataProvider.notifier).setUserDataOneItem("description",inputValue);
                   Navigator.pop(context);

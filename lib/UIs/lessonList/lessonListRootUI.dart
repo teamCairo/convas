@@ -1,3 +1,4 @@
+import 'package:convas/common/commonValues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
@@ -20,8 +21,10 @@ class LessonListRoot extends ConsumerWidget {
       length: 3,
       child: Scaffold(
         appBar: commonAppTabBar(
-          bottom: const TabBar(
-            tabs: [
+          bottom: TabBar(
+              labelColor:commonColorSecondary,
+            unselectedLabelColor:Colors.black54,
+            tabs:const  [
               Tab(text: "Request", icon: Icon(Icons.send)),
               Tab(
                   text: "Lesson plan",

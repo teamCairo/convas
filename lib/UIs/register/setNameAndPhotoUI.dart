@@ -38,7 +38,7 @@ class SetNameAndPhoto extends ConsumerWidget {
           },
           passwordSecure: false),
       commonVerticalGap(),
-      commonButtonOrangeRound(
+      commonButtonSecondaryColorRound(
         text: "Next",
         onPressed: () {
           FocusScope.of(context).requestFocus(FocusNode());

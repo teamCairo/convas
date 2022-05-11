@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../commonValues.dart';
 
-Widget commonButtonOrangeRound(
+Widget commonButtonSecondaryColorRound(
     {required String text, required Function()? onPressed,double? width}) {
   return SizedBox(
     width: width??double.infinity,
@@ -80,8 +80,8 @@ Widget commonButtonRoundByWidthAndHeight(
   );
 }
 
-Widget commonButtonRoundSmall(
-    {required String text, required Function()? onPressed, required Color color,required double width}) {
+Widget commonButtonGrayRound(
+    {required String text, required Function()? onPressed, required double width}) {
   return SizedBox(
     width: width,
     height: 50,
@@ -96,32 +96,7 @@ Widget commonButtonRoundSmall(
       ),
       style: OutlinedButton.styleFrom(
         primary: Colors.white,
-        backgroundColor: color,
-        shape: const StadiumBorder(),
-        side: const BorderSide(color: Colors.white, width: 0),
-      ),
-      onPressed: onPressed,
-    ),
-  );
-}
-
-Widget commonButtonRoundOrangeSmall(
-    {required String text, required Function()? onPressed,required double width }) {
-  return SizedBox(
-    width: width,
-    height: 50,
-    child: OutlinedButton(
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.normal,
-          fontSize: 16,
-          color: Colors.white,
-        ),
-      ),
-      style: OutlinedButton.styleFrom(
-        primary: Colors.white,
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.black38,
         shape: const StadiumBorder(),
         side: const BorderSide(color: Colors.white, width: 0),
       ),
@@ -138,17 +113,18 @@ Widget commonButtonRoundWhiteSmall(
     child: OutlinedButton(
       child: Text(
         text,
-        style: const TextStyle(
+        style:  TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 16,
-          color: Colors.orange,
+          color: commonColorSecondary
+          ,
         ),
       ),
       style: OutlinedButton.styleFrom(
         primary: Colors.white,
         backgroundColor: Colors.white,
-        shape: const StadiumBorder(),
-        side: const BorderSide(color: Colors.orange, width: 1),
+        shape:  const StadiumBorder(),
+        side:  BorderSide(color: commonColorSecondary, width: 2),
       ),
       onPressed: onPressed,
     ),
@@ -189,7 +165,7 @@ Widget commonIconButtonQuestion(
     child: const Icon(
         Icons.info_outline,
         size:30,
-    color:Colors.orange),
+    color:Colors.white),
   );
 }
 

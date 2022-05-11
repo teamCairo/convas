@@ -1,3 +1,4 @@
+import 'package:convas/common/commonValues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
@@ -40,14 +41,16 @@ class CalendarEdit extends ConsumerWidget {
 
 
         return Scaffold(
+            appBar:commonAppbar("Calendar",helpTitle:"Tap the calendar",helpText: "You can set available time then learners find you",contextForHelp: context),
             body: SafeArea(
                 child: Column(
                   children: [
-                    commonAppbar("Calendar",leadingWidget:commonIconButtonQuestion(onTap:(){
-                      commonShowOkInfoDialog(context, "Tap the calendar","You can set available time then learners find you");
-                    }) ),
                     Expanded(
                       child: SfCalendar(
+                        selectionDecoration:const BoxDecoration(
+                          border:null
+                        ) ,
+                          todayHighlightColor:commonColorSecondary,
                           view: CalendarView.week,
                           // showNavigationArrow: true,
                           monthViewSettings: const MonthViewSettings(showAgenda: true),

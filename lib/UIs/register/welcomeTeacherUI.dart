@@ -40,7 +40,7 @@ class WelcomeTeacher extends ConsumerWidget {
           commonVerticalGap(),
           buildIndicatorForSlide(ref,images.length),
           commonVerticalGap(),
-          commonButtonOrangeRound(
+          commonButtonSecondaryColorRound(
             text: "Next",
             onPressed: () async {
               commonNavigatorPushSlideHorizon(context, const SetNameAndPhoto());

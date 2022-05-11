@@ -33,7 +33,7 @@ class SearchUsersMainPage extends ConsumerWidget {
         body: SafeArea(
             child: Padding(
                 padding: const EdgeInsets.only(
-                    top: 20, left: 14, right: 14, bottom: 10),
+                    top: 20, left: 8,  bottom: 10),
                 child: Column(children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
@@ -116,7 +116,7 @@ class SearchUsersMainPage extends ConsumerWidget {
             height: 150,
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
-                padding: const EdgeInsets.only(right: 8.0, top: 8),
+                padding: const EdgeInsets.only(right: 6.0, top: 8),
                 child: commonCircleAvatarImage(
                     radius: 45,
                     image: ref
@@ -137,9 +137,9 @@ class SearchUsersMainPage extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               commonText16BlackLeft(userData.name),
-                              const SizedBox(width:8),
-                              commonText16GrayLeft(fromBirthMillisecondsToAge(userData.birthDate).toString()),
-                              const SizedBox(width:8),
+                              const SizedBox(width:6),
+                              commonText16GrayLeft(commonLogicFromBirthMillisecondsToAge(userData.birthDate).toString()),
+                              const SizedBox(width:3),
                               Icon(commonGenderIcon(userData.gender),size:18)
                             ],
                           ),

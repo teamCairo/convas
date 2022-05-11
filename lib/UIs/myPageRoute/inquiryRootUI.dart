@@ -39,7 +39,7 @@ class InquiryRoot extends ConsumerWidget {
 Widget buttonChooseInquiryType(
     String typeCode, WidgetRef ref, BuildContext context) {
   String inquiryTypeName = getMasterName("inquiryType", typeCode, ref);
-  return commonButtonOrangeRound(
+  return commonButtonSecondaryColorRound(
     text: inquiryTypeName,
     onPressed: () {
       ref.read(inquiryProvider.notifier).setInquiryTypeWithoutRebuild(typeCode);

@@ -49,7 +49,7 @@ class LoginPage extends ConsumerWidget {
             children: <Widget>[
               Text(infoText),
               commonVerticalGap(),
-              commonButtonOrangeRound(
+              commonButtonSecondaryColorRound(
                   text: "Log In",
                   onPressed: () async {
                     FocusScope.of(context).requestFocus(FocusNode());
