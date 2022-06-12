@@ -5,7 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonPushUI.dart';
+import '../../common/UI/commonTextFormUI.dart';
 import '../../common/UI/commonTextUI.dart';
+import '../../common/commonValues.dart';
 import '../../common/logic/commonLogicOthers.dart';
 import '../../common/provider/masterProvider.dart';
 import '../call/callRoomRootUI.dart';
@@ -37,66 +39,98 @@ class AppointmentRequestView extends ConsumerWidget {
       ref.read(appointRequestProvider.notifier).initialize(
           mode, appointmentDocId, requestDocId, argumentFriendUserDocId);
     }
+    return commonScaffoldScroll(context, ref, MainAxisAlignment.start, [
+      Row(
+        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+        children: [
+          commonCircleAvatarImage(
+              radius: 45,
+              image: argumentFriendPhoto,
+              name: argumentFriendUserName),
+          commonText24BlackBoldLeft(argumentFriendUserName)
+        ],
+      ),
+      const SizedBox(height:20),
 
-    return Scaffold(
-        appBar:
-            commonAppbar(mode == "1" ? "Lesson request" : "Lesson appointment"),
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      commonCircleAvatarImage(
-                          radius: 45,
-                          image: argumentFriendPhoto,
-                          name: argumentFriendUserName),
-                      commonText24BlackBoldLeft(argumentFriendUserName)
-                    ],
-                  ),
-                ),
-                commonText16GrayCenter(
-                    ref.watch(appointRequestProvider).getStringFrom()),
-                commonText16GrayCenter(
-                    ref.watch(appointRequestProvider).getStringTo()),
-                commonText16GrayLeft(getMasterData("requestStatus",
-                        ref.watch(appointRequestProvider).status, ref)
-                    .name),
-                commonText24BlackBoldLeft("Request message"),
-                commonText16GrayLeft(
-                    ref.watch(appointRequestProvider).requestMessage),
-                commonText24BlackBoldLeft("Message"),
-                TextFormField(
-                  maxLines: null,
-                  minLines: 7,
-                  // テキスト入力のラベルを設定
-                  decoration: const InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  initialValue: ref.watch(appointRequestProvider).message,
-                  onChanged: (String value) {
-                    ref.read(appointRequestProvider.notifier).setMessage(value);
-                  },
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                footerButtonArea(mode, ref, context)
-              ],
-              // ),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(width:65,
+              child: Icon(Icons.access_time_outlined, color:  commonColorSecondary)),
+          Column(
+            children: [
+              commonText16BlackLeft(
+                  ref.watch(appointRequestProvider).getStringFrom()),
+              commonVerticalGap(),
+              commonText16BlackLeft(
+                  ref.watch(appointRequestProvider).getStringTo()),
+            ],
+          ),
+        ],
+      ),
+      commonVerticalGap(),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(width:65,
+              child: Icon(Icons.send, color:  commonColorSecondary)),
+          commonText16BlackLeft(getMasterData("requestStatus",
+              ref.watch(appointRequestProvider).status, ref)
+              .name),
+        ],
+      ),
+      commonVerticalGap(),
+      Row(
+        children: [
+          commonHorizontalGap(),
+          commonText16BlackLeft("Request message"),
+        ],
+      ),
+      commonVerticalGap(),
+      Row(
+        children: [
+          commonHorizontalGap(),
+          Flexible(
+            child: Text(
+              ref.watch(appointRequestProvider).requestMessage,
+              style: const TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 16,
+                color: Colors.black54,
+              ),
             ),
           ),
-        )));
+        ],
+      ),
+      requestArea( mode,  ref,  context),
+      commonVerticalGap(),
+      footerButtonArea(mode, ref, context)
+    ],
+        appBar:commonAppbar(mode == "1" ? "Lesson request" : "Lesson appointment",helpTitle:"Tap times and adjust to time when you like",helpText: "You can set available time then learners find you",contextForHelp: context));
+  }
+
+
+  Widget requestArea(String mode, WidgetRef ref, BuildContext context) {
+    if(mode =="1"){
+      return commonTextBoxBordered(
+        text: "Message to learner",
+        initialValue: ref.watch(appointRequestProvider).message,
+        onChanged: (String value) {
+          ref.read(appointRequestProvider.notifier).setMessage(value);
+        },
+        maxLines: 20,
+        minLines: 7,
+      );
+    }else{
+      return Text(
+        ref.watch(appointRequestProvider).message,
+        style: const TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          color: Colors.black54,
+        ),
+      );
+    }
   }
 
   Widget footerButtonArea(String mode, WidgetRef ref, BuildContext context) {
@@ -104,21 +138,19 @@ class AppointmentRequestView extends ConsumerWidget {
 
     if (mode == "1") {
       return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 14.0),
-            child: commonButtonRoundWhiteSmall(
-              width:commonWidthHalfButton(context),
-              text: "Deny",
-              onPressed: () async {
-                await ref
-                    .read(appointRequestProvider.notifier)
-                    .denyLessonRequest(ref);
-                await commonShowOkInfoDialog(
-                    context, "XXXXX","You denied this request");
-                Navigator.of(context).pop();
-              },
-            ),
+          commonButtonRoundWhiteSmall(
+            width:commonWidthHalfButton(context),
+            text: "Deny",
+            onPressed: () async {
+              await ref
+                  .read(appointRequestProvider.notifier)
+                  .denyLessonRequest(ref);
+              await commonShowOkInfoDialog(
+                  context, "Thank you!","You denied this request");
+              Navigator.of(context).pop();
+            },
           ),
           commonButtonSecondaryColorRound(
               text: "Accept",
@@ -127,7 +159,7 @@ class AppointmentRequestView extends ConsumerWidget {
                     .read(appointRequestProvider.notifier)
                     .acceptLessonRequest(ref);
                 await commonShowOkInfoDialog(
-                    context,"XXXXX", "You accepted this request");
+                    context,"Thank you!", "You accepted this request");
                 Navigator.of(context).pop();
               },
               width:commonWidthHalfButton(context)),
@@ -135,42 +167,40 @@ class AppointmentRequestView extends ConsumerWidget {
       );
     } else {
       return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 14.0),
-            child: commonButtonRoundWhiteSmall(
-              width:commonWidthHalfButton(context),
-              text: "Cancel lesson",
+          commonButtonRoundWhiteSmall(
+            width:commonWidthHalfButton(context),
+            text: "Cancel lesson",
+            onPressed: () async {
+              commonShowOkNgInfoDialog(
+                  context, "Are you sure you wanna cancel lesson?", () {
+
+                Navigator.of(context).pop();
+              });
+            },
+          ),
+          commonButtonSecondaryColorRound(
+              text: "Enter room",
               onPressed: () async {
-                commonShowOkNgInfoDialog(
-                    context, "Are you sure you wanna cancel lesson?", () {
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return CallRoomRoot(appointmentId: ref.watch(appointRequestProvider).appointmentDocId, argumentFriendUserDocId: argumentFriendUserDocId);
+                    },
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
+                    },
+                  ),
+                );
 
-                  Navigator.of(context).pop();
-                });
               },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 14.0),
-            child: commonButtonSecondaryColorRound(
-                text: "Enter room",
-                onPressed: () async {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) {
-                        return CallRoomRoot(appointmentId: ref.watch(appointRequestProvider).appointmentDocId, argumentFriendUserDocId: argumentFriendUserDocId);
-                      },
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
-                      },
-                    ),
-                  );
-
-                },
-            width:commonWidthHalfButton(context)),
-          ),
+              width:commonWidthHalfButton(context)),
         ],
       );
     }
   }
 }
+
+
+

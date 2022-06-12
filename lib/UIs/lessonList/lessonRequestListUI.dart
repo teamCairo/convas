@@ -1,4 +1,5 @@
 import 'package:convas/common/UI/commonOthersUI.dart';
+import 'package:convas/common/UI/commonPushUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:convas/common/otherClass/commonClassRequest.dart';
 import 'package:convas/common/provider/masterProvider.dart';
@@ -35,8 +36,9 @@ class LessonRequestList extends ConsumerWidget {
     screenAdjustSizeH = MediaQuery.of(context).size.height * 0.0011;
 
     return FutureBuilder(
-      future: selectFirebaseRequestByUserDocId(
-          ref.watch(userDataProvider).userData["userDocId"]),
+      future: selectFirebaseRequestByUserDocIdStatus(
+          ref.watch(userDataProvider).userData["userDocId"]
+          ,"1"),
       builder: (BuildContext context, AsyncSnapshot<List<CommonClassRequest>> snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return const Center(child: CircularProgressIndicator());
@@ -85,22 +87,18 @@ class LessonRequestList extends ConsumerWidget {
                     ]),
                   ),
                   SizedBox(
-                      width: 70 * screenAdjustSizeH,
+                      width: 80 * screenAdjustSizeH,
                       child: Column(children: [
                         commonText14GrayLeft(getMasterData("requestStatus", request.status, ref).name),
                       ]))
                 ]),
           ),
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) {
-                return AppointmentRequestView(request.senderUserDocId,
-                    ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.friendUserName,
-                    ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.profilePhoto==null?null:
-                    Image.memory(ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.profilePhoto!),
-                    request.requestDocId ,"","1");
-              }),
-            );
+            commonNavigatorPushSlideHorizon(context, AppointmentRequestView(request.senderUserDocId,
+                ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.friendUserName,
+                ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.profilePhoto==null?null:
+                Image.memory(ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.profilePhoto!),
+                request.requestDocId ,"","1"));
           },
         ),
       ),

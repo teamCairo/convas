@@ -28,6 +28,8 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(
         snapshot.docs[i].get("requestMessage"),
         snapshot.docs[i].get("message"),
         snapshot.docs[i].get("status"),
+        snapshot.docs[i].get("senderJoinedStatus"),
+        snapshot.docs[i].get("receiverJoinedStatus"),
         snapshot.docs[i].get("insertUserDocId"),
         snapshot.docs[i].get("insertProgramId"),
         snapshot.docs[i].get("insertTime").toDate(),
@@ -61,6 +63,8 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(
         snapshot.docs[i].get("requestMessage"),
         snapshot.docs[i].get("message"),
         snapshot.docs[i].get("status"),
+        snapshot.docs[i].get("senderJoinedStatus"),
+        snapshot.docs[i].get("receiverJoinedStatus"),
         snapshot.docs[i].get("insertUserDocId"),
         snapshot.docs[i].get("insertProgramId"),
         snapshot.docs[i].get("insertTime").toDate(),
@@ -76,14 +80,14 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(
   return returnList;
 }
 
-Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlanAndCancel(String userDocId)async{
+Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlan(String userDocId)async{
 
   List<CommonClassAppointment> returnList=[];
 
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('appointments')
       .where('receiverUserDocId', isEqualTo: userDocId)
-      .where('status', isNotEqualTo: "3")
+      .where('status', whereIn: ["1","2"])
       // .orderBy('insertTime',descending: true)
   // .limit(9999)
       .get();
@@ -102,6 +106,8 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlanAnd
         snapshot.docs[i].get("requestMessage"),
         snapshot.docs[i].get("message"),
         snapshot.docs[i].get("status"),
+        snapshot.docs[i].get("senderJoinedStatus"),
+        snapshot.docs[i].get("receiverJoinedStatus"),
         snapshot.docs[i].get("insertUserDocId"),
         snapshot.docs[i].get("insertProgramId"),
         snapshot.docs[i].get("insertTime").toDate(),
@@ -117,7 +123,7 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlanAnd
   snapshot = await FirebaseFirestore.instance
       .collection('appointments')
       .where('senderUserDocId', isEqualTo: userDocId)
-      .where('status', isNotEqualTo: "3")
+      .where('status', whereIn: ["1","2"])
       // .orderBy('insertTime',descending: true)
   // .limit(9999)
       .get();
@@ -136,6 +142,8 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlanAnd
         snapshot.docs[i].get("requestMessage"),
         snapshot.docs[i].get("message"),
         snapshot.docs[i].get("status"),
+        snapshot.docs[i].get("senderJoinedStatus"),
+        snapshot.docs[i].get("receiverJoinedStatus"),
         snapshot.docs[i].get("insertUserDocId"),
         snapshot.docs[i].get("insertProgramId"),
         snapshot.docs[i].get("insertTime").toDate(),
@@ -170,6 +178,8 @@ Future<CommonClassAppointment> selectFirebaseAppointmentByAppointmentDocId(
       snapshot.get("requestMessage"),
       snapshot.get("message"),
       snapshot.get("status"),
+      snapshot.get("senderJoinedStatus"),
+      snapshot.get("receiverJoinedStatus"),
       snapshot.get('insertUserDocId'),
       snapshot.get('insertProgramId'),
       snapshot.get('insertTime').toDate(),

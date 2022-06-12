@@ -40,7 +40,7 @@ class SetFrequency extends ConsumerWidget {
           const SizedBox(
             height: 30,
           ),
-          levelArea(ref, context),
+          // levelArea(ref, context),
           const SizedBox(
             height: 30,
           ),
@@ -63,30 +63,30 @@ class SetFrequency extends ConsumerWidget {
   }
 }
 
-
-Widget levelArea(WidgetRef ref, BuildContext context) {
-  double gap = 8;
-  return Row(children: [
-    towerUnit( context, "Mon",ref),
-    SizedBox(width: gap),
-    towerUnit(context, "Tue",ref),
-    SizedBox(width: gap),
-    towerUnit(context, "Wed",ref),
-    SizedBox(width: gap),
-    towerUnit(context, "Thu",ref),
-    SizedBox(width: gap),
-    towerUnit(context, "Fri",ref),
-    SizedBox(width: gap),
-    towerUnit(context, "Sat",ref),
-    SizedBox(width: gap),
-    towerUnit(context, "Sun",ref),
-    const SizedBox(width: 2),
-    Align(
-      alignment: Alignment.topCenter,
-      child: commonText16GrayCenter("min"),
-    )
-  ]);
-}
+//
+// Widget levelArea(WidgetRef ref, BuildContext context) {
+//   double gap = 8;
+//   return Row(children: [
+//     towerUnit( context, "Mon",ref),
+//     SizedBox(width: gap),
+//     towerUnit(context, "Tue",ref),
+//     SizedBox(width: gap),
+//     towerUnit(context, "Wed",ref),
+//     SizedBox(width: gap),
+//     towerUnit(context, "Thu",ref),
+//     SizedBox(width: gap),
+//     towerUnit(context, "Fri",ref),
+//     SizedBox(width: gap),
+//     towerUnit(context, "Sat",ref),
+//     SizedBox(width: gap),
+//     towerUnit(context, "Sun",ref),
+//     const SizedBox(width: 2),
+//     Align(
+//       alignment: Alignment.topCenter,
+//       child: commonText16GrayCenter("min"),
+//     )
+//   ]);
+// }
 
 
 Widget levelAreaVer2(WidgetRef ref, BuildContext context) {
@@ -117,17 +117,16 @@ Widget levelAreaVer2(WidgetRef ref, BuildContext context) {
 Widget towerUnitVer2(BuildContext context, String text,WidgetRef ref) {
   int height=120;
   int level =ref.watch(setFrequencyProvider).getLevel(text);
-
-  Color color = Colors.black12;
-    if(level<39){
-      color = Colors.lightGreenAccent;
-    }else if(level<79){
-      color = Colors.yellow;
-
-    }else{
-      color = Colors.deepOrange;
-
-    }
+  Color color = Colors.green;
+  // Color color = Colors.black12;
+  //   if(level<39){
+  //     color = Colors.lightGreenAccent;
+  //   }else if(level<79){
+  //     color = Colors.yellow;
+  //
+  //   }else{
+  //     color = Colors.deepOrange;
+  //   }
 
   return Column(children: [
     commonText16GrayCenter((level).toString()),

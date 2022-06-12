@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../common/logic/commonLogicOthers.dart';
 import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
 import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
 import '../../daoFirebase/eventsDaoFirebase.dart';
@@ -50,7 +51,7 @@ class FriendProfileCalendarNotifier extends ChangeNotifier {
                 _firebaseEventList[i].description,
                 _firebaseEventList[i].recurrenceRule,
                 null,
-                Colors.orange,
+                commonLogicGetAvailabilityColor(_firebaseEventList[i].eventType),
                 ""
             )
         );

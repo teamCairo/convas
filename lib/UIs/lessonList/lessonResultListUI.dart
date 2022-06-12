@@ -3,6 +3,7 @@ import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/UI/commonPushUI.dart';
 import '../../common/commonValues.dart';
 import '../../common/logic/commonLogicDate.dart';
 import '../../common/otherClass/commonClassAppointment.dart';
@@ -102,17 +103,14 @@ class LessonResultList extends ConsumerWidget {
                 ]),
           ),
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) {
-                return AppointmentRequestView(friendDocId,
-                    ref.watch(friendDataProvider).friendData[friendDocId]!.friendUserName,
-                    ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto==null?null:
-                    ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto == null
-                        ? null
-                        : Image.memory(ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto!),
-                    "" ,appoint.appointmentDocId,"2");
-              }),
-            );
+            commonNavigatorPushSlideHorizon(context, AppointmentRequestView(friendDocId,
+                ref.watch(friendDataProvider).friendData[friendDocId]!.friendUserName,
+                ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto==null?null:
+                ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto == null
+                    ? null
+                    : Image.memory(ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto!),
+                "" ,appoint.appointmentDocId,"2"));
+
           },
         ),
       ),

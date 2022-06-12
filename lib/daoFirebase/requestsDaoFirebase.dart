@@ -31,10 +31,11 @@ Future<CommonClassRequest> selectFirebaseRequestById(String requestDocId)async{
 }
 
 
-Future<List<CommonClassRequest>> selectFirebaseRequestByUserDocId(String userDocId)async{
+Future<List<CommonClassRequest>> selectFirebaseRequestByUserDocIdStatus(String userDocId, String status)async{
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('requests')
       .where('receiverUserDocId', isEqualTo: userDocId)
+      .where('status', isEqualTo: status)
       .orderBy('insertTime',descending: true)
       // .limit(9999)
       .get();

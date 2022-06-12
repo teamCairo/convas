@@ -13,6 +13,9 @@ Widget commonTextBoxBordered(
     TextFormField(
         initialValue:initialValue,
         decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: commonColorSecondary,width:2 ),
+          ),
           focusColor: Colors.black,
           fillColor: Colors.black,
           labelText: text,
