@@ -70,6 +70,7 @@ class CallRoomNotifier extends ChangeNotifier {
 
   Future<void> initialize(String friendUserDocId, String appointmentDocId,
       WidgetRef ref) async {
+    await updateAppointmentJoinedUser( ref, appointmentDocId,"callRoom");
     _screenMode = 1;
     _channelMessageList = [];
     _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));

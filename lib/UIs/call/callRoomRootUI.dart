@@ -28,29 +28,22 @@ class CallRoomRoot extends ConsumerWidget {
           .initialize(argumentFriendUserDocId, appointmentId, ref);
     }
 
-    if(ref.watch(callRoomProvider).screenMode==1){
+    if (ref.watch(callRoomProvider).screenMode == 1) {
       return Scaffold(
           appBar: commonAppbar(ref
-          // appBar: commonAppbarTransparent(ref
               .watch(friendDataProvider)
               .friendData[argumentFriendUserDocId]!
               .friendUserName),
           body: SafeArea(
-              child: callRoomWithoutChatUI( ref, appointmentId,context)
-          ));
-
-    }else{
+              child: callRoomWithoutChatUI(ref, appointmentId, context)));
+    } else {
       return Scaffold(
-
           appBar: commonAppbar(ref
-          // appBar: commonAppbarTransparent(ref
               .watch(friendDataProvider)
               .friendData[argumentFriendUserDocId]!
               .friendUserName),
-          body: SafeArea(
-              child: callRoomWithChatUI( ref, appointmentId,context)
-          ));
-
+          body:
+              SafeArea(child: callRoomWithChatUI(ref, appointmentId, context)));
     }
   }
 }

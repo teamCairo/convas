@@ -1,3 +1,4 @@
+import 'package:convas/common/commonValues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,12 +11,12 @@ import '../../common/provider/userProvider.dart';
 import 'callRoomCommonPartsUI.dart';
 import 'callRoomProvider.dart';
 
-Widget callRoomWithChatUI(WidgetRef ref,String appointmentId,BuildContext context){
+Widget callRoomWithChatUI(WidgetRef ref,String appointmentDocId,BuildContext context){
 
   return Column(
     children: [
-      SizedBox(height:200,child: renderVideoAreaWithChat(ref,appointmentId)) ,
-      SizedBox(height:35,child: buttonsForVideoCall(ref,context)),
+      SizedBox(height:200,child: renderVideoAreaWithChat(ref,appointmentDocId)) ,
+      SizedBox(height:35,child: buttonsForVideoCall(ref,context,appointmentDocId)),
       Expanded(child:chatListArea(ref)),
       SizedBox(height:65,child: chatInputArea(ref)),
     ],
@@ -77,7 +78,7 @@ Widget chatInputArea(WidgetRef ref) {
           ref.read(callRoomProvider).rebuildUI();
         },
         color: Colors.white,
-        backcolor: Colors.orange,
+        backcolor: commonColorPrimary,
         showBorder: false,
       )
       ]),

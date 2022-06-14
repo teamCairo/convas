@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/common/otherClass/commonClassRequest.dart';
 import 'package:convas/daoFirebase/requestsDaoFirebase.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../common/otherClass/commonClassAppointment.dart';
+import '../common/provider/userProvider.dart';
 
 Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(String userDocId)async {
   List<CommonClassAppointment> returnList = [];
@@ -95,6 +97,9 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlan(St
   if(snapshot.size==0){
   }else{
     for(int i =0;i<snapshot.size;i++){
+
+
+
       returnList.add(CommonClassAppointment(
         snapshot.docs[i].id,
         snapshot.docs[i].get("senderUserDocId"),
@@ -210,6 +215,8 @@ Future<String> insertFirebaseAppointmentsFromRequest(
     'requestMessage': request.message,
     'message': message,
     'status': "1",
+    'senderJoinedStatus':"0",
+    'receiverJoinedStatus':"0",
     'insertUserDocId': userDocId,
     'insertProgramId': programId,
     'insertTime': FieldValue.serverTimestamp(),
@@ -225,64 +232,57 @@ Future<String> insertFirebaseAppointmentsFromRequest(
   return insertedDocId;
 }
 
-// Future<String> insertFirebaseAppointments(
-//     {required String userDocId,
-//     required String friendUserDocId,
-//     required String courseCode,
-//     required String categoryCode,
-//     required DateTime fromTime,
-//     required DateTime toTime,
-//     required String message,
-//     required String programId}) async {
-//   String insertedDocId = "";
-//   await FirebaseFirestore.instance.collection('appointments').add({
-//     'senderUserDocId': userDocId,
-//     'receiverUserDocId': friendUserDocId,
-//     'courseCode': courseCode,
-//     'categoryCode': categoryCode,
-//     'fromTime':Timestamp.fromDate(fromTime),
-//     'toTime':Timestamp.fromDate(toTime),
-//     'message': message,
-//     'insertUserDocId': userDocId,
-//     'insertProgramId': programId,
-//     'insertTime': FieldValue.serverTimestamp(),
-//     'updateUserDocId': userDocId,
-//     'updateProgramId': programId,
-//     'updateTime': FieldValue.serverTimestamp(),
-//     'readableFlg': true,
-//     'deleteFlg': false,
-//   }).then((value) {
-//     insertedDocId = value.id;
-//   });
-//
-//   return insertedDocId;
-// }
-//
-// Future<void> updateFirebaseAppointments(
-//     {required String requestDocId,
-//     required String userDocId,
-//     required String friendUserDocId,
-//     required String courseCode,
-//     required String categoryCode,
-//       required DateTime fromTime,
-//       required DateTime toTime,
-//     required String message,
-//     required String programId}) async {
-//   await FirebaseFirestore.instance
-//       .collection('appointments')
-//       .doc(requestDocId)
-//       .update({
-//     'senderUserDocId': userDocId,
-//     'receiverUserDocId': friendUserDocId,
-//     'courseCode': courseCode,
-//     'categoryCode': categoryCode,
-//     'fromTime':Timestamp.fromDate(fromTime),
-//     'toTime':Timestamp.fromDate(toTime),
-//     'message': message,
-//     'updateUserDocId': userDocId,
-//     'updateProgramId': programId,
-//     'updateTime': FieldValue.serverTimestamp(),
-//     'readableFlg': true,
-//     'deleteFlg': false,
-//   });
-// }
+
+Future<void> updateAppointmentJoinedUser(WidgetRef ref,String appointmentDocId,String programId) async {
+
+  String userDocId = ref
+      .watch(userDataProvider.notifier)
+      .userData["userDocId"]!;
+
+  CommonClassAppointment appointment=await selectFirebaseAppointmentByAppointmentDocId(appointmentDocId);
+
+  if(appointment.senderUserDocId==userDocId){
+    await FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(appointmentDocId)
+        .update({
+      "senderJoinedStatus": "1",
+      "status": "2",
+      'updateUserDocId': userDocId,
+      'updateProgramId': programId,
+      'updateTime': FieldValue.serverTimestamp(),
+    });
+
+  }else if(appointment.receiverUserDocId==userDocId){
+    await FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(appointmentDocId)
+        .update({
+      "receiverJoinedStatus": "1",
+      "status": "2",
+      'updateUserDocId': userDocId,
+      'updateProgramId': programId,
+      'updateTime': FieldValue.serverTimestamp(),
+    });
+
+  }
+
+}
+
+
+Future<void> updateAppointmentDoneCall(WidgetRef ref,String appointmentDocId,String programId) async {
+
+  String userDocId = ref
+      .watch(userDataProvider.notifier)
+      .userData["userDocId"]!;
+
+    await FirebaseFirestore.instance
+        .collection('appointments')
+        .doc(appointmentDocId)
+        .update({
+      "status": "3",
+      'updateUserDocId': userDocId,
+      'updateProgramId': programId,
+      'updateTime': FieldValue.serverTimestamp(),
+    });
+}

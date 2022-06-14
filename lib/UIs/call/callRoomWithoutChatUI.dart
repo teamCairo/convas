@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'callRoomCommonPartsUI.dart';
 
-Widget callRoomWithoutChatUI(WidgetRef ref,String appointmentId,BuildContext context){
+Widget callRoomWithoutChatUI(WidgetRef ref,String appointmentDocId,BuildContext context){
 
   return Column(
     children: [
-      SizedBox(height:500,child: renderVideoAreaWithoutChat(ref,appointmentId)) ,
-      buttonsForVideoCall(ref,context),
+      SizedBox(height:500,child: renderVideoAreaWithoutChat(ref,appointmentDocId)) ,
+      buttonsForVideoCall(ref,context,appointmentDocId),
     ],
   );
 }

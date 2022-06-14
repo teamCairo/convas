@@ -1,3 +1,4 @@
+import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,6 +6,7 @@ import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 
 import '../../common/UI/commonButtonUI.dart';
+import '../../daoFirebase/appointmentsDaoFirebase.dart';
 import 'callRoomProvider.dart';
 
 Widget localView(double height,double? width){
@@ -12,7 +14,7 @@ Widget localView(double height,double? width){
       width: width??double.infinity, height: height, child: RtcLocalView.SurfaceView());
 }
 
-Widget friendView(WidgetRef ref,String appointmentId,double height,double? width){
+Widget friendView(WidgetRef ref,String appointmentDocId,double height,double? width){
   if (ref.watch(callRoomProvider).friendUserid == null) {
     return Container(height: height,
         width: width??double.infinity,
@@ -22,14 +24,14 @@ Widget friendView(WidgetRef ref,String appointmentId,double height,double? width
       height: height,
       width: width??double.infinity,
       child: RtcRemoteView.SurfaceView(
-        channelId: appointmentId,
+        channelId: appointmentDocId,
         uid: ref.watch(callRoomProvider).friendUserid!,
       ),
     );
   }
 }
 
-Widget buttonsForVideoCall(WidgetRef ref,BuildContext context){
+Widget buttonsForVideoCall(WidgetRef ref,BuildContext context,String appointmentDocId){
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -49,8 +51,7 @@ Widget buttonsForVideoCall(WidgetRef ref,BuildContext context){
           showBorder: false,
           onPressed: () {
             if (ref.watch(callRoomProvider).isJoinedCall) {
-              ref.read(callRoomProvider.notifier).leaveChannel(ref);
-              // Navigator.of(context).pop();
+              showStopCallDialog(context,ref,appointmentDocId);
             } else {
               ref.read(callRoomProvider.notifier).joinCallChannel();
             }
@@ -87,5 +88,33 @@ Widget buttonsForVideoCall(WidgetRef ref,BuildContext context){
           backcolor: Colors.white,
           size: 20),
     ],
+  );
+}
+
+Future<dynamic> showStopCallDialog(BuildContext context, WidgetRef ref,String appointmentDocId)async{
+  return await showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) {
+      return AlertDialog(
+        title:  const Text("Confirmation"),
+        content: commonText16GrayLeft("You wanna finish your lesson??"),
+        actions: [
+          TextButton(
+            child: const Text("Yes, finish"),
+            onPressed: () {
+              ref.read(callRoomProvider.notifier).leaveChannel(ref);
+            }
+          ),
+          TextButton(
+            child: const Text("No, I'll be back"),
+              onPressed: () {
+                updateAppointmentDoneCall( ref, appointmentDocId, "callRoom");
+                ref.read(callRoomProvider.notifier).leaveChannel(ref);
+              }
+          ),
+        ],
+      );
+    },
   );
 }

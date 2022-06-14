@@ -96,9 +96,7 @@ class LessonRequestList extends ConsumerWidget {
           onTap: () {
             commonNavigatorPushSlideHorizon(context, AppointmentRequestView(request.senderUserDocId,
                 ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.friendUserName,
-                ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.profilePhoto==null?null:
-                Image.memory(ref.watch(friendDataProvider).friendData[request.senderUserDocId]!.profilePhoto!),
-                request.requestDocId ,"","1"));
+                request.requestDocId ,"",null,"2"));
           },
         ),
       ),

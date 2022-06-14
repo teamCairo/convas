@@ -105,11 +105,7 @@ class LessonResultList extends ConsumerWidget {
           onTap: () {
             commonNavigatorPushSlideHorizon(context, AppointmentRequestView(friendDocId,
                 ref.watch(friendDataProvider).friendData[friendDocId]!.friendUserName,
-                ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto==null?null:
-                ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto == null
-                    ? null
-                    : Image.memory(ref.watch(friendDataProvider).friendData[friendDocId]!.profilePhoto!),
-                "" ,appoint.appointmentDocId,"2"));
+                "" ,appoint.appointmentDocId,null,"3"));
 
           },
         ),

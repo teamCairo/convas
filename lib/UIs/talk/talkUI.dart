@@ -91,17 +91,9 @@ class Talk extends ConsumerWidget {
           ),
           onTap: () {
 
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  return ChatPage(friendUserDocId:friendData.friendUserDocId
-                      ,friendUserName:friendData.friendUserName, chatHeaderDocId: friendData.chatHeaderId);
-                },
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  return commonFunctionPushSlideHorizon(context, animation, secondaryAnimation, child);
-                },
-              ),
-            );
+            commonNavigatorPushSlideHorizon(context, ChatPage(friendUserDocId:friendData.friendUserDocId
+                ,friendUserName:friendData.friendUserName, chatHeaderDocId: friendData.chatHeaderId));
+
           },
         ),
       ),
