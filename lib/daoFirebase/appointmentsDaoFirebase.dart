@@ -6,18 +6,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/otherClass/commonClassAppointment.dart';
 import '../common/provider/userProvider.dart';
 
-Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(String userDocId)async {
+Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(
+    String userDocId) async {
   List<CommonClassAppointment> returnList = [];
 
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('appointments')
       .where('receiverUserDocId', isEqualTo: userDocId)
-      .where('status', isEqualTo: "3")
+      .where('status', isEqualTo: "4")
       // .orderBy('insertTime', descending: true)
-  // .limit(9999)
+      // .limit(9999)
       .get();
 
-  if (snapshot.size == 0) {} else {
+  if (snapshot.size == 0) {
+  } else {
     for (int i = 0; i < snapshot.size; i++) {
       returnList.add(CommonClassAppointment(
         snapshot.docs[i].id,
@@ -32,6 +34,9 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(
         snapshot.docs[i].get("status"),
         snapshot.docs[i].get("senderJoinedStatus"),
         snapshot.docs[i].get("receiverJoinedStatus"),
+        snapshot.docs[i].get("requestDocId"),
+        snapshot.docs[i].get("startTime"),
+        snapshot.docs[i].get("doneTime"),
         snapshot.docs[i].get("insertUserDocId"),
         snapshot.docs[i].get("insertProgramId"),
         snapshot.docs[i].get("insertTime").toDate(),
@@ -47,12 +52,13 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(
   snapshot = await FirebaseFirestore.instance
       .collection('appointments')
       .where('senderUserDocId', isEqualTo: userDocId)
-      .where('status', isEqualTo: "3")
+      .where('status', isEqualTo: "4")
       // .orderBy('insertTime', descending: true)
-  // .limit(9999)
+      // .limit(9999)
       .get();
 
-  if (snapshot.size == 0) {} else {
+  if (snapshot.size == 0) {
+  } else {
     for (int i = 0; i < snapshot.size; i++) {
       returnList.add(CommonClassAppointment(
         snapshot.docs[i].id,
@@ -67,6 +73,9 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(
         snapshot.docs[i].get("status"),
         snapshot.docs[i].get("senderJoinedStatus"),
         snapshot.docs[i].get("receiverJoinedStatus"),
+        snapshot.docs[i].get("requestDocId"),
+        snapshot.docs[i].get("startTime"),
+        snapshot.docs[i].get("doneTime"),
         snapshot.docs[i].get("insertUserDocId"),
         snapshot.docs[i].get("insertProgramId"),
         snapshot.docs[i].get("insertTime").toDate(),
@@ -78,28 +87,25 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentResultByUserDocId(
       ));
     }
   }
-  returnList.sort((a,b) => a.insertTime.compareTo(b.insertTime));
+  returnList.sort((a, b) => a.insertTime.compareTo(b.insertTime));
   return returnList;
 }
 
-Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlan(String userDocId)async{
-
-  List<CommonClassAppointment> returnList=[];
+Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlan(
+    String userDocId) async {
+  List<CommonClassAppointment> returnList = [];
 
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection('appointments')
       .where('receiverUserDocId', isEqualTo: userDocId)
-      .where('status', whereIn: ["1","2"])
+      .where('status', whereIn: ["1", "2", "3"])
       // .orderBy('insertTime',descending: true)
-  // .limit(9999)
+      // .limit(9999)
       .get();
 
-  if(snapshot.size==0){
-  }else{
-    for(int i =0;i<snapshot.size;i++){
-
-
-
+  if (snapshot.size == 0) {
+  } else {
+    for (int i = 0; i < snapshot.size; i++) {
       returnList.add(CommonClassAppointment(
         snapshot.docs[i].id,
         snapshot.docs[i].get("senderUserDocId"),
@@ -113,6 +119,9 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlan(St
         snapshot.docs[i].get("status"),
         snapshot.docs[i].get("senderJoinedStatus"),
         snapshot.docs[i].get("receiverJoinedStatus"),
+        snapshot.docs[i].get("requestDocId"),
+        snapshot.docs[i].get("startTime"),
+        snapshot.docs[i].get("doneTime"),
         snapshot.docs[i].get("insertUserDocId"),
         snapshot.docs[i].get("insertProgramId"),
         snapshot.docs[i].get("insertTime").toDate(),
@@ -128,14 +137,14 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlan(St
   snapshot = await FirebaseFirestore.instance
       .collection('appointments')
       .where('senderUserDocId', isEqualTo: userDocId)
-      .where('status', whereIn: ["1","2"])
+      .where('status', whereIn: ["1", "2", "3"])
       // .orderBy('insertTime',descending: true)
-  // .limit(9999)
+      // .limit(9999)
       .get();
 
-  if(snapshot.size==0){
-  }else{
-    for(int i =0;i<snapshot.size;i++){
+  if (snapshot.size == 0) {
+  } else {
+    for (int i = 0; i < snapshot.size; i++) {
       returnList.add(CommonClassAppointment(
         snapshot.docs[i].id,
         snapshot.docs[i].get("senderUserDocId"),
@@ -149,6 +158,9 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlan(St
         snapshot.docs[i].get("status"),
         snapshot.docs[i].get("senderJoinedStatus"),
         snapshot.docs[i].get("receiverJoinedStatus"),
+        snapshot.docs[i].get("requestDocId"),
+        snapshot.docs[i].get("startTime"),
+        snapshot.docs[i].get("doneTime"),
         snapshot.docs[i].get("insertUserDocId"),
         snapshot.docs[i].get("insertProgramId"),
         snapshot.docs[i].get("insertTime").toDate(),
@@ -161,7 +173,7 @@ Future<List<CommonClassAppointment>> selectFirebaseAppointmentByUserDocIdPlan(St
     }
   }
 
-  returnList.sort((a,b) => a.insertTime.compareTo(b.insertTime));
+  returnList.sort((a, b) => a.insertTime.compareTo(b.insertTime));
   return returnList;
 }
 
@@ -185,6 +197,9 @@ Future<CommonClassAppointment> selectFirebaseAppointmentByAppointmentDocId(
       snapshot.get("status"),
       snapshot.get("senderJoinedStatus"),
       snapshot.get("receiverJoinedStatus"),
+      snapshot.get("requestDocId"),
+      snapshot.get("startTime"),
+      snapshot.get("doneTime"),
       snapshot.get('insertUserDocId'),
       snapshot.get('insertProgramId'),
       snapshot.get('insertTime').toDate(),
@@ -195,14 +210,9 @@ Future<CommonClassAppointment> selectFirebaseAppointmentByAppointmentDocId(
       snapshot.get('deleteFlg'));
 }
 
-Future<String> insertFirebaseAppointmentsFromRequest(
-      String requestDocId,
-    String message,
-      String userDocId,
-      String programId) async {
-
-  CommonClassRequest request =
-  await selectFirebaseRequestById(requestDocId);
+Future<String> insertFirebaseAppointmentsFromRequest(String requestDocId,
+    String message, String userDocId, String programId) async {
+  CommonClassRequest request = await selectFirebaseRequestById(requestDocId);
 
   String insertedDocId = "";
   await FirebaseFirestore.instance.collection('appointments').add({
@@ -210,13 +220,16 @@ Future<String> insertFirebaseAppointmentsFromRequest(
     'receiverUserDocId': request.senderUserDocId,
     'courseCode': "",
     'categoryCode': "",
-    'fromTime':Timestamp.fromDate(request.from),
-    'toTime':Timestamp.fromDate(request.to),
+    'fromTime': Timestamp.fromDate(request.from),
+    'toTime': Timestamp.fromDate(request.to),
     'requestMessage': request.message,
     'message': message,
     'status': "1",
-    'senderJoinedStatus':"0",
-    'receiverJoinedStatus':"0",
+    'senderJoinedStatus': "0",
+    'receiverJoinedStatus': "0",
+    'requestDocId': requestDocId,
+    'startTime': null,
+    'doneTime': null,
     'insertUserDocId': userDocId,
     'insertProgramId': programId,
     'insertTime': FieldValue.serverTimestamp(),
@@ -232,57 +245,67 @@ Future<String> insertFirebaseAppointmentsFromRequest(
   return insertedDocId;
 }
 
+Future<void> updateAppointmentJoinedUser(
+    WidgetRef ref, String appointmentDocId, String programId) async {
+  String userDocId =
+      ref.watch(userDataProvider.notifier).userData["userDocId"]!;
 
-Future<void> updateAppointmentJoinedUser(WidgetRef ref,String appointmentDocId,String programId) async {
+  CommonClassAppointment appointment =
+      await selectFirebaseAppointmentByAppointmentDocId(appointmentDocId);
 
-  String userDocId = ref
-      .watch(userDataProvider.notifier)
-      .userData["userDocId"]!;
+  Map<String, dynamic> updateMap = {
+    'updateUserDocId': userDocId,
+    'updateProgramId': programId,
+    'updateTime': FieldValue.serverTimestamp(),
+  };
 
-  CommonClassAppointment appointment=await selectFirebaseAppointmentByAppointmentDocId(appointmentDocId);
-
-  if(appointment.senderUserDocId==userDocId){
-    await FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(appointmentDocId)
-        .update({
-      "senderJoinedStatus": "1",
-      "status": "2",
-      'updateUserDocId': userDocId,
-      'updateProgramId': programId,
-      'updateTime': FieldValue.serverTimestamp(),
-    });
-
-  }else if(appointment.receiverUserDocId==userDocId){
-    await FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(appointmentDocId)
-        .update({
-      "receiverJoinedStatus": "1",
-      "status": "2",
-      'updateUserDocId': userDocId,
-      'updateProgramId': programId,
-      'updateTime': FieldValue.serverTimestamp(),
-    });
-
+  if (appointment.senderUserDocId == userDocId) {
+    if (appointment.receiverJoinedStatus == "1") {
+      updateMap.addAll({
+        "senderJoinedStatus": "1",
+        "status": "3",
+        'startTime': FieldValue.serverTimestamp(),
+      });
+    } else {
+      updateMap.addAll({
+        "senderJoinedStatus": "1",
+        "status": "2",
+      });
+    }
+  } else if (appointment.receiverUserDocId == userDocId) {
+    if (appointment.senderJoinedStatus == "1") {
+      updateMap.addAll({
+        "receiverJoinedStatus": "1",
+        "status": "3",
+        'startTime': FieldValue.serverTimestamp(),
+      });
+    } else {
+      updateMap.addAll({
+        "receiverJoinedStatus": "1",
+        "status": "2",
+      });
+    }
   }
 
+  await FirebaseFirestore.instance
+      .collection('appointments')
+      .doc(appointmentDocId)
+      .update(updateMap);
 }
 
+Future<void> updateAppointmentDoneCall(
+    WidgetRef ref, String appointmentDocId, String programId) async {
+  String userDocId =
+      ref.watch(userDataProvider.notifier).userData["userDocId"]!;
 
-Future<void> updateAppointmentDoneCall(WidgetRef ref,String appointmentDocId,String programId) async {
-
-  String userDocId = ref
-      .watch(userDataProvider.notifier)
-      .userData["userDocId"]!;
-
-    await FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(appointmentDocId)
-        .update({
-      "status": "3",
-      'updateUserDocId': userDocId,
-      'updateProgramId': programId,
-      'updateTime': FieldValue.serverTimestamp(),
-    });
+  await FirebaseFirestore.instance
+      .collection('appointments')
+      .doc(appointmentDocId)
+      .update({
+    "status": "4",
+    'doneTime': FieldValue.serverTimestamp(),
+    'updateUserDocId': userDocId,
+    'updateProgramId': programId,
+    'updateTime': FieldValue.serverTimestamp(),
+  });
 }

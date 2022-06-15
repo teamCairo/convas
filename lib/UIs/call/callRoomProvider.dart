@@ -65,13 +65,18 @@ class CallRoomNotifier extends ChangeNotifier {
       _channelMessageList;
   AgoraRtmChannel? _messageChannel;
 
-  int _screenMode = 1;
+  int _screenMode = 2;
   int get screenMode => _screenMode;
+
+  Future<void> refleshAppointmentData()async {
+    _appointmentData =
+    await selectFirebaseAppointmentByAppointmentDocId(_appointmentData.appointmentDocId);
+  }
 
   Future<void> initialize(String friendUserDocId, String appointmentDocId,
       WidgetRef ref) async {
     await updateAppointmentJoinedUser( ref, appointmentDocId,"callRoom");
-    _screenMode = 1;
+    _screenMode = 2;
     _channelMessageList = [];
     _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));
     addListeners();
@@ -164,10 +169,11 @@ class CallRoomNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> leaveChannel(WidgetRef ref) async {
+  Future<void> leaveChannel(WidgetRef ref, String appointmentDocId) async {
     await _engine.leaveChannel();
     await leaveMessageChannel(ref);
     await leaveClientMessage(ref);
+    updateAppointmentDoneCall( ref, appointmentDocId, "callRoom");
     notifyListeners();
   }
 

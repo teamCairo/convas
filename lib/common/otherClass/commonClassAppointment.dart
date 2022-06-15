@@ -14,6 +14,9 @@ class CommonClassAppointment{
       this.status,
       this.senderJoinedStatus,
       this.receiverJoinedStatus,
+      this.requestDocId,
+      this.startTime,
+      this.doneTime,
       this.insertUserDocId,
       this.insertProgramId,
       this.insertTime,
@@ -36,6 +39,9 @@ class CommonClassAppointment{
   late String status;
   late String senderJoinedStatus;
   late String receiverJoinedStatus;
+  late String requestDocId;
+  late DateTime startTime;
+  late DateTime doneTime;
   late String insertUserDocId;
   late String insertProgramId;
   late DateTime insertTime;

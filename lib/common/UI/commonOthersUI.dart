@@ -307,7 +307,7 @@ Future<dynamic> commonShowOkNgInfoDialog(BuildContext context,  String message, 
     barrierDismissible: false,
     builder: (_) {
       return AlertDialog(
-        title:  const Text("Information"),
+        title:  const Text("Confirmation"),
         content: Text(message),
         actions: [
           TextButton(

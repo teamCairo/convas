@@ -23,8 +23,10 @@ Future<void> insertTestMasterData(WidgetRef ref) async {
   insertMasterUnitData(ref:ref,masterGroupCode:"inquiryType",code:"5",name:"Others",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
 
   insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"1",name:"yet",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
-  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"2",name:"already",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
-  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"3",name:"cancel",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"2",name:"any joined",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"3",name:"started",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"4",name:"done",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
+  insertMasterUnitData(ref:ref,masterGroupCode:"appointmentStatus",code:"5",name:"cancel",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
 
   insertMasterUnitData(ref:ref,masterGroupCode:"requestStatus",code:"1",name:"applying",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
   insertMasterUnitData(ref:ref,masterGroupCode:"requestStatus",code:"2",name:"accepted",  onMemoryFlg: true, photoURL1: '', photoURL2: '',programId: "insertTestMastersData");
