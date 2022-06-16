@@ -433,8 +433,8 @@ Widget commonBalloonRight(Widget child){
   return Align(
       alignment: Alignment.centerRight,
       child: Container(
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
+          decoration:  BoxDecoration(
+              borderRadius:const BorderRadius.only(
                 topRight: Radius.circular(40),
                 topLeft: Radius.circular(40),
                 bottomLeft: Radius.circular(40),
@@ -449,26 +449,30 @@ Widget commonBalloon(Widget child,String rightLeft){
     return Align(
         alignment: Alignment.centerRight,
         child: Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+            decoration:  BoxDecoration(
+                borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(40),
                   topLeft: Radius.circular(40),
                   bottomLeft: Radius.circular(40),
                 ),
-                gradient: commonLinearGradientForChatBox),
+                color:commonColorTertiary
+              // gradient: commonLinearGradientForChatBox
+            ),
             child: child));
 
   }else{
     return Align(
         alignment: Alignment.centerLeft,
         child: Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+            decoration:  BoxDecoration(
+                borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(40),
                   topLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
-                gradient: commonLinearGradientForChatBox),
+                color:commonColorTertiary
+                // gradient: commonLinearGradientForChatBox
+            ),
             child: child));
 
   }

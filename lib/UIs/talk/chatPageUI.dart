@@ -6,6 +6,7 @@ import 'package:convas/common/UI/commonPushUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:isar/isar.dart';
@@ -73,66 +74,6 @@ class ChatPage extends ConsumerWidget {
           textInputWidget(ref, context, friendNameTmp, friendImage)
         ])));
   }
-  //
-  // SpeedDial speedDialButton(WidgetRef ref, BuildContext context,
-  //     String friendUserDocId, String friendUserName, Image? friendImage) {
-  //   return SpeedDial(
-  //     elevation: 6,
-  //     buttonSize: const Size(45.0, 45.0),
-  //     childrenButtonSize: const Size(55.0, 55.0),
-  //     animatedIcon: AnimatedIcons.menu_close,
-  //     animatedIconTheme: const IconThemeData(size: 22.0),
-  //     curve: Curves.bounceIn,
-  //     // icon:Icons.keyboard_arrow_up,
-  //     children: [
-  //       SpeedDialChild(
-  //           child: const Icon(Icons.call_sharp),
-  //           backgroundColor: Colors.orange,
-  //           label: "call",
-  //           onTap: () {},
-  //           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-  //       SpeedDialChild(
-  //           child: const Icon(Icons.mic),
-  //           backgroundColor: Colors.teal,
-  //           label: "voice chat",
-  //           onTap: () {},
-  //           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-  //       SpeedDialChild(
-  //           child: const Icon(Icons.photo_outlined),
-  //           backgroundColor: Colors.teal,
-  //           label: "send photo",
-  //           onTap: () {},
-  //           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-  //       SpeedDialChild(
-  //           child: const Icon(Icons.camera_alt_outlined),
-  //           backgroundColor: Colors.teal,
-  //           label: "take photo",
-  //           onTap: () {},
-  //           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-  //     ],
-  //   );
-  // }
-
-  // AppBar appbarImageAndButtons(WidgetRef ref, BuildContext context,
-  //     String friendName, Image? friendImage) {
-  //   return AppBar(
-  //     leading: IconButton(
-  //       icon: commonCircleAvatarImage(
-  //           image: friendImage, radius: 20, name: friendUserName),
-  //       onPressed: () async {
-  //         commonNavigatorPushSlideHorizon(context,
-  //         //     FriendProfile(
-  //         //   argumentFriendUserDocId: friendUserDocId,
-  //         // )
-  //             FriendProfileRoot(argumentFriendUserDocId: friendUserDocId,
-  //                argumentFriendUserName: friendUserName,)
-  //         );
-  //       },
-  //     ),
-  //     elevation: 0.6,
-  //     title: commonText20BlackLeftBold(friendName),
-  //   );
-  // }
 
   Padding balloon(
       ChatDetail chatDetail, String rightLeft, BuildContext context,WidgetRef ref) {
@@ -141,10 +82,10 @@ class ChatPage extends ConsumerWidget {
     List<Widget> widgetList = [];
     widgetList.add(Padding(
         padding: const EdgeInsets.all(16.0),
-        child: commonText14Gray(chatDetail.message)));
+        child: commonText14Black(chatDetail.message)));
     if (chatDetail.messageType == "3") {
       if (rightLeft == "right") {
-        widgetList.add(commonText14Gray("You sent a request"));
+        widgetList.add(commonText14Black("You sent a request"));
         widgetList.add(commonButtonSmallOrangeRound(
             text: "View request", onPressed: () {
           Navigator.of(context).push(
@@ -184,35 +125,40 @@ class ChatPage extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8),
-      child: SizedBox(
-        height: 52,
-        child: Row(children: [
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: commonTextBoxGrayForChat(
-                onChanged: (String value) {
-                  message = value;
-                },
-                controller: _controller,
-                multiLine: true),
-          )),
-          commonButtonGraySmallerIcon(
-              icon: MyFlutterApp.send,
-              onPressed: () async {
+      child: Row(children: [
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: commonTextBoxGrayForChat(
+              onChanged: (String value) {
+                message = value;
+              },
+              controller: _controller,
+              multiLine: true),
+        )),
+        commonButtonGraySmallerIcon(
+            icon: MyFlutterApp.send,
+            onPressed: () async {
+
+              if(message!=""){
+                String tmpMessage=message;
+                message="";
+                _controller.clear();
+
                 await insertChatDetailsDataMessage(
                   ref: ref,
                   chatHeaderDocId: chatHeaderDocId,
                   friendUserDocId: friendUserDocId,
-                  message: message,
+                  message: tmpMessage,
                   programId: "chatPageUI",
                 );
-                _controller.clear();
-              }),
-          // speedDialButton(
-          //     ref, context, friendUserDocId, friendName, friendPhoto)
-        ]),
-      ),
+              }
+
+
+            }),
+        // speedDialButton(
+        //     ref, context, friendUserDocId, friendName, friendPhoto)
+      ]),
     );
   }
 

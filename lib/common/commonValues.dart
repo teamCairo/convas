@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'otherClass/commonHexColor.dart';
 
-const int searchConditionAgeMin = 18;
+const int searchConditionAgeMin = 12;
 const int searchConditionAgeMax = 100;
-const Color themeColorDeep = Colors.orangeAccent;
 
 const platformForCallKotlin = MethodChannel('app.com.convas/app');
 
@@ -23,14 +22,16 @@ const appointmentSelectTypeAlmightyWord = "Anything";
 
 const enterRoomMessage = "Entered the call room";
 
-const LinearGradient commonLinearGradientForChatBox = LinearGradient(
+LinearGradient commonLinearGradientForChatBox = LinearGradient(
     begin: FractionalOffset.topLeft,
     end: FractionalOffset.bottomRight,
     colors: [
-      Color.fromARGB(255, 108, 132, 235),
-      Color.fromARGB(255, 132, 199, 250),
+      CommonHexColor("#fff0f5"),
+      CommonHexColor("#ffe4e1"),
+      // Color.fromARGB(255, 108, 132, 235),
+      // Color.fromARGB(255, 132, 199, 250),
     ],
-    stops: [
+    stops: const [
       0.0,
       1.0,
     ]);

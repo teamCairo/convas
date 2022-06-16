@@ -52,12 +52,20 @@ Widget commonTextBoxGrayForChat(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(40)),
     child: TextField(
-        keyboardType: multiLine??false==false?null:TextInputType.multiline,
+        cursorHeight:26,
+        keyboardType: (multiLine??false)==false?null:TextInputType.multiline,
         autofocus: true,
       controller: controller,
-      decoration: const InputDecoration(border: InputBorder.none),
-      maxLines: multiLine??false==false?1:null,
-      textInputAction: multiLine??false==false?null:TextInputAction.newline,
+      decoration: const InputDecoration(
+          border: InputBorder.none,
+        isDense: true,
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 8,
+          horizontal: 6,
+        ),
+      ),
+      maxLines: (multiLine??false)==false?1:null,
+      textInputAction: (multiLine??false)==false?null:TextInputAction.newline,
       onChanged: onChanged
     ),
   );

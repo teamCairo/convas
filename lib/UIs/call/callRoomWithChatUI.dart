@@ -94,7 +94,7 @@ Padding balloon(
   List<Widget> widgetList = [];
   widgetList.add(Padding(
       padding: const EdgeInsets.all(16.0),
-      child: commonText14Gray(chatMessage.message)));
+      child: commonText14Black(chatMessage.message)));
 
 
   return Padding(

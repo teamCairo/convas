@@ -40,6 +40,16 @@ Widget commonText14Gray(String text) {
   );
 }
 
+Widget commonText14Black(String text) {
+  return Text(
+    text,
+    style: const TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 14,
+      color: Colors.black87,
+    ),
+  );
+}
 Widget commonText16GrayRight(String text) {
   return Align(
       alignment: Alignment.topRight,
