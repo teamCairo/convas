@@ -1,4 +1,4 @@
-// import 'package:convas/UIs/register/learner/setGoalUI.dart';
+// import 'package:convas/UIs/register/learner/XXXXXsetGoalUI.dart';
 // import 'package:convas/common/UI/commonButtonUI.dart';
 // import 'package:convas/common/UI/commonOthersUI.dart';
 // import 'package:convas/common/UI/commonTextUI.dart';

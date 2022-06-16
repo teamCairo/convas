@@ -17,7 +17,7 @@ class WelcomeTeacher extends ConsumerWidget {
     "assets/teacherWelcome2.JPG",
     "assets/teacherWelcome3.JPG",
     "assets/teacherWelcome4.JPG",
-    "assets/teacherWelcome5.JPG",
+    // "assets/teacherWelcome5.JPG",
   ];
 
   bool initialProcessFlg=true;
@@ -34,7 +34,8 @@ class WelcomeTeacher extends ConsumerWidget {
         ref,
         MainAxisAlignment.start,
         [
-          commonText30BlackBoldLeft("You can teach English and get money"),
+          // commonText30BlackBoldLeft("You can teach English and get money"),
+          commonText30BlackBoldLeft("You can teach English here"),
           commonVerticalGap(),
           carouselSliderBuilderForSlide(ref, images,MediaQuery.of(context).size.width),
           commonVerticalGap(),

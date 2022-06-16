@@ -12,20 +12,20 @@ class BottomNavigationBarItems extends ChangeNotifier {
 
   void initialize(WidgetRef ref) {
 
-    if(ref.watch(userDataProvider).userData["userType"]=="1"){
-      _footerItemNames = [
-        'Find',
-        'Talk',
-        'Lesson',
-        'My page',
-      ];
-      _footerIcons = [
-        Icons.search,
-        Icons.message_outlined,
-        Icons.add_chart,
-        Icons.work_outline,
-      ];
-    }else{
+    // if(ref.watch(userDataProvider).userData["userType"]=="1"){
+    //   _footerItemNames = [
+    //     'Find',
+    //     'Talk',
+    //     'Lesson',
+    //     'My page',
+    //   ];
+    //   _footerIcons = [
+    //     Icons.search,
+    //     Icons.message_outlined,
+    //     Icons.add_chart,
+    //     Icons.work_outline,
+    //   ];
+    // }else{
       _footerItemNames = ['Calendar',
         'Find',
         'Talk',
@@ -39,7 +39,7 @@ class BottomNavigationBarItems extends ChangeNotifier {
         Icons.work_outline,
       ];
 
-    }
+    // }
 
 
 

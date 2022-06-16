@@ -258,6 +258,20 @@ Widget commonText16BlackLeft(String text) {
       ));
 }
 
+
+Widget commonText16BlackLeftBold(String text) {
+  return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+          color: Colors.black87,
+        ),
+      ));
+}
+
 Widget commonText20BlackLeftBold(String text) {
   return Align(
       alignment: Alignment.topLeft,

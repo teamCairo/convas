@@ -56,7 +56,7 @@ class ChatPage extends ConsumerWidget {
     }
 
     return Scaffold(
-        appBar: appbarImageAndButtons(ref, context, friendNameTmp, friendImage),
+        appBar:commonAppbar(friendNameTmp),
         body: SafeArea(
             child: Column(children: <Widget>[
           Expanded(
@@ -73,66 +73,66 @@ class ChatPage extends ConsumerWidget {
           textInputWidget(ref, context, friendNameTmp, friendImage)
         ])));
   }
+  //
+  // SpeedDial speedDialButton(WidgetRef ref, BuildContext context,
+  //     String friendUserDocId, String friendUserName, Image? friendImage) {
+  //   return SpeedDial(
+  //     elevation: 6,
+  //     buttonSize: const Size(45.0, 45.0),
+  //     childrenButtonSize: const Size(55.0, 55.0),
+  //     animatedIcon: AnimatedIcons.menu_close,
+  //     animatedIconTheme: const IconThemeData(size: 22.0),
+  //     curve: Curves.bounceIn,
+  //     // icon:Icons.keyboard_arrow_up,
+  //     children: [
+  //       SpeedDialChild(
+  //           child: const Icon(Icons.call_sharp),
+  //           backgroundColor: Colors.orange,
+  //           label: "call",
+  //           onTap: () {},
+  //           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
+  //       SpeedDialChild(
+  //           child: const Icon(Icons.mic),
+  //           backgroundColor: Colors.teal,
+  //           label: "voice chat",
+  //           onTap: () {},
+  //           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
+  //       SpeedDialChild(
+  //           child: const Icon(Icons.photo_outlined),
+  //           backgroundColor: Colors.teal,
+  //           label: "send photo",
+  //           onTap: () {},
+  //           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
+  //       SpeedDialChild(
+  //           child: const Icon(Icons.camera_alt_outlined),
+  //           backgroundColor: Colors.teal,
+  //           label: "take photo",
+  //           onTap: () {},
+  //           labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
+  //     ],
+  //   );
+  // }
 
-  SpeedDial speedDialButton(WidgetRef ref, BuildContext context,
-      String friendUserDocId, String friendUserName, Image? friendImage) {
-    return SpeedDial(
-      elevation: 6,
-      buttonSize: const Size(45.0, 45.0),
-      childrenButtonSize: const Size(55.0, 55.0),
-      animatedIcon: AnimatedIcons.menu_close,
-      animatedIconTheme: const IconThemeData(size: 22.0),
-      curve: Curves.bounceIn,
-      // icon:Icons.keyboard_arrow_up,
-      children: [
-        SpeedDialChild(
-            child: const Icon(Icons.call_sharp),
-            backgroundColor: Colors.orange,
-            label: "call",
-            onTap: () {},
-            labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-        SpeedDialChild(
-            child: const Icon(Icons.mic),
-            backgroundColor: Colors.teal,
-            label: "voice chat",
-            onTap: () {},
-            labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-        SpeedDialChild(
-            child: const Icon(Icons.photo_outlined),
-            backgroundColor: Colors.teal,
-            label: "send photo",
-            onTap: () {},
-            labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-        SpeedDialChild(
-            child: const Icon(Icons.camera_alt_outlined),
-            backgroundColor: Colors.teal,
-            label: "take photo",
-            onTap: () {},
-            labelStyle: const TextStyle(fontWeight: FontWeight.w500)),
-      ],
-    );
-  }
-
-  AppBar appbarImageAndButtons(WidgetRef ref, BuildContext context,
-      String friendName, Image? friendImage) {
-    return AppBar(
-      leading: IconButton(
-        icon: commonCircleAvatarImage(
-            image: friendImage, radius: 20, name: friendUserName),
-        onPressed: () async {
-          commonNavigatorPushSlideHorizon(context,
-          //     FriendProfile(
-          //   argumentFriendUserDocId: friendUserDocId,
-          // )
-              FriendProfileRoot(argumentFriendUserDocId: friendUserDocId,
-                 argumentFriendUserName: friendUserName,)
-          );
-        },
-      ),
-      elevation: 0.6,
-      title: commonText20BlackLeftBold(friendName),
-    );
-  }
+  // AppBar appbarImageAndButtons(WidgetRef ref, BuildContext context,
+  //     String friendName, Image? friendImage) {
+  //   return AppBar(
+  //     leading: IconButton(
+  //       icon: commonCircleAvatarImage(
+  //           image: friendImage, radius: 20, name: friendUserName),
+  //       onPressed: () async {
+  //         commonNavigatorPushSlideHorizon(context,
+  //         //     FriendProfile(
+  //         //   argumentFriendUserDocId: friendUserDocId,
+  //         // )
+  //             FriendProfileRoot(argumentFriendUserDocId: friendUserDocId,
+  //                argumentFriendUserName: friendUserName,)
+  //         );
+  //       },
+  //     ),
+  //     elevation: 0.6,
+  //     title: commonText20BlackLeftBold(friendName),
+  //   );
+  // }
 
   Padding balloon(
       ChatDetail chatDetail, String rightLeft, BuildContext context,WidgetRef ref) {
@@ -209,8 +209,8 @@ class ChatPage extends ConsumerWidget {
                 );
                 _controller.clear();
               }),
-          speedDialButton(
-              ref, context, friendUserDocId, friendName, friendPhoto)
+          // speedDialButton(
+          //     ref, context, friendUserDocId, friendName, friendPhoto)
         ]),
       ),
     );

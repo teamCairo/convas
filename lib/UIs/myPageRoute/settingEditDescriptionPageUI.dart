@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
+import '../../common/commonValues.dart';
 import '../../common/provider/userProvider.dart';
 import '../../daoFirebase/usersDaoFirebase.dart';
 
@@ -15,49 +16,63 @@ class SettingEditDescriptionPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    String inputValue = value;
 
-
-    String inputValue =value;
-
-    return Scaffold(
-      appBar:
-      commonAppbar("Description"),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-
-              Padding(
-                padding:const EdgeInsets.symmetric(vertical:30,horizontal:10),
-                child:
-
-                TextFormField(
-                  maxLines: null,
-                  minLines: 7,
-                  // テキスト入力のラベルを設定
-                  decoration: const InputDecoration(labelText: "self-Introduction"),
-                  initialValue:value,
-                  onChanged: (String value) {
-                    inputValue=value;
-                  },
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
+    return commonScaffoldScroll(
+        context,
+        ref,
+        MainAxisAlignment.start,
+        [
+          TextFormField(
+            maxLines: null,
+            minLines: 7,
+            // テキスト入力のラベルを設定
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: commonColorSecondary,width:2 ),
+              ),
+              focusColor: Colors.black,
+              fillColor: Colors.black,
+              labelText: "Self-introduction",
+              labelStyle: TextStyle(color: commonColorSecondary),
+              // enabledBorder: OutlineInputBorder(
+              //   borderSide: BorderSide(
+              //     color: commonColorSecondary,
+              //   ),
+              // ),
+              border:   OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: commonColorSecondary,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical:30,horizontal: 10),
-                child: commonButtonSecondaryColorRound(text:"OK", onPressed: () async{
-                  await updateUserSelectedItem(ref,"description",inputValue,"settingEditDescriptionPage");
-                  ref.read(userDataProvider.notifier).setUserDataOneItem("description",inputValue);
-                  Navigator.pop(context);
-                },),
-              )
-            ],
+              alignLabelWithHint: true,
+            ),
+            initialValue: value,
+            onChanged: (String value) {
+              inputValue = value;
+            },
+            style: const TextStyle(
+              fontSize: 20,
+            ),
           ),
-        ),
-      ),
-    );
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+            child: commonButtonSecondaryColorRound(
+              text: "OK",
+              onPressed: () async {
+                await updateUserSelectedItem(ref, "description", inputValue,
+                    "settingEditDescriptionPage");
+                ref
+                    .read(userDataProvider.notifier)
+                    .setUserDataOneItem("description", inputValue);
+                Navigator.pop(context);
+              },
+            ),
+          )
+        ],
+        appBar: commonAppbar("Self-introduction",
+            helpTitle: "Self-introduction",
+            helpText: "You can register Self-introduction",
+            contextForHelp: context));
   }
 }

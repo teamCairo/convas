@@ -1,5 +1,6 @@
 import 'package:convas/UIs/findRoute/searchUsersConditionEditNumberDialogProvider.dart';
 import 'package:convas/UIs/findRoute/searchUsersProvider.dart';
+import 'package:convas/common/commonValues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/UI/commonButtonUI.dart';
@@ -98,7 +99,7 @@ class SearchUsersConditionEditNumberDialog extends ConsumerWidget {
 
                           commonButtonRoundByWidthAndHeight(text: 'OK',
                               height: 40,
-                              color: Colors.orange,
+                              color: commonColorSecondary,
                               width: 90,
                               onPressed: () {
                             ref.read(searchUsersProvider.notifier).setCondition(ref, databaseItem,ref.watch(searchUsersConditionEditNumberDialogProvider).rangeValues.start.toInt().toString()

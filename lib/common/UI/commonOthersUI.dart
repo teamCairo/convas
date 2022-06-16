@@ -181,6 +181,11 @@ Widget commonVerticalGap(){
   return const SizedBox(height: 16);
 }
 
+
+Widget commonVerticalGapHalf(){
+  return const SizedBox(height: 8);
+}
+
 Widget commonHorizontalGap(){
   return const SizedBox(width: 16);
 }

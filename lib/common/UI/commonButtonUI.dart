@@ -460,7 +460,7 @@ ElevatedButton commonButtonOrangeRoundSquareSmall(
       ),
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        primary: Colors.orange,
+        primary: commonColorSecondary,
         shape: const StadiumBorder(),
         side: const BorderSide(width: 0, style: BorderStyle.none),
       ));

@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:convas/UIs/register/learner/setFrequencyProvider.dart';
+import 'package:convas/UIs/register/learner/XXXXXsetFrequencyProvider.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/UIs/register/learner/XXXXXsetDayOfWeek.dart';
-import 'package:convas/UIs/register/learner/setFrequencyLogic.dart';
+import 'package:convas/UIs/register/learner/XXXXXsetFrequencyLogic.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';

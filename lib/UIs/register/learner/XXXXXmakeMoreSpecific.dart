@@ -1,8 +1,8 @@
 import 'package:convas/UIs/register/learner/XXXXXoptionBeFoundByLearnerUI.dart';
-import 'package:convas/UIs/register/learner/selectPointsDialogProvider.dart';
-import 'package:convas/UIs/register/learner/setFrequencyUI.dart';
+import 'package:convas/UIs/register/learner/XXXXXselectPointsDialogProvider.dart';
+import 'package:convas/UIs/register/learner/XXXXXsetFrequencyUI.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
-import 'package:convas/UIs/register/learner/setGoalDetailUI.dart';
+import 'package:convas/UIs/register/learner/XXXXXsetGoalDetailUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,9 +13,9 @@ import 'package:intl/intl.dart';
 
 import '../../../common/UI/commonButtonUI.dart';
 import '../../../common/UI/commonPushUI.dart';
-import 'SelectPointsDialogUI.dart';
+import 'XXXXXSelectPointsDialogUI.dart';
 import 'XXXXXoptionFrequencySettingUI.dart';
-import 'goalListData.dart';
+import 'XXXXXgoalListData.dart';
 
 class MakeMoreSpecific extends ConsumerWidget {
   MakeMoreSpecific({

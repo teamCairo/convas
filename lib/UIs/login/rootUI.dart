@@ -50,18 +50,18 @@ class Root extends ConsumerWidget {
   Widget routeElement(
       int selectedIndex, WidgetRef ref) {
 
-    if(ref.watch(userDataProvider).userData["userType"]=="1"){
-      switch (selectedIndex) {
-        case 0:
-          return SearchUsersMainPage();
-        case 1:
-          return Talk();
-        case 2:
-          return LessonListRoot();
-        default:
-          return MyPage();
-      }
-    }else{
+    // if(ref.watch(userDataProvider).userData["userType"]=="1"){
+    //   switch (selectedIndex) {
+    //     case 0:
+    //       return SearchUsersMainPage();
+    //     case 1:
+    //       return Talk();
+    //     case 2:
+    //       return LessonListRoot();
+    //     default:
+    //       return MyPage();
+    //   }
+    // }else{
       switch (selectedIndex) {
         case 0:
           return const CalendarEdit(null);
@@ -75,6 +75,6 @@ class Root extends ConsumerWidget {
           return MyPage();
       }
 
-    }
+    // }
   }
 }

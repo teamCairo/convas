@@ -16,7 +16,7 @@ class WelcomeLearner extends ConsumerWidget {
     "assets/learnerWelcome2.JPG",
     "assets/learnerWelcome3.JPG",
     "assets/learnerWelcome4.JPG",
-    "assets/learnerWelcome5.JPG",
+    // "assets/learnerWelcome5.JPG",
   ];
   bool initialProcessFlg=true;
 

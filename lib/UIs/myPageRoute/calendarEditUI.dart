@@ -1,10 +1,10 @@
 import 'package:convas/common/commonValues.dart';
+import 'package:convas/common/provider/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/otherClass/calendar/commonLogicInterfaceAppointment.dart';
 import '../../common/otherClass/calendar/commonClassEventDataSource.dart';
@@ -39,9 +39,14 @@ class CalendarEdit extends ConsumerWidget {
           return const Text('Something went wrong');
         }
 
-
+        String helpText="";
+        if(ref.watch(userDataProvider).userData["userType"]=="1"){
+          helpText ="You can set available time then teachers find you";
+        }else{
+          helpText ="You can set available time then learners find you";
+        }
         return Scaffold(
-            appBar:commonAppbar("Calendar",helpTitle:"Tap the calendar",helpText: "You can set available time then learners find you",contextForHelp: context),
+            appBar:commonAppbar("Calendar",helpTitle:"Tap the calendar",helpText: helpText,contextForHelp: context),
             body: SafeArea(
                 child: Column(
                   children: [

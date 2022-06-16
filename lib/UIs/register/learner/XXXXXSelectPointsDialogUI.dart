@@ -1,4 +1,4 @@
-import 'package:convas/UIs/register/learner/selectPointsDialogProvider.dart';
+import 'package:convas/UIs/register/learner/XXXXXselectPointsDialogProvider.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -108,11 +108,15 @@ Future<void> initialProcessLogic(WidgetRef ref, String email,BuildContext contex
 
   //ユーザ登録が完了しなかったユーザの場合はプロフィール登録画面の飛ばす
   if(tmpUserData.size==0){
-    await Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) {
-        return const SetUserType();
-      }),
-    );
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const SetUserType()),
+            (_) => false);
+    // Navigator.of(context).pushReplacement(
+    //   MaterialPageRoute(builder: (context) {
+    //     return const SetUserType();
+    //   }),
+    // );
   }else{
 
     await insertOrUpdateIsarSetting(Setting(

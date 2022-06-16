@@ -1,4 +1,4 @@
-import 'package:convas/UIs/register/learner/goalListData.dart';
+import 'package:convas/UIs/register/learner/XXXXXgoalListData.dart';
 import 'package:convas/UIs/register/registerProvider.dart';
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common/UI/commonPushUI.dart';
 import '../dataPreparingUI.dart';
-import 'makeMoreSpecific.dart';
+import 'XXXXXmakeMoreSpecific.dart';
 
 class SetGoalDetail extends ConsumerWidget {
   const SetGoalDetail({

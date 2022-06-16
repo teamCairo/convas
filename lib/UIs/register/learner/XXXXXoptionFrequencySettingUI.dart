@@ -1,6 +1,6 @@
 // import 'package:convas/UIs/register/registerLogic.dart';
 // import 'package:convas/UIs/register/registerProvider.dart';
-// import 'package:convas/UIs/register/learner/setFrequencyUI.dart';
+// import 'package:convas/UIs/register/learner/XXXXXsetFrequencyUI.dart';
 // import 'package:convas/common/UI/commonButtonUI.dart';
 // import 'package:convas/common/UI/commonOthersUI.dart';
 // import 'package:convas/common/UI/commonTextUI.dart';
