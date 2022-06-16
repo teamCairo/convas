@@ -6,6 +6,7 @@ import '../../common/UI/commonButtonUI.dart';
 import '../../common/UI/commonOthersUI.dart';
 import '../../common/UI/commonTextFormUI.dart';
 import '../../developerLogic/testDataMenuSpeedDial.dart';
+import 'loginErrorMessage.dart';
 import 'loginLogic.dart';
 import 'loginProvider.dart';
 
@@ -67,11 +68,9 @@ class LoginPage extends ConsumerWidget {
                           .read(userProvider.state)
                           .update((state) => result.user);
                       userLocalDataCheckForLogin(email, ref, context,);
-                    } catch (e) {
-                      // ログインに失敗した場合
-                      ref
-                          .read(infoTextProvider.state)
-                          .update((state) => "ログインに失敗しました:${e.toString()}");
+                    } on FirebaseAuthException catch (e) {
+
+                      commonShowOkWarningDialog(context, firebaseAuthErrorMessage(e));
                     }
                   }),
               commonVerticalGap(),
@@ -93,23 +92,18 @@ class LoginPage extends ConsumerWidget {
                           .read(userProvider.state)
                           .update((state) => result.user);
 
-                      ref.read(infoTextProvider.state).update(
-                          (state) => "登録OK:" + ref.watch(emailProvider));
-
                       // await insertUserToFirebase(context,ref,email);
                       ref.read(registerProvider.notifier).initialize();
                       userLocalDataCheckForInsert(email, ref, context,);
-                    } catch (e) {
-                      // 登録に失敗した場合
+                    } on FirebaseAuthException catch (e) {
 
-                      ref
-                          .read(infoTextProvider.state)
-                          .update((state) => "登録NG:${e.toString()}");
+                      commonShowOkWarningDialog(context,firebaseAuthErrorMessage(e));
                     }
                   }),
             ],
           ),
         ],
-        floatingActionButton: testDataMenuSpeedDial(ref, context));
+        // floatingActionButton: testDataMenuSpeedDial(ref, context)
+    );
   }
 }
