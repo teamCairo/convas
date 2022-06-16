@@ -85,18 +85,18 @@ Future<void> userLocalDataCheckForLogin(String email, WidgetRef ref, BuildContex
 
 Future<void> loginCommonProcess(
     BuildContext context, WidgetRef ref, String email) async {
-  await initialProcessLogic(ref, email);
+  await initialProcessLogic(ref, email,context);
 
   // ログインに成功した場合
   // チャット画面に遷移＋ログイン画面を破棄
-  await Navigator.of(context).pushReplacement(
-    MaterialPageRoute(builder: (context) {
-      return const Root();
-    }),
-  );
+  // await Navigator.of(context).pushReplacement(
+  //   MaterialPageRoute(builder: (context) {
+  //     return const Root();
+  //   }),
+  // );
 }
 
-Future<void> initialProcessLogic(WidgetRef ref, String email) async {
+Future<void> initialProcessLogic(WidgetRef ref, String email,BuildContext context) async {
 
   await makeDir("media");
 
@@ -106,56 +106,72 @@ Future<void> initialProcessLogic(WidgetRef ref, String email) async {
 
   QuerySnapshot tmpUserData=await selectFirebaseUserByEmail(email);
 
-  await insertOrUpdateIsarSetting(Setting(
-    "localUserInfo",
-    email,
-    tmpUserData.docs[0].id,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ));
+  //ユーザ登録が完了しなかったユーザの場合はプロフィール登録画面の飛ばす
+  if(tmpUserData.size==0){
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) {
+        return const SetUserType();
+      }),
+    );
+  }else{
 
-  ref
-      .read(userDataProvider.notifier)
-      .controlStreamOfReadUserDataFirebaseToIsarAndMemory(ref,email,tmpUserData.docs[0].id);
+    await insertOrUpdateIsarSetting(Setting(
+      "localUserInfo",
+      email,
+      tmpUserData.docs[0].id,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    ));
 
-  await ref
-      .read(masterDataProvider.notifier)
-      .readMasterDataFromIsarToMemory();
+    ref
+        .read(userDataProvider.notifier)
+        .controlStreamOfReadUserDataFirebaseToIsarAndMemory(ref,email,tmpUserData.docs[0].id);
 
-  await ref
-      .read(friendDataProvider.notifier)
-      .readFriendDataFromIsarToMemory();
+    await ref
+        .read(masterDataProvider.notifier)
+        .readMasterDataFromIsarToMemory();
 
-  await ref
-      .read(masterDataProvider.notifier)
-      .readMasterFromFirebaseToIsarAndMemory(ref);
+    await ref
+        .read(friendDataProvider.notifier)
+        .readFriendDataFromIsarToMemory();
 
-  ref
-      .read(friendDataProvider.notifier)
-      .controlStreamOfReadFriendNewDataFromFirebaseToIsarAndMemory(ref,tmpUserData.docs[0].id);
+    await ref
+        .read(masterDataProvider.notifier)
+        .readMasterFromFirebaseToIsarAndMemory(ref);
 
-  ref
-      .read(chatDetailDataProvider.notifier)
-      .controlStreamOfReadChatDetailNewDataFromFirebaseToIsar(ref,tmpUserData.docs[0].id);
+    ref
+        .read(friendDataProvider.notifier)
+        .controlStreamOfReadFriendNewDataFromFirebaseToIsarAndMemory(ref,tmpUserData.docs[0].id);
 
-  ref
-      .read(eventDataProvider.notifier)
-      .controlStreamOfReadEventNewDataFromFirebaseToIsar(ref,tmpUserData.docs[0].id);
+    ref
+        .read(chatDetailDataProvider.notifier)
+        .controlStreamOfReadChatDetailNewDataFromFirebaseToIsar(ref,tmpUserData.docs[0].id);
 
-  ref
-      .read(topicDataProvider.notifier)
-      .controlStreamOfReadTopicNewDataFromFirebaseToIsar(ref);
+    ref
+        .read(eventDataProvider.notifier)
+        .controlStreamOfReadEventNewDataFromFirebaseToIsar(ref,tmpUserData.docs[0].id);
 
-  ref.read(userDataProvider.notifier).updateUserWhenLogin(ref);
+    ref
+        .read(topicDataProvider.notifier)
+        .controlStreamOfReadTopicNewDataFromFirebaseToIsar(ref);
 
-  listenNotification();
-  updateOnlineStatus(ref,tmpUserData.docs[0].id);
+    ref.read(userDataProvider.notifier).updateUserWhenLogin(ref);
+
+    listenNotification();
+    updateOnlineStatus(ref,tmpUserData.docs[0].id);
+
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const Root()),
+            (_) => false);
+
+  }
 
 }
 

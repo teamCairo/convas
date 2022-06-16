@@ -22,12 +22,12 @@ Future<void> commonRegisterLogic(WidgetRef ref, BuildContext context)async{
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final User? _currentUser = _auth.currentUser;
   await insertUser(ref,_currentUser!.email!);
-  await initialProcessLogic(ref, _currentUser.email!);
+  await initialProcessLogic(ref, _currentUser.email!,context);
 
-  Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const Root()),
-          (_) => false);
+  // Navigator.pushAndRemoveUntil(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => const Root()),
+  //         (_) => false);
 }
 
 Future<void> insertUser(WidgetRef ref,String email)async {

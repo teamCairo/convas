@@ -7,16 +7,16 @@ String firebaseAuthErrorMessage (FirebaseAuthException e) {
 
     case 'unknown':
       return 'input e-mail and password';
-      break;
+      // break;
     // case 'wrong-password':
     //   result = FirebaseAuthResultStatus.WrongPassword;
     //   break;
     // case 'user-disabled':
     //   result = FirebaseAuthResultStatus.UserDisabled;
     //   break;
-    // case 'user-not-found':
-    //   result = FirebaseAuthResultStatus.UserNotFound;
-    //   break;
+    case 'user-not-found':
+      return "this e-mail hasn't been registered";
+      // break;
     // case 'operation-not-allowed':
     //   result = FirebaseAuthResultStatus.OperationNotAllowed;
     //   break;

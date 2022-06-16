@@ -42,14 +42,14 @@ class LoginAutoPage extends ConsumerWidget  {
     Setting? tmpSetting = await selectIsarSettingByCode("localUserInfo");
 
     if (tmpSetting != null) {
-      await initialProcessLogic(ref, tmpSetting.stringValue1!);
+      await initialProcessLogic(ref, tmpSetting.stringValue1!,context);
       // ログインに成功した場合
       // チャット画面に遷移＋ログイン画面を破棄
-      await Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) {
-          return const Root();
-        }),
-      );
+      // await Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(builder: (context) {
+      //     return const Root();
+      //   }),
+      // );
     } else {
       await Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) {
