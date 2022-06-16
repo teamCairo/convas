@@ -1,12 +1,12 @@
+
+import 'package:convas/UIs/text/textDetails.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
-import 'package:convas/text/textDetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../common/UI/commonPushUI.dart';
-import '../common/UI/commonTextUI.dart';
+import '../../common/UI/commonPushUI.dart';
+import '../../common/UI/commonTextUI.dart';
 
 class TextRoot extends ConsumerWidget {
   TextRoot({
