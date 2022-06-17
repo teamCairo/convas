@@ -74,12 +74,15 @@ class SettingEditRadioPage extends ConsumerWidget {
                     ),
               ),
             ),
-            commonButtonSecondaryColorRound(text:"OK", onPressed: () async{
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: commonButtonSecondaryColorRound(text:"OK", onPressed: () async{
 
-                await updateUserSelectedItem(ref,databaseItem,ref.watch(settingEditRadioPageProvider).onRadioGroupValue,"settingEditTextPage");
-                ref.read(userDataProvider.notifier).setUserDataOneItem(databaseItem,ref.watch(settingEditRadioPageProvider).onRadioGroupValue);
-                Navigator.pop(context);
-              },)
+                  await updateUserSelectedItem(ref,databaseItem,ref.watch(settingEditRadioPageProvider).onRadioGroupValue,"settingEditTextPage");
+                  ref.read(userDataProvider.notifier).setUserDataOneItem(databaseItem,ref.watch(settingEditRadioPageProvider).onRadioGroupValue);
+                  Navigator.pop(context);
+                },),
+            )
           ],
         ),
       ),

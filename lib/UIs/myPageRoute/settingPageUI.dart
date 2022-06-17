@@ -281,15 +281,8 @@ class SettingPage extends ConsumerWidget {
                           }),
                         );
                       } else if (databaseItem == "birthDate") {
-                        // await Navigator.of(context).push(
-                        //   MaterialPageRoute(builder: (context) {
-                        //     return SettingEditNumberPage(
-                        //       displayedItem: displayedItem,
-                        //       databaseItem: databaseItem,
-                        //       value:value,
-                        //     );
-                        //   }),
-                        // );
+
+                        commonShowOkWarningDialog(context,"You can't edit your birth date");
                       } else {
                         await Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) {

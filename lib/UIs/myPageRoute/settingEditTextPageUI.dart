@@ -45,7 +45,7 @@ class SettingEditTextPage extends ConsumerWidget {
             ),
             ),),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical:30,horizontal: 10),
+              padding: const EdgeInsets.all(20),
               child: commonButtonSecondaryColorRound(text:"OK", onPressed: () async{
                 await updateUserSelectedItem(ref,databaseItem,inputValue,"settingEditTextPage");
                 ref.read(userDataProvider.notifier).setUserDataOneItem(databaseItem,inputValue);
