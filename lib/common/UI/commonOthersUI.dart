@@ -452,9 +452,9 @@ Widget commonBalloon(Widget child,String rightLeft){
         child: Container(
             decoration:  BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(40),
-                  topLeft: Radius.circular(40),
-                  bottomLeft: Radius.circular(40),
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                  bottomLeft: Radius.circular(30),
                 ),
                 color:commonColorTertiary
               // gradient: commonLinearGradientForChatBox
@@ -467,9 +467,9 @@ Widget commonBalloon(Widget child,String rightLeft){
         child: Container(
             decoration:  BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(40),
-                  topLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
                 color:commonColorTertiary
                 // gradient: commonLinearGradientForChatBox

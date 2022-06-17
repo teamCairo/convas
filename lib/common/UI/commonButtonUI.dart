@@ -131,32 +131,6 @@ Widget commonButtonRoundWhiteSmall(
   );
 }
 
-Widget commonButtonSmallOrangeRound(
-    {required String text, required Function()? onPressed}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-    child: SizedBox(
-      height: 30,
-      child: OutlinedButton(
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-            color: Colors.white,
-          ),
-        ),
-        style: OutlinedButton.styleFrom(
-          primary: Colors.white10,
-          backgroundColor: Colors.orange,
-          shape: const StadiumBorder(),
-          side: const BorderSide(color: Colors.white, width: 0),
-        ),
-        onPressed: onPressed,
-      ),
-    ),
-  );
-}
 
 Widget commonIconButtonQuestion(
     {required Function()? onTap}) {
@@ -446,7 +420,7 @@ ElevatedButton commonButtonWhiteRoundSquareSmall(
       ));
 }
 
-ElevatedButton commonButtonOrangeRoundSquareSmall(
+ElevatedButton commonButtonColorRoundSquareSmall(
     {required String text, required Function()? onPressed}) {
   return ElevatedButton(
       onPressed: onPressed,

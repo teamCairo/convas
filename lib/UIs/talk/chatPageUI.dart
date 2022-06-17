@@ -83,13 +83,14 @@ class ChatPage extends ConsumerWidget {
     //rightLeft="right"or"left"
 
     List<Widget> widgetList = [];
-    widgetList.add(Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: commonText14Black(chatDetail.message)));
     if (chatDetail.messageType == "3") {
+      widgetList.add(const SizedBox(height:20));
       if (rightLeft == "right") {
-        widgetList.add(commonText14Black("You sent a request"));
-        widgetList.add(commonButtonSmallOrangeRound(
+        widgetList.add(Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: commonText14Black("You sent a request"),
+        ));
+        widgetList.add(commonButtonColorRoundSquareSmall(
             text: "View request", onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
@@ -99,8 +100,11 @@ class ChatPage extends ConsumerWidget {
           );
         }));
       } else {
-        widgetList.add(commonText14Gray("Friend sent a request"));
-        widgetList.add(commonButtonSmallOrangeRound(
+        widgetList.add(Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: commonText14Gray("Friend sent a request")),
+        );
+        widgetList.add(commonButtonColorRoundSquareSmall(
             text: "View request",
             onPressed: () {
               Navigator.of(context).push(
@@ -111,7 +115,36 @@ class ChatPage extends ConsumerWidget {
               );
             }));
       }
+    }else if (chatDetail.messageType == "4") {
+      widgetList.add(const SizedBox(height:20));
+      if (rightLeft == "right") {
+        widgetList.add(Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: commonText14Black("You accept a request"),
+        ));
+        widgetList.add(commonButtonColorRoundSquareSmall(
+            text: "View appointment", onPressed: () {
+          commonNavigatorPushSlideHorizon(context, AppointmentRequestView(friendUserDocId,
+              friendUserName, "" ,chatDetail.referDocId,null,"4"));
+        }));
+      } else {
+        widgetList.add(Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: commonText14Gray("Friend accept a request")),
+        );
+        widgetList.add(commonButtonColorRoundSquareSmall(
+            text: "View appointment",
+            onPressed: () {
+              commonNavigatorPushSlideHorizon(context, AppointmentRequestView(friendUserDocId,
+                  friendUserName, "" ,chatDetail.referDocId,null,"4"));
+
+            }));
+      }
     }
+
+    widgetList.add(Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: commonText14Black(chatDetail.message)));
 
     return Padding(
         padding: const EdgeInsets.only(bottom: 28.0),

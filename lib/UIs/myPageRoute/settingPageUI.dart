@@ -120,7 +120,7 @@ class SettingPage extends ConsumerWidget {
           ),
           child: Align(
               alignment: Alignment.centerRight,
-              child: commonButtonOrangeRoundSquareSmall(
+              child: commonButtonColorRoundSquareSmall(
                   text: "Edit",
                   onPressed: () async {
                     await Navigator.of(context).push(
@@ -182,7 +182,7 @@ class SettingPage extends ConsumerWidget {
           ),
           child: Align(
               alignment: Alignment.centerRight,
-              child: commonButtonOrangeRoundSquareSmall(
+              child: commonButtonColorRoundSquareSmall(
                   text: "Edit",
                   onPressed: () async {
                     await Navigator.of(context).push(

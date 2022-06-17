@@ -24,176 +24,183 @@ class FriendProfile extends ConsumerWidget {
           appBar: commonAppbar("Profile"),
           body: const Center(child: CircularProgressIndicator()));
     } else {
-      return Scaffold(
-          appBar: commonAppbar("Profile"),
-          body: Column(children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: SafeArea(
-                    child: Container(
-                  decoration: BoxDecoration(
-                    gradient: commonGetLinearGradientTeacher(ref
-                        .watch(friendProfileDataProvider)
-                        .friendProfileData["userType"]),
+      return commonScaffoldScroll(
+          context,
+          ref,
+          MainAxisAlignment.start,
+          [
+            Container(
+              decoration: BoxDecoration(
+                gradient: commonGetLinearGradientTeacher(ref
+                    .watch(friendProfileDataProvider)
+                    .friendProfileData["userType"]),
+              ),
+              child: Column(children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      commonCircleAvatarImage(
+                          radius: 110,
+                          image: ref
+                              .watch(friendProfileDataProvider)
+                              .friendProfilePhotoData,
+                          name: ref
+                              .watch(friendProfileDataProvider)
+                              .friendProfileData["name"]),
+                      // Container(
+                      //   height: 220,
+                      //   width: 50,
+                      //   child: Column(children: [
+                      //     const SizedBox(height: 22),
+                      //     Icon(
+                      //         commonGenderIcon(ref
+                      //             .watch(friendProfileDataProvider)
+                      //             .friendProfileData["gender"]),
+                      //         size: 20),
+                      //     IconButton(
+                      //         onPressed: () {},
+                      //         icon: const Icon(Icons.star_border))
+                      //   ]),
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(25),
+                      //     color: Colors.white,
+                      //   ),
+                      // )
+                    ],
                   ),
-                  child: Column(children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 30.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(style: BorderStyle.none),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      commonVerticalGap(),
+                      Row(
                         children: [
-                          commonCircleAvatarImage(
-                              radius: 110,
-                              image: ref
+                          commonHorizontalGap(),
+                          commonText22SecondaryColorLeftBold(ref
+                              .watch(friendProfileDataProvider)
+                              .friendProfileData["name"]),
+                          const SizedBox(width: 8),
+                          commonText16GrayLeft(commonLogicFromBirthToAge(ref
                                   .watch(friendProfileDataProvider)
-                                  .friendProfilePhotoData,
-                              name: ref
+                                  .friendProfileData["birthDate"])
+                              .toString()),
+                          const SizedBox(width: 8),
+                          Icon(
+                              commonGenderIcon(ref
                                   .watch(friendProfileDataProvider)
-                                  .friendProfileData["name"]),
-                          // Container(
-                          //   height: 220,
-                          //   width: 50,
-                          //   child: Column(children: [
-                          //     const SizedBox(height: 22),
-                          //     Icon(
-                          //         commonGenderIcon(ref
-                          //             .watch(friendProfileDataProvider)
-                          //             .friendProfileData["gender"]),
-                          //         size: 20),
-                          //     IconButton(
-                          //         onPressed: () {},
-                          //         icon: const Icon(Icons.star_border))
-                          //   ]),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(25),
-                          //     color: Colors.white,
-                          //   ),
-                          // )
+                                  .friendProfileData["gender"]),
+                              size: 18)
                         ],
                       ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(style: BorderStyle.none),
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(20),
-                        ),
-                      ),
-                      child: Column(
+                      commonVerticalGapHalf(),
+                      Row(
                         children: [
-                          commonVerticalGap(),
-                          Row(
-                            children: [
-                              commonHorizontalGap(),
-                              commonText22SecondaryColorLeftBold(ref
+                          commonHorizontalGap(),
+                          loginLampSmall(
+                              ref
                                   .watch(friendProfileDataProvider)
-                                  .friendProfileData["name"]),
-                              const SizedBox(width: 8),
-                              commonText16GrayLeft(commonLogicFromBirthToAge(ref
-                                      .watch(friendProfileDataProvider)
-                                      .friendProfileData["birthDate"])
-                                  .toString()),
-                              const SizedBox(width: 8),
-                              Icon(
-                                  commonGenderIcon(ref
-                                      .watch(friendProfileDataProvider)
-                                      .friendProfileData["gender"]),
-                                  size: 18)
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              commonHorizontalGap(),
-                              loginLampSmall(
-                                  ref
-                                      .watch(friendProfileDataProvider)
-                                      .friendProfileData["lastLoginTime"],
-                                  ref
-                                      .watch(friendProfileDataProvider)
-                                      .friendProfileData["onlineStatus"],
-                                  true),
-                            ],
-                          ),
-                          ref
-                              .watch(friendProfileDataProvider)
-                              .friendProfileData["userType"]=="2"?Column(
-                            children: [
-                              commonLineHorizontalGrayThin(16, 16),
-                              Row(
-                                children: [
-                                  commonHorizontalGap(),
-                                  commonText16BlackLeft("Self introduction"),
-                                ],
-                              ),
-                              commonVerticalGap(),
-                              Row(
-                                children: [
-                                  commonHorizontalGap(),
-                                  Flexible(
-                                    child: Text(
-                                      ref
-                                          .watch(friendProfileDataProvider)
-                                          .friendProfileData["description"],
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                        color: Colors.black54,
+                                  .friendProfileData["lastLoginTime"],
+                              ref
+                                  .watch(friendProfileDataProvider)
+                                  .friendProfileData["onlineStatus"],
+                              true),
+                        ],
+                      ),
+                      ref
+                                  .watch(friendProfileDataProvider)
+                                  .friendProfileData["userType"] ==
+                              "2"
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  child: commonLineHorizontalGrayThin(16, 16),
+                                ),
+                                Row(
+                                  children: [
+                                    commonHorizontalGap(),
+                                    commonText16BlackLeftBold("Self-introduction"),
+                                  ],
+                                ),
+                                commonVerticalGapHalf(),
+                                Row(
+                                  children: [
+                                    commonHorizontalGap(),
+                                    Flexible(
+                                      child: Text(
+                                        ref
+                                            .watch(friendProfileDataProvider)
+                                            .friendProfileData["description"]==""?"Not registered":ref
+                                            .watch(friendProfileDataProvider)
+                                            .friendProfileData["description"],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                          color: Colors.black54,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ):Container(),
-                          commonLineHorizontalGrayThin(16, 16),
-                          Row(
-                            children: [
-                              commonHorizontalGap(),
-                              commonText16BlackLeft("Personal Info"),
-                            ],
-                          ),
-                          commonVerticalGap(),
-                          linePadding(ref, "Name", "name"),
-                          linePadding(ref, "Gender", "gender"),
-                          linePadding(ref, "Age", "birthDate"),
-                          ref
-                              .watch(friendProfileDataProvider)
-                              .friendProfileData["userType"]=="1"?linePadding(ref, "English Level", "level"):Container(),
-                          ref
-                              .watch(friendProfileDataProvider)
-                              .friendProfileData["userType"]=="2"?Column(
-                            children: [
-                              linePadding(ref, "Occupation", "occupation"),
-                              linePadding(ref, "Mother Tongue", "motherTongue"),
-                              linePadding(ref, "Country", "country"),
-                              linePadding(ref, "Town", "town"),
-                              linePadding(ref, "Home Country", "homeCountry"),
-                              linePadding(ref, "Home Town", "homeTown"),
-                            ],
-                          ):Container(),
+                                  ],
+                                ),
+                              ],
+                            )
+                          : Container(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: commonLineHorizontalGrayThin(16, 16),
+                      ),
+                      Row(
+                        children: [
+                          commonHorizontalGap(),
+                          commonText16BlackLeftBold("Personal Info"),
                         ],
                       ),
-                    ),
-                  ]),
-                )),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: commonButtonSecondaryColorRound(
-                onPressed: () async {
-                  await insertFriendAndMoveToChatPage(
-                      ref, context, argumentFriendUserDocId);
-                },
-                text: ref
-                        .watch(friendProfileDataProvider)
-                        .friendProfileData["friendFlg"]
-                    ? "Talk"
-                    : "Send message",
-              ),
+                      commonVerticalGapHalf(),
+                      linePadding(ref, "Name", "name"),
+                      linePadding(ref, "Gender", "gender"),
+                      linePadding(ref, "Age", "birthDate"),
+                      ref
+                                  .watch(friendProfileDataProvider)
+                                  .friendProfileData["userType"] ==
+                              "1"
+                          ? linePadding(ref, "English Level", "level")
+                          : Container(),
+                      ref
+                                  .watch(friendProfileDataProvider)
+                                  .friendProfileData["userType"] ==
+                              "2"
+                          ? Column(
+                              children: [
+                                linePadding(ref, "Occupation", "occupation"),
+                                linePadding(
+                                    ref, "Mother Tongue", "motherTongue"),
+                                linePadding(ref, "Country", "country"),
+                                linePadding(ref, "Town", "town"),
+                                linePadding(ref, "Home Country", "homeCountry"),
+                                linePadding(ref, "Home Town", "homeTown"),
+                              ],
+                            )
+                          : Container(),
+                    ],
+                  ),
+                ),
+              ]),
             )
-          ]));
+          ],
+          withoutPadding:true,
+          appBar: commonAppbar("User profile",
+              helpTitle: "User profile",
+              helpText: "You can check other user's profile and send request by moving to calendar and tapping time)",
+              contextForHelp: context));
     }
   }
 
@@ -212,17 +219,24 @@ class FriendProfile extends ConsumerWidget {
     } else {
       displayedValue = value;
     }
-    return Row(
+    return Column(
       children: [
-        commonHorizontalGap(),
-        Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              commonText12SecondaryColorLeft(displayedItem),
-              commonText16GrayLeft(displayedValue),
-              commonVerticalGap()
-            ]),
+        Row(
+          children: [
+            commonHorizontalGap(),
+            Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  commonText12SecondaryColorLeft(displayedItem),
+                  commonText16GrayLeft(displayedValue),
+                ]),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: commonLineHorizontalGrayThin(10, 8),
+        ),
       ],
     );
   }
