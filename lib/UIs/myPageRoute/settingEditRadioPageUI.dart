@@ -24,7 +24,6 @@ class SettingEditRadioPage extends ConsumerWidget {
   Map<String,Master> masterMap = {};
   List<Widget> radioTileList = [];
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 

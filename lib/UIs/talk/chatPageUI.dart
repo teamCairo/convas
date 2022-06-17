@@ -57,7 +57,10 @@ class ChatPage extends ConsumerWidget {
     }
 
     return Scaffold(
-        appBar:commonAppbar(friendNameTmp),
+        appBar:commonAppbar(friendNameTmp,leadingWidget:Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: commonCircleAvatarUserImage(radius: 20, name: friendNameTmp, context: context, userDocId: friendUserDocId),
+        )),
         body: SafeArea(
             child: Column(children: <Widget>[
           Expanded(

@@ -10,7 +10,7 @@ import '../logic/commonLogicOthers.dart';
 import 'commonButtonUI.dart';
 import 'commonTextUI.dart';
 
-AppBar commonAppbar(String text,{Color? color,Color? textColor,String? helpTitle,String? helpText,  BuildContext? contextForHelp}) {
+AppBar commonAppbar(String text,{Color? color,Color? textColor,String? helpTitle,String? helpText,  BuildContext? contextForHelp,  Widget? leadingWidget}) {
   List<Widget> tailWidgetList =[];
   if(helpText!=null||contextForHelp!=null||helpTitle!=null){
     tailWidgetList.add(Padding(
@@ -30,6 +30,7 @@ AppBar commonAppbar(String text,{Color? color,Color? textColor,String? helpTitle
     txColor=textColor;
   }
   return AppBar(
+    leading:leadingWidget,
     backgroundColor: backColor,
     elevation: 0.0,
     title: Row(
