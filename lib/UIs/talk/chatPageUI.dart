@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:convas/common/UI/commonButtonUI.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
 import 'package:convas/common/UI/commonPushUI.dart';
@@ -173,7 +171,7 @@ class ChatPage extends ConsumerWidget {
               multiLine: true),
         )),
         commonButtonGraySmallerIcon(
-            icon: MyFlutterApp.send,
+            icon: Icons.send,
             onPressed: () async {
 
               if(message!=""){

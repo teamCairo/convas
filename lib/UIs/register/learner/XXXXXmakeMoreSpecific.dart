@@ -8,7 +8,7 @@ import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
+// import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/UI/commonButtonUI.dart';
@@ -116,20 +116,22 @@ List<Widget> makeHashButtonList(
 }
 
 selectDate(BuildContext context, WidgetRef ref) async {
-  DateTime? selectedDate = await showMonthPicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime.now(),
-    lastDate: DateTime(DateTime.now().year + 2),
-  );
+  // DateTime? selectedDate = await showMonthPicker(
+  //   context: context,
+  //   initialDate: DateTime.now(),
+  //   firstDate: DateTime.now(),
+  //   lastDate: DateTime(DateTime.now().year + 2),
+  // );
 
   // 選択がキャンセルされた場合はNULL
-  if (selectedDate == null) return;
-
-  DateFormat outputFormat = DateFormat('yyyy/MM');
-  String dueStr = outputFormat.format(selectedDate);
-
-  ref.read(registerProvider.notifier).setGoalHashTag("Due", dueStr);
+  //
+  // DateFormat outputFormat = DateFormat('yyyy/MM');
+  // String dueStr = outputFormat.format(selectedDate);
+  //
+  // ref.read(registerProvider.notifier).setGoalHashTag("Due", dueStr);
+  //
+  // if (selectedDate == null) return null;
+  return null;
 }
 
 selectPoint(BuildContext context, WidgetRef ref) async {
