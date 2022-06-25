@@ -21,18 +21,18 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '1.1'
+    flutterVersionCode = '3'//localProperties.getPropertyを参照
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.1'
+    flutterVersionName = '1.1.1'//localProperties.getPropertyを参照
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-//apply plugin: 'com.google.gms.google-services'//RE-ADD20220623
+apply plugin: 'com.google.gms.google-services'//RE-ADD20220623
 
 android {
 //    compileSdkVersion flutter.compileSdkVersion
@@ -121,7 +121,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
     implementation 'com.google.firebase:firebase-analytics'
-//    implementation 'com.android.support:multidex:1.0.3'//RE-ADD20220623
+    implementation 'com.android.support:multidex:1.0.3'//RE-ADD20220623
     implementation "com.algolia:algoliasearch-client-kotlin:$kotlin_client_version"
     implementation "io.ktor:ktor-client-okhttp:$ktor_version"
 }
