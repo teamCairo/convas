@@ -1,4 +1,5 @@
 import 'package:convas/UIs/myPageRoute/settingPageUI.dart';
+import 'package:convas/UIs/openRoom/openRoomListUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,7 @@ import '../../common/UI/commonTextUI.dart';
 import '../../common/logic/commonLogicDate.dart';
 import '../../common/provider/userProvider.dart';
 import '../login/loginPageUI.dart';
+import '../openRoom/createOpenRoomUI.dart';
 import 'inquiryRootUI.dart';
 
 class MyPage extends ConsumerWidget {
@@ -104,6 +106,41 @@ class MyPage extends ConsumerWidget {
                   bigIconButton(
                     text: "How to study",
                     icon: Icons.book_rounded,
+                    onPressed: () async {
+                      commonShowOkInfoDialog(context, "Information",
+                          "Explanation of this App is coming soon..");
+                      // await Navigator.of(context).push(
+                      //   MaterialPageRoute(builder: (context) {
+                      //     return const CalendarEdit(null);
+                      //   }),
+                      // );
+                    },
+                  ),
+                ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  bigIconButton(
+                    text: "Open room",
+                    icon: Icons.add_call,
+                    onPressed: () async {
+                      commonNavigatorPushSlideHorizon(context, CreateOpenRoom());
+                    },
+                  ),
+                  bigIconButton(
+                    text: "Open room list",
+                    icon: Icons.meeting_room,
+                    onPressed: () async {
+                      commonNavigatorPushSlideHorizon(
+                          context, OpenRoomList());
+                    },
+                  ),
+                  bigIconButton(
+                    text: "How to study",
+                    icon: Icons.crop_square_sharp,
                     onPressed: () async {
                       commonShowOkInfoDialog(context, "Information",
                           "Explanation of this App is coming soon..");

@@ -39,6 +39,9 @@ android {
     compileSdkVersion 32
 //    buildToolsVersion "32.0.0"
 
+    // for Play Console Debug Symbol
+    ndkVersion "24.0.8215888"
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -63,6 +66,11 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true // これを追加
+
+        ndk {
+            // Specifies the ABI configurations of your native libraries Gradle should build and package with your APK.
+            abiFilters "x86_64", "arm64-v8a"
+        }
     }
 
     signingConfigs {
@@ -93,6 +101,10 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.release
             resValue "string", "app_name", "convas"
+
+            ndk {
+                debugSymbolLevel 'SYMBOL_TABLE'
+            }
         }
         debug {
             // TODO: Add your own signing config for the release build.

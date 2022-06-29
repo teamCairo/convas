@@ -40,8 +40,8 @@ class CommonClassAppointment{
   late String senderJoinedStatus;
   late String receiverJoinedStatus;
   late String requestDocId;
-  late DateTime startTime;
-  late DateTime doneTime;
+  DateTime? startTime;
+  DateTime?  doneTime;
   late String insertUserDocId;
   late String insertProgramId;
   late DateTime insertTime;
