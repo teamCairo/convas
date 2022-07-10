@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../daoFirebase/openRoomDaoFirebase.dart';
 
 final createOpenRoomProvider = ChangeNotifierProvider(
-      (ref) => createOpenRoomNotifier(),
+      (ref) => CreateOpenRoomNotifier(),
 );
 
-class createOpenRoomNotifier extends ChangeNotifier {
+class CreateOpenRoomNotifier extends ChangeNotifier {
   String _description = "";
   String _roomName = "";
   DateTime? _endDateTime;

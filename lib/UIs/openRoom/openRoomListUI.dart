@@ -1,18 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convas/common/UI/commonOthersUI.dart';
+import 'package:convas/common/UI/commonPushUI.dart';
 import 'package:convas/common/UI/commonTextUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/UI/commonPushUI.dart';
-import '../../common/logic/commonLogicDate.dart';
-import '../../common/otherClass/commonClassAppointment.dart';
-import '../../common/provider/friendProvider.dart';
-import '../../common/provider/masterProvider.dart';
 import '../../common/provider/userProvider.dart';
-import '../../daoFirebase/appointmentsDaoFirebase.dart';
 import '../../daoFirebase/openRoomDaoFirebase.dart';
-import '../talk/appointmentRequestViewUI.dart';
+import 'openRoomRootUI.dart';
 
 class OpenRoomList extends ConsumerWidget {
   OpenRoomList({
@@ -93,9 +88,7 @@ class OpenRoomList extends ConsumerWidget {
                 ]),
           ),
           onTap: () {
-            // commonNavigatorPushSlideHorizon(context, AppointmentRequestView(friendDocId,
-            //     ref.watch(friendDataProvider).friendData[friendDocId]!.friendUserName,
-            //     "" ,appoint.appointmentDocId,null,"3"));
+            commonNavigatorPushSlideHorizon(context, OpenRoomRoot(openRoomDocId: dSnapshot.id));
 
           },
         ),
